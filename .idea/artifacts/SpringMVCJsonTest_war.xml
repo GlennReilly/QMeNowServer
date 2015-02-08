@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SpringMVCJsonTest:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SpringMVCJsonTest.war">
+      <element id="artifact" artifact-name="SpringMVCJsonTest:war exploded" />
+    </root>
+  </artifact>
+</component>
