@@ -24,7 +24,7 @@ public class PersistGreeting {
 
     private final String url = "jdbc:mysql://localhost:3306/grTestDB";
     private final String user = "sqluser";
-    private final String password = "us3rP455w0rd!";
+    private final String password = "us3rP455w0rd!"; //set in aws
 
 
     public static void SaveGreeting(com.bluemongo.springmvcjsontest.model.Greeting greeting) {
@@ -40,7 +40,7 @@ public class PersistGreeting {
 
         }catch(SQLException sqlx)
         {
-
+            logger.info(sqlx.getMessage());
         }
         return connection;
     }
