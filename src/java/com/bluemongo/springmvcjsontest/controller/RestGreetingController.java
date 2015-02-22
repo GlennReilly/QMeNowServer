@@ -21,18 +21,19 @@ public class RestGreetingController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     static final Logger logger = LogManager.getLogger(RestGreetingController.class);
+    private PersistGreeting persistGreeting = new PersistGreeting();
 
     public @ResponseBody
     Greeting greeting(@RequestParam(value="name", defaultValue="Wurld") String name) {
         Greeting greeting = new Greeting(counter.incrementAndGet(), String.format(template, name), Greeting.Status.OK);
-        PersistGreeting.SaveGreeting(greeting);
+        persistGreeting.SaveGreeting(greeting);
         return greeting;
     }
 
     @RequestMapping( value = "/getGreetingJson", method = RequestMethod.GET, headers="Accept=application/json", produces = {"application/json"})
     public @ResponseBody String greetingGson(@RequestParam(value="name", defaultValue="Wurld") String name) {
         Greeting greeting = new Greeting(counter.incrementAndGet(), String.format(template, name), Greeting.Status.OK);
-        PersistGreeting.SaveGreeting(greeting);
+        persistGreeting.SaveGreeting(greeting);
         return greeting.toJson();
     }
 

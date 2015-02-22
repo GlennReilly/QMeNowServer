@@ -15,34 +15,68 @@ import java.sql.Statement;
  * Created by glenn on 21/02/15.
  */
 public class PersistGreeting {
-    private Connection connection = null;
+    private static Connection connection = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
     private static final Logger logger = LogManager.getLogger(PersistGreeting.class);
 
-    private final String url = "jdbc:mysql://localhost:3306/grTestDB";
-    private final String user = "sqluser";
-    private final String password = "us3rP455w0rd!"; //set in aws
+    private static final String url = "jdbc:mysql://localhost:3306/grTestDB";
+    private static final String user = "sqluser";
+    private static final String password = "us3rP455w0rd!"; //set in aws
 
 
-    public static void SaveGreeting(com.bluemongo.springmvcjsontest.model.Greeting greeting) {
-        //AmazonDynamoDBClient client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-        //DynamoDBMapper mapper = new DynamoDBMapper(client);
-        //mapper.save(greeting);
+    public void SaveGreeting(com.bluemongo.springmvcjsontest.model.Greeting greeting) {
+        initConnection();
+        //initStatement();
+        try {
+            preparedStatement = connection.prepareStatement("insert into Greeting values(?,?)");
+            preparedStatement.setLong(1, greeting.getId());
+            preparedStatement.setString(2, greeting.getContent());
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException sqlx)
+        {
+            logger.info(sqlx.getMessage());
+        }
+
+        //doQuery(query);
         logger.info("greeting saved.");
     }
 
-    public Connection getConnection(){
+/*    private void doQuery(String query) {
         try{
-            connection = DriverManager.getConnection(url, user, password);
+            connection.prepareStatement("");
 
         }catch(SQLException sqlx)
         {
             logger.info(sqlx.getMessage());
         }
-        return connection;
+    }*/
+
+    public void initConnection(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+        }
+        catch(SQLException sqlx)
+        {
+            logger.info(sqlx.getMessage());
+        }
+        catch (ClassNotFoundException cnfe) {
+            logger.info(cnfe.getMessage());
+        }
+    }
+
+    public void initStatement(){
+        try{
+            statement = connection.createStatement();
+
+        }catch(SQLException sqlx)
+        {
+            logger.info(sqlx.getMessage());
+        }
     }
 
 
