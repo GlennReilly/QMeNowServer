@@ -18,6 +18,7 @@ Welcome to SpringMVCJsonTest
     <li><a href="./greeting/getGreetingJson">/greeting/getGreetingJson</a></li>
     <li><a href="./greeting/test">/greeting/test</a></li>
     <li><a href="./greeting/bob">/greeting/{bob}</a> - you can change this name in the url.</li>
+    <li><a href="./greeting/createPhrase?phraseString=insert_phraseString_here">/greeting/createPhrase?phraseString=insert_phraseString_here</a></li>
 </ul>
 </body>
 </html>

@@ -1,10 +1,8 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.bluemongo.springmvcjsontest.model.Greeting;
 
+import com.bluemongo.springmvcjsontest.model.Phrase;
 import com.bluemongo.springmvcjsontest.persistence.PersistGreeting;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +26,15 @@ public class RestGreetingController {
         Greeting greeting = new Greeting(counter.incrementAndGet(), String.format(template, name), Greeting.Status.OK);
         persistGreeting.SaveGreeting(greeting);
         return greeting;
+    }
+
+    @RequestMapping( value = "/createPhrase", method = RequestMethod.GET, headers="Accept=application/json", produces = {"application/json"})
+    public @ResponseBody String CreatePhrase(@RequestParam(value="phraseString") String phraseString){
+        Phrase phrase = new Phrase();
+        if((!phraseString.trim().equals("")) && !Phrase.AlreadyExists(phraseString)){
+            phrase.setPhrase(phraseString);
+        }
+        return phrase.toJson();
     }
 
     @RequestMapping( value = "/getGreetingJson", method = RequestMethod.GET, headers="Accept=application/json", produces = {"application/json"})
