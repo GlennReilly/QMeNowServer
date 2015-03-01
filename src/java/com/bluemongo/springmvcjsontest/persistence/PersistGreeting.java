@@ -24,16 +24,15 @@ public class PersistGreeting {
 
     private static final String url = "jdbc:mysql://localhost:3306/grTestDB";
     private static final String user = "sqluser";
-    private static final String password = "us3rP455w0rd!"; //set in aws
+    private static final String password = "us3rP455w0rd!"; //set in mysql aws & dev
 
 
     public void SaveGreeting(com.bluemongo.springmvcjsontest.model.Greeting greeting) {
         initConnection();
         //initStatement();
         try {
-            preparedStatement = connection.prepareStatement("insert into Greeting values(?,?)");
-            preparedStatement.setLong(1, greeting.getId());
-            preparedStatement.setString(2, greeting.getContent());
+            preparedStatement = connection.prepareStatement("insert into Greeting(comment) values(?)");
+            preparedStatement.setString(1, greeting.getContent());
             preparedStatement.executeUpdate();
         }
         catch(SQLException sqlx)
