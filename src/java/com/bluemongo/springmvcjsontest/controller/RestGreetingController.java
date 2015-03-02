@@ -4,6 +4,7 @@ import com.bluemongo.springmvcjsontest.model.Greeting;
 
 import com.bluemongo.springmvcjsontest.model.Phrase;
 import com.bluemongo.springmvcjsontest.persistence.PersistGreeting;
+import com.bluemongo.springmvcjsontest.persistence.PersistPhrase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class RestGreetingController {
     private final AtomicLong counter = new AtomicLong();
     static final Logger logger = LogManager.getLogger(RestGreetingController.class);
     private PersistGreeting persistGreeting = new PersistGreeting();
+    private PersistPhrase persistPhrase = new PersistPhrase();
 
     public @ResponseBody
     Greeting greeting(@RequestParam(value="name", defaultValue="Wurld") String name) {
@@ -31,9 +33,8 @@ public class RestGreetingController {
     @RequestMapping( value = "/createPhrase", method = RequestMethod.GET, headers="Accept=application/json", produces = {"application/json"})
     public @ResponseBody String CreatePhrase(@RequestParam(value="phraseString") String phraseString){
         Phrase phrase = new Phrase();
-        if((!phraseString.trim().equals("")) && !Phrase.AlreadyExists(phraseString)){
-            phrase.setPhrase(phraseString);
-        }
+        phrase.setPhraseText(phraseString);
+        persistPhrase.SavePhrase(phrase);
         return phrase.toJson();
     }
 

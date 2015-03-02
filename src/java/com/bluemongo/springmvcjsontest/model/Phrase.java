@@ -1,18 +1,39 @@
 package com.bluemongo.springmvcjsontest.model;
 
 import com.google.gson.Gson;
+import org.joda.time.DateTime;
+import utils.InputHelper;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by glenn on 23/12/14.
  */
 public class Phrase implements Comparable {
-    private String phrase;
+    private String phraseText;
     private int rating;
+    private String phraseAuthor = "";
+    private Date phraseDate;
 
     public static boolean AlreadyExists(String phraseString) {
         return false;
+    }
+
+    public String getPhraseText() {
+        return InputHelper.cleanText(phraseText);
+    }
+
+    public String getPhraseAuthor() {
+        return InputHelper.cleanText(phraseAuthor);
+    }
+
+    public Date getPhraseDate() {
+        if(phraseDate == null)
+        {
+            phraseDate = new Date();
+        }
+        return phraseDate;
     }
 
     public enum UsersVoteOptions {DownVote, NoVote, UpVote};
@@ -34,26 +55,29 @@ public class Phrase implements Comparable {
     private UsersVoteOptions usersVote;
 
     public Phrase(){
-        phrase = "";
+        phraseText = "";
         rating = 0;
     }
 
     public Phrase(String phraseText){
-        phrase = phraseText;
+        this.phraseText = InputHelper.cleanText(phraseText);
         rating = 0;
         numberOfPhrases++;
         createdOrder = numberOfPhrases;
     }
 
-    public void setPhrase(String phraseText){
-        if(this.phrase.equals("")) {
-            this.phrase = phraseText;
+    public void setPhraseText(String phraseText){
+        if((!phraseText.trim().equals("")) && !Phrase.AlreadyExists(phraseText)) {
+            if (this.phraseText.equals("")) {
+                this.phraseText = InputHelper.cleanText(phraseText);
+
+            }
         }
     }
 
     @Override
     public String toString() {
-        return phrase;
+        return phraseText;
     }
 
     public int getRating(){

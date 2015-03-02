@@ -34,14 +34,12 @@ public class PersistGreeting {
             preparedStatement = connection.prepareStatement("insert into Greeting(comment) values(?)");
             preparedStatement.setString(1, greeting.getContent());
             preparedStatement.executeUpdate();
+            logger.info("greeting saved.");
         }
         catch(SQLException sqlx)
         {
             logger.info(sqlx.getMessage());
         }
-
-        //doQuery(query);
-        logger.info("greeting saved.");
     }
 
 /*    private void doQuery(String query) {
