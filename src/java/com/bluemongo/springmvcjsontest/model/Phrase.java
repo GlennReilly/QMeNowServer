@@ -1,22 +1,21 @@
 package com.bluemongo.springmvcjsontest.model;
 
 import com.google.gson.Gson;
-import org.joda.time.DateTime;
 import utils.InputHelper;
 
-import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by glenn on 23/12/14.
  */
+
 public class Phrase implements Comparable {
     private String phraseText;
     private int rating;
     private String phraseAuthor = "";
     private Date phraseDate;
 
-    public static boolean AlreadyExists(String phraseString) {
+    public static boolean AlreadyExists(String phraseString, String phraseAuthor) {
         return false;
     }
 
@@ -67,7 +66,7 @@ public class Phrase implements Comparable {
     }
 
     public void setPhraseText(String phraseText){
-        if((!phraseText.trim().equals("")) && !Phrase.AlreadyExists(phraseText)) {
+        if((!phraseText.trim().equals("")) && !Phrase.AlreadyExists(phraseText, phraseAuthor)) {
             if (this.phraseText.equals("")) {
                 this.phraseText = InputHelper.cleanText(phraseText);
 
@@ -93,7 +92,6 @@ public class Phrase implements Comparable {
     }
 
 
-    @Override
     public int compareTo(Object another) {
         Phrase anotherPhrase = (Phrase) another;
         int phraseRatingPriority = (this.getRating() > anotherPhrase.getRating())? 1 : (this.getRating() < anotherPhrase.getRating())? -1: 0;

@@ -25,6 +25,8 @@
         <module name="SpringMVCJsonTest" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="1.7">
+      <module name="SpringMVCJsonTest" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
-

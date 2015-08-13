@@ -3,12 +3,12 @@ package com.bluemongo.springmvcjsontest.model;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+/*import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;*/
 
-@DynamoDBTable(tableName = "Greeting")
+//@DynamoDBTable(tableName = "Greeting")
 public class Greeting implements Serializable{
 
 
@@ -27,12 +27,12 @@ public class Greeting implements Serializable{
         this.statusNEW = status;
     }
 
-    @DynamoDBHashKey(attributeName = "Id")
+    //@DynamoDBHashKey(attributeName = "Id")
     public long getId() {
         return id;
     }
 
-    @DynamoDBAttribute(attributeName = "Content")
+    //@DynamoDBAttribute(attributeName = "Content")
     public String getContent() {
         return content;
     }

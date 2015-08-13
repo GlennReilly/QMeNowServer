@@ -6,8 +6,6 @@
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/grTestDB</jdbc-url>
-      <user-name>sqluser</user-name>
-      <user-password>dfdfdfd9df99dfd8dffadf9edf9fdf9fdfdddf9adfd8dfcedf8b</user-password>
       <driver-properties>
         <property name="zeroDateTimeBehavior" value="convertToNull" />
         <property name="tinyInt1isBit" value="false" />

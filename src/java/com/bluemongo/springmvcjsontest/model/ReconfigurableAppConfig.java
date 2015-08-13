@@ -1,14 +1,25 @@
 package com.bluemongo.springmvcjsontest.model;
 
 import com.sun.jndi.toolkit.url.Uri;
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by glenn on 26/07/15.
  */
+
 public class ReconfigurableAppConfig {
+    int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private int versionNumber;
     private String title;
     private Uri imageUri;
