@@ -9,3 +9,14 @@ body{
 .divForEachButtonConfig {
     padding: 0 0 10px 0;
 }
+
+.label2{
+    text-align: right;
+    width: 350px;
+    padding: 2px 20px 2px 20px;
+    margin-right: 10px;
+}
+
+.label2 > label{
+    padding-right: 7px;
+}

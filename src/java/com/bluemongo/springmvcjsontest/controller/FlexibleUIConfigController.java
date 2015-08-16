@@ -22,6 +22,33 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 public class FlexibleUIConfigController {
     private static final Logger logger = LogManager.getLogger(FlexibleUIConfigController.class);
 
+/*    @RequestMapping("/")
+    public String index(){
+        return "index";
+    }*/
+
+
+    @RequestMapping(value="/")
+    public ModelAndView GetIndexPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/FlexibleUIConfig/index");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/buttonStyle/add", method = RequestMethod.GET)
+    public ModelAndView GetButtonStyleForm(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("command",new AppButton());
+        modelAndView.setViewName("/FlexibleUIConfig/addButtonStyleForm");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/buttonStyle/add", method = RequestMethod.POST)
+    public String AddButtonStyle(@ModelAttribute AppButton appButton){
+
+        return "button style saved successfully: " + appButton.getName();
+    }
+
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.GET)
     public ModelAndView GetEditConfigForm(@PathVariable int configID){
         ModelAndView modelAndView = new ModelAndView();
@@ -32,7 +59,7 @@ public class FlexibleUIConfigController {
         }else {
             ConfigOptions configOptions = new ConfigOptions();
             configOptions.setCurrentAppConfig(appConfig);
-            modelAndView.setViewName("EditConfigForm");
+            modelAndView.setViewName("/FlexibleUIConfig/EditConfigForm");
             modelAndView.addObject("command", configOptions);
         }
         return modelAndView;

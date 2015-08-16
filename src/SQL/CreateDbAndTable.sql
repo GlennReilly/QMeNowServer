@@ -49,11 +49,15 @@ create table nameValuePairs(
   pairName varchar(100),
   pairFriendlyName varchar(100),
   pairValue text,
+  createdDate TIMESTAMP NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (id)
 );
 
 insert into nameValuePairs(pairName,pairFriendlyName, pairValue) values('btn1', 'blue button',
 '{"name":"button1","text":"button one","textColour":"#006666","backgroundColorHex":"#CCFF99","padding":"10dp 17dp 3dp 10dp"}');
+
+insert into nameValuePairs(pairName,pairFriendlyName, pairValue) values('btn2', 'green button',
+'{"name":"button2","text":"button two","textColour":"#000000","backgroundColorHex":"#33CC33","padding":"14dp 10dp 2dp 10dp"}');
 
 select * from nameValuePairs;
 
