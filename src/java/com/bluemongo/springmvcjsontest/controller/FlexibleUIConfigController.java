@@ -32,10 +32,16 @@ public class FlexibleUIConfigController {
             ConfigOptions configOptions = new ConfigOptions();
             configOptions.setCurrentAppConfig(appConfig);
             modelAndView.setViewName("EditConfigForm");
-            modelAndView.addObject("command", configOptions); // use 'command' instead of 'ConfigOptions'?
+            modelAndView.addObject("command", configOptions);
         }
-
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String EditConfig2(){
+        ReconfigurableAppConfig appConfig = new ReconfigurableAppConfig();
+
+        return "hello";
     }
 
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.POST)
@@ -45,10 +51,20 @@ public class FlexibleUIConfigController {
         return appConfig;
     }
 
-    @RequestMapping(value = "/save/{configID}", method = RequestMethod.POST)
-    public String SaveConfig(@PathVariable int configID, @RequestParam int numberOfButtonsRequired){
+    @RequestMapping(value = "/save/{configID}")
+    public String SaveConfig2(@PathVariable int configID){
 
-        return "Saved: " + configID + ", numberOfButtonsRequired: " + numberOfButtonsRequired;
+        return "Saved: " + configID;
+    }
+
+    @RequestMapping(value = "/save/{configID}", method = RequestMethod.POST)
+    public String SaveConfig(@PathVariable int configID, @RequestParam int numberOfButtonsRequired,
+                @RequestParam String[] selectedButtonStyle,
+                @RequestParam String selectedButtonDestination){
+
+        return "Saved: " + configID + ", numberOfButtonsRequired: " + numberOfButtonsRequired
+                + ", selectedButtonStyle: " + selectedButtonStyle[1]
+                + ", selectedButtonDestination: " + selectedButtonDestination;
     }
 
 }

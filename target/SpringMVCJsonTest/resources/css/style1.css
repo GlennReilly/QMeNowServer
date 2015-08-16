@@ -1,0 +1,11 @@
+body{
+    font-family: Verdana, sans-serif;
+}
+
+.divForAllButtonConfig {
+    padding: 10px 0 10px 0;
+}
+
+.divForEachButtonConfig {
+    padding: 0 0 10px 0;
+}

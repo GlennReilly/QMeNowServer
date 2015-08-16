@@ -12,13 +12,12 @@
 <html>
 <head>
     <title></title>
-  <%--
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style1.css">
---%>
+
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 
 <form:form method="post" action="/FlexibleUIConfig/save/${command.currentAppConfig.id}">
+<%--<form:form method="POST" action="/FlexibleUIConfig/save/23">--%>
 EditConfigForms<br/>
 ${command.currentAppConfig.id}<br/>
 Select picture:
@@ -28,32 +27,38 @@ Select pageTitle:
 Select number of buttons:
   <form:select path="numberOfButtonsRequired">
      <form:option value="0" label="Please select" />
-    <c:forEach begin="1" end="10" var="i">
+       <c:forEach begin="1" end="20" var="i">
       <form:option value="${i}" />
     </c:forEach>
   </form:select>
-  <br/>
-for each button
-  <br/>
-[
-  <br/>
-Select button style:
-  <br/>
-Select button link:
-  <br/>
-]
-  <br/>
+  <div id="divForAllButtonConfigs" class="divForAllButtonConfig"></div>
   <input type="submit" value="Submit"/>
+
+  <div id="hiddenElements" style="visibility: hidden;">
+    <div id="divForBtnStyleTemplate" class="divForEachButtonConfig">
+        <div>Select button style:
+          <form:select path="selectedButtonStyle"  >
+            <form:option value="0" label="Please select button style" />
+            <c:forEach begin="1" end="5" var="i">
+              <form:option value="${i}" />
+            </c:forEach>
+          </form:select>
+        </div>
+        <div>Select button destination:
+            <form:select path="selectedButtonDestination">
+                <form:option value="0" label="Please select button destination" />
+                <c:forEach begin="1" end="5" var="i">
+                    <form:option value="${i}" />
+                </c:forEach>
+            </form:select>
+        </div>
+
+    </div>
+  </div>
+
 </form:form>
-
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
-<script language="javascript" type="text/javascript">
-
-  $(document).ready(function(){
-    alert("hello");
-  });
-
-</script>
+<script src="<spring:url value='/resources/scripts/editConfigForm.js'/>" ></script>
 </body>
 </html>
 
