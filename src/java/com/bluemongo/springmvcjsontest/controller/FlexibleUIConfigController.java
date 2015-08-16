@@ -1,5 +1,6 @@
 package com.bluemongo.springmvcjsontest.controller;
 
+import com.bluemongo.springmvcjsontest.model.AppButton;
 import com.bluemongo.springmvcjsontest.model.ConfigOptions;
 import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
 import com.bluemongo.springmvcjsontest.service.ReconfigurableAppConfigService;
@@ -37,19 +38,47 @@ public class FlexibleUIConfigController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String EditConfig2(){
-        ReconfigurableAppConfig appConfig = new ReconfigurableAppConfig();
-
-        return "hello";
-    }
-
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.POST)
     public ReconfigurableAppConfig EditConfig(@PathVariable int configID){
         ReconfigurableAppConfig appConfig = new ReconfigurableAppConfig();
 
         return appConfig;
     }
+
+    @RequestMapping(value = "/testConfigJson", method = RequestMethod.GET)
+    public ReconfigurableAppConfig EditConfig2(){
+        ReconfigurableAppConfig appConfig = new ReconfigurableAppConfig();
+
+        appConfig.setTitle("Great trucking songs of the renaissance..");
+
+        AppButton button1 = new AppButton();
+        button1.setName("button1");
+        button1.setText("button one");
+        button1.setBackgroundColorHex("#0066CC");
+        button1.setTextColour("#ffffff");
+        button1.setPadding("7dp 10dp 3dp 10dp");
+        appConfig.addButton(button1);
+
+        AppButton button2 = new AppButton();
+        button2.setName("button2");
+        button2.setText("button Two");
+        button1.setBackgroundColorHex("#33CC33");
+        button1.setTextColour("#000000");
+        button1.setPadding("14dp 10dp 2dp 10dp");
+        appConfig.addButton(button2);
+
+        AppButton button3 = new AppButton();
+        button3.setName("button3");
+        button3.setText("button three");
+        button1.setBackgroundColorHex("#CCFF99");
+        button1.setTextColour("#006666");
+        button1.setPadding("10dp 17dp 3dp 10dp");
+        appConfig.addButton(button3);
+
+        return appConfig;
+    }
+
+
 
     @RequestMapping(value = "/save/{configID}")
     public String SaveConfig2(@PathVariable int configID){
@@ -59,11 +88,11 @@ public class FlexibleUIConfigController {
 
     @RequestMapping(value = "/save/{configID}", method = RequestMethod.POST)
     public String SaveConfig(@PathVariable int configID, @RequestParam int numberOfButtonsRequired,
-                @RequestParam String[] selectedButtonStyle,
+                @RequestParam String selectedButtonStyle,
                 @RequestParam String selectedButtonDestination){
 
         return "Saved: " + configID + ", numberOfButtonsRequired: " + numberOfButtonsRequired
-                + ", selectedButtonStyle: " + selectedButtonStyle[1]
+                + ", selectedButtonStyle: " + selectedButtonStyle
                 + ", selectedButtonDestination: " + selectedButtonDestination;
     }
 

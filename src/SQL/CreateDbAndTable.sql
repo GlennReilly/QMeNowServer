@@ -37,6 +37,30 @@ insert into ConfigStore(config) value('third test');
 
 SELECT * from ConfigStore;
 
+/*
+ *
+ */
+create table nameValuePairs(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  customerId long,
+  classification1 varchar(100),
+  classification2 varchar(100),
+  classification3 varchar(100),
+  pairName varchar(100),
+  pairFriendlyName varchar(100),
+  pairValue text,
+  PRIMARY KEY (id)
+);
+
+insert into nameValuePairs(pairName,pairFriendlyName, pairValue) values('btn1', 'blue button',
+'{"name":"button1","text":"button one","textColour":"#006666","backgroundColorHex":"#CCFF99","padding":"10dp 17dp 3dp 10dp"}');
+
+select * from nameValuePairs;
+
+/*
+ *
+ */
+
 create user 'user456'@'localhost' identified by 'userHotDogFiasco$';
 grant insert,execute,select,delete on DemoJunk1.* to 'user'@'localhost';
 

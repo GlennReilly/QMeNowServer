@@ -7,20 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d36dc02-edb4-4daa-8655-08d7a9335ab0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/scripts/editConfigForm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/model/ConfigOptions.class" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/model/ConfigOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/model/ConfigOptions.class" afterPath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/model/ConfigOptions.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/model/AppButton.class" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/model/AppButton.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/model/AppButton.class" afterPath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/model/AppButton.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.class" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.class" afterPath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/controller/RestGreetingController.class" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/controller/RestGreetingController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/controller/RestGreetingController.class" afterPath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/controller/RestGreetingController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ConfigOptions.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ConfigOptions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/EditConfigForm.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/EditConfigForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/EditConfigForm.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/EditConfigForm.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppButton.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql" afterPath="$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/css/style1.css" afterPath="$PROJECT_DIR$/src/main/resources/css/style1.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/css/style1.css" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/css/style1.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/css/style1.css" afterPath="$PROJECT_DIR$/target/classes/css/style1.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestGreetingController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestGreetingController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SpringMVCJsonTest.iws" />
@@ -84,11 +81,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FlexibleUIConfigController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FlexibleUIConfigController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7612732">
-              <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,11 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <file leaf-file-name="CreateDbAndTable.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.64190984">
+              <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReconfigurableAppConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ReconfigurableAppConfig.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -110,10 +117,51 @@
         <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ConfigOptions.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
+                <element signature="e#349#350#0" expanded="true" />
                 <element signature="e#397#398#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppButton.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppButton.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+              <folding>
+                <element signature="e#318#319#0" expanded="true" />
+                <element signature="e#358#359#0" expanded="true" />
+                <element signature="e#390#391#0" expanded="true" />
+                <element signature="e#421#422#0" expanded="true" />
+                <element signature="e#448#449#0" expanded="true" />
+                <element signature="e#488#489#0" expanded="true" />
+                <element signature="e#520#521#0" expanded="true" />
+                <element signature="e#557#558#0" expanded="true" />
+                <element signature="e#590#591#0" expanded="true" />
+                <element signature="e#642#643#0" expanded="true" />
+                <element signature="e#686#687#0" expanded="true" />
+                <element signature="e#731#732#0" expanded="true" />
+                <element signature="e#772#773#0" expanded="true" />
+                <element signature="e#840#841#0" expanded="true" />
+                <element signature="e#900#901#0" expanded="true" />
+                <element signature="e#934#935#0" expanded="true" />
+                <element signature="e#964#965#0" expanded="true" />
+                <element signature="e#1010#1011#0" expanded="true" />
+                <element signature="e#1048#1049#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestGreetingController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestGreetingController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -185,10 +233,8 @@
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/OfyService.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/Helper.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/PersistenceHelper.java" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestGreetingController.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/DBHelper.java" />
-        <option value="$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ReconfigurableAppConfig.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Error.jsp" />
@@ -198,9 +244,12 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/css/style1.css" />
         <option value="$PROJECT_DIR$/src/main/resources/scripts/editConfigForm.js" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ConfigOptions.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/EditConfigForm.jsp" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestGreetingController.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ConfigOptions.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppButton.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.java" />
+        <option value="$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql" />
       </list>
     </option>
   </component>
@@ -1050,7 +1099,7 @@
       <workItem from="1437994224637" duration="25833000" />
       <workItem from="1438771569597" duration="19000" />
       <workItem from="1438946423234" duration="56288000" />
-      <workItem from="1439647674177" duration="2276000" />
+      <workItem from="1439647674177" duration="5159000" />
     </task>
     <task id="LOCAL-00001" summary="implemented log4j2.">
       <created>1424527602321</created>
@@ -1098,7 +1147,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154789000" />
+    <option name="totallyTimeSpent" value="157672000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1140,6 +1189,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15795091" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1153,7 +1203,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33020833" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1195,13 +1244,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/HelloWorldController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1235,6 +1277,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1285,6 +1328,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1335,6 +1379,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1432,13 +1477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/DBHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1458,6 +1496,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.333333">
           <caret line="17" column="70" selection-start-line="17" selection-start-column="70" selection-end-line="17" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1465,6 +1504,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1476,17 +1516,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestGreetingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56157637">
-          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Error.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40206185">
           <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1521,13 +1555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ReconfigurableAppConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1773399">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/css/style1.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1546,16 +1573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ConfigOptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
-          <folding>
-            <element signature="e#397#398#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/EditConfigForm.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.62963">
@@ -1564,13 +1581,76 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ReconfigurableAppConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestGreetingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/ConfigOptions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#349#350#0" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding>
+            <element signature="e#318#319#0" expanded="true" />
+            <element signature="e#358#359#0" expanded="true" />
+            <element signature="e#390#391#0" expanded="true" />
+            <element signature="e#421#422#0" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#520#521#0" expanded="true" />
+            <element signature="e#557#558#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#642#643#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#731#732#0" expanded="true" />
+            <element signature="e#772#773#0" expanded="true" />
+            <element signature="e#840#841#0" expanded="true" />
+            <element signature="e#900#901#0" expanded="true" />
+            <element signature="e#934#935#0" expanded="true" />
+            <element signature="e#964#965#0" expanded="true" />
+            <element signature="e#1010#1011#0" expanded="true" />
+            <element signature="e#1048#1049#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/FlexibleUIConfigController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7612732">
-          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="49" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.64190984">
+          <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
