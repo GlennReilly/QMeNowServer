@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class DBHelper {
 
-    protected Connection getConnection() throws SQLException, ClassNotFoundException {
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         final String DBURL = "jdbc:mysql://localhost:3306/DemoJunk1";
         String username  = "user456";

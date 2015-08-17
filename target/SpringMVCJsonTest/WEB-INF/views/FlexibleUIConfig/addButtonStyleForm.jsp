@@ -25,11 +25,11 @@ Add a button style
                 <label>name:</label><form:input path="name"/>
             </div>
         </div>
-        <div>
+<%--        <div>
             <div class="label2">
                 <label>text:</label><form:input path="text"/>
             </div>
-        </div>
+        </div>--%>
         <div>
             <div class="label2">
                 <label>textColour:</label><form:input path="textColour"/>

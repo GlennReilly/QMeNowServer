@@ -1,16 +1,14 @@
 package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.AppButton;
+import com.bluemongo.springmvcjsontest.model.ButtonStyle;
 import com.bluemongo.springmvcjsontest.model.ConfigOptions;
 import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
 import com.bluemongo.springmvcjsontest.service.ReconfigurableAppConfigService;
-import com.google.appengine.api.urlfetch.HTTPMethod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.resource.PathResourceResolver;
 
 /**
  * Created by glenn on 9/08/15.
@@ -38,15 +36,15 @@ public class FlexibleUIConfigController {
     @RequestMapping(value="/buttonStyle/add", method = RequestMethod.GET)
     public ModelAndView GetButtonStyleForm(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("command",new AppButton());
+        modelAndView.addObject("command",new ButtonStyle());
         modelAndView.setViewName("/FlexibleUIConfig/addButtonStyleForm");
         return modelAndView;
     }
 
     @RequestMapping(value="/buttonStyle/add", method = RequestMethod.POST)
-    public String AddButtonStyle(@ModelAttribute AppButton appButton){
-
-        return "button style saved successfully: " + appButton.getName();
+    public String AddButtonStyle(@ModelAttribute ButtonStyle buttonStyle){
+        buttonStyle.save();
+        return "button style saved successfully: " + buttonStyle.getName();
     }
 
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.GET)

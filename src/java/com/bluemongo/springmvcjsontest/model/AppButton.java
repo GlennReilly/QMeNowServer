@@ -6,9 +6,8 @@ package com.bluemongo.springmvcjsontest.model;
 public class AppButton {
     private String name;
     private String text;
-    private String textColour;
-    private String backgroundColorHex;
-    private String padding;
+
+    private ButtonStyle buttonStyle = new ButtonStyle();
 
     public String getName() {
         return name;
@@ -27,26 +26,26 @@ public class AppButton {
     }
 
     public String getTextColour() {
-        return textColour;
+        return buttonStyle.getTextColour();
     }
 
     public void setTextColour(String textColour) {
-        this.textColour = textColour;
+        this.buttonStyle.setTextColour(textColour);
     }
 
     public String getBackgroundColorHex() {
-        return backgroundColorHex;
+        return buttonStyle.getBackgroundColorHex();
     }
 
     public void setBackgroundColorHex(String backgroundColorHex) {
-        this.backgroundColorHex = backgroundColorHex;
+        this.buttonStyle.setBackgroundColorHex(backgroundColorHex);
     }
 
     public String getPadding() {
-        return padding;
+        return buttonStyle.getPadding();
     }
 
     public void setPadding(String padding) {
-        this.padding = padding;
+        this.buttonStyle.setPadding(padding);
     }
 }

@@ -72,3 +72,19 @@ grant insert,execute,select,delete on DemoJunk1.* to 'user'@'localhost';
 /*
  *
  */
+
+/*
+ *
+ */
+create table buttonStyle(
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  createdDate TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  styleName varchar(50),
+  textColour varchar(20),
+  backgroundColourHex varchar(20),
+  padding varchar(50),
+  PRIMARY KEY (id)
+)
+
+insert into buttonStyle(styleName, textColour, backgroundColourHex, padding) values('buttonStyle1','#000000','#33CC33', '14dp 10dp 2dp 10dp');
+select * from buttonStyle;
