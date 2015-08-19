@@ -3,6 +3,7 @@ package com.bluemongo.springmvcjsontest.model;
 import com.bluemongo.springmvcjsontest.persistence.PersistButtonStyle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,13 +14,71 @@ public class ButtonStyle {
     private String textColour;
     private String backgroundColorHex;
     private String padding;
+    private int id;
+    private Date createdDate;
+    private long customerId;
+    private String classification1;
+    private String classification2;
+    private String classification3;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getClassification1() {
+        return classification1;
+    }
+
+    public void setClassification1(String classification1) {
+        this.classification1 = classification1;
+    }
+
+    public String getClassification2() {
+        return classification2;
+    }
+
+    public void setClassification2(String classification2) {
+        this.classification2 = classification2;
+    }
+
+    public String getClassification3() {
+        return classification3;
+    }
+
+    public void setClassification3(String classification3) {
+        this.classification3 = classification3;
+    }
 
     public static List<ButtonStyle> getAll(){
         return new ArrayList<>();
     }
 
     public void save() {
-        PersistButtonStyle.save(this);
+        PersistButtonStyle.saveNew(this);
+    }
+
+    public List<ButtonStyle> get(long customerId){
+        return PersistButtonStyle.get(customerId);
     }
 
     public String getName() {

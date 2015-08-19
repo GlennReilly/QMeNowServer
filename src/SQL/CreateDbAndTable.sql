@@ -83,6 +83,7 @@ create table buttonStyle(
   textColour varchar(20),
   backgroundColourHex varchar(20),
   padding varchar(50),
+  customerId long,
   PRIMARY KEY (id)
 )
 

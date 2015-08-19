@@ -17,7 +17,7 @@
 </head>
 
 <form:form method="post" action="/FlexibleUIConfig/save/${command.currentAppConfig.id}">
-<%--<form:form method="POST" action="/FlexibleUIConfig/save/23">--%>
+<%--<form:form method="POST" action="/FlexibleUIConfig/saveNew/23">--%>
 EditConfigForms<br/>
 ${command.currentAppConfig.id}<br/>
 Select picture:
