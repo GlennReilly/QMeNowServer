@@ -48,8 +48,9 @@ public class PersistButtonStyle {
             preparedStatement.setLong(1, customerId);
 
             ResultSet rs = preparedStatement.executeQuery();
-            ButtonStyle buttonStyle = new ButtonStyle();
+
             while (rs.next()){
+                ButtonStyle buttonStyle = new ButtonStyle();
                 buttonStyle.setId(rs.getInt("id"));
                 buttonStyle.setCreatedDate(rs.getDate("createdDate"));
                 buttonStyle.setName(rs.getString("styleName"));

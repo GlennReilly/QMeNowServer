@@ -11,6 +11,11 @@ import java.util.List;
 
 public class ReconfigurableAppConfig {
     int id;
+    private String headerImagePath;
+    private int versionNumber;
+    private String title;
+    private Uri imageUri;
+    private List<AppButton> buttonList = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -19,11 +24,6 @@ public class ReconfigurableAppConfig {
     public void setId(int id) {
         this.id = id;
     }
-
-    private int versionNumber;
-    private String title;
-    private Uri imageUri;
-    private List<AppButton> buttonList = new ArrayList<>();
 
     public List<AppButton> getButtonList() {
         return buttonList;
@@ -60,5 +60,13 @@ public class ReconfigurableAppConfig {
 
     public void addButton(AppButton button) {
         buttonList.add(button);
+    }
+
+    public void setHeaderImagePath(String headerImagePath) {
+        this.headerImagePath = headerImagePath;
+    }
+
+    public String getHeaderImagePath() {
+        return headerImagePath;
     }
 }

@@ -17,44 +17,87 @@
 </head>
 
 <form:form method="post" action="/FlexibleUIConfig/save/${command.currentAppConfig.id}">
-<%--<form:form method="POST" action="/FlexibleUIConfig/saveNew/23">--%>
-EditConfigForms<br/>
-${command.currentAppConfig.id}<br/>
-Select picture:
+<div class="divMain">
+    <div class="divTitle">
+        EditConfigForms
+    </div>
+    <div class="divCustomerDetails">
+        ${command.currentAppConfig.id}
+    </div>
+
   <br/>
-Select pageTitle:
+
   <br/>
-Select number of buttons:
-  <form:select path="numberOfButtonsRequired">
-     <form:option value="0" label="Please select" />
-       <c:forEach begin="1" end="20" var="i">
-      <form:option value="${i}" />
-    </c:forEach>
-  </form:select>
+<div class="labelColumn">
+    <div>
+        <span class="formLabel">Enter pageTitle:</span>
+    </div>
+    <div>
+        <span class="formLabel">Select picture:</span>
+    </div>
+    <div>
+        <span class="formLabel">Select number of buttons:</span>
+    </div>
+</div>
+<div class="formElementsColumn">
+    <div>
+        <form:input path="pageTitle" />
+    </div>
+    <div>
+        <form:select path="headerImagePath">
+            <form:option value="0" label="Please select" />
+        </form:select>
+    </div>
+    <div>
+      <form:select path="numberOfButtonsRequired">
+         <form:option value="0" label="Please select" />
+           <c:forEach begin="1" end="20" var="i">
+          <form:option value="${i}" />
+        </c:forEach>
+      </form:select>
+    </div>
+</div>
   <div id="divForAllButtonConfigs" class="divForAllButtonConfig"></div>
-  <input type="submit" value="Submit"/>
+    <div class="formButtonColumn">
+        <div class="divForSubmitButton">
+            <input type="submit" value="Submit"/>
+        </div>
+    </div>
+
+<!-- the below elements are dynamically inserted into the layout by js -->
 
   <div id="hiddenElements" style="visibility: hidden;">
     <div id="divForBtnStyleTemplate" class="divForEachButtonConfig">
-        <div>Select button style:
-          <form:select path="selectedButtonStyle"  >
-            <form:option value="0" label="Please select button style" />
-            <c:forEach begin="1" end="5" var="i">
-              <form:option value="${i}" />
-            </c:forEach>
-          </form:select>
-        </div>
-        <div>Select button destination:
-            <form:select path="selectedButtonDestination">
-                <form:option value="0" label="Please select button destination" />
-                <c:forEach begin="1" end="5" var="i">
-                    <form:option value="${i}" />
-                </c:forEach>
-            </form:select>
+        <div class="labelColumn">
+            <div>
+                <span class="formLabel">Select button style:</span>
+            </div>
+            <div>
+                <span class="formLabel">Select button destination:</span>
+            </div>
         </div>
 
+        <div class="formElementsColumn">
+            <div>
+                <form:select path="selectedButtonStyle">
+                    <form:option value="0" label="Please select" />
+                    <form:options items="${command.availableButtonStyles}" itemValue="Name" itemLabel="Name" />
+                </form:select>
+            </div>
+            <div>
+                <form:select path="selectedButtonDestination">
+                    <form:option value="0" label="Please select" />
+                    <c:forEach begin="1" end="5" var="i">
+                        <form:option value="${i}" />
+                    </c:forEach>
+                </form:select>
+            </div>
+        </div>
     </div>
   </div>
+</div>
+
+    <!-- the above elements are dynamically inserted into the layout by js -->
 
 </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>

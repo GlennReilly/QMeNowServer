@@ -57,6 +57,7 @@ public class FlexibleUIConfigController {
         }else {
             ConfigOptions configOptions = new ConfigOptions();
             configOptions.setCurrentAppConfig(appConfig);
+            configOptions.setAvailableButtonStyles();
             modelAndView.setViewName("/FlexibleUIConfig/EditConfigForm");
             modelAndView.addObject("command", configOptions);
         }

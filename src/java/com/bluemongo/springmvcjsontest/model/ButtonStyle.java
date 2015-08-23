@@ -77,7 +77,7 @@ public class ButtonStyle {
         PersistButtonStyle.saveNew(this);
     }
 
-    public List<ButtonStyle> get(long customerId){
+    public static List<ButtonStyle> get(long customerId){
         return PersistButtonStyle.get(customerId);
     }
 
