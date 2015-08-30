@@ -17,7 +17,7 @@ body{
 }
 
 .divForAllButtonConfig {
-    padding: 10px 0 10px 0;
+    padding: 20px 0 10px 0;
 }
 
 .divForEachButtonConfig {
@@ -60,7 +60,12 @@ body{
     text-align: left;
     padding-left: 340px;
     padding-top: 20px;
+    padding-bottom: 10px;
     background-color: darkseagreen;
     position:absolute;
     bottom:0;
+}
+
+.BtnRowStyleTitle{
+    background-color: #cfeab4;
 }

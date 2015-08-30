@@ -68,6 +68,7 @@
 
   <div id="hiddenElements" style="visibility: hidden;">
     <div id="divForBtnStyleTemplate" class="divForEachButtonConfig">
+        <div class="BtnRowStyleTitle">button #</div>
         <div class="labelColumn">
             <div>
                 <span class="formLabel">Select button style:</span>
