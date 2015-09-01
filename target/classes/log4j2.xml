@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="debug">
     <Properties>
-        <Property name="log-path">${sys:catalina.home}/logs</Property>
+        <Property contactName="log-path">${sys:catalina.home}/logs</Property>
     </Properties>
 
     <Appenders>
-        <RollingFile name="file-log" fileName="${log-path}/SpringMVCJsonTest-info.log"
+        <RollingFile contactName="file-log" fileName="${log-path}/SpringMVCJsonTest-info.log"
                      filePattern="${log-path}/SpringMVCJsonTest-info-%d{yyyy-MM-dd}.log" immediateFlush="true">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
@@ -16,12 +16,12 @@
             <DefaultRolloverStrategy max="4"/>
         </RollingFile>
 
-        <Console name="console" target="SYSTEM_OUT">
+        <Console contactName="console" target="SYSTEM_OUT">
             <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.bluemongo.springmvcjsontest" level="info" additivity="false">
+        <Logger contactName="com.bluemongo.springmvcjsontest" level="info" additivity="false">
             <appender-ref ref="file-log" level="info"/>
         </Logger>
         <Root level="info" additivity="false">

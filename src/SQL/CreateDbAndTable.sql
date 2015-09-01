@@ -54,10 +54,10 @@ create table nameValuePairs(
 );
 
 insert into nameValuePairs(pairName,pairFriendlyName, pairValue) values('btn1', 'blue button',
-'{"name":"button1","text":"button one","textColour":"#006666","backgroundColorHex":"#CCFF99","padding":"10dp 17dp 3dp 10dp"}');
+'{"contactName":"button1","text":"button one","textColour":"#006666","backgroundColorHex":"#CCFF99","padding":"10dp 17dp 3dp 10dp"}');
 
 insert into nameValuePairs(pairName,pairFriendlyName, pairValue) values('btn2', 'green button',
-'{"name":"button2","text":"button two","textColour":"#000000","backgroundColorHex":"#33CC33","padding":"14dp 10dp 2dp 10dp"}');
+'{"contactName":"button2","text":"button two","textColour":"#000000","backgroundColorHex":"#33CC33","padding":"14dp 10dp 2dp 10dp"}');
 
 select * from nameValuePairs;
 
@@ -72,6 +72,29 @@ grant insert,execute,select,delete on DemoJunk1.* to 'user'@'localhost';
 /*
  *
  */
+
+CREATE TABLE `appUser` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `password` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `customerId` int(11) DEFAULT NULL,
+  `createdDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `firstName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `lastName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `physicalAddress` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
+  `emailAddress` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+create table customer(
+  id int not null auto_increment,
+  businessName nvarchar(100),
+  phoneNumber varchar(30),
+  emailAddress nvarchar(50),
+  physicalAddress nvarchar(300),
+  PRIMARY KEY (id)
+);
+
 
 /*
  *

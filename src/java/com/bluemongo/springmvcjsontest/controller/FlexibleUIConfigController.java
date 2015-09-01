@@ -1,10 +1,8 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.model.AppButton;
-import com.bluemongo.springmvcjsontest.model.ButtonStyle;
-import com.bluemongo.springmvcjsontest.model.ConfigOptions;
-import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
+import com.bluemongo.springmvcjsontest.model.*;
 import com.bluemongo.springmvcjsontest.service.ReconfigurableAppConfigService;
+import com.bluemongo.springmvcjsontest.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +31,61 @@ public class FlexibleUIConfigController {
         return modelAndView;
     }
 
+    // Login methods
+
+    @RequestMapping(value = "/login", method=RequestMethod.GET)
+    public ModelAndView GetLoginForm(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("FlexibleUIConfig/login");
+        modelAndView.addObject("command", new UserCredentials());
+        return  modelAndView;
+    }
+
+    @RequestMapping(value = "/login", method=RequestMethod.POST)
+    public ModelAndView ProcessLogin(@ModelAttribute UserCredentials userCredentials){
+        UserService userService = new UserService();
+        ModelAndView modelAndView = new ModelAndView();
+        if(userService.validateCredentials(userCredentials)){
+            modelAndView.setViewName("FlexibleUIConfig/showUserHome");
+        }
+        else{
+            modelAndView.setViewName("Error");
+        }
+        return modelAndView;
+    }
+
+    // Customer methods
+
+    @RequestMapping(value="/customer/add", method = RequestMethod.GET)
+    public ModelAndView GetCustomerAddForm(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/FlexibleUIConfig/addCustomerForm");
+        modelAndView.addObject("command", new Customer());
+        return  modelAndView;
+    }
+
+    @RequestMapping(value="/customer/add", method = RequestMethod.POST)
+    public String AddCustomer(@ModelAttribute Customer customer){
+        customer.save();
+        return "Customer saved successfully: " + customer.getContactName();
+    }
+
+    // User methods
+    @RequestMapping(value="/user/add", method = RequestMethod.GET)
+    public ModelAndView GetUserAddForm(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/FlexibleUIConfig/addUserForm");
+        modelAndView.addObject("command", new User());
+        return  modelAndView;
+    }
+
+    @RequestMapping(value="/user/add", method = RequestMethod.POST)
+    public String AddUser(@ModelAttribute User user) {
+        user.save();
+        return "User saved successfully: " + user.getFirstName() + " " + user.getLastName();
+    }
+    // Button style methods
+
     @RequestMapping(value="/buttonStyle/add", method = RequestMethod.GET)
     public ModelAndView GetButtonStyleForm(){
         ModelAndView modelAndView = new ModelAndView();
@@ -46,6 +99,8 @@ public class FlexibleUIConfigController {
         buttonStyle.save();
         return "button style saved successfully: " + buttonStyle.getName();
     }
+
+
 
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.GET)
     public ModelAndView GetEditConfigForm(@PathVariable int configID){
@@ -70,6 +125,7 @@ public class FlexibleUIConfigController {
 
         return appConfig;
     }
+
 
     @RequestMapping(value = "/testConfigJson", method = RequestMethod.GET)
     public ReconfigurableAppConfig EditConfig2(){

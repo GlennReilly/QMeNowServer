@@ -1,10 +1,9 @@
 package com.bluemongo.springmvcjsontest.model;
 
-import com.bluemongo.springmvcjsontest.persistence.PersistButtonStyle;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import com.bluemongo.springmvcjsontest.persistence.ButtonStyleStore;
 
 /**
  * Created by glenn on 17/08/15.
@@ -74,11 +73,13 @@ public class ButtonStyle {
     }
 
     public void save() {
-        PersistButtonStyle.saveNew(this);
+        ButtonStyleStore buttonStyleStore = new ButtonStyleStore();
+        buttonStyleStore.saveNew(this);
     }
 
     public static List<ButtonStyle> get(long customerId){
-        return PersistButtonStyle.get(customerId);
+        ButtonStyleStore buttonStyleStore = new ButtonStyleStore();
+        return buttonStyleStore.get(customerId);
     }
 
     public String getName() {

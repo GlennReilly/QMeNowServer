@@ -14,9 +14,11 @@
 Welcome to the FlexibleUIConfig demo
 <br/>
 <ul>
+    <li><a href="./login">Login</a></li>
+    <li><a href="./customer/add">Add a new customer</a></li>
+    <li><a href="./user/add">Add a new user</a></li>
     <li><a href="./buttonStyle/add">Add a new button style</a></li>
     <li><a href="./edit/42">/FlexibleUIConfig/edit/42</a></li>
-    <li><a href="./customer/add">Add a new customer</a></li>
 </ul>
 </body>
 </html>

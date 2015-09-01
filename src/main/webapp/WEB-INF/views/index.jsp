@@ -22,7 +22,7 @@ Welcome to SpringMVCJsonTest
     <li><a href="./greeting/testReconfigurableApp">/greeting/testReconfigurableApp</a></li>
     <li><a href="./greeting/getGreetingJson">/greeting/getGreetingJson</a></li>
     <li><a href="./greeting/test">/greeting/test</a></li>
-    <li><a href="./greeting/bob">/greeting/{bob}</a> - you can change this name in the url.</li>
+    <li><a href="./greeting/bob">/greeting/{bob}</a> - you can change this contactName in the url.</li>
     <li><a href="./phrase/createPhrase?phraseString=insert_phraseString_here">/phrase/createPhrase?phraseString=insert_phraseString_here</a></li>
     <li><a href="./phrase/newPhraseForm">/phrase/newPhraseForm</a></li>
 </ul>
