@@ -6,12 +6,10 @@ import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
  * Created by glenn on 31/08/15.
  */
 public class Customer {
+    private int id;
     private String businessName = "";
-    private String contactName = "";
     private String phoneNumber = "";
     private String emailAddress = "";
-    private String username = "";
-    private String password = "";
     private String physicalAddress = "";
 
 
@@ -20,20 +18,12 @@ public class Customer {
         customerStore.saveNew(this);
     }
 
-    public String getUsername() {
-        return username;
+    public int getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getBusinessName() {
@@ -66,13 +56,5 @@ public class Customer {
 
     public void setPhysicalAddress(String physicalAddress) {
         this.physicalAddress = physicalAddress;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
     }
 }

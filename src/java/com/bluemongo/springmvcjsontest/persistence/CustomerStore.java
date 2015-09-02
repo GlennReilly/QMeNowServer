@@ -5,6 +5,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,6 +33,31 @@ public class CustomerStore {
         {
             logger.info(ex.getMessage());
         }
+    }
+
+    public List<Customer> getAll(boolean isActive){
+        List<Customer> customerList = new ArrayList<>();
+        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress from customer where active = ?";
+        try {
+            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+            preparedStatement.setBoolean(1, isActive);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                Customer customer = new Customer();
+                customer.setId(resultSet.getInt("id"));
+                customer.setBusinessName(resultSet.getNString("businessName"));
+                customer.setPhoneNumber(resultSet.getString("phoneNumber"));
+                customer.setEmailAddress(resultSet.getString("emailAddress"));
+                customer.setPhysicalAddress(resultSet.getNString("physicalAddress"));
+                customerList.add(customer);
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return customerList;
     }
 
 /*    public Customer get(int customerId){

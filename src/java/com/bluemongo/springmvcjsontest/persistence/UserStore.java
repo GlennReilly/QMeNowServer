@@ -1,6 +1,7 @@
 package com.bluemongo.springmvcjsontest.persistence;
 
 import com.bluemongo.springmvcjsontest.model.User;
+import com.bluemongo.springmvcjsontest.model.UserCredentials;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,4 +36,53 @@ public class UserStore {
             logger.info(ex.getMessage());
         }
     }
+
+    public boolean validateCredentials(UserCredentials userCredentials) {
+        boolean foundUserWithTheseCredentials = false;
+        String query = "select count(id) from appUser where username = ? AND password = ? AND active = true";
+        try {
+            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, userCredentials.getUsername());
+            preparedStatement.setString(2, userCredentials.getPassword());
+            resultSet = preparedStatement.executeQuery();
+            int rowCount = 0;
+            while(resultSet.next()){
+                rowCount = resultSet.getInt(1);
+            }
+            foundUserWithTheseCredentials = rowCount>0? true: false;
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return foundUserWithTheseCredentials;
+    }
+
+    public User get(UserCredentials userCredentials){
+        User user = new User();
+        String query = "SELECT id, username, customerId, firstName, lastName, physicalAddress, " +
+                "emailAddress, active, FROM appUser where username = ? AND password = ? AND active = true";
+        try {
+            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, userCredentials.getUsername());
+            preparedStatement.setString(2, userCredentials.getPassword());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                user.setId(resultSet.getInt("id"));
+                user.setUsername(resultSet.getNString("username"));
+                user.setCustomerId(resultSet.getInt("customerId"));
+                user.setFirstName(resultSet.getNString("firstName"));
+                user.setLastName(resultSet.getNString("lastName"));
+                user.setPhysicalAddress(resultSet.getNString("physicalAddress"));
+                user.setEmailAddress(resultSet.getNString("emailAddress"));
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+
+        return user;
+    }
+
 }

@@ -83,17 +83,19 @@ CREATE TABLE `appUser` (
   `lastName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `physicalAddress` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
   `emailAddress` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `active` bit(1) DEFAULT b'1',
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
-create table customer(
-  id int not null auto_increment,
-  businessName nvarchar(100),
-  phoneNumber varchar(30),
-  emailAddress nvarchar(50),
-  physicalAddress nvarchar(300),
-  PRIMARY KEY (id)
-);
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `businessName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `phoneNumber` varchar(30) DEFAULT NULL,
+  `emailAddress` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `physicalAddress` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
+  `active` bit(1) DEFAULT b'1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 
 /*

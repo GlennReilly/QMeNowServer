@@ -1,8 +1,9 @@
 package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.*;
-import com.bluemongo.springmvcjsontest.service.ReconfigurableAppConfigService;
-import com.bluemongo.springmvcjsontest.service.UserService;
+import com.bluemongo.springmvcjsontest.service.ConfigHelper;
+import com.bluemongo.springmvcjsontest.service.ReconfigurableAppConfigFormHelper;
+import com.bluemongo.springmvcjsontest.service.UserFormHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +44,10 @@ public class FlexibleUIConfigController {
 
     @RequestMapping(value = "/login", method=RequestMethod.POST)
     public ModelAndView ProcessLogin(@ModelAttribute UserCredentials userCredentials){
-        UserService userService = new UserService();
         ModelAndView modelAndView = new ModelAndView();
-        if(userService.validateCredentials(userCredentials)){
+        User user = User.get(userCredentials);
+        if(user != null){
+        //if(User.validateCredentials(userCredentials))
             modelAndView.setViewName("FlexibleUIConfig/showUserHome");
         }
         else{
@@ -67,7 +69,7 @@ public class FlexibleUIConfigController {
     @RequestMapping(value="/customer/add", method = RequestMethod.POST)
     public String AddCustomer(@ModelAttribute Customer customer){
         customer.save();
-        return "Customer saved successfully: " + customer.getContactName();
+        return "Customer saved successfully: " + customer.getBusinessName();
     }
 
     // User methods
@@ -75,12 +77,12 @@ public class FlexibleUIConfigController {
     public ModelAndView GetUserAddForm(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/FlexibleUIConfig/addUserForm");
-        modelAndView.addObject("command", new User());
+        modelAndView.addObject("command", new UserFormHelper());
         return  modelAndView;
     }
 
     @RequestMapping(value="/user/add", method = RequestMethod.POST)
-    public String AddUser(@ModelAttribute User user) {
+    public String AddUser(@ModelAttribute UserFormHelper user) {
         user.save();
         return "User saved successfully: " + user.getFirstName() + " " + user.getLastName();
     }
@@ -105,16 +107,16 @@ public class FlexibleUIConfigController {
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.GET)
     public ModelAndView GetEditConfigForm(@PathVariable int configID){
         ModelAndView modelAndView = new ModelAndView();
-        ReconfigurableAppConfig appConfig = ReconfigurableAppConfigService.getConfig(configID);
+        ReconfigurableAppConfig appConfig = ReconfigurableAppConfigFormHelper.getConfig(configID);
         if (appConfig == null) {
             logger.error("No appConfig found with configID: " + configID);
             modelAndView.setViewName("Error");
         }else {
-            ConfigOptions configOptions = new ConfigOptions();
-            configOptions.setCurrentAppConfig(appConfig);
-            configOptions.setAvailableButtonStyles();
+            ConfigHelper configHelper = new ConfigHelper();
+            configHelper.setCurrentAppConfig(appConfig);
+            configHelper.setAvailableButtonStyles();
             modelAndView.setViewName("/FlexibleUIConfig/EditConfigForm");
-            modelAndView.addObject("command", configOptions);
+            modelAndView.addObject("command", configHelper);
         }
         return modelAndView;
     }

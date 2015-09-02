@@ -7,6 +7,8 @@ import com.bluemongo.springmvcjsontest.persistence.UserStore;
  */
 public class User {
     private UserCredentials userCredentials = new UserCredentials();
+    private static UserStore userStore = new UserStore();
+    private int id;
     private int customerId;
     private String firstName = "";
     private String lastName = "";
@@ -14,6 +16,13 @@ public class User {
     private String emailAddress = "";
     private String physicalAddress = "";
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public UserCredentials getUserCredentials() {
         return userCredentials;
@@ -48,7 +57,6 @@ public class User {
     }
 
     public void save() {
-        UserStore userStore = new UserStore();
         userStore.saveNew(this);
     }
 
@@ -93,4 +101,16 @@ public class User {
         this.physicalAddress = physicalAddress;
     }
 
+    public static User get(UserCredentials userCredentials) {
+        return userStore.get(userCredentials);
+    }
+
+    public static boolean validateCredentials(UserCredentials userCredentials) {
+        if(userStore.validateCredentials(userCredentials)) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
