@@ -14,9 +14,18 @@ public class ConfigHelper { //This is an helper class that deals with presenting
     private String headerImagePath;
     private String pageTitle;
     private int numberOfButtonsRequired;
-    private String selectedButtonStyle;
-    private String selectedButtonDestination;
+    private String buttonTexts;
+    private ButtonStyle selectedButtonStyles;
+    private String selectedButtonDestinations;
     private List<ButtonStyle> availableButtonStyles;
+
+    public String getButtonTexts() {
+        return buttonTexts;
+    }
+
+    public void setButtonTexts(String buttonTexts) {
+        this.buttonTexts = buttonTexts;
+    }
 
     public String getHeaderImagePath() {
         return currentAppConfig.getHeaderImagePath();
@@ -37,32 +46,43 @@ public class ConfigHelper { //This is an helper class that deals with presenting
         this.currentAppConfig.setTitle(this.pageTitle);
     }
 
+    public void setAvailableButtonStyles(List<ButtonStyle> availableButtonStyles) {
+        this.availableButtonStyles = availableButtonStyles;
+    }
 
     public List<ButtonStyle> getAvailableButtonStyles() {
         return availableButtonStyles;
     }
 
     public void setAvailableButtonStyles() {
-        this.availableButtonStyles = ButtonStyle.get(123L);
+        this.availableButtonStyles = ButtonStyle.getAllForCustomer(123L);
+    }
+
+    public void setCurrentAppConfig(ReconfigurableAppConfig currentAppConfig) {
+        this.currentAppConfig = currentAppConfig;
+    }
+
+    public ReconfigurableAppConfig getCurrentAppConfig() {
+        return currentAppConfig;
     }
 
 
     //i think the below might need to be moved into the currentAppConfig..
 
-    public String getSelectedButtonDestination() {
-        return selectedButtonDestination;
+    public String getSelectedButtonDestinations() {
+        return selectedButtonDestinations;
     }
 
-    public void setSelectedButtonDestination(String selectedButtonDestination) {
-        this.selectedButtonDestination = selectedButtonDestination;
+    public void setSelectedButtonDestinations(String selectedButtonDestinations) {
+        this.selectedButtonDestinations = selectedButtonDestinations;
     }
 
-    public String getSelectedButtonStyle() {
-        return selectedButtonStyle;
+    public ButtonStyle getSelectedButtonStyles() {
+        return selectedButtonStyles;
     }
 
-    public void setSelectedButtonStyle(String selectedButtonStyle) {
-        this.selectedButtonStyle = selectedButtonStyle;
+    public void setSelectedButtonStyles(ButtonStyle selectedButtonStyles) {
+        this.selectedButtonStyles = selectedButtonStyles;
     }
 
     public int getNumberOfButtonsRequired() {
@@ -73,11 +93,5 @@ public class ConfigHelper { //This is an helper class that deals with presenting
         this.numberOfButtonsRequired = numberOfButtonsRequired;
     }
 
-    public void setCurrentAppConfig(ReconfigurableAppConfig currentAppConfig) {
-        this.currentAppConfig = currentAppConfig;
-    }
 
-    public ReconfigurableAppConfig getCurrentAppConfig() {
-        return currentAppConfig;
-    }
 }

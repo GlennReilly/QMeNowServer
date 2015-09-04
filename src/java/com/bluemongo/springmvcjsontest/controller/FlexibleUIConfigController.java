@@ -9,6 +9,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by glenn on 9/08/15.
  */
@@ -18,12 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/FlexibleUIConfig")
 public class FlexibleUIConfigController {
     private static final Logger logger = LogManager.getLogger(FlexibleUIConfigController.class);
-
-/*    @RequestMapping("/")
-    public String index(){
-        return "index";
-    }*/
-
 
     @RequestMapping(value="/")
     public ModelAndView GetIndexPage(){
@@ -91,7 +88,7 @@ public class FlexibleUIConfigController {
     @RequestMapping(value="/buttonStyle/add", method = RequestMethod.GET)
     public ModelAndView GetButtonStyleForm(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("command",new ButtonStyle());
+        modelAndView.addObject("command", new ButtonStyle());
         modelAndView.setViewName("/FlexibleUIConfig/addButtonStyleForm");
         return modelAndView;
     }
@@ -102,7 +99,7 @@ public class FlexibleUIConfigController {
         return "button style saved successfully: " + buttonStyle.getName();
     }
 
-
+    // Edit Config methods
 
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.GET)
     public ModelAndView GetEditConfigForm(@PathVariable int configID){
@@ -121,12 +118,84 @@ public class FlexibleUIConfigController {
         return modelAndView;
     }
 
+
+
+    @RequestMapping(value = "/save/{configID}", method = RequestMethod.POST)
+    public String SaveConfig(@PathVariable int configID,
+                             @RequestParam String pageTitle,
+                             @RequestParam int numberOfButtonsRequired, //probably not really required by this point..
+                             @RequestParam String buttonTexts,
+                             @RequestParam String selectedButtonStyles,
+                             @RequestParam String selectedButtonDestinations){
+        List<AppButton> appButtonList = new ArrayList<>();
+        String[] arrButtonTexts = buttonTexts.split(",");
+        List<String> buttonTextList = new ArrayList<>();
+        for (String strButtonText : arrButtonTexts){
+            if (strButtonText.length()>0){
+                buttonTextList.add(strButtonText);
+            }
+        }
+
+        String[] arrButtonStyles = selectedButtonStyles.split(",");
+        List<ButtonStyle> buttonStyleList = new ArrayList<>();
+        for(String strButtonStyleId : arrButtonStyles){
+            int buttonStyleId = Integer.parseInt(strButtonStyleId);
+            if (buttonStyleId > 0) { //not sure why the 'please select' option is coming through as one of the selected results, this counters it.
+                ButtonStyle buttonStyle = ButtonStyle.get(buttonStyleId);
+                buttonStyleList.add(buttonStyle);
+            }
+        }
+//selectedButtonDestinations next..
+        String[] arrButtonDestinations = selectedButtonDestinations.split(",");
+        List<ButtonDestination> buttonDestinationList = new ArrayList<>();
+        for (String strButtonDestinationId : arrButtonDestinations){
+            int buttonDestinationId = Integer.parseInt(strButtonDestinationId);
+            if (buttonDestinationId > 0){
+                //TODO - finish the below
+                ButtonDestination buttonDestination = ButtonDestination.get(buttonDestinationId);
+                buttonDestinationList.add(buttonDestination);
+            }
+        }
+
+        //Now for each buttonText, button destination and buttonStyle - create a button object.
+
+        for (int i = 0; i < buttonDestinationList.size(); i++){
+            String buttonText = buttonTextList.get(i);
+            ButtonDestination buttonDestination = buttonDestinationList.get(i);
+            ButtonStyle buttonStyle = buttonStyleList.get(i);
+            AppButton appButton = new AppButton(buttonText, buttonDestination, buttonStyle);
+            appButtonList.add(appButton);
+        }
+
+        return "Saved new config, title: " + pageTitle + ", id:" + configID + ", numberOfButtonsRequired: " + numberOfButtonsRequired
+                + ", buttonTexts: " + buttonTexts
+                + ", selectedButtonStyles: " + selectedButtonStyles
+                + ", selectedButtonDestinations: " + selectedButtonDestinations;
+    }
+
+/*    @RequestMapping(value = "/save/{configID}", method = RequestMethod.POST)
+    public String SaveConfig(@ModelAttribute ConfigHelper configHelper){
+
+        return "Saved2: " + configHelper.getCurrentAppConfig().getId() + ", numberOfButtonsRequired: " + configHelper.getNumberOfButtonsRequired()
+                + ", selectedButtonStyles: " + configHelper.getSelectedButtonStyles()
+                + ", selectedButtonDestinations: " + configHelper.getSelectedButtonDestinations();
+    }*/
+
+    /*    //is the below being used??
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.POST)
     public ReconfigurableAppConfig EditConfig(@PathVariable int configID){
         ReconfigurableAppConfig appConfig = new ReconfigurableAppConfig();
 
         return appConfig;
     }
+
+
+
+    @RequestMapping(value = "/save/{configID}")
+    public String SaveConfig2(@PathVariable int configID){
+
+        return "Saved: " + configID;
+    }*/
 
 
     @RequestMapping(value = "/testConfigJson", method = RequestMethod.GET)
@@ -162,22 +231,5 @@ public class FlexibleUIConfigController {
         return appConfig;
     }
 
-
-
-    @RequestMapping(value = "/save/{configID}")
-    public String SaveConfig2(@PathVariable int configID){
-
-        return "Saved: " + configID;
-    }
-
-    @RequestMapping(value = "/save/{configID}", method = RequestMethod.POST)
-    public String SaveConfig(@PathVariable int configID, @RequestParam int numberOfButtonsRequired,
-                @RequestParam String selectedButtonStyle,
-                @RequestParam String selectedButtonDestination){
-
-        return "Saved: " + configID + ", numberOfButtonsRequired: " + numberOfButtonsRequired
-                + ", selectedButtonStyle: " + selectedButtonStyle
-                + ", selectedButtonDestination: " + selectedButtonDestination;
-    }
 
 }

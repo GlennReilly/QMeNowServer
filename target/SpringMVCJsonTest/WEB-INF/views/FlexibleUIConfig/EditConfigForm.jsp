@@ -77,6 +77,9 @@
         <div class="BtnRowStyleTitle">button #</div>
         <div class="labelColumn">
             <div>
+                <span class="formLabel">Enter button text:</span>
+            </div>
+            <div>
                 <span class="formLabel">Select button style:</span>
             </div>
             <div>
@@ -86,13 +89,16 @@
 
         <div class="formElementsColumn">
             <div>
-                <form:select path="selectedButtonStyle">
-                    <form:option value="0" label="Please select" />
-                    <form:options items="${command.availableButtonStyles}" itemValue="Name" itemLabel="Name" />
+                <form:input path="buttonTexts" />
+            </div>
+            <div>
+                <form:select path="selectedButtonStyles">
+                    <form:option value="0" label="Please select"  />
+                    <form:options items="${command.availableButtonStyles}" itemValue="Id" itemLabel="Name" />
                 </form:select>
             </div>
             <div>
-                <form:select path="selectedButtonDestination">
+                <form:select path="selectedButtonDestinations">
                     <form:option value="0" label="Please select" />
                     <c:forEach begin="1" end="5" var="i">
                         <form:option value="${i}" />

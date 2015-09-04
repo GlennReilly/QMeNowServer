@@ -77,9 +77,14 @@ public class ButtonStyle {
         buttonStyleStore.saveNew(this);
     }
 
-    public static List<ButtonStyle> get(long customerId){
+    public static List<ButtonStyle> getAllForCustomer(long customerId){
         ButtonStyleStore buttonStyleStore = new ButtonStyleStore();
-        return buttonStyleStore.get(customerId);
+        return buttonStyleStore.getAllForCustomer(customerId);
+    }
+
+    public static ButtonStyle get(int buttonStyleId) {
+        ButtonStyleStore buttonStyleStore = new ButtonStyleStore();
+        return buttonStyleStore.get(buttonStyleId);
     }
 
     public String getName() {
@@ -113,4 +118,5 @@ public class ButtonStyle {
     public void setPadding(String padding) {
         this.padding = padding;
     }
+
 }

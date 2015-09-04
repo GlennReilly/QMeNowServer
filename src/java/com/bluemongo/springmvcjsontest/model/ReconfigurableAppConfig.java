@@ -1,5 +1,6 @@
 package com.bluemongo.springmvcjsontest.model;
 
+import com.bluemongo.springmvcjsontest.persistence.ConfigStore;
 import com.sun.jndi.toolkit.url.Uri;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,23 @@ public class ReconfigurableAppConfig {
     int id;
     private String headerImagePath;
     private int versionNumber;
+    private int customerId;
     private String title;
     private Uri imageUri;
     private List<AppButton> buttonList = new ArrayList<>();
+
+    public void save(){
+        ConfigStore configStore = new ConfigStore();
+        configStore.saveNew(this);
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
     public int getId() {
         return id;

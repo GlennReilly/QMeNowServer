@@ -1,6 +1,7 @@
 package com.bluemongo.springmvcjsontest.persistence;
 
 import com.bluemongo.springmvcjsontest.model.Customer;
+import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.PreparedStatement;
@@ -60,7 +61,31 @@ public class CustomerStore {
         return customerList;
     }
 
-/*    public Customer get(int customerId){
+    public List<ReconfigurableAppConfig> getConfigs(int customerId){
+        List<ReconfigurableAppConfig> reconfigurableAppConfigList = new ArrayList<>();
+        String query = "SELECT id, title, config, createdDate, updatedDate, customerId, revisionNumber " +
+        "FROM ConfigStore where customerId is null or  customerId = ?";
+        try {
+            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+            preparedStatement.setInt(1, customerId);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                ReconfigurableAppConfig config = new ReconfigurableAppConfig();
+                config.setTitle(resultSet.getNString("title"));
+                //TODO complete this.
+                reconfigurableAppConfigList.add(config);
+            }
+
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return reconfigurableAppConfigList;
+    }
+
+/*    public Customer getAllForCustomer(int customerId){
 
     }*/
 }

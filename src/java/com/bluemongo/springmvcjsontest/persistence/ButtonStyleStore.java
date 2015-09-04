@@ -1,5 +1,6 @@
 package com.bluemongo.springmvcjsontest.persistence;
 
+import com.bluemongo.springmvcjsontest.model.ButtonStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,7 +37,7 @@ public class ButtonStyleStore {
         }
     }
 
-    public List<com.bluemongo.springmvcjsontest.model.ButtonStyle> get(long customerId) {
+    public List<com.bluemongo.springmvcjsontest.model.ButtonStyle> getAllForCustomer(long customerId) {
         String query = "select id, createdDate, styleName, textColour, backgroundColourHex, padding," +
                 " classification1, classification2, classification3, customerId" +
                 " from buttonStyle where customerId=? or customerId is null";
@@ -67,5 +68,36 @@ public class ButtonStyleStore {
             logger.info(ex.getMessage());
         }
         return buttonStyleList;
+    }
+
+    public ButtonStyle get(int buttonStyleId) {
+        String query = "select id, createdDate, styleName, textColour, backgroundColourHex, padding," +
+                " classification1, classification2, classification3, customerId" +
+                " from buttonStyle where id = ?";
+        ButtonStyle buttonStyle = null;
+        try {
+            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+            preparedStatement.setLong(1, buttonStyleId);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                buttonStyle = new com.bluemongo.springmvcjsontest.model.ButtonStyle();
+                buttonStyle.setId(resultSet.getInt("id"));
+                buttonStyle.setCreatedDate(resultSet.getDate("createdDate"));
+                buttonStyle.setName(resultSet.getString("styleName"));
+                buttonStyle.setTextColour(resultSet.getString("textColour"));
+                buttonStyle.setBackgroundColorHex(resultSet.getString("backgroundColourHex"));
+                buttonStyle.setPadding(resultSet.getString("padding"));
+                buttonStyle.setClassification1(resultSet.getString("classification1"));
+                buttonStyle.setClassification2(resultSet.getString("classification2"));
+                buttonStyle.setClassification3(resultSet.getString("classification3"));
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return buttonStyle;
     }
 }

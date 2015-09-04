@@ -6,8 +6,33 @@ package com.bluemongo.springmvcjsontest.model;
 public class AppButton {
     private String name;
     private String text;
+    private ButtonDestination buttonDestination =  null;
+    private ButtonStyle buttonStyle = null;
 
-    private ButtonStyle buttonStyle = new ButtonStyle();
+    public AppButton(){}
+
+    public AppButton(String buttonText, ButtonDestination buttonDestination, ButtonStyle buttonStyle) {
+        this.setText(buttonText);
+        this.buttonDestination = buttonDestination;
+        this.buttonStyle = buttonStyle;
+    }
+
+    public ButtonStyle getButtonStyle() {
+        return buttonStyle;
+    }
+
+    public void setButtonStyle(ButtonStyle buttonStyle) {
+        this.buttonStyle = buttonStyle;
+    }
+
+    public ButtonDestination getButtonDestination() {
+        return buttonDestination;
+    }
+
+    public void setButtonDestination(ButtonDestination buttonDestination) {
+        this.buttonDestination = buttonDestination;
+    }
+
 
     public String getName() {
         return name;

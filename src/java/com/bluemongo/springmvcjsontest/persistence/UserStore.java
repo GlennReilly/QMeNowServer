@@ -59,15 +59,16 @@ public class UserStore {
     }
 
     public User get(UserCredentials userCredentials){
-        User user = new User();
+        User user = null;
         String query = "SELECT id, username, customerId, firstName, lastName, physicalAddress, " +
-                "emailAddress, active, FROM appUser where username = ? AND password = ? AND active = true";
+                "emailAddress, active FROM appUser where username = ? AND password = ? AND active = true";
         try {
             preparedStatement = dbHelper.getConnection().prepareStatement(query);
             preparedStatement.setString(1, userCredentials.getUsername());
             preparedStatement.setString(2, userCredentials.getPassword());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
+                user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getNString("username"));
                 user.setCustomerId(resultSet.getInt("customerId"));
