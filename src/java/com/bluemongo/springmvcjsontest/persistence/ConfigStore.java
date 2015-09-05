@@ -43,4 +43,29 @@ public class ConfigStore {
 
         return configList;
     }
+
+    public ReconfigurableAppConfig get(int configID) {
+        ReconfigurableAppConfig appConfig = null;
+        String query = "select id, title, config, createdDate, customerId, revisionNumber from ConfigStore where id = ?";
+        try {
+            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+            preparedStatement.setInt(1, configID);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                appConfig = new ReconfigurableAppConfig();
+                appConfig.setId(resultSet.getInt("id"));
+                appConfig.setTitle(resultSet.getNString("title"));
+                appConfig.setCustomerId(resultSet.getInt("customerId"));
+                appConfig.setRevisionNumber(resultSet.getInt("revisionNumber"));
+                appConfig.setCreatedDate(resultSet.getDate("createdDate"));
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+
+        return appConfig;
+    }
 }

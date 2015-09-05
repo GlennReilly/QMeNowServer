@@ -127,6 +127,7 @@ public class FlexibleUIConfigController {
                              @RequestParam String buttonTexts,
                              @RequestParam String selectedButtonStyles,
                              @RequestParam String selectedButtonDestinations){
+
         List<AppButton> appButtonList = new ArrayList<>();
         String[] arrButtonTexts = buttonTexts.split(",");
         List<String> buttonTextList = new ArrayList<>();
@@ -167,35 +168,16 @@ public class FlexibleUIConfigController {
             appButtonList.add(appButton);
         }
 
+        ReconfigurableAppConfig appConfig = ReconfigurableAppConfigFormHelper.getConfig(configID);
+        appConfig.setButtonList(appButtonList);
+        appConfig.save();
+
         return "Saved new config, title: " + pageTitle + ", id:" + configID + ", numberOfButtonsRequired: " + numberOfButtonsRequired
                 + ", buttonTexts: " + buttonTexts
                 + ", selectedButtonStyles: " + selectedButtonStyles
                 + ", selectedButtonDestinations: " + selectedButtonDestinations;
     }
 
-/*    @RequestMapping(value = "/save/{configID}", method = RequestMethod.POST)
-    public String SaveConfig(@ModelAttribute ConfigHelper configHelper){
-
-        return "Saved2: " + configHelper.getCurrentAppConfig().getId() + ", numberOfButtonsRequired: " + configHelper.getNumberOfButtonsRequired()
-                + ", selectedButtonStyles: " + configHelper.getSelectedButtonStyles()
-                + ", selectedButtonDestinations: " + configHelper.getSelectedButtonDestinations();
-    }*/
-
-    /*    //is the below being used??
-    @RequestMapping(value = "/edit/{configID}", method = RequestMethod.POST)
-    public ReconfigurableAppConfig EditConfig(@PathVariable int configID){
-        ReconfigurableAppConfig appConfig = new ReconfigurableAppConfig();
-
-        return appConfig;
-    }
-
-
-
-    @RequestMapping(value = "/save/{configID}")
-    public String SaveConfig2(@PathVariable int configID){
-
-        return "Saved: " + configID;
-    }*/
 
 
     @RequestMapping(value = "/testConfigJson", method = RequestMethod.GET)

@@ -13,6 +13,10 @@ public class ReconfigurableAppConfigFormHelper {
             reconfigurableAppConfig = new ReconfigurableAppConfig();
             reconfigurableAppConfig.setId(configID + 1);
         }
+        if(configID == 43) {
+            reconfigurableAppConfig = new ReconfigurableAppConfig();
+            reconfigurableAppConfig.setId(configID);
+        }
 
         return reconfigurableAppConfig;
     }

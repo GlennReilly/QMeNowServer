@@ -2,6 +2,9 @@ package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.ConfigStore;
 import com.sun.jndi.toolkit.url.Uri;
+import sun.security.krb5.Config;
+
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +21,15 @@ public class ReconfigurableAppConfig {
     private String title;
     private Uri imageUri;
     private List<AppButton> buttonList = new ArrayList<>();
+    private int revisionNumber;
+    private Date createdDate;
+
+    public static ReconfigurableAppConfig get(int configID) {
+        ConfigStore configStore = new ConfigStore();
+        ReconfigurableAppConfig appConfig = configStore.get(configID);
+
+        return appConfig;
+    }
 
     public void save(){
         ConfigStore configStore = new ConfigStore();
@@ -72,7 +84,6 @@ public class ReconfigurableAppConfig {
         this.imageUri = imageUri;
     }
 
-
     public void addButton(AppButton button) {
         buttonList.add(button);
     }
@@ -83,5 +94,22 @@ public class ReconfigurableAppConfig {
 
     public String getHeaderImagePath() {
         return headerImagePath;
+    }
+
+
+    public void setRevisionNumber(int revisionNumber) {
+        this.revisionNumber = revisionNumber;
+    }
+
+    public int getRevisionNumber() {
+        return revisionNumber;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
     }
 }
