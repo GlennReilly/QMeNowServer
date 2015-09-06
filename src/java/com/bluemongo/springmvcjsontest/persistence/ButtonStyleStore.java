@@ -4,6 +4,7 @@ import com.bluemongo.springmvcjsontest.model.ButtonStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
@@ -22,8 +23,8 @@ public class ButtonStyleStore {
     public void saveNew(com.bluemongo.springmvcjsontest.model.ButtonStyle buttonStyle){
         //insert into buttonStyle(styleName, textColour, backgroundColourHex, padding) values('buttonStyle1','#000000','#33CC33', '14dp 10dp 2dp 10dp');
         String query = "insert into buttonStyle(styleName, textColour, backgroundColourHex, padding) values(?,?,?,?)";
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, buttonStyle.getName());
             preparedStatement.setString(2, buttonStyle.getTextColour());
             preparedStatement.setString(3, buttonStyle.getBackgroundColorHex());
@@ -42,8 +43,8 @@ public class ButtonStyleStore {
                 " classification1, classification2, classification3, customerId" +
                 " from buttonStyle where customerId=? or customerId is null";
         List<com.bluemongo.springmvcjsontest.model.ButtonStyle> buttonStyleList = new ArrayList<>();
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, customerId);
 
             resultSet = preparedStatement.executeQuery();
@@ -75,8 +76,8 @@ public class ButtonStyleStore {
                 " classification1, classification2, classification3, customerId" +
                 " from buttonStyle where id = ?";
         ButtonStyle buttonStyle = null;
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, buttonStyleId);
 
             resultSet = preparedStatement.executeQuery();

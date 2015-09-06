@@ -12,17 +12,17 @@ public class testReconfigurableAppConfig {
 
     @Before
     public void setUp(){
-
+        reconfigurableAppConfig = null;
     }
 
-    @Test
+/*    @Test
     public void testGetId(){
         int configID = 42;
         reconfigurableAppConfig = new ReconfigurableAppConfig();
-        reconfigurableAppConfig.setId(configID);
+        //reconfigurableAppConfig.setId(configID);
 
         assertEquals(42, reconfigurableAppConfig.getId());
-    }
+    }*/
 
     @Test
     public void testGetConfigNull(){
@@ -42,4 +42,37 @@ public class testReconfigurableAppConfig {
     public void testRevisionIncrementing(){
 
     }
+
+
+    @Test
+    public void testConfigInsertRetrieve(){
+        reconfigurableAppConfig = new ReconfigurableAppConfig();
+        reconfigurableAppConfig.setCustomerId(123);
+        final String title = "testing of the insert";
+        reconfigurableAppConfig.setTitle(title);
+        reconfigurableAppConfig.setButtonList(null);
+
+        //We differentiate between updating and saving new by the existence of an id
+        int savedId = reconfigurableAppConfig.save();
+
+        ReconfigurableAppConfig reconfigurableAppConfig2 = ReconfigurableAppConfig.get(savedId);
+        assertEquals(title, reconfigurableAppConfig2.getTitle());
+    }
+
+    @Test
+    public void testConfigUpdateRetrieve(){
+        reconfigurableAppConfig = ReconfigurableAppConfig.get(2);
+        reconfigurableAppConfig.setCustomerId(123);
+        final String title = "testing of the update";
+        reconfigurableAppConfig.setTitle(title);
+        reconfigurableAppConfig.setButtonList(null);
+
+        //We differentiate between updating and saving new by the existence of an id
+        int savedId = reconfigurableAppConfig.save();
+
+        ReconfigurableAppConfig reconfigurableAppConfig2 = ReconfigurableAppConfig.get(savedId);
+        assertEquals(title, reconfigurableAppConfig2.getTitle());
+    }
+
+
 }

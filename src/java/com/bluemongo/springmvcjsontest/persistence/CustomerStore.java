@@ -4,6 +4,8 @@ import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -21,8 +23,8 @@ public class CustomerStore {
 
     public void saveNew(Customer customer){
         String query = "insert into customer(businessName, phoneNumber, emailAddress, physicalAddress) values (?,?,?,?)";
-        try{
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,customer.getBusinessName());
             preparedStatement.setString(2,customer.getPhoneNumber());
             preparedStatement.setString(3,customer.getEmailAddress());
@@ -39,8 +41,8 @@ public class CustomerStore {
     public List<Customer> getAll(boolean isActive){
         List<Customer> customerList = new ArrayList<>();
         String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress from customer where active = ?";
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setBoolean(1, isActive);
             resultSet = preparedStatement.executeQuery();
 
@@ -65,8 +67,8 @@ public class CustomerStore {
         List<ReconfigurableAppConfig> reconfigurableAppConfigList = new ArrayList<>();
         String query = "SELECT id, title, config, createdDate, updatedDate, customerId, revisionNumber " +
         "FROM ConfigStore where customerId is null or  customerId = ?";
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, customerId);
             resultSet = preparedStatement.executeQuery();
 

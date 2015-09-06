@@ -16,13 +16,20 @@ import java.util.List;
 public class ReconfigurableAppConfig {
     int id;
     private String headerImagePath;
-    private int versionNumber;
     private int customerId;
     private String title;
     private Uri imageUri;
     private List<AppButton> buttonList = new ArrayList<>();
     private int revisionNumber;
     private Date createdDate;
+    private String config;
+
+    public ReconfigurableAppConfig() {
+    }
+
+/*    public ReconfigurableAppConfig(int id) {
+        this.id = id;
+    }*/
 
     public static ReconfigurableAppConfig get(int configID) {
         ConfigStore configStore = new ConfigStore();
@@ -31,9 +38,16 @@ public class ReconfigurableAppConfig {
         return appConfig;
     }
 
-    public void save(){
+    public int save(){
         ConfigStore configStore = new ConfigStore();
-        configStore.saveNew(this);
+        int savedId = 0;
+        if(this.getId()>0){
+        savedId = configStore.saveUpdate(this);
+        }
+        else{
+            savedId = configStore.saveNew(this);
+        }
+        return savedId;
     }
 
     public int getCustomerId() {
@@ -48,7 +62,7 @@ public class ReconfigurableAppConfig {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
@@ -66,14 +80,6 @@ public class ReconfigurableAppConfig {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getVersionNumber() {
-        return versionNumber;
-    }
-
-    public void setVersionNumber(int versionNumber) {
-        this.versionNumber = versionNumber;
     }
 
     public Uri getImageUri() {
@@ -105,11 +111,20 @@ public class ReconfigurableAppConfig {
         return revisionNumber;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
     public Date getCreatedDate() {
         return createdDate;
+    }
+
+    public int incrementAndGetRevisionNumber() {
+        setRevisionNumber(getRevisionNumber()+1);
+        return getRevisionNumber();
+    }
+
+    public void setConfig(String config) {
+        this.config = config;
+    }
+
+    public String getConfig() {
+        return config;
     }
 }
