@@ -11,7 +11,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title></title>
+    <configName></configName>
 
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>

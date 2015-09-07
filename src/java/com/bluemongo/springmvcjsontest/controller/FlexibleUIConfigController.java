@@ -2,7 +2,6 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.*;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
-import com.bluemongo.springmvcjsontest.service.ReconfigurableAppConfigFormHelper;
 import com.bluemongo.springmvcjsontest.service.UserFormHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -104,13 +103,12 @@ public class FlexibleUIConfigController {
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.GET)
     public ModelAndView GetEditConfigForm(@PathVariable int configID){
         ModelAndView modelAndView = new ModelAndView();
-        ReconfigurableAppConfig appConfig = ReconfigurableAppConfigFormHelper.getConfig(configID);
+        ReconfigurableAppConfig appConfig = ConfigHelper.get(configID);
         if (appConfig == null) {
             logger.error("No appConfig found with configID: " + configID);
             modelAndView.setViewName("Error");
         }else {
-            ConfigHelper configHelper = new ConfigHelper();
-            configHelper.setCurrentAppConfig(appConfig);
+            ConfigHelper configHelper = new ConfigHelper(appConfig);
             configHelper.setAvailableButtonStyles();
             modelAndView.setViewName("/FlexibleUIConfig/EditConfigForm");
             modelAndView.addObject("command", configHelper);
@@ -168,9 +166,10 @@ public class FlexibleUIConfigController {
             appButtonList.add(appButton);
         }
 
-        ReconfigurableAppConfig appConfig = ReconfigurableAppConfigFormHelper.getConfig(configID);
+        ReconfigurableAppConfig appConfig = ConfigHelper.get(configID);
+        ConfigHelper configHelper = new ConfigHelper(appConfig);
         appConfig.setButtonList(appButtonList);
-        appConfig.save();
+        configHelper.save();
 
         return "Saved new config, title: " + pageTitle + ", id:" + configID + ", numberOfButtonsRequired: " + numberOfButtonsRequired
                 + ", buttonTexts: " + buttonTexts

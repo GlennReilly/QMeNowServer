@@ -12,7 +12,7 @@
 
 <html>
 <head>
-    <title>Add a button style</title>
+    <configName>Add a button style</configName>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>

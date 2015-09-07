@@ -10,7 +10,7 @@
 <%@taglib  uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-    <title></title>
+    <configName></configName>
 </head>
 <body>
     <form:form action="/phrase/newPhraseForm" method="POST">

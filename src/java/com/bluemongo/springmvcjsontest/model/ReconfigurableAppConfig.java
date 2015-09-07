@@ -2,8 +2,6 @@ package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.ConfigStore;
 import com.sun.jndi.toolkit.url.Uri;
-import sun.security.krb5.Config;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +14,23 @@ import java.util.List;
 public class ReconfigurableAppConfig {
     int id;
     private String headerImagePath;
-    private int customerId;
+    //private int customerId;
     private String title;
     private Uri imageUri;
     private List<AppButton> buttonList = new ArrayList<>();
     private int revisionNumber;
     private Date createdDate;
-    private String config;
+
+    //private String config;
 
     public ReconfigurableAppConfig() {
     }
 
-/*    public ReconfigurableAppConfig(int id) {
+    public ReconfigurableAppConfig(int id) {
         this.id = id;
-    }*/
+    }
 
-    public static ReconfigurableAppConfig get(int configID) {
+/*    public static ReconfigurableAppConfig get(int configID) {
         ConfigStore configStore = new ConfigStore();
         ReconfigurableAppConfig appConfig = configStore.get(configID);
 
@@ -48,15 +47,15 @@ public class ReconfigurableAppConfig {
             savedId = configStore.saveNew(this);
         }
         return savedId;
-    }
+    }*/
 
-    public int getCustomerId() {
+/*    public int getCustomerId() {
         return customerId;
     }
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -120,11 +119,11 @@ public class ReconfigurableAppConfig {
         return getRevisionNumber();
     }
 
-    public void setConfig(String config) {
+/*    public void setConfig(String config) {
         this.config = config;
     }
 
     public String getConfig() {
         return config;
-    }
+    }*/
 }

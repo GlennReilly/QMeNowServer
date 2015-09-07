@@ -6,11 +6,13 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+
 import com.google.gson.Gson;
 
 /**
@@ -24,15 +26,15 @@ public class ConfigStore {
     private static final Logger logger = LogManager.getLogger(ConfigStore.class);
 
 
-    public int saveNew(ReconfigurableAppConfig config){
+    public int saveNew(ConfigHelper configHelper){
         int lastInsertedId = -1;
         String query = "insert into ConfigStore(title, config, customerId) values(?,?,?)";
-        String configJson = gson.toJson(config);
+        String configJson = gson.toJson(configHelper.getCurrentAppConfig());
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, config.getTitle());
+            preparedStatement.setString(1, configHelper.getConfigName());
             preparedStatement.setString(2, configJson);
-            preparedStatement.setInt(3, config.getCustomerId());
+            preparedStatement.setInt(3, configHelper.getCustomerId());
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
             if(resultSet.next()){
@@ -47,19 +49,19 @@ public class ConfigStore {
     }
 
 
-    public int saveUpdate(ReconfigurableAppConfig config) {
+    public int saveUpdate(ConfigHelper configHelper) {
         int lastUpdatedId = -1;
         String query = "update ConfigStore SET title = ?, config = ?, customerId = ?, revisionNumber = ? where id = ?";
-        String configJson = gson.toJson(config);
+        String configJson = gson.toJson(configHelper.getCurrentAppConfig());
         try(Connection connection = dbHelper.getConnection()){
         preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, config.getTitle());
+            preparedStatement.setString(1, configHelper.getConfigName());
             preparedStatement.setString(2, configJson);
-            preparedStatement.setInt(3, config.getCustomerId());
-            preparedStatement.setInt(4, config.incrementAndGetRevisionNumber());
-            preparedStatement.setInt(5, config.getId());
+            preparedStatement.setInt(3, configHelper.getCustomerId());
+            preparedStatement.setInt(4, configHelper.getCurrentAppConfig().incrementAndGetRevisionNumber());
+            preparedStatement.setInt(5, configHelper.getCurrentAppConfig().getId());
             preparedStatement.executeUpdate();
-            lastUpdatedId = config.getId();
+            lastUpdatedId = configHelper.getCurrentAppConfig().getId();
         }
         catch(Exception ex)
         {
@@ -84,11 +86,15 @@ public class ConfigStore {
                 resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
-                    appConfig = new ReconfigurableAppConfig();
-                    appConfig.setTitle(resultSet.getNString("title"));
-                    appConfig.setCustomerId(resultSet.getInt("customerId"));
-                    appConfig.setConfig(resultSet.getString("config"));
+                    Gson gson = new Gson();
+                    final String jsonConfig = resultSet.getString("config");
+                    appConfig = gson.fromJson(jsonConfig, ReconfigurableAppConfig.class);
+                    //appConfig = new ReconfigurableAppConfig(configID);
+
+                    //appConfig.setTitle(resultSet.getNString("title"));
+                    //appConfig.setCustomerId(resultSet.getInt("customerId"));
                     appConfig.setRevisionNumber(resultSet.getInt("revisionNumber"));
+                    ConfigHelper configHelper = new ConfigHelper(appConfig);
                 }
 
         }
