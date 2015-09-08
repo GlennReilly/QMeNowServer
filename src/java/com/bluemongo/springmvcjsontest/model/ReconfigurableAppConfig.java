@@ -12,57 +12,18 @@ import java.util.List;
  */
 
 public class ReconfigurableAppConfig {
-    int id;
+    //int id;
     private String headerImagePath;
     //private int customerId;
     private String title;
     private Uri imageUri;
     private List<AppButton> buttonList = new ArrayList<>();
-    private int revisionNumber;
+    private int revisionNumber = 1;
     private Date createdDate;
 
     //private String config;
 
     public ReconfigurableAppConfig() {
-    }
-
-    public ReconfigurableAppConfig(int id) {
-        this.id = id;
-    }
-
-/*    public static ReconfigurableAppConfig get(int configID) {
-        ConfigStore configStore = new ConfigStore();
-        ReconfigurableAppConfig appConfig = configStore.get(configID);
-
-        return appConfig;
-    }
-
-    public int save(){
-        ConfigStore configStore = new ConfigStore();
-        int savedId = 0;
-        if(this.getId()>0){
-        savedId = configStore.saveUpdate(this);
-        }
-        else{
-            savedId = configStore.saveNew(this);
-        }
-        return savedId;
-    }*/
-
-/*    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }*/
-
-    public int getId() {
-        return id;
-    }
-
-    private void setId(int id) {
-        this.id = id;
     }
 
     public List<AppButton> getButtonList() {
@@ -73,11 +34,11 @@ public class ReconfigurableAppConfig {
         this.buttonList = buttonList;
     }
 
-    public String getTitle() {
+    public String getPageTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setPageTitle(String title) {
         this.title = title;
     }
 
@@ -119,11 +80,4 @@ public class ReconfigurableAppConfig {
         return getRevisionNumber();
     }
 
-/*    public void setConfig(String config) {
-        this.config = config;
-    }
-
-    public String getConfig() {
-        return config;
-    }*/
 }

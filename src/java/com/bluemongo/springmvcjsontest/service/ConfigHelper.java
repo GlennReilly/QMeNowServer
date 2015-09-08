@@ -14,47 +14,39 @@ public class ConfigHelper { //This is an helper class that deals with presenting
     private ReconfigurableAppConfig currentAppConfig;
     private int customerId;
     private String headerImagePath;
-    private String pageTitle;
     private int numberOfButtonsRequired;
     private String buttonTexts;
     private ButtonStyle selectedButtonStyles;
     private String selectedButtonDestinations;
     private List<ButtonStyle> availableButtonStyles;
     private String configName;
+    private int id;
 
+    public int getId() {
+        return id;
+    }
 
-    /*    public static ReconfigurableAppConfig getConfig(int configID) {
-        ReconfigurableAppConfig  reconfigurableAppConfig = ReconfigurableAppConfig.get(configID);
-        return reconfigurableAppConfig;
-    }*/
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public ConfigHelper(ReconfigurableAppConfig config){
         this.currentAppConfig = config;
     }
 
-    public static ReconfigurableAppConfig get(int configID) {
+    public static ConfigHelper get(int configID) {
         ConfigStore configStore = new ConfigStore();
-        ReconfigurableAppConfig appConfig = configStore.get(configID);
+        ConfigHelper configHelper = configStore.get(configID);
 
-        return appConfig;
+        return configHelper;
     }
 
-/*    public static int save(ReconfigurableAppConfig config){
-        ConfigStore configStore = new ConfigStore();
-        int savedId;
-        if(config.getId()>0){
-            savedId = configStore.saveUpdate(config);
-        }
-        else{
-            savedId = configStore.saveNew(config);
-        }
-        return savedId;
-    }*/
 
     public int save(){
         ConfigStore configStore = new ConfigStore();
         int savedId;
-        if(getCurrentAppConfig().getId()>0){
+        if(this.getId() > 0){
             savedId = configStore.saveUpdate(this);
         }
         else{
@@ -71,31 +63,12 @@ public class ConfigHelper { //This is an helper class that deals with presenting
         this.customerId = customerId;
     }
 
-    public String getButtonTexts() {
-        return buttonTexts;
+    public String getConfigName() {
+        return configName;
     }
 
-    public void setButtonTexts(String buttonTexts) {
-        this.buttonTexts = buttonTexts;
-    }
-
-    public String getHeaderImagePath() {
-        return currentAppConfig.getHeaderImagePath();
-    }
-
-    public void setHeaderImagePath(String headerImagePath) {
-        this.headerImagePath = headerImagePath;
-        currentAppConfig.setHeaderImagePath(headerImagePath);
-    }
-
-
-    public String getPageTitle() {
-        return pageTitle = currentAppConfig.getTitle();
-    }
-
-    public void setPageTitle(String pageTitle) {
-        this.pageTitle = pageTitle;
-        this.currentAppConfig.setTitle(this.pageTitle);
+    public void setConfigName(String configName) {
+        this.configName = configName;
     }
 
     public void setAvailableButtonStyles(List<ButtonStyle> availableButtonStyles) {
@@ -109,10 +82,6 @@ public class ConfigHelper { //This is an helper class that deals with presenting
     public void setAvailableButtonStyles() {
         this.availableButtonStyles = ButtonStyle.getAllForCustomer(123L);
     }
-
-/*    public void setCurrentAppConfig(ReconfigurableAppConfig currentAppConfig) {
-        this.currentAppConfig = currentAppConfig;
-    }*/
 
     public ReconfigurableAppConfig getCurrentAppConfig() {
         return currentAppConfig;
@@ -145,12 +114,4 @@ public class ConfigHelper { //This is an helper class that deals with presenting
         this.numberOfButtonsRequired = numberOfButtonsRequired;
     }
 
-
-    public String getConfigName() {
-        return configName;
-    }
-
-    public void setConfigName(String configName) {
-        this.configName = configName;
-    }
 }

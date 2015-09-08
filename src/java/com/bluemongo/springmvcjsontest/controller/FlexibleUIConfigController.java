@@ -103,12 +103,12 @@ public class FlexibleUIConfigController {
     @RequestMapping(value = "/edit/{configID}", method = RequestMethod.GET)
     public ModelAndView GetEditConfigForm(@PathVariable int configID){
         ModelAndView modelAndView = new ModelAndView();
-        ReconfigurableAppConfig appConfig = ConfigHelper.get(configID);
+        ConfigHelper configHelper = ConfigHelper.get(configID);
+        ReconfigurableAppConfig appConfig = configHelper.getCurrentAppConfig();
         if (appConfig == null) {
             logger.error("No appConfig found with configID: " + configID);
             modelAndView.setViewName("Error");
         }else {
-            ConfigHelper configHelper = new ConfigHelper(appConfig);
             configHelper.setAvailableButtonStyles();
             modelAndView.setViewName("/FlexibleUIConfig/EditConfigForm");
             modelAndView.addObject("command", configHelper);
@@ -166,8 +166,8 @@ public class FlexibleUIConfigController {
             appButtonList.add(appButton);
         }
 
-        ReconfigurableAppConfig appConfig = ConfigHelper.get(configID);
-        ConfigHelper configHelper = new ConfigHelper(appConfig);
+        ConfigHelper configHelper = ConfigHelper.get(configID);
+        ReconfigurableAppConfig appConfig = configHelper.getCurrentAppConfig();
         appConfig.setButtonList(appButtonList);
         configHelper.save();
 
@@ -183,7 +183,7 @@ public class FlexibleUIConfigController {
     public ReconfigurableAppConfig EditConfig2(){
         ReconfigurableAppConfig appConfig = new ReconfigurableAppConfig();
 
-        appConfig.setTitle("Great trucking songs of the renaissance..");
+        appConfig.setPageTitle("Great trucking songs of the renaissance..");
 
         AppButton button1 = new AppButton();
         button1.setName("button1");

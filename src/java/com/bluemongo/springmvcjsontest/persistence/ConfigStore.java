@@ -2,16 +2,14 @@ package com.bluemongo.springmvcjsontest.persistence;
 
 import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
 
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
+import com.google.gson.JsonSyntaxException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import com.google.gson.Gson;
 
@@ -59,9 +57,9 @@ public class ConfigStore {
             preparedStatement.setString(2, configJson);
             preparedStatement.setInt(3, configHelper.getCustomerId());
             preparedStatement.setInt(4, configHelper.getCurrentAppConfig().incrementAndGetRevisionNumber());
-            preparedStatement.setInt(5, configHelper.getCurrentAppConfig().getId());
+            preparedStatement.setInt(5, configHelper.getId());
             preparedStatement.executeUpdate();
-            lastUpdatedId = configHelper.getCurrentAppConfig().getId();
+            lastUpdatedId = configHelper.getId();
         }
         catch(Exception ex)
         {
@@ -70,15 +68,34 @@ public class ConfigStore {
         return lastUpdatedId;
     }
 
-    public List<ReconfigurableAppConfig> getAll(int customerId){
-        List<ReconfigurableAppConfig> configList = new ArrayList<>();
+    public List<ConfigHelper> getAll(int customerId){
+        List<ConfigHelper> configList = new ArrayList<>();
+        String query = "select id, title, config, createdDate, customerId from ConfigStore where customerId=? or customerId is null";
+        try (Connection connection = dbHelper.getConnection()){
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, customerId);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                final ConfigHelper configHelper = getConfigHelper(resultSet);
+                if (configHelper != null) {
+                    configList.add(configHelper);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
 
         return configList;
     }
 
-    public ReconfigurableAppConfig get(int configID) {
-        ReconfigurableAppConfig appConfig = null;
-        String query = "select id, title, config, createdDate, customerId, revisionNumber from ConfigStore where id = ?";
+
+    public ConfigHelper get(int configID) {
+        ConfigHelper configHelper = null;
+        ReconfigurableAppConfig appConfig;
+        String query = "select id, title, config, createdDate, customerId from ConfigStore where id = ?";
         try(Connection connection = dbHelper.getConnection()) {
 
                 preparedStatement = connection.prepareStatement(query);
@@ -86,15 +103,7 @@ public class ConfigStore {
                 resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
-                    Gson gson = new Gson();
-                    final String jsonConfig = resultSet.getString("config");
-                    appConfig = gson.fromJson(jsonConfig, ReconfigurableAppConfig.class);
-                    //appConfig = new ReconfigurableAppConfig(configID);
-
-                    //appConfig.setTitle(resultSet.getNString("title"));
-                    //appConfig.setCustomerId(resultSet.getInt("customerId"));
-                    appConfig.setRevisionNumber(resultSet.getInt("revisionNumber"));
-                    ConfigHelper configHelper = new ConfigHelper(appConfig);
+                    configHelper = getConfigHelper(resultSet);
                 }
 
         }
@@ -104,7 +113,27 @@ public class ConfigStore {
         }
 
 
-        return appConfig;
+        return configHelper;
+    }
+
+    private ConfigHelper getConfigHelper(ResultSet resultSet) throws SQLException {
+        ReconfigurableAppConfig appConfig = null;
+        ConfigHelper configHelper = null;
+        Gson gson = new Gson();
+        final String jsonConfig = resultSet.getString("config");
+        try {
+            appConfig = gson.fromJson(jsonConfig, ReconfigurableAppConfig.class);
+        } catch (JsonSyntaxException e) {
+            //e.printStackTrace();
+        }
+
+        if (appConfig != null) {
+            configHelper = new ConfigHelper(appConfig);
+            configHelper.setId(resultSet.getInt("id"));
+            configHelper.setConfigName(resultSet.getString("title"));
+            configHelper.setCustomerId(resultSet.getInt("customerId"));
+        }
+        return configHelper;
     }
 
 }

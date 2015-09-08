@@ -2,9 +2,11 @@
  * Created by glenn on 5/09/15.
  */
 import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
+import com.bluemongo.springmvcjsontest.persistence.ConfigStore;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import org.junit.*;
-import sun.security.krb5.Config;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -18,28 +20,6 @@ public class testReconfigurableAppConfig {
         reconfigurableAppConfig = null;
     }
 
-/*    @Test
-    public void testGetId(){
-        int configID = 42;
-        reconfigurableAppConfig = new ReconfigurableAppConfig();
-        //reconfigurableAppConfig.setId(configID);
-
-        assertEquals(42, reconfigurableAppConfig.getId());
-    }*/
-
-    @Test
-    public void testGetConfigNull(){
-        int configID = -1;
-        reconfigurableAppConfig = ConfigHelper.get(configID);
-        assertEquals(null, reconfigurableAppConfig);
-    }
-
-/*    @Test
-    public void testGetConfigNotNull(){
-        int configID = 4;
-        reconfigurableAppConfig = ConfigHelper.get(configID);
-        assertNotEquals(null, reconfigurableAppConfig);
-    }*/
 
     @Test
     public void testRevisionIncrementing(){
@@ -52,34 +32,46 @@ public class testReconfigurableAppConfig {
         reconfigurableAppConfig = new ReconfigurableAppConfig();
         ConfigHelper configHelper = new ConfigHelper(reconfigurableAppConfig);
         configHelper.setCustomerId(123);
-        configHelper.setConfigName("testing the config name");
-        final String title = "testing config title - insert";
-        reconfigurableAppConfig.setTitle(title);
+        final String configName = "testing the config name - update " + configHelper.getCurrentAppConfig().getRevisionNumber();
+        configHelper.setConfigName(configName);
+        final String pageTitle = "testing config title - insert " + configHelper.getCurrentAppConfig().getRevisionNumber();
+        reconfigurableAppConfig.setPageTitle(pageTitle);
         reconfigurableAppConfig.setButtonList(null);
 
         //We differentiate between updating and saving new by the existence of an id
         int savedId = configHelper.save();
 
-        ReconfigurableAppConfig reconfigurableAppConfig2 = ConfigHelper.get(savedId);
-        assertEquals(title, reconfigurableAppConfig2.getTitle());
+        ConfigHelper configHelperRetrieve =  ConfigHelper.get(savedId);
+        ReconfigurableAppConfig reconfigurableAppConfigRetrieve = configHelperRetrieve.getCurrentAppConfig();
+
+        assertEquals(configName, configHelperRetrieve.getConfigName());
+        assertEquals(pageTitle, reconfigurableAppConfigRetrieve.getPageTitle());
     }
 
     @Test
     public void testConfigUpdateRetrieve(){
-        reconfigurableAppConfig = ConfigHelper.get(2);
-        ConfigHelper configHelper = new ConfigHelper(reconfigurableAppConfig);
-        configHelper.setCustomerId(123);
-        configHelper.setConfigName("testing the config name");
-        final String title = "testing config title - update";
-        reconfigurableAppConfig.setTitle(title);
+        ConfigHelper configHelper = ConfigHelper.get(2);
+        final String configName = "testing the config name - update " + configHelper.getCurrentAppConfig().getRevisionNumber();
+        configHelper.setConfigName(configName);
+        final String pageTitle = "testing config page title - update " + configHelper.getCurrentAppConfig().getRevisionNumber();
+        reconfigurableAppConfig = configHelper.getCurrentAppConfig();
+        reconfigurableAppConfig.setPageTitle(pageTitle);
         reconfigurableAppConfig.setButtonList(null);
 
         //We differentiate between updating and saving new by the existence of an id
         int savedId = configHelper.save();
 
-        ReconfigurableAppConfig reconfigurableAppConfig2 = ConfigHelper.get(savedId);
-        assertEquals(title, reconfigurableAppConfig2.getTitle());
+        ConfigHelper configHelperRetrieve =  ConfigHelper.get(savedId);
+        ReconfigurableAppConfig reconfigurableAppConfigRetrieve = configHelperRetrieve.getCurrentAppConfig();
+
+        assertEquals(configName, configHelperRetrieve.getConfigName());
+        assertEquals(pageTitle, reconfigurableAppConfigRetrieve.getPageTitle());
     }
 
-
+    @Test
+    public void testGetAllConfigsForCustomer(){
+        ConfigStore configStore = new ConfigStore();
+        List<ConfigHelper> configHelpers = configStore.getAll(123);
+        assertTrue("configHelpers.size(): " + configHelpers.size(), configHelpers.size() > 0);
+    }
 }

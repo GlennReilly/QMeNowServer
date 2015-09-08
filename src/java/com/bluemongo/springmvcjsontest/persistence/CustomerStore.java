@@ -74,7 +74,7 @@ public class CustomerStore {
 
             while (resultSet.next()){
                 ReconfigurableAppConfig config = new ReconfigurableAppConfig();
-                config.setTitle(resultSet.getNString("title"));
+                config.setPageTitle(resultSet.getNString("title"));
                 //TODO complete this.
                 reconfigurableAppConfigList.add(config);
             }
