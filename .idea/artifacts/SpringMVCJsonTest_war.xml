@@ -3,6 +3,14 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="SpringMVCJsonTest.war">
       <element id="artifact" artifact-name="SpringMVCJsonTest:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SpringMVCJsonTest" />
+        </element>
+      </element>
+      <element id="directory" name="resources">
+        <element id="directory" name="images" />
+      </element>
     </root>
   </artifact>
 </component>

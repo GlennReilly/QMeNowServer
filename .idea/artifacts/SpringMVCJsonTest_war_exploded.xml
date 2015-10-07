@@ -41,6 +41,7 @@
           <element id="library" level="project" name="Maven: com.google.http-client:google-http-client-protobuf:1.15.0-rc" />
           <element id="library" level="project" name="Maven: com.google.http-client:google-http-client-jackson:1.15.0-rc" />
           <element id="library" level="project" name="Maven: com.google.oauth-client:google-oauth-client:1.15.0-rc" />
+          <element id="library" level="project" name="Maven: com.google.zxing:core:3.2.1" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:18.0" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.36" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.1" />
@@ -49,6 +50,9 @@
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/SpringMVCJsonTest/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="directory" name="resources">
+        <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
       </element>
       <element id="javaee-facet-resources" facet="SpringMVCJsonTest/web/Web" />
     </root>

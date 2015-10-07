@@ -10,6 +10,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <bean class="com.bluemongo.springmvcjsontest.controller.FlexibleUIConfigController"></bean>
+    <bean class="com.bluemongo.springmvcjsontest.controller.BarcodeController"></bean>
     <bean class="com.bluemongo.springmvcjsontest.controller.HelloWorldController"></bean>
     <bean class="com.bluemongo.springmvcjsontest.controller.RestGreetingController"></bean>
     <bean class="com.bluemongo.springmvcjsontest.controller.RestPhraseController"></bean>

@@ -16,6 +16,7 @@ Welcome to SpringMVCJsonTest
 <br/>
 <ul>
     <li><a href="./FlexibleUIConfig/">/FlexibleUIConfig</a></li>
+    <li><a href="./FlexibleUIConfig/Barcode/">/FlexibleUIConfig/Barcode/</a></li>
     <br/>
     <li><a href="./greeting/getGreeting">/greeting/getGreeting</a></li>
     <li><a href="./greeting/testDB">/greeting/testDB</a></li>

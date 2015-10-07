@@ -82,6 +82,23 @@ public class FlexibleUIConfigController {
         user.save();
         return "User saved successfully: " + user.getFirstName() + " " + user.getLastName();
     }
+
+    @RequestMapping(value = "/user/getAppointments/{userId}", method = RequestMethod.GET)
+    public List<Appointment> GetUserAppointments(@PathVariable int userId){
+        List<Appointment> appointmentList = new ArrayList<>();
+        if (userId == 1234){
+            Appointment appointment = new Appointment();
+            appointment.setTestThing("successful Retrofit call");
+            appointmentList.add(appointment);
+        }else{
+            Appointment appointment = new Appointment();
+            appointment.setTestThing("no appointments found on server");
+            appointmentList.add(appointment);
+        }
+
+        return appointmentList;
+    }
+
     // Button style methods
 
     @RequestMapping(value="/buttonStyle/add", method = RequestMethod.GET)
@@ -211,6 +228,8 @@ public class FlexibleUIConfigController {
 
         return appConfig;
     }
+
+
 
 
 }
