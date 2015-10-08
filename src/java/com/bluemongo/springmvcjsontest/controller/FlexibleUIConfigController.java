@@ -1,5 +1,6 @@
 package com.bluemongo.springmvcjsontest.controller;
 
+import com.bluemongo.springmvcjsontest.api.UserAppointmentService;
 import com.bluemongo.springmvcjsontest.model.*;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import com.bluemongo.springmvcjsontest.service.UserFormHelper;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/FlexibleUIConfig")
-public class FlexibleUIConfigController {
+public class FlexibleUIConfigController implements UserAppointmentService {
     private static final Logger logger = LogManager.getLogger(FlexibleUIConfigController.class);
 
     @RequestMapping(value="/")
@@ -81,22 +82,6 @@ public class FlexibleUIConfigController {
     public String AddUser(@ModelAttribute UserFormHelper user) {
         user.save();
         return "User saved successfully: " + user.getFirstName() + " " + user.getLastName();
-    }
-
-    @RequestMapping(value = "/user/getAppointments/{userId}", method = RequestMethod.GET)
-    public List<Appointment> GetUserAppointments(@PathVariable int userId){
-        List<Appointment> appointmentList = new ArrayList<>();
-        if (userId == 1234){
-            Appointment appointment = new Appointment();
-            appointment.setTestThing("successful Retrofit call");
-            appointmentList.add(appointment);
-        }else{
-            Appointment appointment = new Appointment();
-            appointment.setTestThing("no appointments found on server");
-            appointmentList.add(appointment);
-        }
-
-        return appointmentList;
     }
 
     // Button style methods
@@ -229,7 +214,34 @@ public class FlexibleUIConfigController {
         return appConfig;
     }
 
+    @Override
+    @RequestMapping(value = "/user/getAppointmentsTest/{userId}", method = RequestMethod.GET)
+    public List<Appointment> getUserAppointmentsTest(@PathVariable int userId){
+        List<Appointment> appointmentList = new ArrayList<>();
+        if (userId == 1234){
+            Appointment appointment = new Appointment();
+            appointment.setMessageToUser("successful Retrofit call");
+            appointmentList.add(appointment);
+        }else{
+            Appointment appointment = new Appointment();
+            appointment.setMessageToUser("no appointments found on server");
+            appointmentList.add(appointment);
+        }
+
+        return appointmentList;
+    }
 
 
 
+
+    @Override
+    @RequestMapping(value = "/user/getAppointments/{userId}", method = RequestMethod.GET)
+    public List<Appointment> getUserAppointments(@PathVariable int userId) {
+        return null;
+    }
+
+    @Override
+    public List<UserDetails> getUserMatchesByName(String firstName, String lastName) {
+        return null;
+    }
 }
