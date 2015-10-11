@@ -4,10 +4,9 @@ package com.bluemongo.springmvcjsontest.model;
  * Created by glenn on 4/10/15.
  */
 public class BarcodePayload {
-    String CustomerName;
-    String DateTimeFormat;
-    String DateTimeString;
-    String Content;
+    private String DateTimeString;
+    private String CustomerName;
+    private String Content;
 
     public String getCustomerName() {
         return CustomerName;
@@ -15,14 +14,6 @@ public class BarcodePayload {
 
     public void setCustomerName(String customerName) {
         CustomerName = customerName;
-    }
-
-    public String getDateTimeFormat() {
-        return DateTimeFormat;
-    }
-
-    public void setDateTimeFormat(String dateTimeFormat) {
-        DateTimeFormat = dateTimeFormat;
     }
 
     public String getDateTimeString() {

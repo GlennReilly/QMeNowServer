@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by glenn on 1/09/15.
@@ -86,4 +88,31 @@ public class UserStore {
         return user;
     }
 
+    public List<User> getAll(boolean isActive) {
+        List<User> userList = new ArrayList<>();
+        String query = "SELECT id, username, customerId, firstName, lastName, physicalAddress, " +
+                "emailAddress, active FROM appUser where active = ?";
+        try {
+            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+            preparedStatement.setBoolean(1, isActive);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setUsername(resultSet.getNString("username"));
+                user.setCustomerId(resultSet.getInt("customerId"));
+                user.setFirstName(resultSet.getNString("firstName"));
+                user.setLastName(resultSet.getNString("lastName"));
+                user.setPhysicalAddress(resultSet.getNString("physicalAddress"));
+                user.setEmailAddress(resultSet.getNString("emailAddress"));
+                userList.add(user);
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+
+        return userList;
+    }
 }

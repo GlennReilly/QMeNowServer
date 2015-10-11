@@ -3,10 +3,8 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.BarcodePayload;
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,12 +17,12 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import utils.InputHelper;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Hashtable;
@@ -35,7 +33,7 @@ import java.util.Hashtable;
 
 
 @Controller
-@RequestMapping("/FlexibleUIConfig/Barcode")
+@RequestMapping("/FlexibleUIConfig/barcode")
 public class BarcodeController implements ServletContextAware {
 
     private ServletContext servletContext;
@@ -101,14 +99,11 @@ public class BarcodeController implements ServletContextAware {
     }
 
     private String getBarcodePayload(String txtcontent) {
-        Date now = Calendar.getInstance().getTime();
-        String format = "yyyyMMddHHmmss";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-        String formattedNow = simpleDateFormat.format(now);
+
+        String formattedNow = getFormattedNowDateString();
 
         BarcodePayload barcodePayload = new BarcodePayload();
         barcodePayload.setCustomerName("test customer name");
-        barcodePayload.setDateTimeFormat(format);
         barcodePayload.setDateTimeString(formattedNow);
         barcodePayload.setContent(txtcontent);
         Gson gson = new Gson();
@@ -119,6 +114,15 @@ public class BarcodeController implements ServletContextAware {
 /*
 
         return JsonConvert.SerializeObject(barcodePayload);*/
+    }
+
+    private String getFormattedNowDateString() {
+        //"yyyy-MM-dd'T'HH:mm:ssz"
+        //2015-10-10T11:16+00:00
+
+        Date now = Calendar.getInstance().getTime();
+        String dateString = InputHelper.getISO8601StringFromDate(now);
+        return dateString;
     }
 
     @Override

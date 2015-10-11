@@ -11,6 +11,7 @@ public class Customer {
     private String phoneNumber = "";
     private String emailAddress = "";
     private String physicalAddress = "";
+    private String contactName = "";
 
 
     public void save() {
@@ -56,5 +57,13 @@ public class Customer {
 
     public void setPhysicalAddress(String physicalAddress) {
         this.physicalAddress = physicalAddress;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 }

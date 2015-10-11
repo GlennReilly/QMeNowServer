@@ -42,6 +42,7 @@
           <element id="library" level="project" name="Maven: com.google.http-client:google-http-client-jackson:1.15.0-rc" />
           <element id="library" level="project" name="Maven: com.google.oauth-client:google-oauth-client:1.15.0-rc" />
           <element id="library" level="project" name="Maven: com.google.zxing:core:3.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.4" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:18.0" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.36" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.1" />

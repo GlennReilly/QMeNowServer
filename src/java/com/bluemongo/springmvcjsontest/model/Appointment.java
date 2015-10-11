@@ -1,6 +1,7 @@
 package com.bluemongo.springmvcjsontest.model;
 
-import utils.ISO8601DateParser;
+
+import utils.InputHelper;
 
 import java.util.Date;
 
@@ -12,8 +13,8 @@ public class Appointment {
     Date appointmentDate;
     String location;
 
-    public String getAppointmentDate8601() {
-        return ISO8601DateParser.toString(appointmentDate);
+    public String getAppointmentDateString8601() {
+        return InputHelper.getISO8601StringFromDate(appointmentDate);
     }
 
     public Date getAppointmentDate() {

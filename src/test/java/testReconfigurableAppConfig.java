@@ -5,10 +5,9 @@ import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
 import com.bluemongo.springmvcjsontest.persistence.ConfigStore;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import org.junit.*;
-
 import java.util.List;
-
 import static org.junit.Assert.*;
+
 
 public class testReconfigurableAppConfig {
 

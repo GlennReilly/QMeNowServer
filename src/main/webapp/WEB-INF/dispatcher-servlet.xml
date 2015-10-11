@@ -14,6 +14,8 @@
     <bean class="com.bluemongo.springmvcjsontest.controller.HelloWorldController"></bean>
     <bean class="com.bluemongo.springmvcjsontest.controller.RestGreetingController"></bean>
     <bean class="com.bluemongo.springmvcjsontest.controller.RestPhraseController"></bean>
+    <bean class="com.bluemongo.springmvcjsontest.controller.AppointmentController"></bean>
+    <bean class="com.bluemongo.springmvcjsontest.controller.UserController"></bean>
     <!--    <bean class="com.bluemongo.springMvcTest.controller.AnotherController"></bean>-->
 
 

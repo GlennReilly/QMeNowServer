@@ -3,7 +3,6 @@ package com.bluemongo.springmvcjsontest.controller;
 import com.bluemongo.springmvcjsontest.api.UserAppointmentService;
 import com.bluemongo.springmvcjsontest.model.*;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
-import com.bluemongo.springmvcjsontest.service.UserFormHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -67,21 +66,6 @@ public class FlexibleUIConfigController implements UserAppointmentService {
     public String AddCustomer(@ModelAttribute Customer customer){
         customer.save();
         return "Customer saved successfully: " + customer.getBusinessName();
-    }
-
-    // User methods
-    @RequestMapping(value="/user/add", method = RequestMethod.GET)
-    public ModelAndView GetUserAddForm(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/FlexibleUIConfig/addUserForm");
-        modelAndView.addObject("command", new UserFormHelper());
-        return  modelAndView;
-    }
-
-    @RequestMapping(value="/user/add", method = RequestMethod.POST)
-    public String AddUser(@ModelAttribute UserFormHelper user) {
-        user.save();
-        return "User saved successfully: " + user.getFirstName() + " " + user.getLastName();
     }
 
     // Button style methods
@@ -244,4 +228,6 @@ public class FlexibleUIConfigController implements UserAppointmentService {
     public List<UserDetails> getUserMatchesByName(String firstName, String lastName) {
         return null;
     }
+
+
 }
