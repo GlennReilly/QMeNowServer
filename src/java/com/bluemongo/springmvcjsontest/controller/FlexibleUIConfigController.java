@@ -58,14 +58,14 @@ public class FlexibleUIConfigController implements UserAppointmentService {
     public ModelAndView GetCustomerAddForm(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/FlexibleUIConfig/addCustomerForm");
-        modelAndView.addObject("command", new Customer());
+        modelAndView.addObject("command", new Business());
         return  modelAndView;
     }
 
     @RequestMapping(value="/customer/add", method = RequestMethod.POST)
-    public String AddCustomer(@ModelAttribute Customer customer){
-        customer.save();
-        return "Customer saved successfully: " + customer.getBusinessName();
+    public String AddCustomer(@ModelAttribute Business business){
+        business.save();
+        return "Customer saved successfully: " + business.getBusinessName();
     }
 
     // Button style methods

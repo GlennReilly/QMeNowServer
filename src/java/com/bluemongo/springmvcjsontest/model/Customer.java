@@ -2,37 +2,85 @@ package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
- * Created by glenn on 31/08/15.
+ * Created by glenn on 1/09/15.
  */
 public class Customer {
+    private static CustomerStore customerStore = new CustomerStore();
     private int id;
-    private String businessName = "";
+    private int customerId;
+    private String firstName = "";
+    private String lastName = "";
+    private String name = "";
     private String phoneNumber = "";
     private String emailAddress = "";
     private String physicalAddress = "";
-    private String contactName = "";
+    private Date DOB;
+
+    public Customer() {}
+
+    public Customer(int id) {
+        this.id = id;
+    }
 
 
-    public void save() {
-        CustomerStore customerStore = new CustomerStore();
-        customerStore.saveNew(this);
+    public static Customer get(int customerId) {
+        return customerStore.get(customerId);
+    }
+
+
+
+    public List<Customer> getAllUsers(boolean active){
+        List<Customer> customerList = new ArrayList<>();
+        customerList = customerStore.getAll(active);
+        return  customerList;
+    }
+
+    public int save() {
+        int newCustomerId = customerStore.saveNew(this);
+        return newCustomerId;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
-    public String getBusinessName() {
-        return businessName;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setBusinessName(String businessName) {
-        this.businessName = businessName;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+    public String getName() {
+        return getFirstName() + " " + getLastName();
+    }
+
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPhoneNumber() {
@@ -59,11 +107,12 @@ public class Customer {
         this.physicalAddress = physicalAddress;
     }
 
-    public String getContactName() {
-        return contactName;
+
+    public void setDOB(Date DOB) {
+        this.DOB = DOB;
     }
 
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
+    public Date getDOB() {
+        return DOB;
     }
 }

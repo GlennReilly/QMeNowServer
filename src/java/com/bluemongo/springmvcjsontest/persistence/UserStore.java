@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,8 @@ public class UserStore {
     private ResultSet resultSet = null;
     private static final Logger logger = LogManager.getLogger(UserStore.class);
 
-    public void saveNew(User user){
+    public int saveNew(User user){
+        int lastInsertedId = -1;
         String query = "insert into appUser(username, password, customerId, firstName, lastName, physicalAddress, emailAddress) values (?,?,?,?,?,?,?)";
         try{
             preparedStatement = dbHelper.getConnection().prepareStatement(query);
@@ -32,18 +34,24 @@ public class UserStore {
             preparedStatement.setString(7, user.getEmailAddress());
             preparedStatement.executeUpdate();
             logger.info("new Customer inserted.");
+
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastInsertedId = resultSet.getInt(1);
+            }
         }
         catch(Exception ex)
         {
             logger.info(ex.getMessage());
         }
+        return lastInsertedId;
     }
 
     public boolean validateCredentials(UserCredentials userCredentials) {
         boolean foundUserWithTheseCredentials = false;
         String query = "select count(id) from appUser where username = ? AND password = ? AND active = true";
         try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+            preparedStatement = dbHelper.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, userCredentials.getUsername());
             preparedStatement.setString(2, userCredentials.getPassword());
             resultSet = preparedStatement.executeQuery();

@@ -15,6 +15,7 @@ public class User {
     private int customerId;
     private String firstName = "";
     private String lastName = "";
+    private String name = "";
     private String phoneNumber = "";
     private String emailAddress = "";
     private String physicalAddress = "";
@@ -77,6 +78,12 @@ public class User {
     public String getLastName() {
         return lastName;
     }
+
+
+    public String getName() {
+        return getFirstName() + " " + getLastName();
+    }
+
 
     public void setLastName(String lastName) {
         this.lastName = lastName;

@@ -1,6 +1,6 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.service.UserCustomerFormHelper;
+import com.bluemongo.springmvcjsontest.service.AddUserFormHelper;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,12 +18,12 @@ public class UserController {
     public ModelAndView GetUserAddForm(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/FlexibleUIConfig/addUserForm");
-        modelAndView.addObject("command", new UserCustomerFormHelper());
+        modelAndView.addObject("command", new AddUserFormHelper());
         return  modelAndView;
     }
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public String AddUser(@ModelAttribute UserCustomerFormHelper user) {
+    public String AddUser(@ModelAttribute AddUserFormHelper user) {
         user.save();
         return "User saved successfully: " + user.getFirstName() + " " + user.getLastName();
     }

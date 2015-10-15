@@ -1,5 +1,6 @@
 package com.bluemongo.springmvcjsontest.controller;
 
+import com.bluemongo.springmvcjsontest.service.AddAppointmentFormHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +15,9 @@ public class AppointmentController {
     @RequestMapping(value = "/add")
     public ModelAndView getAddAppointmentForm(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/FlexibleUIConfig/Appointment/add");
+        AddAppointmentFormHelper addAppointmentFormHelper = new AddAppointmentFormHelper();
+        modelAndView.addObject("command", addAppointmentFormHelper);
+        modelAndView.setViewName("FlexibleUIConfig/Appointment/addCustomerAppointment");
         return modelAndView;
     }
 }
