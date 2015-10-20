@@ -11,11 +11,18 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-  <configName>User home</configName>
-
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-User home
+User home<br/>
+${message}<br/>
+<br/>
+Business Name: ${Business.businessName}
+<br/>
+<li><a href="<spring:url value='/FlexibleUIConfig/customer/add'/>"> Add a new customer</a></li>
+<li><a href="<spring:url value='/FlexibleUIConfig/appointment/add/${User.businessId}'/>">Add a new appointment for a customer</a></li>
+<li><a href="<spring:url value='/FlexibleUIConfig/appointmentType/add/${User.businessId}'/>">Add a new appointment type for your business</a></li>
+<li><a href="<spring:url value='/FlexibleUIConfig/location/add/${User.businessId}'/>">Add a new location for your business</a></li>
+<li><a href="<spring:url value='/FlexibleUIConfig/user/add'/>"> Add a new user</a></li>
 </body>
 </html>

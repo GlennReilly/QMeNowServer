@@ -13,23 +13,23 @@ import java.util.List;
 public class AddUserFormHelper {
     private User user;
     private List<Business> activeBusinesses = new ArrayList<>();
-    private int selectedCustomerId;
+    private int selectedBusinessId;
 
-    public void setSelectedCustomerId(int selectedCustomerId) {
-        this.selectedCustomerId = selectedCustomerId;
+    public void setSelectedBusinessId(int selectedBusinessId) {
+        this.selectedBusinessId = selectedBusinessId;
     }
 
-    public int getSelectedCustomerId() {
-        return selectedCustomerId;
+    public int getSelectedBusinessId() {
+        return selectedBusinessId;
     }
 
     public List<Business> getActiveBusinesses() {
-        activeBusinesses = getCustomers();
+        activeBusinesses = getBusinesses();
         return activeBusinesses;
     }
 
-    public void setActiveCustomers() {
-        this.activeBusinesses = getCustomers();
+    public void setActiveBusinesses() {
+        this.activeBusinesses = getBusinesses();
     }
 
 
@@ -43,7 +43,7 @@ public class AddUserFormHelper {
 
 
     public void save() {
-        user.setCustomerId(selectedCustomerId);
+        user.setBusinessId(selectedBusinessId);
         user.save();
     }
 
@@ -55,12 +55,12 @@ public class AddUserFormHelper {
         return user.getLastName();
     }
 
-    private List<Business> getCustomers(boolean isActive){
+    private List<Business> getBusinesses(boolean isActive){
         BusinessStore businessStore = new BusinessStore();
         return businessStore.getAll(isActive);
     }
 
-    private List<Business> getCustomers(){
-        return getCustomers(true);
+    private List<Business> getBusinesses(){
+        return getBusinesses(true);
     }
 }

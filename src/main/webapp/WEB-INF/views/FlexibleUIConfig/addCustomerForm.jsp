@@ -12,19 +12,20 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-  <configName>Add a customer</configName>
+  <%--<configName>Add a customer</configName>--%>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
 Add customer
+
 <form:form action="./add/" method="post">
     <div>
         <div>
             <div class="label2">
-                <label>business name:</label><form:input path="businessName"/>
+                <label>first name:</label><form:input path="firstName"/>
             </div>
             <div class="label2">
-                <label>contact name:</label><form:input path="contactName"/>
+                <label>last name:</label><form:input path="lastName"/>
             </div>
             <div class="label2">
                 <label>phone number:</label><form:input path="phoneNumber"/>
@@ -32,6 +33,15 @@ Add customer
             <div class="label2">
                 <label>email address:</label><form:input path="emailAddress"/>
             </div>
+            <div class="label2">
+                <label>street address:</label><form:input path="physicalAddress"/>
+            </div>
+<%--            <div class="label2">
+                <label>DOB:</label><form:input path="DOB"/>
+            </div>
+            <div class="label2">
+                <label>gender:</label><form:input path="gender"/>
+            </div>--%>
         </div>
         <input type="submit"/>
     </div>

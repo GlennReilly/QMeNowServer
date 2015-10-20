@@ -14,9 +14,10 @@ public class Business {
     private String contactName = "";
 
 
-    public void save() {
+    public int saveNew() {
         BusinessStore businessStore = new BusinessStore();
-        businessStore.saveNew(this);
+        int newBusinessId = businessStore.saveNew(this);
+        return newBusinessId;
     }
 
     public int getId() {

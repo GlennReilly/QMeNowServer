@@ -5,6 +5,7 @@ import com.bluemongo.springmvcjsontest.model.UserCredentials;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -23,11 +24,11 @@ public class UserStore {
     public int saveNew(User user){
         int lastInsertedId = -1;
         String query = "insert into appUser(username, password, customerId, firstName, lastName, physicalAddress, emailAddress) values (?,?,?,?,?,?,?)";
-        try{
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,user.getUsername());
             preparedStatement.setString(2,user.getPassword());
-            preparedStatement.setInt(3, user.getCustomerId());
+            preparedStatement.setInt(3, user.getBusinessId());
             preparedStatement.setString(4, user.getFirstName());
             preparedStatement.setString(5,user.getLastName());
             preparedStatement.setString(6, user.getPhysicalAddress());
@@ -50,8 +51,8 @@ public class UserStore {
     public boolean validateCredentials(UserCredentials userCredentials) {
         boolean foundUserWithTheseCredentials = false;
         String query = "select count(id) from appUser where username = ? AND password = ? AND active = true";
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, userCredentials.getUsername());
             preparedStatement.setString(2, userCredentials.getPassword());
             resultSet = preparedStatement.executeQuery();
@@ -72,8 +73,8 @@ public class UserStore {
         User user = null;
         String query = "SELECT id, username, customerId, firstName, lastName, physicalAddress, " +
                 "emailAddress, active FROM appUser where username = ? AND password = ? AND active = true";
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, userCredentials.getUsername());
             preparedStatement.setString(2, userCredentials.getPassword());
             resultSet = preparedStatement.executeQuery();
@@ -81,7 +82,7 @@ public class UserStore {
                 user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getNString("username"));
-                user.setCustomerId(resultSet.getInt("customerId"));
+                user.setBusinessId(resultSet.getInt("customerId"));
                 user.setFirstName(resultSet.getNString("firstName"));
                 user.setLastName(resultSet.getNString("lastName"));
                 user.setPhysicalAddress(resultSet.getNString("physicalAddress"));
@@ -100,15 +101,15 @@ public class UserStore {
         List<User> userList = new ArrayList<>();
         String query = "SELECT id, username, customerId, firstName, lastName, physicalAddress, " +
                 "emailAddress, active FROM appUser where active = ?";
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setBoolean(1, isActive);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getNString("username"));
-                user.setCustomerId(resultSet.getInt("customerId"));
+                user.setBusinessId(resultSet.getInt("customerId"));
                 user.setFirstName(resultSet.getNString("firstName"));
                 user.setLastName(resultSet.getNString("lastName"));
                 user.setPhysicalAddress(resultSet.getNString("physicalAddress"));

@@ -11,7 +11,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-  <configName>Add a user</configName>
+  <%--<configName>Add a user</configName>--%>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
@@ -20,9 +20,9 @@ Add a User
 <form:form action="./add/" method="post">
   <div>
       <div class="label2">
-          <form:select path="selectedCustomerId">
+          <form:select path="selectedBusinessId">
               <form:option value="0" label="Please select" />
-              <form:options items="${command.activeCustomers}" itemValue="id" itemLabel="businessName" />
+              <form:options items="${command.activeBusinesses}" itemValue="id" itemLabel="businessName" />
           </form:select>
       </div>
     <div class="label2">

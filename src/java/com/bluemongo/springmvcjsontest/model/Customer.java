@@ -12,16 +12,18 @@ import java.util.List;
 public class Customer {
     private static CustomerStore customerStore = new CustomerStore();
     private int id;
-    private int customerId;
     private String firstName = "";
     private String lastName = "";
     private String name = "";
     private String phoneNumber = "";
     private String emailAddress = "";
     private String physicalAddress = "";
+    private Gender gender;
     private Date DOB;
+    private int businessId;
 
     public Customer() {}
+
 
     public Customer(int id) {
         this.id = id;
@@ -33,14 +35,14 @@ public class Customer {
     }
 
 
-
-    public List<Customer> getAllUsers(boolean active){
+/*
+    public List<Customer> getAllCustomers(boolean active){
         List<Customer> customerList = new ArrayList<>();
         customerList = customerStore.getAll(active);
         return  customerList;
-    }
+    }*/
 
-    public int save() {
+    public int saveNew() {
         int newCustomerId = customerStore.saveNew(this);
         return newCustomerId;
     }
@@ -51,14 +53,6 @@ public class Customer {
 
     private void setId(int id) {
         this.id = id;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public String getFirstName() {
@@ -115,4 +109,23 @@ public class Customer {
     public Date getDOB() {
         return DOB;
     }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public int getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(int businessId) {
+        this.businessId = businessId;
+    }
+
+    public enum Gender {NOT_SPECIFIED, MALE, FEMALE,}
+
 }

@@ -75,7 +75,7 @@ public class BarcodeController implements ServletContextAware {
             Graphics2D graphics = (Graphics2D) image.getGraphics();
             graphics.setColor(Color.WHITE);
             graphics.fillRect(0, 0, matrixWidth, matrixWidth);
-            // Paint and save the image using the ByteMatrix
+            // Paint and saveNew the image using the ByteMatrix
             graphics.setColor(Color.BLACK);
 
             for (int i = 0; i < matrixWidth; i++) {

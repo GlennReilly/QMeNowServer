@@ -12,7 +12,7 @@ public class User {
     private UserCredentials userCredentials = new UserCredentials();
     private static UserStore userStore = new UserStore();
     private int id;
-    private int customerId;
+    private int businessId;
     private String firstName = "";
     private String lastName = "";
     private String name = "";
@@ -59,12 +59,12 @@ public class User {
         this.userCredentials = userCredentials;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getBusinessId() {
+        return businessId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setBusinessId(int businessId) {
+        this.businessId = businessId;
     }
 
     public String getFirstName() {

@@ -16,17 +16,24 @@
 <body>
 Add a new appointment.
 <br/>
+${message}<br/>
+BusinessId: ${businessId}
+<br/>
 Select customer:
-<form:form action="./add/" method="post">
+<form:form action="../add/${businessId}" method="post">
   <div>
     <div class="label2">
     <form:select path="selectedUserId">
       <form:option value="0" label="Please select" />
-      <form:options items="${command.activeCustomers}" itemValue="id" itemLabel="name" />
+      <form:options items="${command.customersList}" itemValue="id" itemLabel="name" />
     </form:select>
     </div>
     <div class="label2">
-      <label>location</label><form:input path="appointment.location" />
+      <label>location</label>
+      <form:select path="appointment.locationId">
+        <form:option value="0" label="Please select" />
+        <form:options items="${command.activeLocations}" itemValue="id" itemLabel="locationName" />
+      </form:select>
     </div>
     <div class="label2">
       <label>messageToUser</label><form:input path="appointment.messageToUser" />

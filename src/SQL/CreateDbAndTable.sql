@@ -41,7 +41,7 @@ SELECT * from ConfigStore;
 
 create table nameValuePairs(
   id INTEGER NOT NULL AUTO_INCREMENT,
-  customerId long,
+  businessId long,
   classification1 varchar(100),
   classification2 varchar(100),
   classification3 varchar(100),
@@ -68,7 +68,7 @@ create table appUser(
   id INTEGER NOT NULL AUTO_INCREMENT,
   username varchar(50),
   password varchar(50),
-  customerId integer,
+  businessId integer,
   createdDate TIMESTAMP NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (id)
 );
@@ -81,7 +81,7 @@ CREATE TABLE `appUser` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `password` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `customerId` int(11) DEFAULT NULL,
+  `businessId` int(11) DEFAULT NULL,
   `createdDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `firstName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `lastName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
@@ -118,7 +118,7 @@ create table buttonStyle(
   classification1 varchar(100),
   classification2 varchar(100),
   classification3 varchar(100),
-  customerId long,
+  businessId long,
   PRIMARY KEY (id)
 );
 
@@ -126,18 +126,18 @@ update buttonStyle set styleName = 'buttonStyle4' where id = 4;
 
 
 insert into buttonStyle(styleName, textColour, backgroundColourHex, padding) values('buttonStyle1','#000000','#33CC33', '14dp 10dp 2dp 10dp');
-insert into buttonStyle(styleName, textColour, backgroundColourHex, padding, customerId) values('buttonStyle3','#000066','#33CC66', '18dp 8dp 2dp 10dp',123);
-insert into buttonStyle(styleName, textColour, backgroundColourHex, padding, customerId) values('buttonStyle5','#660066','#99CC33', '18dp 8dp 2dp 10dp',456);
+insert into buttonStyle(styleName, textColour, backgroundColourHex, padding, businessId) values('buttonStyle3','#000066','#33CC66', '18dp 8dp 2dp 10dp',123);
+insert into buttonStyle(styleName, textColour, backgroundColourHex, padding, businessId) values('buttonStyle5','#660066','#99CC33', '18dp 8dp 2dp 10dp',456);
 select * from buttonStyle;
 
-select 	id,	createdDate, styleName,	textColour, backgroundColourHex, padding, classification1, classification2, classification3, customerId
-from buttonStyle where customerId = 123 or customerId is null;
+select 	id,	createdDate, styleName,	textColour, backgroundColourHex, padding, classification1, classification2, classification3, businessId
+from buttonStyle where businessId = 123 or businessId is null;
 
 select * from appUser;
 SELECT `appUser`.`id`,
   `appUser`.`username`,
   `appUser`.`password`,
-  `appUser`.`customerId`,
+  `appUser`.`businessId`,
   `appUser`.`createdDate`,
   `appUser`.`firstName`,
   `appUser`.`lastName`,
@@ -146,18 +146,18 @@ SELECT `appUser`.`id`,
   `appUser`.`active`
 FROM `DemoJunk1`.`appUser`;
 
-SELECT id, username, customerId, firstName, lastName, physicalAddress,
+SELECT id, username, businessId, firstName, lastName, physicalAddress,
   emailAddress, active FROM appUser where username = 'fherbert' AND password = 'sandworm$' AND active = true;
 
 select * from nameValuePairs;
 
 
 set @customerID = 2;
-SELECT id, title, config, createdDate, updatedDate, customerId, revisionNumber
-FROM ConfigStore where customerId is null or  customerId = @customerID;
+SELECT id, title, config, createdDate, updatedDate, businessId, revisionNumber
+FROM ConfigStore where businessId is null or  businessId = @customerID;
 
 
-alter table ConfigStore add column customerId int;
+alter table ConfigStore add column businessId int;
 alter table ConfigStore add column revisionNumber int;
 alter table ConfigStore modify column revisionNumber int default 1;
 alter table ConfigStore add column title varchar(200);
@@ -168,7 +168,7 @@ create table location(
   id int(11) NOT NULL AUTO_INCREMENT,
   createdDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   locationName varchar(100),
-  customerId int,
+  businessId int,
   PRIMARY KEY (id)
 );
 
@@ -181,4 +181,19 @@ create table appointment(
   messageToUser varchar(400),
   PRIMARY KEY (id)
 );
+
+create table appointmentStatus (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  createdDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  businessId int,
+  statusName varchar(100),
+  PRIMARY KEY (id)
+);
+
+ALTER TABLE appointment CONVERT TO CHARACTER SET utf8;
+ALTER TABLE appointmentStatus CONVERT TO CHARACTER SET utf8;
+ALTER TABLE appUser CONVERT TO CHARACTER SET utf8;
+ALTER TABLE business CONVERT TO CHARACTER SET utf8;
+ALTER TABLE customer CONVERT TO CHARACTER SET utf8;
+ALTER TABLE location CONVERT TO CHARACTER SET utf8;
 

@@ -10,18 +10,26 @@ import java.util.Date;
  * Created by glenn on 5/10/15.
  */
 public class Appointment {
+    private int id;
     private String messageToUser;
     private Date appointmentDate;
     private int locationId;
     private int userId;
-    String appointmentType;
-
+    private String appointmentType;
+    private int status;
     private AppointmentStore appointmentStore = new AppointmentStore();
 
-    public int save() {
+
+    public Appointment(){}
+    public Appointment(int id){
+        this.id = id;
+    }
+
+    public int saveNew() {
         int newId = appointmentStore.saveNew(this);
         return newId;
     }
+
 
     public String getAppointmentDateString8601() {
         return InputHelper.getISO8601StringFromDate(appointmentDate);
@@ -43,7 +51,7 @@ public class Appointment {
         this.locationId = locationId;
     }
 
-    public String getMessageToUser() {
+    public String getMessageToCustomer() {
         return messageToUser;
     }
 
@@ -55,7 +63,7 @@ public class Appointment {
         this.userId = userId;
     }
 
-    public int getUserId() {
+    public int getCustomerId() {
         return userId;
     }
 
@@ -65,5 +73,17 @@ public class Appointment {
 
     public void setAppointmentType(String appointmentType) {
         this.appointmentType = appointmentType;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public int getId() {
+        return id;
     }
 }

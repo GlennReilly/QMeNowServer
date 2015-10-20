@@ -1,15 +1,19 @@
 import com.bluemongo.springmvcjsontest.model.Appointment;
+import com.bluemongo.springmvcjsontest.model.AppointmentStatus;
 import com.bluemongo.springmvcjsontest.model.Customer;
-import com.bluemongo.springmvcjsontest.model.Location;
+import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import org.junit.Test;
+import utils.InputHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by glenn on 14/10/15.
@@ -17,14 +21,15 @@ import static org.junit.Assert.assertNotNull;
 public class testModels {
 
     @Test
-    public void testAppointmentWithoutLocationSave(){
+    public void testCreateAppointmentWithoutLocation(){
         Appointment appointment = new Appointment();
         appointment.setAppointmentDate(new Date());
         appointment.setAppointmentType("test appointment type here");
         appointment.setLocationId(1);
+        appointment.setStatus(1);
         appointment.setMessageToUser("this is a test message to the user");
         appointment.setUserId(1);
-        int newId = appointment.save();
+        int newId = appointment.saveNew();
         assertNotNull(newId);
     }
 
@@ -39,7 +44,7 @@ public class testModels {
         customer.setLastName("jones");
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
-        String dateInString = "31-08-1982";
+        String dateInString = "31-08-1952";
         try {
             Date DOB = sdf.parse(dateInString);
             customer.setDOB(DOB);
@@ -47,7 +52,47 @@ public class testModels {
             e.printStackTrace();
         }
 
-        int newId = customer.save();
+        int newId = customer.saveNew();
         assertNotNull(newId);
     }
+
+    @Test
+    public void testCreateAppointmentStatus(){
+        AppointmentStatus appointmentStatus = new AppointmentStatus();
+        appointmentStatus.setCustomerId(1);
+        appointmentStatus.setStatusName("expected");
+        int newId = appointmentStatus.saveNew();
+        assertNotNull(newId);
+    }
+
+    @Test
+    public void testGetAllAppointmentsForUser(){
+        AppointmentStore appointmentStore = new AppointmentStore();
+        List<Appointment> appointmentList = appointmentStore.getAll(1);
+        assertTrue(appointmentList.size() > 0);
+    }
+
+    @Test
+    public void testGetAllAppointmentsForUserForToday(){
+        AppointmentStore appointmentStore = new AppointmentStore();
+        List<Appointment> appointmentList = appointmentStore.getAllForToday(1);
+        assertTrue(appointmentList.size() > 0);
+    }
+
+    @Test
+    public void testGetAllAppointmentsForUserForDate(){
+        AppointmentStore appointmentStore = new AppointmentStore();
+        Date date = Calendar.getInstance().getTime();
+
+        Calendar cal = Calendar.getInstance(); // locale-specific
+        cal.setTime(date);
+        InputHelper.resetTimeOfDate(cal);
+
+        Date dateAtMidnight = cal.getTime();
+
+        List<Appointment> appointmentList = appointmentStore.getAllForDate(1, dateAtMidnight);
+        assertTrue(appointmentList.size() > 0);
+    }
+
+
 }

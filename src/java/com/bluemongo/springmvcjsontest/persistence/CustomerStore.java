@@ -4,10 +4,7 @@ import com.bluemongo.springmvcjsontest.model.Customer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,15 +19,20 @@ public class CustomerStore {
 
     public int saveNew(Customer customer){
         int lastInsertedId = -1;
-        String query = "insert into customer(firstName, lastName, physicalAddress, emailAddress, phoneNumber, DOB) values (?,?,?,?,?,?)";
-        try{
-            preparedStatement = dbHelper.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        String query = "insert into customer(firstName, lastName, physicalAddress, emailAddress, phoneNumber, DOB, businessId) values (?,?,?,?,?,?,?)";
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, customer.getFirstName());
             preparedStatement.setString(2, customer.getLastName());
             preparedStatement.setString(3, customer.getPhysicalAddress());
             preparedStatement.setString(4, customer.getEmailAddress());
             preparedStatement.setString(5, customer.getPhoneNumber());
-            preparedStatement.setDate(6, (Date) customer.getDOB());
+            if (customer.getDOB() != null) {
+                preparedStatement.setDate(6, new java.sql.Date(customer.getDOB().getTime()));
+            }else{
+                preparedStatement.setDate(6, null);
+            }
+            preparedStatement.setInt(7, customer.getBusinessId());
             preparedStatement.executeUpdate();
             logger.info("new Customer inserted.");
 
@@ -42,7 +44,6 @@ public class CustomerStore {
         catch(Exception ex)
         {
             logger.info(ex.getMessage());
-            return Integer.parseInt(null);
         }
         return lastInsertedId;
     }
@@ -52,18 +53,13 @@ public class CustomerStore {
         Customer customer = null;
         String query = "SELECT id, firstName, lastName, physicalAddress, " +
                 "emailAddress, active FROM customer where id = ? AND active = true";
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, customerId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                customer = new Customer(resultSet.getInt("id"));
-                //customer.setId(resultSet.getInt("id"));
-                customer.setCustomerId(resultSet.getInt("customerId"));
-                customer.setFirstName(resultSet.getNString("firstName"));
-                customer.setLastName(resultSet.getNString("lastName"));
-                customer.setPhysicalAddress(resultSet.getNString("physicalAddress"));
-                customer.setEmailAddress(resultSet.getNString("emailAddress"));
+                customer = getCustomerFromResultSet();
             }
         }
         catch(Exception ex)
@@ -74,22 +70,18 @@ public class CustomerStore {
         return customer;
     }
 
-    public List<Customer> getAll(boolean isActive) {
+    public List<Customer> getAll(int businessId, boolean isActive) {
         List<Customer> customerList = new ArrayList<>();
-        String query = "SELECT id, username, customerId, firstName, lastName, physicalAddress, " +
-                "emailAddress, active FROM customer where active = ?";
-        try {
-            preparedStatement = dbHelper.getConnection().prepareStatement(query);
-            preparedStatement.setBoolean(1, isActive);
+        String query = "SELECT id, firstName, lastName, phoneNumber, physicalAddress, " +
+                "emailAddress, DOB, active FROM customer where businessId = ? AND active = ?";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, businessId);
+            preparedStatement.setBoolean(2, isActive);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                Customer customer = new Customer(resultSet.getInt("id"));
-                //customer.setId(resultSet.getInt("id"));
-                customer.setCustomerId(resultSet.getInt("customerId"));
-                customer.setFirstName(resultSet.getNString("firstName"));
-                customer.setLastName(resultSet.getNString("lastName"));
-                customer.setPhysicalAddress(resultSet.getNString("physicalAddress"));
-                customer.setEmailAddress(resultSet.getNString("emailAddress"));
+                Customer customer = getCustomerFromResultSet();
                 customerList.add(customer);
             }
         }
@@ -99,5 +91,16 @@ public class CustomerStore {
         }
 
         return customerList;
+    }
+
+    private Customer getCustomerFromResultSet() throws SQLException {
+        Customer customer = new Customer(resultSet.getInt("id"));
+        customer.setFirstName(resultSet.getNString("firstName"));
+        customer.setLastName(resultSet.getNString("lastName"));
+        customer.setPhoneNumber(resultSet.getString("phoneNumber"));
+        customer.setPhysicalAddress(resultSet.getNString("physicalAddress"));
+        customer.setEmailAddress(resultSet.getNString("emailAddress"));
+        customer.setDOB(resultSet.getDate("DOB"));
+        return customer;
     }
 }

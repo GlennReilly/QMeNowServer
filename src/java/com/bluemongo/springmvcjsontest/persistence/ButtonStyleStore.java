@@ -42,6 +42,7 @@ public class ButtonStyleStore {
         String query = "select id, createdDate, styleName, textColour, backgroundColourHex, padding," +
                 " classification1, classification2, classification3, customerId" +
                 " from buttonStyle where customerId=? or customerId is null";
+
         List<com.bluemongo.springmvcjsontest.model.ButtonStyle> buttonStyleList = new ArrayList<>();
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
@@ -75,6 +76,7 @@ public class ButtonStyleStore {
         String query = "select id, createdDate, styleName, textColour, backgroundColourHex, padding," +
                 " classification1, classification2, classification3, customerId" +
                 " from buttonStyle where id = ?";
+
         ButtonStyle buttonStyle = null;
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
