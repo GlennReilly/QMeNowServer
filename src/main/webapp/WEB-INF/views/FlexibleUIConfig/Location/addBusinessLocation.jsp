@@ -1,4 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: glenn
@@ -10,10 +13,11 @@
 <html>
 <head>
     <title></title>
+  <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-Add a Location for your business
-<br/>
+<div class="pageTitle">${pageTitle}</div>
+<div class="pageMessage">${message}</div>
 <form:form action="../add/${businessId}" method="post">
   <div>
     <div>
@@ -21,7 +25,9 @@ Add a Location for your business
         <label>location name:</label><form:input path="locationName"/>
       </div>
     </div>
-    <input type="submit"/>
+    <div class="label2">
+      <input type="submit">
+    </div>
   </div>
 </form:form>
 </body>

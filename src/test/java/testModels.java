@@ -24,10 +24,10 @@ public class testModels {
     public void testCreateAppointmentWithoutLocation(){
         Appointment appointment = new Appointment();
         appointment.setAppointmentDate(new Date());
-        appointment.setAppointmentType("test appointment type here");
+        appointment.setAppointmentTypeId(1);
         appointment.setLocationId(1);
         appointment.setStatus(1);
-        appointment.setMessageToUser("this is a test message to the user");
+        appointment.setMessageToCustomer("this is a test message to the user");
         appointment.setUserId(1);
         int newId = appointment.saveNew();
         assertNotNull(newId);
@@ -59,7 +59,7 @@ public class testModels {
     @Test
     public void testCreateAppointmentStatus(){
         AppointmentStatus appointmentStatus = new AppointmentStatus();
-        appointmentStatus.setCustomerId(1);
+        appointmentStatus.setBusinessId(1);
         appointmentStatus.setStatusName("expected");
         int newId = appointmentStatus.saveNew();
         assertNotNull(newId);

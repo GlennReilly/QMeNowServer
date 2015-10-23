@@ -8,14 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <configName></configName>
+    <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-Welcome to the FlexibleUIConfig demo
+<div class="pageTitle">${pageTitle}</div>
+<div class="pageMessage">${message}</div>
 <br/>
 <ul>
     <li><a href="./login">Login</a></li>
     <li><a href="./customer/add">Add a new customer</a></li>
+    <li><a href="./customer/find">Find a customer</a></li>
     <li><a href="./appointment/add">Add a new appointment for a customer</a></li>
     <li><a href="./user/add">Add a new user</a></li>
     <li><a href="./business/add">Add a new business</a></li>

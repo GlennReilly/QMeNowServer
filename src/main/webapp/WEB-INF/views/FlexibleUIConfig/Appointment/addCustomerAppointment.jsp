@@ -14,32 +14,41 @@
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-Add a new appointment.
-<br/>
-${message}<br/>
+<div class="pageTitle">${pageTitle}</div>
+<div class="pageMessage">${message}</div>
 BusinessId: ${businessId}
 <br/>
-Select customer:
-<form:form action="../add/${businessId}" method="post">
+
+<form:form action="./add/" method="post">
   <div>
     <div class="label2">
+      <label>Select customer:</label>
     <form:select path="selectedUserId">
       <form:option value="0" label="Please select" />
       <form:options items="${command.customersList}" itemValue="id" itemLabel="name" />
     </form:select>
     </div>
     <div class="label2">
-      <label>location</label>
+      <label>location:</label>
       <form:select path="appointment.locationId">
         <form:option value="0" label="Please select" />
         <form:options items="${command.activeLocations}" itemValue="id" itemLabel="locationName" />
       </form:select>
     </div>
     <div class="label2">
-      <label>messageToUser</label><form:input path="appointment.messageToUser" />
+      <label>appointment type:</label>
+      <form:select path="appointment.appointmentTypeId">
+        <form:option value="0" label="Please select" />
+        <form:options items="${command.appointmentTypeList}" itemValue="id" itemLabel="name" />
+      </form:select>
+    </div>
+    <div class="label2">
+      <label>message to Customer:</label><form:input path="appointment.messageToCustomer" />
     </div>
 
-    <input type="submit">
+    <div class="label2">
+      <input type="submit">
+    </div>
   </div>
   </form:form>
 </body>

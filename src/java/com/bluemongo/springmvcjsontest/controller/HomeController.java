@@ -2,7 +2,6 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.api.UserAppointmentService;
 import com.bluemongo.springmvcjsontest.model.*;
-import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,7 +37,7 @@ public class HomeController implements UserAppointmentService {
     public ModelAndView GetLoginForm(HttpSession httpSession){
         ModelAndView modelAndView;
         if (httpSession.getAttribute("User") == null) {
-            modelAndView = ModelViewHelper.GetLoginForm();
+            modelAndView = ModelViewHelper.GetLoginForm(null);
         }
         else{
             User user = (User)httpSession.getAttribute("User");
@@ -79,7 +78,7 @@ public class HomeController implements UserAppointmentService {
         ReconfigurableAppConfig appConfig = configHelper.getCurrentAppConfig();
         if (appConfig == null) {
             logger.error("No appConfig found with configID: " + configID);
-            modelAndView.setViewName("Error");
+            modelAndView.setViewName("error");
         }else {
             configHelper.setAvailableButtonStyles();
             modelAndView.setViewName("/FlexibleUIConfig/EditConfigForm");
@@ -192,11 +191,11 @@ public class HomeController implements UserAppointmentService {
         List<Appointment> appointmentList = new ArrayList<>();
         if (userId == 1234){
             Appointment appointment = new Appointment();
-            appointment.setMessageToUser("successful Retrofit call");
+            appointment.setMessageToCustomer("successful Retrofit call");
             appointmentList.add(appointment);
         }else{
             Appointment appointment = new Appointment();
-            appointment.setMessageToUser("no appointments found on server");
+            appointment.setMessageToCustomer("no appointments found on server");
             appointmentList.add(appointment);
         }
 

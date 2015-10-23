@@ -21,10 +21,10 @@ public class AppointmentStatusStore {
 
     public int saveNew(AppointmentStatus appointmentStatus) {
         int lastInsertedId = -1;
-        String query = "insert into appointmentStatus(customerId, statusName) values (?,?)";
+        String query = "insert into appointmentStatus(businessId, statusName) values (?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setInt(1, appointmentStatus.getCustomerId());
+            preparedStatement.setInt(1, appointmentStatus.getBusinessId());
             preparedStatement.setString(2, appointmentStatus.getStatusName());
 
             preparedStatement.executeUpdate();
@@ -52,7 +52,7 @@ public class AppointmentStatusStore {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 AppointmentStatus appointmentStatus = new AppointmentStatus();
-                appointmentStatus.setCustomerId(customerId);
+                appointmentStatus.setBusinessId(customerId);
                 appointmentStatus.setStatusName(resultSet.getString("StatusName"));
                 appointmentStatusList.add(appointmentStatus);
             }

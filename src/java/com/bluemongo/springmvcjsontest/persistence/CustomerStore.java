@@ -103,4 +103,46 @@ public class CustomerStore {
         customer.setDOB(resultSet.getDate("DOB"));
         return customer;
     }
+
+    public List<Customer> get(int businessId, String customerIdStr, String firstName, String lastName) {
+        List<Customer> customerList = new ArrayList<>();
+
+        customerIdStr = customerIdStr == null? "%%" : "%" + customerIdStr + "%";
+        firstName = firstName == null? "%%" : "%" + firstName + "%";
+        lastName = lastName == null? "%%" : "%" + lastName + "%";
+
+/*        if (customerIdStr.equals(null)|| customerIdStr.equals("")){
+            customerIdStr = "%%";
+        }*/
+
+/*        if (firstName.equals(null)|| firstName.equals("")){
+            firstName = "%%";
+        }
+
+        if (lastName.equals(null)|| lastName.equals("")){
+            lastName = "%%";
+        }*/
+
+        String query = "SELECT id, firstName, lastName, phoneNumber, physicalAddress, " +
+                "emailAddress, DOB, active FROM customer where id like ? AND firstName like ? And lastName like ? AND businessId = ?";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, customerIdStr);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, lastName);
+            preparedStatement.setInt(4, businessId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Customer customer = getCustomerFromResultSet();
+                customerList.add(customer);
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+
+        return customerList;
+    }
 }

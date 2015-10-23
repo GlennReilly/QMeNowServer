@@ -15,7 +15,8 @@
 
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
-
+<div class="pageTitle">${pageTitle}</div>
+<div class="pageMessage">${message}</div>
 <form:form method="post" action="/FlexibleUIConfig/save/${command.currentAppConfig.id}">
 <div class="divMain">
     <div class="divTitle">

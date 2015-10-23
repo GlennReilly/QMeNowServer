@@ -16,8 +16,8 @@
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-Add a button style
-<br/>
+<div class="pageTitle">${pageTitle}</div>
+<div class="pageMessage">${message}</div>
 <form:form action="./add/" method="post">
     <div>
         <div>
@@ -40,7 +40,9 @@ Add a button style
                 <label>padding:</label><form:input path="padding"/>
             </div>
         </div>
-        <input type="submit"/>
+        <div class="label2">
+            <input type="submit">
+        </div>
     </div>
 </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>

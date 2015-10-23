@@ -11,11 +11,11 @@ import java.util.Date;
  */
 public class Appointment {
     private int id;
-    private String messageToUser;
+    private String messageToCustomer;
     private Date appointmentDate;
     private int locationId;
     private int userId;
-    private String appointmentType;
+    private int appointmentTypeId;
     private int status;
     private AppointmentStore appointmentStore = new AppointmentStore();
 
@@ -52,11 +52,11 @@ public class Appointment {
     }
 
     public String getMessageToCustomer() {
-        return messageToUser;
+        return messageToCustomer;
     }
 
-    public void setMessageToUser(String messageToUser) {
-        this.messageToUser = messageToUser;
+    public void setMessageToCustomer(String messageToCustomer) {
+        this.messageToCustomer = messageToCustomer;
     }
 
     public void setUserId(int userId) {
@@ -65,14 +65,6 @@ public class Appointment {
 
     public int getCustomerId() {
         return userId;
-    }
-
-    public String getAppointmentType() {
-        return appointmentType;
-    }
-
-    public void setAppointmentType(String appointmentType) {
-        this.appointmentType = appointmentType;
     }
 
     public void setStatus(int status) {
@@ -85,5 +77,13 @@ public class Appointment {
 
     public int getId() {
         return id;
+    }
+
+    public int getAppointmentTypeId() {
+        return appointmentTypeId;
+    }
+
+    public void setAppointmentTypeId(int appointmentTypeId) {
+        this.appointmentTypeId = appointmentTypeId;
     }
 }

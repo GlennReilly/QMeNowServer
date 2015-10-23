@@ -13,9 +13,11 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
     <body>
-        Barcode index
+    <div class="pageTitle">${pageTitle}</div>
+    <div class="pageMessage">${message}</div>
         <br/>
         <a href="./makeQRCode">/makeQRCode</a>
         <br/>

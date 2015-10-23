@@ -38,4 +38,9 @@ public class Location {
     public void setBusinessId(int customerId) {
         this.customerId = customerId;
     }
+
+    public int getBusinessId(){
+        return customerId;
+    }
+
 }

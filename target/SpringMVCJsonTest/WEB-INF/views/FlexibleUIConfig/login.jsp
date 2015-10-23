@@ -11,10 +11,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-  <configName>Login or create account</configName>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
+<div class="pageTitle">${pageTitle}</div>
+<div class="pageMessage">${message}</div>
     <form:form action="./login/" method="post">
         <div>
             <div class="label2">
@@ -23,7 +24,9 @@
             <div class="label2">
                 <label>password:</label><form:password path="password" id="password" />
             </div>
-            <input type="submit">
+            <div class="label2">
+                <input type="submit">
+            </div>
         </div>
     </form:form>
 

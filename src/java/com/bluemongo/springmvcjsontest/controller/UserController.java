@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by glenn on 11/10/15.
  */
@@ -17,10 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
     // User methods
     @RequestMapping(value="/add", method = RequestMethod.GET)
-    public ModelAndView GetUserAddForm(){
+    public ModelAndView GetUserAddForm(HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/FlexibleUIConfig/addUserForm");
-        modelAndView.addObject("command", new AddUserFormHelper());
+
+        if (httpSession.getAttribute("User") == null) {
+            modelAndView = ModelViewHelper.GetLoginForm(null);
+        }
+        else {
+            modelAndView.setViewName("/FlexibleUIConfig/addUserForm");
+            modelAndView.addObject("command", new AddUserFormHelper());
+            modelAndView.addObject("pageTitle", "Add a user");
+        }
         return  modelAndView;
     }
 

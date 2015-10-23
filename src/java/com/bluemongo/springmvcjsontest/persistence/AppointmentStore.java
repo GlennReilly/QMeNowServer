@@ -20,10 +20,10 @@ public class AppointmentStore {
 
         public int saveNew(Appointment appointment) {
         int lastInsertedId = -1;
-        String query = "insert into appointment(appointmentType, appointmentDate, customerId, status, messageToUser, locationId) values (?,?,?,?,?,?)";
+        String query = "insert into appointment(appointmentTypeId, appointmentDate, customerId, status, messageToUser, locationId) values (?,?,?,?,?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, appointment.getAppointmentType());
+            preparedStatement.setInt(1, appointment.getAppointmentTypeId());
             if (appointment.getAppointmentDate() != null) {
                 preparedStatement.setTimestamp(2, new Timestamp(appointment.getAppointmentDate().getTime()));
             }
@@ -52,7 +52,7 @@ public class AppointmentStore {
         public List<Appointment> getAllForToday(int userId){
             //chronologically ordered list
             List<Appointment> appointmentList = new ArrayList<>();
-            String query = "SELECT id, createdDate, appointmentType, appointmentDate, customerId, messageToUser, status FROM appointment" +
+            String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status FROM appointment" +
                     " where userId = ?;";
 
             try(Connection connection = dbHelper.getConnection()){
@@ -62,10 +62,10 @@ public class AppointmentStore {
 
                 while (resultSet.next()){
                     Appointment appointment = new Appointment(resultSet.getInt("id"));
-                    appointment.setAppointmentType(resultSet.getString("appointmentType"));
+                    appointment.setAppointmentTypeId(resultSet.getInt("appointmentTypeId"));
                     appointment.setAppointmentDate(resultSet.getDate("appointmentDate"));
                     appointment.setUserId(resultSet.getInt("userId"));
-                    appointment.setMessageToUser(resultSet.getNString("messageToUser"));
+                    appointment.setMessageToCustomer(resultSet.getNString("messageToUser"));
 
                     appointmentList.add(appointment);
                 }
@@ -80,7 +80,7 @@ public class AppointmentStore {
     public List<Appointment> getAllForDate(int userId, Date date){
         //chronologically ordered list
         List<Appointment> appointmentList = new ArrayList<>();
-        String query = "SELECT id, createdDate, appointmentType, appointmentDate, customerId, messageToUser, status FROM appointment" +
+        String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status FROM appointment" +
                 " where userId = ? and appointmentDate between ? and DATE_ADD(?,INTERVAL 1 day) ;";
 
         try(Connection connection = dbHelper.getConnection()){
@@ -92,10 +92,10 @@ public class AppointmentStore {
 
             while (resultSet.next()){
                 Appointment appointment = new Appointment(resultSet.getInt("id"));
-                appointment.setAppointmentType(resultSet.getString("appointmentType"));
+                appointment.setAppointmentTypeId(resultSet.getInt("appointmentTypeId"));
                 appointment.setAppointmentDate(resultSet.getDate("appointmentDate"));
                 appointment.setUserId(resultSet.getInt("userId"));
-                appointment.setMessageToUser(resultSet.getNString("messageToUser"));
+                appointment.setMessageToCustomer(resultSet.getNString("messageToUser"));
 
                 appointmentList.add(appointment);
             }
@@ -108,9 +108,9 @@ public class AppointmentStore {
     }
 
     public List<Appointment> getAll(int userId){
-        //chronologically ordered list
+        //TODO chronologically ordered list?
         List<Appointment> appointmentList = new ArrayList<>();
-        String query = "SELECT id, createdDate, appointmentType, appointmentDate, customerId, messageToUser, status FROM appointment" +
+        String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status FROM appointment" +
                 " where userId = ?;";
 
         try(Connection connection = dbHelper.getConnection()){
@@ -120,10 +120,10 @@ public class AppointmentStore {
 
             while (resultSet.next()){
                 Appointment appointment = new Appointment(resultSet.getInt("id"));
-                appointment.setAppointmentType(resultSet.getString("appointmentType"));
+                appointment.setAppointmentTypeId(resultSet.getInt("appointmentType"));
                 appointment.setAppointmentDate(resultSet.getDate("appointmentDate"));
                 appointment.setUserId(resultSet.getInt("userId"));
-                appointment.setMessageToUser(resultSet.getNString("messageToUser"));
+                appointment.setMessageToCustomer(resultSet.getNString("messageToUser"));
 
                 appointmentList.add(appointment);
             }

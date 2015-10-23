@@ -15,8 +15,8 @@
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-Add a User
-<br/>
+<div class="pageTitle">${pageTitle}</div>
+<div class="pageMessage">${message}</div>
 <form:form action="./add/" method="post">
   <div>
       <div class="label2">
@@ -26,28 +26,29 @@ Add a User
           </form:select>
       </div>
     <div class="label2">
-      <label>firstName</label><form:input path="user.firstName" />
+      <label>first name:</label><form:input path="user.firstName" />
     </div>
     <div class="label2">
-      <label>lastName</label><form:input path="user.lastName" />
+      <label>last name:</label><form:input path="user.lastName" />
     </div>
       <div class="label2">
-          <label>username</label><form:input path="user.username" />
+          <label>username:</label><form:input path="user.username" />
       </div>
       <div class="label2">
-          <label>password</label><form:input path="user.password" />
+          <label>password:</label><form:input path="user.password" />
       </div>
       <div class="label2">
-          <label>phone Number</label><form:input path="user.phoneNumber" />
+          <label>phone Number:</label><form:input path="user.phoneNumber" />
       </div>
       <div class="label2">
-          <label>email Address</label><form:input path="user.emailAddress" />
+          <label>email address:</label><form:input path="user.emailAddress" />
       </div>
       <div class="label2">
-          <label>physical Address</label><form:input path="user.physicalAddress" />
+          <label>physical address:</label><form:input path="user.physicalAddress" />
       </div>
-
-      <input type="submit">
+      <div class="label2">
+        <input type="submit">
+      </div>
   </div>
 </form:form>
 </body>

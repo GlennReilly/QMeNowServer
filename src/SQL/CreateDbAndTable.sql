@@ -177,8 +177,8 @@ create table appointment(
   createdDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   appointmentType varchar(200),
   appointmentDate timestamp,
-  userId int,
-  messageToUser varchar(400),
+  customerId int,
+  messageToCustomer varchar(400),
   PRIMARY KEY (id)
 );
 

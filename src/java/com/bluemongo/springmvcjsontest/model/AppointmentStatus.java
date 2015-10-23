@@ -6,12 +6,10 @@ import com.bluemongo.springmvcjsontest.persistence.AppointmentStatusStore;
  * Created by glenn on 16/10/15.
  */
 public class AppointmentStatus  {
-    int id;
-    int customerId;
-    String statusName;
-
+    private int id;
+    private String statusName;
+    private int businessId;
     AppointmentStatusStore store = new AppointmentStatusStore();
-
 
     public int saveNew() {
         int newId = store.saveNew(this);
@@ -26,19 +24,19 @@ public class AppointmentStatus  {
         this.id = id;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
     public String getStatusName() {
         return statusName;
     }
 
     public void setStatusName(String statusName) {
         this.statusName = statusName;
+    }
+
+    public void setBusinessId(int businessId) {
+        this.businessId = businessId;
+    }
+
+    public int getBusinessId() {
+        return businessId;
     }
 }

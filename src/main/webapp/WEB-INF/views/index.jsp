@@ -10,6 +10,7 @@
 <html>
 <head>
     <configName></configName>
+    <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
 Welcome to SpringMVCJsonTest
