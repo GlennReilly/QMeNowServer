@@ -10,75 +10,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/CustomerStore.java" line="21" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d36dc02-edb4-4daa-8655-08d7a9335ab0" name="Default" comment="added basic find customer fn">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/AppointmentStatusController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/AppointmentTypeController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentTypeStore.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/GetAppointmentsByCustomerAndDateHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/GetFindCustomerHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/AppointmentType/addAppointmentTypeForm.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer/customerDetails.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer/customerList.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/error.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer/findCustomer.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/getAppointmentsForCustomerByDate.jsp" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/Error.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/addCustomerForm.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/resources/css/style1.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/resources/log4j2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/resources/scripts/addButtonStyleForm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/resources/scripts/editConfigForm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/resources/scripts/jquery-2.1.4.min.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Error.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/AppointmentStatus/addAppointmentStatusForm.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/addCustomerForm.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer/addCustomerForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/persistence/CustomerStore.class" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/persistence/CustomerStore.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/persistence/CustomerStore.class" afterPath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/persistence/CustomerStore.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/persistence/UserStore.class" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/persistence/UserStore.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/persistence/UserStore.class" afterPath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/persistence/UserStore.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/AddAppointmentFormHelper.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/AddAppointmentFormHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Appointment.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Appointment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/AppointmentController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/AppointmentController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentStatus.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStatusStore.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStatusStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStore.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql" afterPath="$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/CustomerStore.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/CustomerStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/EditConfigForm.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/EditConfigForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/EditConfigForm.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/EditConfigForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/HomeController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/HomeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Location.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Location.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/LocationController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/LocationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/ModelViewHelper.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/ModelViewHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/SpringMVCJsonTest_war.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/SpringMVCJsonTest_war.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/UserController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/addBusinessForm.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/addBusinessForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Location/addBusinessLocation.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Location/addBusinessLocation.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/addButtonStyleForm.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/addButtonStyleForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/addButtonStyleForm.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/addButtonStyleForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/addCustomerAppointment.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/addCustomerAppointment.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/addUserForm.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/addUserForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/addUserForm.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/addUserForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/createPhraseForm.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/createPhraseForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/createPhraseForm.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/createPhraseForm.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Barcode/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Barcode/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/index.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/index.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/login.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/login.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/showUserHome.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/showUserHome.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/showUserHome.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/showUserHome.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/css/style1.css" afterPath="$PROJECT_DIR$/src/main/resources/css/style1.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/css/style1.css" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/css/style1.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/css/style1.css" afterPath="$PROJECT_DIR$/target/classes/css/style1.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/testModels.java" afterPath="$PROJECT_DIR$/src/test/java/testModels.java" />
+    <list default="true" id="1d36dc02-edb4-4daa-8655-08d7a9335ab0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SpringMVCJsonTest.iws" />
@@ -214,8 +146,8 @@
       <file leaf-file-name="style1.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/css/style1.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21399178">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.30864197">
+              <caret line="70" column="1" selection-start-line="70" selection-start-column="1" selection-end-line="70" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -903,7 +835,7 @@
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
@@ -1510,7 +1442,7 @@
       <workItem from="1444210510411" duration="10690000" />
       <workItem from="1444446902807" duration="13922000" />
       <workItem from="1444550777967" duration="74792000" />
-      <workItem from="1445302014251" duration="58608000" />
+      <workItem from="1445302014251" duration="59276000" />
     </task>
     <task id="LOCAL-00001" summary="implemented log4j2.">
       <created>1424527602321</created>
@@ -1584,11 +1516,17 @@
       <option name="project" value="LOCAL" />
       <updated>1445333401211</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added basic find customer fn">
+      <created>1445608642780</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1445608642780</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="488758000" />
+    <option name="totallyTimeSpent" value="489426000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1605,7 +1543,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.209375" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.209375" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20208333" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1616,7 +1554,7 @@
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19690502" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19690502" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2274,8 +2212,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/css/style1.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21399178">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.30864197">
+          <caret line="70" column="1" selection-start-line="70" selection-start-column="1" selection-end-line="70" selection-end-column="1" />
           <folding />
         </state>
       </provider>
