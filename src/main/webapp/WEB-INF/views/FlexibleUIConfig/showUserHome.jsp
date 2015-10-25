@@ -19,9 +19,10 @@
 <br/>
 Business Name: ${Business.businessName}
 <br/>
+<li><a href="./FlexibleUIConfig/barcode/">/FlexibleUIConfig/barcode/</a></li>
 <li><a href="<spring:url value='/FlexibleUIConfig/customer/add'/>"> Add a new customer</a></li>
 <li><a href="<spring:url value='/FlexibleUIConfig/customer/find'/>">Find a customer</a></li>
-<li><a href="<spring:url value='/FlexibleUIConfig/appointment/add'/>">Add a new appointment for a customer</a></li>
+<li><a href="<spring:url value='/FlexibleUIConfig/appointment/get'/>">Show all appointments</a></li>
 <li><a href="<spring:url value='/FlexibleUIConfig/appointmentType/add'/>">Add a new appointment type for your business</a></li>
 <li><a href="<spring:url value='/FlexibleUIConfig/appointmentStatus/add'/>">Add a new appointment status for your business</a></li>
 <li><a href="<spring:url value='/FlexibleUIConfig/location/add'/>">Add a new location for your business</a></li>

@@ -16,5 +16,36 @@
 <body>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
+<form:form action="./add/" method="post">
+    <div>
+        <div>
+            <div class="label2">
+                <label>first name:</label><form:input path="firstName"/>
+            </div>
+            <div class="label2">
+                <label>last name:</label><form:input path="lastName"/>
+            </div>
+            <div class="label2">
+                <label>phone number:</label><form:input path="phoneNumber"/>
+            </div>
+            <div class="label2">
+                <label>email address:</label><form:input path="emailAddress"/>
+            </div>
+            <div class="label2">
+                <label>street address:</label><form:input path="physicalAddress"/>
+            </div>
+                <%--            <div class="label2">
+                                <label>DOB:</label><form:input path="DOB"/>
+                            </div>
+                            <div class="label2">
+                                <label>gender:</label><form:input path="gender"/>
+                            </div>--%>
+        </div>
+        <div class="label2">
+            <input type="submit"/>
+        </div>
+    </div>
+</form:form>
+<span class="listLink"><a href='<spring:url value="/FlexibleUIConfig/appointment/add/${command.id}"/>'>add appointment</a></span>
 </body>
 </html>

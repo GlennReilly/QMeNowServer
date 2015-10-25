@@ -5,10 +5,7 @@ import com.bluemongo.springmvcjsontest.model.User;
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import com.bluemongo.springmvcjsontest.service.GetFindCustomerHelper;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -95,6 +92,27 @@ public class CustomerController {
             }
 
         }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/details/{customerId}", method = RequestMethod.GET)
+    public ModelAndView ShowCustomerDetails(HttpSession httpSession, @PathVariable int customerId){
+        ModelAndView modelAndView = new ModelAndView();
+        if (httpSession.getAttribute("User") == null) {
+            modelAndView = ModelViewHelper.GetLoginForm(null);
+        }
+        else{
+            User user = (User)httpSession.getAttribute("User");
+            Customer customer = new CustomerStore().get(user.getBusinessId(), customerId);
+            if (customer != null){
+                    modelAndView.addObject("command", customer);
+                    modelAndView.addObject("pageTitle", "Customer Details");
+                    modelAndView.setViewName("FlexibleUIConfig/Customer/customerDetails");
+            }else {
+                modelAndView = ModelViewHelper.GetModelViewForError("Sorry, there was an error retrieving that customer.");
+            }
+        }
+
         return modelAndView;
     }
 }

@@ -18,8 +18,7 @@
 
     <c:forEach items="${customerList}" var="customer">
         <c:out value="${customer.firstName} ${customer.lastName}"/>
-        <span class="listLink"><a href='<spring:url value="FlexibleUIConfig/Customer/customerDetails/${customer.id}"/>'>view</a></span>
-        <span class="listLink"><a href='<spring:url value="/FlexibleUIConfig/appointment/add/${customer.id}"/>'>add appointment</a></span>
+        <span class="listLink"><a href='<spring:url value="../details/${customer.id}"/>'>view</a></span>
         <br/>
     </c:forEach>
 </body>

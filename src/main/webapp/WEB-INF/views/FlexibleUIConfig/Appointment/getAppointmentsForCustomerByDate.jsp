@@ -10,10 +10,10 @@
 <body>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./add/" method="post">
+<form:form action="./get/" method="get">
     <div>
         <div>
-            <div class="label2">
+<%--            <div class="label2">
                 <label>user id:</label><form:input path="customerId" />
             </div>
             <div class="label2">
@@ -21,17 +21,20 @@
             </div>
             <div class="label2">
                 <label>last name:</label><form:input path="lastName" />
-            </div>
+            </div>--%>
             <div class="label2">
                 <label>from date:</label><form:input path="strFromDate" />
             </div>
             <div class="label2">
-                <label>to date:</label><form:input path="strToDate" id="toDate"/>
+                <label>to date:</label><form:input path="strToDate" />
             </div>
         </div>
         <div class="label2">
             <input type="submit">
         </div>
+        <c:forEach items="${command.appointmentResultList}" var="appointmentResult" >
+            <c:out value="${appointmentResult.appointment.messageToCustomer}" />
+        </c:forEach>
     </div>
 </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
@@ -39,7 +42,7 @@
 <script>
     $(function() {
         $( "#strFromDate" ).datepicker({dateFormat: "dd-mm-yy"});
-        $( "#toDate" ).datepicker({dateFormat: "dd-mm-yy"});
+        $( "#strToDate" ).datepicker({dateFormat: "dd-mm-yy"});
     });
 </script>
 

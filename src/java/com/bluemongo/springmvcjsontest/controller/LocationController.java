@@ -32,13 +32,17 @@ public class LocationController {
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public ModelAndView AddLocation(@ModelAttribute Location location, HttpSession httpSession){
+        ModelAndView modelAndView;
         LocationStore locationStore = new LocationStore();
         locationStore.saveNew(location);
         if (httpSession.getAttribute("User") != null) {
             User user = (User)httpSession.getAttribute("User");
+            String message = "Location saved successfully: "; // + newAppointmentId;
+             modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+        } else{
+            modelAndView = ModelViewHelper.GetLoginForm("Please log in");
         }
-        String message = "Location saved successfully: "; // + newAppointmentId;
-        ModelAndView modelAndView = ModelViewHelper.GetModelViewForAddAppointment(location.getBusinessId(), message);
+
         return modelAndView;
     }
 }

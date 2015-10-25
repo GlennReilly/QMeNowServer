@@ -14,9 +14,10 @@ public class Appointment {
     private String messageToCustomer;
     private Date appointmentDate;
     private int locationId;
-    private int userId;
+    private int customerId;
     private int appointmentTypeId;
     private int status;
+    private boolean isComplete;
     private AppointmentStore appointmentStore = new AppointmentStore();
 
 
@@ -59,12 +60,12 @@ public class Appointment {
         this.messageToCustomer = messageToCustomer;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public int getCustomerId() {
-        return userId;
+        return customerId;
     }
 
     public void setStatus(int status) {
@@ -85,5 +86,13 @@ public class Appointment {
 
     public void setAppointmentTypeId(int appointmentTypeId) {
         this.appointmentTypeId = appointmentTypeId;
+    }
+
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
     }
 }

@@ -2,9 +2,7 @@ package com.bluemongo.springmvcjsontest.service;
 
 import com.bluemongo.springmvcjsontest.model.Appointment;
 import com.bluemongo.springmvcjsontest.model.AppointmentType;
-import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.model.Location;
-import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import com.bluemongo.springmvcjsontest.persistence.LocationStore;
 
 import java.util.ArrayList;
@@ -15,18 +13,27 @@ import java.util.List;
 
  */
 public class AddAppointmentFormHelper {
+    private int customerId;
     private int userId = -1;
     private int businessId = -1;
     Appointment appointment;
     private int selectedUserId;
     private List<Location> activeLocations = new ArrayList<>();
-    private List<Customer> customersList = new ArrayList<>();
+    //private List<Customer> customersList = new ArrayList<>();
     private List<AppointmentType> appointmentTypeList  = new ArrayList<>();
 
     public AddAppointmentFormHelper(){}
     public AddAppointmentFormHelper(int userId, int businessId){
         this.userId = userId;
         this.businessId = businessId;
+    }
+
+    public int getCustomerId() {
+        return this.customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public int getBusinessId() {
@@ -46,7 +53,7 @@ public class AddAppointmentFormHelper {
     }
 
     public int saveNew() {
-        appointment.setUserId(selectedUserId);
+        appointment.setCustomerId(this.customerId);
         int newAppointmentId = appointment.saveNew();
         return newAppointmentId;
     }
@@ -78,13 +85,13 @@ public class AddAppointmentFormHelper {
         this.selectedUserId = selectedUserId;
     }
 
-    public void setCustomersList(List<Customer> customersList) {
+/*    public void setCustomersList(List<Customer> customersList) {
         this.customersList = customersList;
     }
 
     public List<Customer> getCustomersList() {
         return customersList;
-    }
+    }*/
 
     public List<AppointmentType> getAppointmentTypeList() {
         return appointmentTypeList;

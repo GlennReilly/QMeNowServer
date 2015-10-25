@@ -7,6 +7,9 @@ import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,22 +58,23 @@ public class ModelViewHelper {
         return modelAndView;
     }
 
-    public static ModelAndView GetModelViewForAddAppointment(int businessId, String message){
+    public static ModelAndView GetModelViewForAddAppointment(int customerId, int businessId, String message, HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
         AddAppointmentFormHelper addAppointmentFormHelper = new AddAppointmentFormHelper();
 
         addAppointmentFormHelper.setBusinessId(businessId);
-        List<Customer> customerList = new CustomerStore().getAll(businessId, true);
-        addAppointmentFormHelper.setCustomersList(customerList);
-
+        addAppointmentFormHelper.setCustomerId(customerId);
+        Customer customer = new CustomerStore().get(businessId, customerId);
         List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(true, businessId);
         addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
 
         modelAndView.addObject("command", addAppointmentFormHelper);
-        modelAndView.addObject("pageTitle", "Add Appointment");
+        modelAndView.addObject("pageTitle", "Add Appointment for " + customer.getName());
         message = (message == null) ? "" :  message;
         modelAndView.addObject("message", message);
-        modelAndView.addObject("businessId", businessId);
+
+        httpSession.setAttribute("businessId", businessId);
+        httpSession.setAttribute("customerId", customerId);
         modelAndView.setViewName("FlexibleUIConfig/Appointment/addCustomerAppointment");
         return modelAndView;
     }
@@ -141,11 +145,13 @@ public class ModelViewHelper {
         return  modelAndView;
     }
 
+
     public static ModelAndView GetModelViewForGetCustomerAppointments(int businessId, String message) {
         ModelAndView modelAndView = new ModelAndView();
-        GetAppointmentsByCustomerAndDateHelper getAppointmentsByCustomerAndDate = new GetAppointmentsByCustomerAndDateHelper();
-        modelAndView.addObject("command", getAppointmentsByCustomerAndDate);
-        modelAndView.addObject("pageTitle", "Get Appointments for Customer by Date");
+        //GetAppointmentsByCustomerAndDateHelper getAppointmentsByCustomerAndDate = new GetAppointmentsByCustomerAndDateHelper();
+        GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper = new GetAppointmentSearchResultsHelper();
+        modelAndView.addObject("command", getAppointmentSearchResultsHelper);
+        modelAndView.addObject("pageTitle", "Show Appointments");
         modelAndView.setViewName("/FlexibleUIConfig/Appointment/getAppointmentsForCustomerByDate");
 
         return  modelAndView;
@@ -157,6 +163,37 @@ public class ModelViewHelper {
         modelAndView.addObject("command", getFindCustomerHelper);
         modelAndView.addObject("pageTitle", "Find a Customer");
         modelAndView.setViewName("/FlexibleUIConfig/Customer/findCustomer");
+
+        return  modelAndView;
+    }
+
+    public static ModelAndView GetAppointmentSearchResults(int businessId, String strFromDate, String strToDate, String message) {
+        ModelAndView modelAndView = new ModelAndView();
+        GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper = new GetAppointmentSearchResultsHelper();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date fromDate = sdf.parse(strFromDate);
+            Date toDate = sdf.parse(strToDate);
+            getAppointmentSearchResultsHelper.setFromDate(fromDate);
+            getAppointmentSearchResultsHelper.setToDate(toDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        getAppointmentSearchResultsHelper.setBusinessId(businessId);
+        modelAndView.addObject("command", getAppointmentSearchResultsHelper);
+        modelAndView.addObject("pageTitle", "Show Appointments");
+        modelAndView.setViewName("/FlexibleUIConfig/Appointment/getAppointmentsForCustomerByDate");
+
+        return  modelAndView;
+    }
+
+    public static ModelAndView GetAppointmentSearchResults(GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper, String message) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("command", getAppointmentSearchResultsHelper);
+        modelAndView.addObject("pageTitle", "Show Appointments");
+        modelAndView.setViewName("/FlexibleUIConfig/Appointment/getAppointmentsForCustomerByDate");
 
         return  modelAndView;
     }

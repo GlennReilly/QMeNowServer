@@ -30,8 +30,8 @@ public class Customer {
     }
 
 
-    public static Customer get(int customerId) {
-        return customerStore.get(customerId);
+    public static Customer get(int businessId, int customerId) {
+        return customerStore.get(businessId, customerId);
     }
 
 

@@ -16,18 +16,10 @@
 <body>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-BusinessId: ${businessId}
 <br/>
 
-<form:form action="./add/" method="post">
+<form:form action="../add/" method="post">
   <div>
-    <div class="label2">
-      <label>Select customer:</label>
-    <form:select path="selectedUserId">
-      <form:option value="0" label="Please select" />
-      <form:options items="${command.customersList}" itemValue="id" itemLabel="name" />
-    </form:select>
-    </div>
     <div class="label2">
       <label>location:</label>
       <form:select path="appointment.locationId">

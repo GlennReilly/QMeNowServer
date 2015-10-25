@@ -28,7 +28,7 @@ public class testModels {
         appointment.setLocationId(1);
         appointment.setStatus(1);
         appointment.setMessageToCustomer("this is a test message to the user");
-        appointment.setUserId(1);
+        appointment.setCustomerId(1);
         int newId = appointment.saveNew();
         assertNotNull(newId);
     }

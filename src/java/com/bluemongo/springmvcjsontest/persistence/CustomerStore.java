@@ -49,14 +49,15 @@ public class CustomerStore {
     }
 
 
-    public Customer get(int customerId){
+    public Customer get(int businessId, int customerId){
         Customer customer = null;
-        String query = "SELECT id, firstName, lastName, physicalAddress, " +
-                "emailAddress, active FROM customer where id = ? AND active = true";
+        String query = "SELECT id, firstName, lastName, phoneNumber, physicalAddress, " +
+                "emailAddress, DOB, active FROM customer where id = ? AND active = true AND businessId = ?";
 
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(2, businessId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 customer = getCustomerFromResultSet();
