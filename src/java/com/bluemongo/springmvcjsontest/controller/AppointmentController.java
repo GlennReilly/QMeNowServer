@@ -57,7 +57,7 @@ public class AppointmentController {
 
         @RequestMapping(value = "/get", method = RequestMethod.GET)
         public ModelAndView GetAllForDateRange(HttpSession httpSession, @ModelAttribute GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper){
-            ModelAndView modelAndView = new ModelAndView();
+            ModelAndView modelAndView;
 
                 User user;
                 if (httpSession.getAttribute("User") != null){
@@ -75,7 +75,7 @@ public class AppointmentController {
 
     @RequestMapping(value = "/getAllForDateRange", method = RequestMethod.GET)
     public ModelAndView GetAllForDateRange(HttpSession httpSession){
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView;
 
         User user;
         if (httpSession.getAttribute("User") != null){

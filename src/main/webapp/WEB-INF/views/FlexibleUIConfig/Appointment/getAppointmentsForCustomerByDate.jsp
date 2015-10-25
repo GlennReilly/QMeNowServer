@@ -10,18 +10,9 @@
 <body>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./get/" method="get">
-    <div>
+<form:form action="/FlexibleUIConfig/appointment/get/" method="get">
+    <td>
         <div>
-<%--            <div class="label2">
-                <label>user id:</label><form:input path="customerId" />
-            </div>
-            <div class="label2">
-                <label>first name:</label><form:input path="firstName" />
-            </div>
-            <div class="label2">
-                <label>last name:</label><form:input path="lastName" />
-            </div>--%>
             <div class="label2">
                 <label>from date:</label><form:input path="strFromDate" />
             </div>
@@ -32,10 +23,51 @@
         <div class="label2">
             <input type="submit">
         </div>
-        <c:forEach items="${command.appointmentResultList}" var="appointmentResult" >
-            <c:out value="${appointmentResult.appointment.messageToCustomer}" />
-        </c:forEach>
+
+    <div class="pageSubHeading" style="display: table;">
+        Search Results:
     </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Appointment Date
+                    </th>
+                    <th>
+                        Appointment #
+                    </th>
+                    <th>
+                        Customer name
+                    </th>
+                    <th>
+                        Message to customer
+                    </th>
+                    <th>
+                        View
+                    </th>
+                </tr>
+            </thead>
+        <c:forEach items="${command.appointmentResultList}" var="appointmentResult"  >
+            <tr>
+                <td>
+                    <c:out value="${appointmentResult.appointment.appointmentDate}" />
+                </td>
+                <td>
+                    <c:out value="${appointmentResult.appointment.id}" />
+                </td>
+                <td>
+                    <c:out value="${appointmentResult.customer.name}" />
+                </td>
+                <td>
+                    <c:out value="${appointmentResult.appointment.messageToCustomer}" />
+                </td>
+                <td>
+                    <a href="<spring:url value='/FlexibleUIConfig/appointment/get/${appointmentResult.appointment.id}' />" >view</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+
 </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
 <script src="<spring:url value='/resources/scripts/jquery-ui.min.js'/>" ></script>

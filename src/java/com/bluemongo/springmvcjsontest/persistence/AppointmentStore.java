@@ -76,17 +76,19 @@ public class AppointmentStore {
         }
 
 
-    public List<AppointmentResult> get(int businessId, Date strFromDate, Date toDate){
+    public List<AppointmentResult> get(int businessId, Date fromDate, Date toDate){
         //TODO chronologically ordered list?
         List<AppointmentResult> appointmentResultList = new ArrayList<>();
         String query = "SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, " +
                 "customer.businessId, status, isComplete FROM appointment " +
                 "inner join customer on appointment.customerId = customer.id" +
-                " where customer.businessId = ?;";
+                " where customer.businessId = ? AND appointmentDate BETWEEN ? AND ? ORDER by appointmentDate ASC ;";
 
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
+            preparedStatement.setDate(2, new java.sql.Date(fromDate.getTime()));
+            preparedStatement.setDate(3, new java.sql.Date(toDate.getTime()));
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
