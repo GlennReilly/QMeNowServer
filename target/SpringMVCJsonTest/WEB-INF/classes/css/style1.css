@@ -85,9 +85,35 @@ body{
     font-size: 1.5vh;
     font-weight: bold;
     color: DarkRed;
+    padding-top: 2vh;
+}
+
+.pageSubHeading{
+    font-size: 2vh;
+    font-weight: bold;
 }
 
 .listLink{
     width:5vw;
     padding:0.5vh 1vw 0.5vh 1vw;
+}
+
+.row{
+    clear:both;
+    float:left;
+    width:60vw;
+    display: table-row;
+}
+
+.rowItem{
+    float:left;
+    width: 7vw;
+    display: table-cell;
+}
+
+.rowTitleItem{
+    font-weight: bold;
+    float:left;
+    padding: 1vh 1vw 1vh 1vw;
+    display: table-cell;
 }

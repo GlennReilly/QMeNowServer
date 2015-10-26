@@ -79,6 +79,28 @@ public class ModelViewHelper {
         return modelAndView;
     }
 
+    public static ModelAndView GetModelViewForEditAppointment(int customerId, int businessId, String message, HttpSession httpSession, Appointment appointment){
+        ModelAndView modelAndView = new ModelAndView();
+        AddAppointmentFormHelper addAppointmentFormHelper = new AddAppointmentFormHelper();
+
+        addAppointmentFormHelper.setAppointment(appointment);
+        addAppointmentFormHelper.setBusinessId(businessId);
+        addAppointmentFormHelper.setCustomerId(customerId);
+        Customer customer = new CustomerStore().get(businessId, customerId);
+        List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(true, businessId);
+        addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
+
+        modelAndView.addObject("command", addAppointmentFormHelper);
+        modelAndView.addObject("pageTitle", "Edit Appointment for " + customer.getName());
+        message = (message == null) ? "" :  message;
+        modelAndView.addObject("message", message);
+
+        httpSession.setAttribute("businessId", businessId);
+        httpSession.setAttribute("customerId", customerId);
+        modelAndView.setViewName("FlexibleUIConfig/Appointment/addCustomerAppointment");
+        return modelAndView;
+    }
+
     public static ModelAndView GetModeViewForAddLocation(int businessId, String message) {
         ModelAndView modelAndView = new ModelAndView();
         Location location = new Location();
