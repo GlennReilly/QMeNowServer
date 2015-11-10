@@ -4,6 +4,8 @@ package com.bluemongo.springmvcjsontest.model;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import utils.InputHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,6 +14,7 @@ import java.util.Date;
 public class Appointment {
     private int id;
     private String messageToCustomer;
+    private String strAppointmentDate;
     private Date appointmentDate;
     private int locationId;
     private int customerId;
@@ -31,6 +34,9 @@ public class Appointment {
         return newId;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getAppointmentDateString8601() {
         return InputHelper.getISO8601StringFromDate(appointmentDate);
@@ -42,6 +48,20 @@ public class Appointment {
 
     public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
+    }
+
+    public String getStrAppointmentDate() {
+        return strAppointmentDate;
+    }
+
+    public void setStrAppointmentDate(String strAppointmentDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            appointmentDate = sdf.parse(strAppointmentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.strAppointmentDate = strAppointmentDate;
     }
 
     public int getLocationId() {
@@ -94,5 +114,10 @@ public class Appointment {
 
     public void setIsComplete(boolean isComplete) {
         this.isComplete = isComplete;
+    }
+
+    public int saveUpdate() {
+        int updatedId = appointmentStore.saveUpdate(this);
+        return updatedId;
     }
 }

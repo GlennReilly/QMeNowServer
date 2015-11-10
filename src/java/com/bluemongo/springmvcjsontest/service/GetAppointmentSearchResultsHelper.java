@@ -1,6 +1,5 @@
 package com.bluemongo.springmvcjsontest.service;
 
-import com.bluemongo.springmvcjsontest.model.Appointment;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 
 import java.text.ParseException;
@@ -14,14 +13,14 @@ import java.util.List;
  */
 public class GetAppointmentSearchResultsHelper {
     List<AppointmentResult> appointmentResultList = new ArrayList<>();
-
     AppointmentStore appointmentStore = new AppointmentStore();
     String strFromDate;
     String strToDate;
     Date fromDate;
     Date toDate;
-
+    int customerId;
     int businessId;
+
 
 
     public void setStrFromDate(String strFromDate) {
@@ -52,8 +51,12 @@ public class GetAppointmentSearchResultsHelper {
         this.strToDate = strToDate;
     }
 
+    public void generateSearchResults(){
+        appointmentResultList = appointmentStore.get(businessId, customerId, fromDate, toDate);
+    }
+
     public List<AppointmentResult> getAppointmentResultList() {
-        return appointmentResultList = appointmentStore.get(businessId, fromDate, toDate);
+        return appointmentResultList;
     }
 
     public void setAppointmentResultList(List<AppointmentResult> appointmentResultList) {
@@ -92,7 +95,11 @@ public class GetAppointmentSearchResultsHelper {
         this.businessId = businessId;
     }
 
-    public void generateSearchResults(){
-        getAppointmentResultList();
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }

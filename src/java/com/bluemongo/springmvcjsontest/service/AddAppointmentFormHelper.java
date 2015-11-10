@@ -100,4 +100,10 @@ public class AddAppointmentFormHelper {
     public void setAppointmentTypeList(List<AppointmentType> appointmentTypeList) {
         this.appointmentTypeList = appointmentTypeList;
     }
+
+    public int saveUpdate() {
+        //appointment.setCustomerId(this.customerId);
+        int updatedAppointmentId = appointment.saveUpdate();
+        return updatedAppointmentId;
+    }
 }

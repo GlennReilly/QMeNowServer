@@ -71,7 +71,7 @@ public class BusinessStore {
         return businessList;
     }
 
-    public Business Get(int businessId) {
+    public Business get(int businessId) {
         Business business = null;
         String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress from business where id = ? AND active = ?";
         try(Connection connection = dbHelper.getConnection()) {

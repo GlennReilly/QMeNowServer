@@ -16,7 +16,7 @@
 <body>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-    <form:form action="/FlexibleUIConfig/login/" method="post">
+    <form:form action="/login/" method="post">
         <div>
             <div class="label2">
                 <label>username:</label><form:input path="username" id="username"/>

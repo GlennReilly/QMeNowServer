@@ -7,7 +7,7 @@ public class AppButton {
     private String name;
     private String text;
     private ButtonDestination buttonDestination =  null;
-    private ButtonStyle buttonStyle = null;
+    private ButtonStyle buttonStyle = new ButtonStyle();
 
     public AppButton(){}
 

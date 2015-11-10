@@ -19,7 +19,7 @@
     <div class="pageTitle">${pageTitle}</div>
     <div class="pageMessage">${message}</div>
         <br/>
-        <a href="./makeQRCode">/makeQRCode</a>
+        <a href="./">refresh</a>
         <br/>
         <img src="<spring:url value='/resources/images/qrCode.gif'/>"/>
     </body>

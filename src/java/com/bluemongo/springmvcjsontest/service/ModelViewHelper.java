@@ -49,7 +49,7 @@ public class ModelViewHelper {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("User", validUser);
         BusinessStore businessStore = new BusinessStore();
-        Business business = businessStore.Get(validUser.getBusinessId());
+        Business business = businessStore.get(validUser.getBusinessId());
         modelAndView.addObject("pageTitle", "User Home");
         message = (message == null) ? "" :  message;
         modelAndView.addObject("message", message);
@@ -168,17 +168,6 @@ public class ModelViewHelper {
     }
 
 
-    public static ModelAndView GetModelViewForGetCustomerAppointments(int businessId, String message) {
-        ModelAndView modelAndView = new ModelAndView();
-        //GetAppointmentsByCustomerAndDateHelper getAppointmentsByCustomerAndDate = new GetAppointmentsByCustomerAndDateHelper();
-        GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper = new GetAppointmentSearchResultsHelper();
-        modelAndView.addObject("command", getAppointmentSearchResultsHelper);
-        modelAndView.addObject("pageTitle", "Show Appointments");
-        modelAndView.setViewName("/FlexibleUIConfig/Appointment/getAppointmentsForCustomerByDate");
-
-        return  modelAndView;
-    }
-
     public static ModelAndView GetModelViewForFindCustomer(User user, String message) {
         ModelAndView modelAndView = new ModelAndView();
         GetFindCustomerHelper getFindCustomerHelper = new GetFindCustomerHelper();
@@ -210,6 +199,29 @@ public class ModelViewHelper {
         return  modelAndView;
     }
 
+
+    public static ModelAndView GetAppointmentSearchResultsForm(int businessId, String message) {
+        ModelAndView modelAndView = new ModelAndView();
+        GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper = new GetAppointmentSearchResultsHelper();
+        modelAndView.addObject("command", getAppointmentSearchResultsHelper);
+        modelAndView.addObject("pageTitle", "Show Appointments");
+        modelAndView.setViewName("/FlexibleUIConfig/Appointment/getAppointmentsForCustomerByDate");
+
+        return  modelAndView;
+    }
+
+    public static ModelAndView GetAppointmentSearchResultsForm(int businessId, int customerId, String message) {
+        ModelAndView modelAndView = new ModelAndView();
+        GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper = new GetAppointmentSearchResultsHelper();
+        getAppointmentSearchResultsHelper.setCustomerId(customerId);
+        modelAndView.addObject("command", getAppointmentSearchResultsHelper);
+        modelAndView.addObject("pageTitle", "Show Appointments");
+        modelAndView.setViewName("/FlexibleUIConfig/Appointment/getAppointmentsForCustomerByDate");
+
+        return  modelAndView;
+    }
+
+
     public static ModelAndView GetAppointmentSearchResults(GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper, String message) {
         ModelAndView modelAndView = new ModelAndView();
 
@@ -219,4 +231,6 @@ public class ModelViewHelper {
 
         return  modelAndView;
     }
+
+
 }

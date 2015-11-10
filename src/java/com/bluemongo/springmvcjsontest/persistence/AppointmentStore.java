@@ -52,6 +52,38 @@ public class AppointmentStore {
         return lastInsertedId;
     }
 
+    public int saveUpdate(Appointment appointment) {
+        int lastInsertedId = -1;
+        String query = "update appointment set appointmentTypeId = ?, appointmentDate = ?, status = ?, messageToUser = ?, locationId = ?, isComplete = ? where id = ?";
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, appointment.getAppointmentTypeId());
+            if (appointment.getAppointmentDate() != null) {
+                preparedStatement.setTimestamp(2, new Timestamp(appointment.getAppointmentDate().getTime()));
+            }
+            else {
+                preparedStatement.setTimestamp(2, null);
+            }
+            preparedStatement.setInt(3, appointment.getStatus());
+            preparedStatement.setString(4, appointment.getMessageToCustomer());
+            preparedStatement.setInt(5, appointment.getLocationId());
+            preparedStatement.setBoolean(6, appointment.isComplete());
+            preparedStatement.setInt(7, appointment.getId());
+            preparedStatement.executeUpdate();
+            logger.info("new appointment inserted.");
+
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastInsertedId = resultSet.getInt(1);
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return lastInsertedId;
+    }
+
     public Appointment get(int appointmentId){
         //TODO needs work or renaming
         //chronologically ordered list
@@ -100,31 +132,65 @@ public class AppointmentStore {
         }
 
 
-    public List<AppointmentResult> get(int businessId, Date fromDate, Date toDate){
+    public List<AppointmentResult> get(int businessId, int customerId, Date fromDate, Date toDate){
         //TODO chronologically ordered list?
         List<AppointmentResult> appointmentResultList = new ArrayList<>();
+
+        if(customerId > 0) {
+            getResultsForCustomer(businessId, customerId, fromDate, toDate, appointmentResultList);
+        } else {
+            getResultsForAllCustomers(businessId, fromDate, toDate, appointmentResultList);
+        }
+
+        return appointmentResultList;
+    }
+
+    private void getResultsForAllCustomers(int businessId, Date fromDate, Date toDate, List<AppointmentResult> appointmentResultList) {
         String query = "SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status, locationId, isComplete, " +
                 "customer.businessId FROM appointment " +
                 "inner join customer on appointment.customerId = customer.id" +
-                " where customer.businessId = ? AND appointmentDate BETWEEN ? AND ? ORDER by appointmentDate ASC ;";
+                " where customer.businessId = ? AND appointmentDate BETWEEN ? AND ? " +
+                "ORDER by appointmentDate ASC ;";
 
-        try(Connection connection = dbHelper.getConnection()){
+        try (Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
             preparedStatement.setDate(2, new java.sql.Date(fromDate.getTime()));
             preparedStatement.setDate(3, new java.sql.Date(toDate.getTime()));
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 AppointmentResult appointmentResult = getAppointmentResultFromResultSet(resultSet);
                 appointmentResultList.add(appointmentResult);
             }
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             logger.info(ex.getMessage());
         }
+    }
 
-        return appointmentResultList;
+    private void getResultsForCustomer(int businessId, int customerId, Date fromDate, Date toDate, List<AppointmentResult> appointmentResultList) {
+        String query = "SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status, locationId, isComplete, " +
+                "customer.businessId FROM appointment " +
+                "inner join customer on appointment.customerId = customer.id" +
+                " where customer.businessId = ? AND appointmentDate BETWEEN ? AND ? " +
+                "AND customer.id = ? " +
+                "ORDER by appointmentDate ASC ;";
+
+        try (Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, businessId);
+            preparedStatement.setDate(2, new java.sql.Date(fromDate.getTime()));
+            preparedStatement.setDate(3, new java.sql.Date(toDate.getTime()));
+            preparedStatement.setInt(4, customerId);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                AppointmentResult appointmentResult = getAppointmentResultFromResultSet(resultSet);
+                appointmentResultList.add(appointmentResult);
+            }
+        } catch (Exception ex) {
+            logger.info(ex.getMessage());
+        }
     }
 
 
@@ -198,5 +264,6 @@ public class AppointmentStore {
 
         return appointmentResult;
     }
+
 
 }

@@ -117,7 +117,7 @@ public class BarcodeController implements ServletContextAware {
     }
 
     private String getFormattedNowDateString() {
-        //"yyyy-MM-dd'T'HH:mm:ssz"
+        //"yyyy-MM-dd'T'HH:mm:ssz" ISO8601
         //2015-10-10T11:16+00:00
 
         Date now = Calendar.getInstance().getTime();
