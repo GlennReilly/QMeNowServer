@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
+<tags:logo
+        logoPath="/resources/images/${command.logoName}">
+</tags:logo>
 <tags:menu></tags:menu>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
@@ -32,9 +35,10 @@
             </div>
         </div>
         <div class="label2">
-            <ul>
-                <li><a href="<spring:url value='/FlexibleUIConfig/business/barcode/'/>">barcode</a></li>
-            </ul>
+                <a href="<spring:url value='/FlexibleUIConfig/business/barcode/'/>">show barcode</a>
+            <br/>
+                <a href="<spring:url value='/FlexibleUIConfig/business/edit/${command.id}'/>">edit business details</a>
+
         </div>
     </div>
 </form:form>

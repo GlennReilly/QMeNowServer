@@ -5,10 +5,7 @@ import com.bluemongo.springmvcjsontest.model.ReconfigurableAppConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +21,14 @@ public class BusinessStore {
 
     public int saveNew(Business business){
         int lastInsertedId = -1;
-        String query = "insert into business(businessName, phoneNumber, emailAddress, physicalAddress) values (?,?,?,?)";
+        String query = "insert into business(businessName, phoneNumber, emailAddress, physicalAddress, contactName) values (?,?,?,?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, business.getBusinessName());
             preparedStatement.setString(2, business.getPhoneNumber());
             preparedStatement.setString(3, business.getEmailAddress());
             preparedStatement.setString(4, business.getPhysicalAddress());
+            preparedStatement.setString(5, business.getContactName());
             preparedStatement.executeUpdate();
             logger.info("new Customer inserted.");
 
@@ -46,21 +44,37 @@ public class BusinessStore {
         return lastInsertedId;
     }
 
+    public int saveUpdate(Business business) {
+        int lastInsertedId = -1;
+        String query = "update business set businessName=?, phoneNumber=?, emailAddress=?, physicalAddress=?, contactName=? where id = ?";
+        try(Connection connection = dbHelper.getConnection()){
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, business.getBusinessName());
+            preparedStatement.setString(2, business.getPhoneNumber());
+            preparedStatement.setString(3, business.getEmailAddress());
+            preparedStatement.setString(4, business.getPhysicalAddress());
+            preparedStatement.setString(5, business.getContactName());
+            preparedStatement.setInt(6, business.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lastInsertedId;
+    }
+
     public List<Business> getAll(boolean isActive){
         List<Business> businessList = new ArrayList<>();
-        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress from business where active = ?";
+        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName from business where active = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setBoolean(1, isActive);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                Business business = new Business();
-                business.setId(resultSet.getInt("id"));
-                business.setBusinessName(resultSet.getNString("businessName"));
-                business.setPhoneNumber(resultSet.getString("phoneNumber"));
-                business.setEmailAddress(resultSet.getString("emailAddress"));
-                business.setPhysicalAddress(resultSet.getNString("physicalAddress"));
+                Business business = getBusiness(resultSet);
                 businessList.add(business);
             }
         }
@@ -71,9 +85,21 @@ public class BusinessStore {
         return businessList;
     }
 
+    private Business getBusiness(ResultSet resultSet) throws SQLException {
+        Business business = new Business();
+        business.setId(resultSet.getInt("id"));
+        business.setBusinessName(resultSet.getNString("businessName"));
+        business.setPhoneNumber(resultSet.getString("phoneNumber"));
+        business.setEmailAddress(resultSet.getString("emailAddress"));
+        business.setPhysicalAddress(resultSet.getNString("physicalAddress"));
+        business.setContactName(resultSet.getString("contactName"));
+        business.setLogoName(resultSet.getString("logoName"));
+        return business;
+    }
+
     public Business get(int businessId) {
         Business business = null;
-        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress from business where id = ? AND active = ?";
+        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName from business where id = ? AND active = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
@@ -81,12 +107,7 @@ public class BusinessStore {
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                business = new Business();
-                business.setId(resultSet.getInt("id"));
-                business.setBusinessName(resultSet.getNString("businessName"));
-                business.setPhoneNumber(resultSet.getString("phoneNumber"));
-                business.setEmailAddress(resultSet.getString("emailAddress"));
-                business.setPhysicalAddress(resultSet.getNString("physicalAddress"));
+                business = getBusiness(resultSet);
             }
         }
         catch(Exception ex)
@@ -121,5 +142,17 @@ public class BusinessStore {
         return reconfigurableAppConfigList;
     }
 
-
+    public void setLogoName(int businessId, String logoName) {
+        String query = "update business set logoName=? where id=?";
+        try(Connection connection = dbHelper.getConnection()){
+          preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, logoName);
+            preparedStatement.setInt(2, businessId);
+            preparedStatement.execute();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

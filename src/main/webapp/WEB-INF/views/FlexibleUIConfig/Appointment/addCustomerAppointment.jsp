@@ -21,7 +21,7 @@
 <div class="pageMessage">${message}</div>
 <br/>
 
-<form:form action="../add/" method="post">
+<form:form action="../addOrUpdate/" method="post">
   <div>
       <div class="label2">
           <label>appointment date:</label><form:input path="appointment.strAppointmentDate" id="strAppointmentDate" />

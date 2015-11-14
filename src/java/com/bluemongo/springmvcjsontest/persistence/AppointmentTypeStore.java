@@ -20,14 +20,15 @@ public class AppointmentTypeStore {
 
     public int saveNew(AppointmentType appointmentType) {
         int lastInsertedId = -1;
-        String query = "insert into appointmentType(businessId, name, styleJson) values (?,?,?)";
+        String query = "insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson) values (?,?,?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, appointmentType.getBusinessId());
             preparedStatement.setString(2, appointmentType.getName());
-            preparedStatement.setString(3, appointmentType.getStyleJson());
+            preparedStatement.setString(3, appointmentType.getBackgroundColourHexCode());
+            preparedStatement.setString(4, appointmentType.getStyleJson());
             preparedStatement.executeUpdate();
-            logger.info("new Customer inserted.");
+            logger.info("new AppointmentType inserted.");
 
             resultSet = preparedStatement.getGeneratedKeys();
             if(resultSet.next()){
@@ -43,7 +44,7 @@ public class AppointmentTypeStore {
 
     public List<AppointmentType> getAll(boolean isActive, int businessId){
         List<AppointmentType> appointmentTypeList = new ArrayList<>();
-        String query = "select id, name, styleJson, businessId from appointmentType where isActive = ? AND businessId = ?";
+        String query = "select id, name, backgroundColourHexCode, styleJson, businessId from appointmentType where isActive = ? AND businessId = ?";
 
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query);
@@ -55,6 +56,7 @@ public class AppointmentTypeStore {
                 appointmentType.setBusinessId(businessId);
                 appointmentType.setId(resultSet.getInt("id"));
                 appointmentType.setName(resultSet.getString("name"));
+                appointmentType.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
                 appointmentType.setStyleJson(resultSet.getString("styleJson"));
                 appointmentTypeList.add(appointmentType);
             }

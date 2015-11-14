@@ -1,6 +1,7 @@
 package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by glenn on 31/08/15.
@@ -12,6 +13,8 @@ public class Business {
     private String emailAddress = "";
     private String physicalAddress = "";
     private String contactName = "";
+    private MultipartFile logo;
+    private String logoName;
 
 
     public int saveNew() {
@@ -19,6 +22,13 @@ public class Business {
         int newBusinessId = businessStore.saveNew(this);
         return newBusinessId;
     }
+
+    public int saveUpdate() {
+        BusinessStore businessStore = new BusinessStore();
+        int updatedBusinessId = businessStore.saveUpdate(this);
+        return updatedBusinessId;
+    }
+
 
     public int getId() {
         return id;
@@ -66,5 +76,22 @@ public class Business {
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
+    }
+
+    public MultipartFile getLogo() {
+        return logo;
+    }
+
+    public void setLogo(MultipartFile logo) {
+        this.logo = logo;
+    }
+
+    public void setLogoName(String logoName) {
+        this.logoName = logoName;
+        new BusinessStore().setLogoName(this.getId(),logoName);
+    }
+
+    public String getLogoName() {
+        return logoName;
     }
 }

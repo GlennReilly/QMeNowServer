@@ -33,9 +33,9 @@ public class AppointmentController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/add", method = RequestMethod.POST)
+    @RequestMapping(value="/addOrUpdate", method = RequestMethod.POST)
     public ModelAndView AddAppointment(@ModelAttribute AddAppointmentFormHelper addAppointmentFormHelper, HttpSession httpSession){
-        String message = "";
+        String message;
 
         if (httpSession.getAttribute("businessId") != null && httpSession.getAttribute("customerId") != null){
             addAppointmentFormHelper.setBusinessId((int) httpSession.getAttribute("businessId"));

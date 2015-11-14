@@ -16,10 +16,16 @@
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
+<tags:logo
+        logoPath="/resources/images/${command.logoName}">
+</tags:logo>
 <tags:menu></tags:menu>
+
+<br/>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./add/" method="post">
+
+<form:form action="../addOrUpdate/" method="post">
     <div>
         <div>
             <div class="label2">
@@ -39,9 +45,28 @@
             </div>
         </div>
         <div class="label2">
-            <input type="submit">
+            <c:choose>
+                <c:when test="${empty command.id || command.id eq 0 }">
+                    <c:set var="buttonText" value="Save New Business" />
+                </c:when>
+                <c:otherwise>
+                    <c:set var="buttonText" value="Update Business" />
+                </c:otherwise>
+            </c:choose>
+            <input type="submit" value="${buttonText}">
         </div>
     </div>
+</form:form>
+<form:form method="POST" action="../uploadLogo"
+           enctype="multipart/form-data">
+
+    <form:errors path="*" cssClass="errorblock" element="div" />
+
+    Please select a file to upload : <input type="file" name="logo" />
+    <input type="submit" value="upload" />
+		<span><form:errors path="logo" cssClass="error" />
+		</span>
+
 </form:form>
 </body>
 </html>
