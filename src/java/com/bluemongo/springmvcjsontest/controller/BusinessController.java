@@ -2,6 +2,7 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.BarcodePayload;
 import com.bluemongo.springmvcjsontest.model.Business;
+import com.bluemongo.springmvcjsontest.model.User;
 import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import com.google.gson.Gson;
@@ -22,9 +23,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,10 +36,7 @@ import java.util.Hashtable;
 @RequestMapping("/FlexibleUIConfig/business")
 public class BusinessController implements ServletContextAware
 {
-
         private ServletContext servletContext;
-
-    // Customer methods
 
     @RequestMapping(value = "/{businessId}", method = RequestMethod.GET)
     public ModelAndView ShowBusinessDetails(@PathVariable int businessId, HttpSession httpSession){
@@ -58,7 +54,7 @@ public class BusinessController implements ServletContextAware
         modelAndView.addObject("pageTitle", "Edit Business Details");
         modelAndView.setViewName("/FlexibleUIConfig/Business/addBusinessForm");
         Business business = new BusinessStore().get(businessId);
-        httpSession.setAttribute("businessId", business.getId());
+        httpSession.setAttribute("businessId", business.getId()); //TODO should this be user.businessId? What about Admin editing other businesses?
         modelAndView.addObject("command", business);
         return modelAndView;
     }
@@ -73,12 +69,13 @@ public class BusinessController implements ServletContextAware
 
     @RequestMapping(value = "/addOrUpdate", method = RequestMethod.POST)
     public String AddBusiness(@ModelAttribute Business business, HttpSession httpSession) {
-        if(httpSession.getAttribute("businessId").equals(null)) {
+        if(httpSession.getAttribute("businessId")==null || httpSession.getAttribute("businessId").equals(0)) {
             int newBusinessId = business.saveNew();
             return "Business saved successfully: " + newBusinessId;
         }
         else{
             int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
+
             business.setId(businessId);
             business.saveUpdate();
             return "Business updated successfully";
@@ -135,6 +132,15 @@ public class BusinessController implements ServletContextAware
         int height = 250;
         int width = 250;
         ModelAndView modelAndView = new ModelAndView();
+
+        if (httpSession.getAttribute("User") != null) {
+            User user = (User)httpSession.getAttribute("User");
+            int businessId = user.getBusinessId(); //TODO need to work on whether we use the currently logged in users businessId or a separate one. What about admin editing?
+            //TODO maybe each business would have a separate user just for showing the QRCode.
+            if (businessId > 0){
+                httpSession.setAttribute("businessId", businessId);
+            }
+        }
 
         if (httpSession.getAttribute("businessId") != null) {
             int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
