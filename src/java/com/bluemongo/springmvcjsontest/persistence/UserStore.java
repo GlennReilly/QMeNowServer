@@ -5,10 +5,7 @@ import com.bluemongo.springmvcjsontest.model.UserCredentials;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,22 +68,16 @@ public class UserStore {
 
     public User get(UserCredentials userCredentials){
         User user = null;
-        String query = "SELECT id, username, customerId, firstName, lastName, physicalAddress, " +
-                "emailAddress, active FROM appUser where username = ? AND password = ? AND active = true";
+        String query = "SELECT appUser.id, username, customerId, firstName, lastName, physicalAddress," +
+                " emailAddress, active, appUserType.name as appUserTypeName FROM appUser inner join appUserType on appUser.userType = appUserType.id" +
+                " where username = ? AND password = ? AND active = true";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, userCredentials.getUsername());
             preparedStatement.setString(2, userCredentials.getPassword());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getNString("username"));
-                user.setBusinessId(resultSet.getInt("customerId"));
-                user.setFirstName(resultSet.getNString("firstName"));
-                user.setLastName(resultSet.getNString("lastName"));
-                user.setPhysicalAddress(resultSet.getNString("physicalAddress"));
-                user.setEmailAddress(resultSet.getNString("emailAddress"));
+                user = getUser(resultSet);
             }
         }
         catch(Exception ex)
@@ -94,6 +85,20 @@ public class UserStore {
             logger.info(ex.getMessage());
         }
 
+        return user;
+    }
+
+    private User getUser(ResultSet resultSet) throws SQLException {
+        User user;
+        user = new User();
+        user.setId(resultSet.getInt("id"));
+        user.setUsername(resultSet.getNString("username"));
+        user.setBusinessId(resultSet.getInt("customerId"));
+        user.setFirstName(resultSet.getNString("firstName"));
+        user.setLastName(resultSet.getNString("lastName"));
+        user.setPhysicalAddress(resultSet.getNString("physicalAddress"));
+        user.setEmailAddress(resultSet.getNString("emailAddress"));
+        user.setUserType(resultSet.getString("appUserTypeName"));
         return user;
     }
 
@@ -106,14 +111,7 @@ public class UserStore {
             preparedStatement.setBoolean(1, isActive);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                User user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getNString("username"));
-                user.setBusinessId(resultSet.getInt("customerId"));
-                user.setFirstName(resultSet.getNString("firstName"));
-                user.setLastName(resultSet.getNString("lastName"));
-                user.setPhysicalAddress(resultSet.getNString("physicalAddress"));
-                user.setEmailAddress(resultSet.getNString("emailAddress"));
+                User user = getUser(resultSet);
                 userList.add(user);
             }
         }

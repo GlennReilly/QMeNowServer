@@ -19,6 +19,8 @@ public class User {
     private String phoneNumber = "";
     private String emailAddress = "";
     private String physicalAddress = "";
+    private UserType userType;
+    public enum UserType{USER, ADMIN}
 
     public static User get(UserCredentials userCredentials) {
         return userStore.get(userCredentials);
@@ -131,4 +133,17 @@ public class User {
     }
 
 
+    public void setUserType(String userType) {
+        switch (userType.toUpperCase()){
+            case "ADMIN": this.userType = UserType.ADMIN;
+                break;
+            case "USER": this.userType = UserType.USER;
+                break;
+        }
+
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
 }

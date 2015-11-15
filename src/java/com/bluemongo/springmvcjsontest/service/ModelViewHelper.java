@@ -34,14 +34,31 @@ public class ModelViewHelper {
     }
 
     public static ModelAndView ProcessLogin(UserCredentials userCredentials,HttpSession httpSession) {
-        ModelAndView modelAndView;
+        ModelAndView modelAndView = new ModelAndView();
         User validUser = User.get(userCredentials);
         if (validUser != null) {
             httpSession.setAttribute("User", validUser);
-            modelAndView = ModelViewHelper.GetModelViewForUserHome(validUser, null);
+            if (validUser.getUserType().equals(User.UserType.USER)) {
+                modelAndView = ModelViewHelper.GetModelViewForUserHome(validUser, null);
+            }else if (validUser.getUserType().equals(User.UserType.ADMIN)) {
+                modelAndView = ModelViewHelper.GetModelViewForAdminHome(validUser, null);
+            }
         } else {
             modelAndView = GetLoginForm("a error occurred while trying to log you in. Please try again.");
         }
+        return modelAndView;
+    }
+
+    private static ModelAndView GetModelViewForAdminHome(User validUser, String message) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("User", validUser);
+        BusinessStore businessStore = new BusinessStore();
+        Business business = businessStore.get(validUser.getBusinessId());
+        modelAndView.addObject("pageTitle", "Admin Home");
+        message = (message == null) ? "" :  message;
+        modelAndView.addObject("message", message);
+        modelAndView.addObject("Business", business);
+        modelAndView.setViewName("FlexibleUIConfig/index");
         return modelAndView;
     }
 
