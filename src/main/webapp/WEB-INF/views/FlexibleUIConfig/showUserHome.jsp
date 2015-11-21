@@ -15,14 +15,16 @@
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-<tags:logo
-        logoPath="/resources/images/${Business.logoName}">
-</tags:logo>
 <tags:menu></tags:menu>
+<tags:header
+        logoPath="${Business.logoName}"
+        businessName="${Business.businessName}"
+        >
+</tags:header>
+
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<br/>
-Business Name: ${Business.businessName}
+
 <br/>
     <ul>
         <li><a href="<spring:url value='/FlexibleUIConfig/business/${Business.id}'/>">Show your business details</a></li>

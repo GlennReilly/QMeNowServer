@@ -16,6 +16,10 @@
 </head>
 <body>
 <tags:menu></tags:menu>
+<tags:header
+        logoPath="${logoName}">
+</tags:header>
+
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
 

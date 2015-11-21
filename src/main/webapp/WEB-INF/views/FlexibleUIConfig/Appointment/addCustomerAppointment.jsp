@@ -14,9 +14,15 @@
     <title></title>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery-ui.min.css'/>" />
+  <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery.ptTimeSelect.css'/>" />
 </head>
 <body>
 <tags:menu></tags:menu>
+<tags:header
+        logoPath="${logoName}"
+        businessName="${businessName}">
+</tags:header>
+
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
 <br/>
@@ -25,6 +31,9 @@
   <div>
       <div class="label2">
           <label>appointment date:</label><form:input path="appointment.strAppointmentDate" id="strAppointmentDate" />
+      </div>
+      <div class="label2">
+          <label>appointment time:</label><form:input path="appointment.strAppointmentTime" id="strAppointmentTime" />
       </div>
     <div class="label2">
       <label>location:</label>
@@ -60,9 +69,11 @@
   </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
 <script src="<spring:url value='/resources/scripts/jquery-ui.min.js'/>" ></script>
+<script src="<spring:url value='/resources/scripts/jquery.ptTimeSelect.js'/>" ></script>
 <script>
     $(function() {
         $( "#strAppointmentDate" ).datepicker({dateFormat: "dd-mm-yy"});
+        $("#strAppointmentTime").ptTimeSelect();
     });
 </script>
 </body>

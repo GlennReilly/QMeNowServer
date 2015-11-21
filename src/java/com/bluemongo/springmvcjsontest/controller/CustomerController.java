@@ -1,7 +1,9 @@
 package com.bluemongo.springmvcjsontest.controller;
 
+import com.bluemongo.springmvcjsontest.model.Business;
 import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.model.User;
+import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import com.bluemongo.springmvcjsontest.service.GetFindCustomerHelper;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
@@ -27,7 +29,7 @@ public class CustomerController {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         }
         else {
-            modelAndView = ModelViewHelper.GetModelViewForCustomerAdd();
+            modelAndView = ModelViewHelper.GetModelViewForCustomerAdd(httpSession);
         }
         return modelAndView;
     }
@@ -58,6 +60,9 @@ public class CustomerController {
         else{
             User user = (User)httpSession.getAttribute("User");
             modelAndView = ModelViewHelper.GetModelViewForFindCustomer(user, null);
+            Business business = new BusinessStore().get(user.getBusinessId());
+            modelAndView.addObject("businessName", business.getBusinessName());
+            modelAndView.addObject("logoName", business.getLogoName());
         }
         return modelAndView;
     }
@@ -71,6 +76,9 @@ public class CustomerController {
         else{
             User user = (User)httpSession.getAttribute("User");
             modelAndView = new ModelAndView();
+            Business business = new BusinessStore().get(user.getBusinessId());
+            modelAndView.addObject("businessName", business.getBusinessName());
+            modelAndView.addObject("logoName", business.getLogoName());
             String customerIdStr = getFindCustomerHelper.getCustomerIdStr();
             String firstName = getFindCustomerHelper.getFirstName();
             String lastName = getFindCustomerHelper.getLastName();
@@ -105,9 +113,12 @@ public class CustomerController {
             User user = (User)httpSession.getAttribute("User");
             Customer customer = new CustomerStore().get(user.getBusinessId(), customerId);
             if (customer != null){
-                    modelAndView.addObject("command", customer);
-                    modelAndView.addObject("pageTitle", "Customer Details");
-                    modelAndView.setViewName("FlexibleUIConfig/Customer/customerDetails");
+                Business business = new BusinessStore().get(user.getBusinessId());
+                modelAndView.addObject("businessName", business.getBusinessName());
+                modelAndView.addObject("logoName", business.getLogoName());
+                modelAndView.addObject("command", customer);
+                modelAndView.addObject("pageTitle", "Customer Details");
+                modelAndView.setViewName("FlexibleUIConfig/Customer/customerDetails");
             }else {
                 modelAndView = ModelViewHelper.GetModelViewForError("Sorry, there was an error retrieving that customer.");
             }

@@ -9,10 +9,12 @@
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-<tags:logo
-        logoPath="/resources/images/${command.logoName}">
-</tags:logo>
 <tags:menu></tags:menu>
+<tags:header
+        logoPath="${command.logoName}"
+        businessName="${command.businessName}">
+</tags:header>
+
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
 <form:form action="./add/" method="post">

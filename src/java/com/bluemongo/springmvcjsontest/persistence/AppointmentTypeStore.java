@@ -52,12 +52,7 @@ public class AppointmentTypeStore {
             preparedStatement.setInt(2, businessId);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                AppointmentType appointmentType = new AppointmentType();
-                appointmentType.setBusinessId(businessId);
-                appointmentType.setId(resultSet.getInt("id"));
-                appointmentType.setName(resultSet.getString("name"));
-                appointmentType.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
-                appointmentType.setStyleJson(resultSet.getString("styleJson"));
+                AppointmentType appointmentType = getAppointmentType(businessId, resultSet);
                 appointmentTypeList.add(appointmentType);
             }
         }
@@ -68,5 +63,37 @@ public class AppointmentTypeStore {
         }
 
         return appointmentTypeList;
+    }
+
+    private AppointmentType getAppointmentType(int businessId, ResultSet resultSet) throws SQLException {
+        AppointmentType appointmentType = new AppointmentType();
+        appointmentType.setBusinessId(businessId);
+        appointmentType.setId(resultSet.getInt("id"));
+        appointmentType.setName(resultSet.getString("name"));
+        appointmentType.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
+        appointmentType.setStyleJson(resultSet.getString("styleJson"));
+        return appointmentType;
+    }
+
+    public AppointmentType get(int businessId, int appointmentTypeId) {
+        AppointmentType appointmentType = null;
+        String query = "select id, name, backgroundColourHexCode, styleJson, businessId from appointmentType where isActive = ? AND businessId = ? AND id=?";
+
+        try(Connection connection = dbHelper.getConnection()){
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setBoolean(1, true);
+            preparedStatement.setInt(2, businessId);
+            preparedStatement.setInt(3, appointmentTypeId);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                appointmentType = getAppointmentType(businessId, resultSet);
+            }
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return appointmentType;
     }
 }

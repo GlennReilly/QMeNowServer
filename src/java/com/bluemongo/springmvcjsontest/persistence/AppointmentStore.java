@@ -244,9 +244,9 @@ public class AppointmentStore {
 
     private Appointment getAppointmentFromResultSet(ResultSet resultSet) throws SQLException {
         Appointment appointment = new Appointment(resultSet.getInt("id"));
+        appointment.setCustomerId(resultSet.getInt("customerId"));
         appointment.setAppointmentTypeId(resultSet.getInt("appointmentTypeId"));
         appointment.setAppointmentDate(resultSet.getDate("appointmentDate"));
-        appointment.setCustomerId(resultSet.getInt("customerId"));
         appointment.setMessageToCustomer(resultSet.getNString("messageToUser"));
         appointment.setStatus(resultSet.getInt("status"));
         appointment.setLocationId(resultSet.getInt("locationId"));

@@ -45,8 +45,8 @@ public class AppointmentController {
         if (httpSession.getAttribute("CurrentlyEditingAppointmentId") != null){
             int appointmentId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingAppointmentId").toString());
             addAppointmentFormHelper.getAppointment().setId(appointmentId);
-            int newAppointmentId = addAppointmentFormHelper.saveUpdate();
-            message = "Appointment " + newAppointmentId + " updated successfully: ";
+            addAppointmentFormHelper.saveUpdate();
+            message = "Appointment updated successfully: ";
             httpSession.setAttribute("CurrentlyEditingAppointmentId", null);
         }else{
             int newAppointmentId = addAppointmentFormHelper.saveNew();
@@ -65,7 +65,7 @@ public class AppointmentController {
 
 
 
-    @RequestMapping(value = "/get/{appointmentId}")
+    @RequestMapping(value = "/get/{appointmentId}", method = RequestMethod.GET)
     public ModelAndView ShowAppointmentDetails(HttpSession httpSession, @PathVariable int appointmentId)
     {
         ModelAndView modelAndView;
@@ -124,7 +124,7 @@ public class AppointmentController {
             user = (User)httpSession.getAttribute("User");
             getAppointmentSearchResultsHelper.setBusinessId(user.getBusinessId());
             getAppointmentSearchResultsHelper.generateSearchResults();
-            modelAndView = ModelViewHelper.GetAppointmentSearchResults(getAppointmentSearchResultsHelper, null);
+            modelAndView = ModelViewHelper.GetAppointmentSearchResults(getAppointmentSearchResultsHelper, null, httpSession);
         }
         else{
             modelAndView = ModelViewHelper.GetLoginForm("Please log in");

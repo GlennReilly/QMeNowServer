@@ -14,7 +14,7 @@ import java.util.List;
 public class ReconfigurableAppConfig {
     //int id;
     private String headerImagePath;
-    //private int customerId;
+    //private int businessId;
     private String title;
     private Uri imageUri;
     private List<AppButton> buttonList = new ArrayList<>();

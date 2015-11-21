@@ -45,6 +45,8 @@ public class BusinessController implements ServletContextAware
         Business business = new BusinessStore().get(businessId);
         httpSession.setAttribute("businessId", business.getId());
         modelAndView.addObject("command", business);
+        modelAndView.addObject("businessName", business.getBusinessName());
+        modelAndView.addObject("logoName", business.getLogoName());
         return modelAndView;
     }
 
@@ -52,17 +54,19 @@ public class BusinessController implements ServletContextAware
     public ModelAndView EditBusinessDetails(@PathVariable int businessId, HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("pageTitle", "Edit Business Details");
-        modelAndView.setViewName("/FlexibleUIConfig/Business/addBusinessForm");
+        modelAndView.setViewName("FlexibleUIConfig/Business/addEditBusinessForm");
         Business business = new BusinessStore().get(businessId);
         httpSession.setAttribute("businessId", business.getId()); //TODO should this be user.businessId? What about Admin editing other businesses?
         modelAndView.addObject("command", business);
+        modelAndView.addObject("businessName", business.getBusinessName());
+        modelAndView.addObject("logoName", business.getLogoName());
         return modelAndView;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView GetBusinessAddForm() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("FlexibleUIConfig/Business/addBusinessForm");
+        modelAndView.setViewName("FlexibleUIConfig/Business/addEditBusinessForm");
         modelAndView.addObject("command", new Business());
         return modelAndView;
     }

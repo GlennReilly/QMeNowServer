@@ -28,21 +28,16 @@ public class AppointmentTypeController {
     public ModelAndView GetAppointmentTypeHome(HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
 
-
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         }
         else{
             User user = (User)httpSession.getAttribute("User");
-            Business business = new BusinessStore().get(user.getBusinessId());
+/*            Business business = new BusinessStore().get(user.getBusinessId());
             List<AppointmentType> appointmentTypes;
+*/
             try {
-                appointmentTypes = new AppointmentTypeStore().getAll(true, user.getBusinessId());
-                modelAndView.addObject("logoName", business.getLogoName());
-                modelAndView.addObject("appointmentTypes", appointmentTypes);
-                modelAndView.addObject("pageTitle", business.getBusinessName());
-                modelAndView.addObject("pageMessage", "Appointment Types");
-                modelAndView.setViewName("FlexibleUIConfig/AppointmentType/index");
+                modelAndView = new ModelViewHelper().getModelViewForAppointmentTypeHome(user);
             }
             catch (Exception ex){
                 modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
@@ -51,6 +46,8 @@ public class AppointmentTypeController {
 
         return modelAndView;
     }
+
+
 
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public ModelAndView GetAppointmentTypeAddForm(HttpSession httpSession){
@@ -70,7 +67,8 @@ public class AppointmentTypeController {
                 appointmentType.setBusinessId(user.getBusinessId());
                 int newAppointmentTypeId = new AppointmentTypeStore().saveNew(appointmentType);
                 String message = "Appointment Type saved successfully: " + newAppointmentTypeId;
-                modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+                //modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+                modelAndView = new ModelViewHelper().getModelViewForAppointmentTypeHome(user);
             }
             catch (Exception ex){
                 modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());

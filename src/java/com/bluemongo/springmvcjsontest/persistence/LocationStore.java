@@ -1,5 +1,7 @@
 package com.bluemongo.springmvcjsontest.persistence;
 
+import com.bluemongo.springmvcjsontest.model.Business;
+import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.model.Location;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +23,11 @@ public class LocationStore {
     private static final Logger logger = LogManager.getLogger(BusinessStore.class);
 
     public void saveNew(Location location){
-        String query = "insert into location(locationName, customerId) values (?,?)";
+        String query = "insert into location(locationName, businessId) values (?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,location.getLocationName());
-            preparedStatement.setInt(2, location.getCustomerId());
+            preparedStatement.setInt(2, location.getBusinessId());
 
             preparedStatement.executeUpdate();
             logger.info("new Location inserted.");
@@ -36,21 +39,18 @@ public class LocationStore {
 
     }
 
-    public List<Location> getAll(int customerId, boolean isActive) {
+    public List<Location> getAll(int businessId, boolean isActive) {
         List<Location> locationList = new ArrayList<>();
-        String query = " SELECT id, createdDate, locationName, customerId FROM location where customerId = ? AND isActive = ?; ";
+        String query = " SELECT id, createdDate, locationName, businessId FROM location where businessId = ? AND isActive = ?; ";
 
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(1, businessId);
             preparedStatement.setBoolean(2, isActive);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
-                Location location = new Location();
-                location.setId(resultSet.getInt("id"));
-                location.setBusinessId(customerId);
-                location.setLocationName(resultSet.getNString("locationName"));
+                Location location = getLocationFromResultSet(resultSet);
                 locationList.add(location);
             }
 
@@ -60,5 +60,37 @@ public class LocationStore {
 
 
         return locationList;
+    }
+
+
+    public Location get(int locationId) {
+        Location location = null;
+        String query = " SELECT id, createdDate, locationName, businessId FROM location where id=? AND isActive = ?; ";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, locationId);
+            preparedStatement.setBoolean(2, true);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                location = getLocationFromResultSet(resultSet);
+            }
+
+        }catch (Exception ex){
+            logger.info(ex.getMessage());
+        }
+        return location;
+    }
+
+    private Location getLocationFromResultSet(ResultSet resultSet) throws SQLException {
+        Business business = new BusinessStore().get(resultSet.getInt("businessId"));
+        Location location = new Location();
+        location.setId(resultSet.getInt("id"));
+
+        location.setBusinessId(business!=null? business.getId(): null);
+
+        location.setLocationName(resultSet.getNString("locationName"));
+        return location;
     }
 }

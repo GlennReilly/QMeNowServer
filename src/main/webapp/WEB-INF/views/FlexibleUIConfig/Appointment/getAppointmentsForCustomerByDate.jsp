@@ -11,6 +11,11 @@
 </head>
 <body>
 <tags:menu></tags:menu>
+<tags:header
+        logoPath="${logoName}"
+        businessName="${businessName}">
+</tags:header>
+
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
 <form:form action="/FlexibleUIConfig/appointment/get" method="post">
@@ -39,12 +44,18 @@
         </div>
         <table>
             <thead>
-            <tr>
+            <tr style="background-color: #1c94c4; color: white;">
                 <th>
                     Appointment Date
                 </th>
                 <th>
                     Appointment #
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Type
                 </th>
                 <th>
                     Customer name
@@ -66,12 +77,18 @@
                         <c:out value="${appointmentResult.appointment.id}" />
                     </td>
                     <td>
+                        <c:out value="${appointmentResult.appointment.locationName}" />
+                    </td>
+                    <td>
+                        <c:out value="${appointmentResult.appointment.appointmentTypeName}" />
+                    </td>
+                    <td>
                         <c:out value="${appointmentResult.customer.name}" />
                     </td>
                     <td>
                         <c:out value="${appointmentResult.appointment.messageToCustomer}" />
                     </td>
-                    <td>
+                    <td style="padding-left: 10px;">
                         <a href="<spring:url value='/FlexibleUIConfig/appointment/get/${appointmentResult.appointment.id}' />" >view</a>
                     </td>
                 </tr>

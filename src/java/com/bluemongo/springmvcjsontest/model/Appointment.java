@@ -1,7 +1,7 @@
 package com.bluemongo.springmvcjsontest.model;
 
 
-import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
+import com.bluemongo.springmvcjsontest.persistence.*;
 import utils.InputHelper;
 
 import java.text.ParseException;
@@ -15,6 +15,7 @@ public class Appointment {
     private int id;
     private String messageToCustomer;
     private String strAppointmentDate;
+    private String strAppointmentTime;
     private Date appointmentDate;
     private int locationId;
     private int customerId;
@@ -22,6 +23,8 @@ public class Appointment {
     private int status;
     private boolean isComplete;
     private AppointmentStore appointmentStore = new AppointmentStore();
+    private String locationName;
+    private String appointmentTypeName;
 
 
     public Appointment(){}
@@ -48,20 +51,34 @@ public class Appointment {
 
     public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
+        setStrAppointmentDate(appointmentDate);
     }
 
     public String getStrAppointmentDate() {
         return strAppointmentDate;
     }
 
+    public void setStrAppointmentDate(Date appointmentDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        this.strAppointmentDate = sdf.format(appointmentDate);
+    }
+
     public void setStrAppointmentDate(String strAppointmentDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            appointmentDate = sdf.parse(strAppointmentDate);
+            this.setAppointmentDate(sdf.parse(strAppointmentDate));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         this.strAppointmentDate = strAppointmentDate;
+    }
+
+    public String getStrAppointmentTime() {
+        return strAppointmentTime;
+    }
+
+    public void setStrAppointmentTime(String strAppointmentTime) {
+        this.strAppointmentTime = strAppointmentTime;
     }
 
     public int getLocationId() {
@@ -70,6 +87,11 @@ public class Appointment {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
+        Location location = new LocationStore().get(this.locationId);
+        locationName = "";
+        if(location != null) {
+            locationName = location.getLocationName();
+        }
     }
 
     public String getMessageToCustomer() {
@@ -106,6 +128,17 @@ public class Appointment {
 
     public void setAppointmentTypeId(int appointmentTypeId) {
         this.appointmentTypeId = appointmentTypeId;
+        Customer customer = new CustomerStore().get(this.customerId);
+        AppointmentType appointmentType = null;
+        if(customer != null) {
+            appointmentType = new AppointmentTypeStore().get(customer.getBusinessId(), this.appointmentTypeId);
+        }
+        this.appointmentTypeName = appointmentType != null? appointmentType.getName(): "";
+    }
+
+    public String getAppointmentTypeName() {
+
+        return this.appointmentTypeName;
     }
 
     public boolean isComplete() {
@@ -120,4 +153,12 @@ public class Appointment {
         int updatedId = appointmentStore.saveUpdate(this);
         return updatedId;
     }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+
+
+
 }

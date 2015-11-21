@@ -8,7 +8,7 @@ import com.bluemongo.springmvcjsontest.persistence.LocationStore;
 public class Location {
     int id;
     String locationName;
-    int customerId;
+    int businessId;
     private LocationStore locationStore = new LocationStore();
 
     public void save(){
@@ -16,6 +16,9 @@ public class Location {
     }
 
     public String getLocationName() {
+        if(locationName == null){
+            locationName = "";
+        }
         return locationName;
     }
 
@@ -31,16 +34,12 @@ public class Location {
         this.locationName = locationName;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setBusinessId(int customerId) {
-        this.customerId = customerId;
+    public void setBusinessId(int businessId) {
+        this.businessId = businessId;
     }
 
     public int getBusinessId(){
-        return customerId;
+        return businessId;
     }
 
 }

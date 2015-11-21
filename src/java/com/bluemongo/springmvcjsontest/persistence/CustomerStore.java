@@ -52,7 +52,7 @@ public class CustomerStore {
     public Customer get(int businessId, int customerId){
         Customer customer = null;
         String query = "SELECT id, firstName, lastName, phoneNumber, physicalAddress, " +
-                "emailAddress, DOB, active FROM customer where id = ? AND active = true AND businessId = ?";
+                "emailAddress, businessId, DOB, active FROM customer where id = ? AND active = true AND businessId = ?";
 
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
@@ -71,10 +71,31 @@ public class CustomerStore {
         return customer;
     }
 
+    public Customer get(int customerId){
+        Customer customer = null;
+        String query = "SELECT id, firstName, lastName, phoneNumber, physicalAddress, " +
+                "emailAddress, businessId, DOB, active FROM customer where id = ? AND active = true;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, customerId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                customer = getCustomerFromResultSet();
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+
+        return customer;
+    }
+
     public List<Customer> getAll(int businessId, boolean isActive) {
         List<Customer> customerList = new ArrayList<>();
         String query = "SELECT id, firstName, lastName, phoneNumber, physicalAddress, " +
-                "emailAddress, DOB, active FROM customer where businessId = ? AND active = ?";
+                "emailAddress, businessId, DOB, active FROM customer where businessId = ? AND active = ?";
 
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
@@ -101,6 +122,7 @@ public class CustomerStore {
         customer.setPhoneNumber(resultSet.getString("phoneNumber"));
         customer.setPhysicalAddress(resultSet.getNString("physicalAddress"));
         customer.setEmailAddress(resultSet.getNString("emailAddress"));
+        customer.setBusinessId(resultSet.getInt("businessId"));
         customer.setDOB(resultSet.getDate("DOB"));
         return customer;
     }
@@ -125,7 +147,7 @@ public class CustomerStore {
         }*/
 
         String query = "SELECT id, firstName, lastName, phoneNumber, physicalAddress, " +
-                "emailAddress, DOB, active FROM customer where id like ? AND firstName like ? And lastName like ? AND businessId = ?";
+                "emailAddress, businessId, DOB, active FROM customer where id like ? AND firstName like ? And lastName like ? AND businessId = ?";
 
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);

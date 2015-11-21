@@ -9,6 +9,11 @@
 </head>
 <body>
 <tags:menu></tags:menu>
+<tags:header
+        logoPath="${logoName}"
+        businessName="${businessName}">
+</tags:header>
+
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
 <form:form action="./find/" method="post">
