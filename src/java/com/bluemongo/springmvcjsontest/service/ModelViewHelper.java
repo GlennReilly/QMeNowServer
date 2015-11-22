@@ -1,9 +1,7 @@
 package com.bluemongo.springmvcjsontest.service;
 
 import com.bluemongo.springmvcjsontest.model.*;
-import com.bluemongo.springmvcjsontest.persistence.AppointmentTypeStore;
-import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
-import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
+import com.bluemongo.springmvcjsontest.persistence.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -94,7 +92,7 @@ public class ModelViewHelper {
 
         httpSession.setAttribute("businessId", businessId);
         httpSession.setAttribute("customerId", customerId);
-        modelAndView.setViewName("FlexibleUIConfig/Appointment/addCustomerAppointment");
+        modelAndView.setViewName("FlexibleUIConfig/Appointment/addEditCustomerAppointment");
         return modelAndView;
     }
 
@@ -116,7 +114,7 @@ public class ModelViewHelper {
 
         httpSession.setAttribute("businessId", businessId);
         httpSession.setAttribute("customerId", customerId);
-        modelAndView.setViewName("FlexibleUIConfig/Appointment/addCustomerAppointment");
+        modelAndView.setViewName("FlexibleUIConfig/Appointment/addEditCustomerAppointment");
         return modelAndView;
     }
 
@@ -163,12 +161,10 @@ public class ModelViewHelper {
     public ModelAndView getModelViewForAppointmentTypeHome(User user) {
         ModelAndView modelAndView = new ModelAndView();
         List<AppointmentType> appointmentTypes;
-        Business business = new BusinessStore().get(user.getBusinessId());
         appointmentTypes = new AppointmentTypeStore().getAll(true, user.getBusinessId());
-        modelAndView.addObject("logoName", business.getLogoName());
+        populateHeaderValues(user.getBusinessId(), modelAndView);
         modelAndView.addObject("appointmentTypes", appointmentTypes);
-        modelAndView.addObject("pageTitle", business.getBusinessName());
-        modelAndView.addObject("pageMessage", "Appointment Types");
+        modelAndView.addObject("pageTitle", "Appointment Types");
         modelAndView.setViewName("FlexibleUIConfig/AppointmentType/index");
         return modelAndView;
     }
@@ -291,4 +287,27 @@ public class ModelViewHelper {
     }
 
 
+    public ModelAndView getModelViewForAppointmentStatusHome(User user) {
+        ModelAndView modelAndView;
+            modelAndView = new ModelAndView();
+            modelAndView.setViewName("/FlexibleUIConfig/AppointmentStatus/index");
+            List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(user.getBusinessId());
+            populateHeaderValues(user.getBusinessId(), modelAndView);
+            modelAndView.addObject("appointmentStatuses", appointmentStatusList);
+            modelAndView.addObject("pageTitle", "Appointment Statuses");
+
+        return  modelAndView;
+    }
+
+    public ModelAndView getModelViewForLocationsHome(User user) {
+        ModelAndView modelAndView;
+        modelAndView = new ModelAndView();
+        modelAndView.setViewName("/FlexibleUIConfig/Location/index");
+        List<Location> locationList = new LocationStore().getAll(user.getBusinessId(),true);
+        populateHeaderValues(user.getBusinessId(), modelAndView);
+        modelAndView.addObject("locations", locationList);
+        modelAndView.addObject("pageTitle", "Locations");
+
+        return  modelAndView;
+    }
 }

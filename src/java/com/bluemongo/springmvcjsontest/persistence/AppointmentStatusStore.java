@@ -21,11 +21,12 @@ public class AppointmentStatusStore {
 
     public int saveNew(AppointmentStatus appointmentStatus) {
         int lastInsertedId = -1;
-        String query = "insert into appointmentStatus(businessId, statusName) values (?,?)";
+        String query = "insert into appointmentStatus(businessId, statusName, backgroundColourHexCode) values (?,?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, appointmentStatus.getBusinessId());
-            preparedStatement.setString(2, appointmentStatus.getStatusName());
+            preparedStatement.setString(2, appointmentStatus.getName());
+            preparedStatement.setString(3, appointmentStatus.getBackgroundColourHexCode());
 
             preparedStatement.executeUpdate();
             logger.info("new AppointmentStatusStore inserted.");
@@ -42,19 +43,16 @@ public class AppointmentStatusStore {
         return lastInsertedId;
     }
 
-    public List<AppointmentStatus> getAll(int customerId){
+    public List<AppointmentStatus> getAll(int businessId){
         List<AppointmentStatus> appointmentStatusList = new ArrayList<>();
-        String query = "select statusName from appointmentStatus where customerId = ?";
+        String query = "select id, statusName, businessId, backgroundColourHexCode from appointmentStatus where businessId = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(1, businessId);
 
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                AppointmentStatus appointmentStatus = new AppointmentStatus();
-                appointmentStatus.setBusinessId(customerId);
-                appointmentStatus.setStatusName(resultSet.getString("StatusName"));
-                appointmentStatusList.add(appointmentStatus);
+                appointmentStatusList.add(getAppointmentStatusFromResultSet(resultSet));
             }
         }
         catch(Exception ex)
@@ -63,5 +61,14 @@ public class AppointmentStatusStore {
         }
         return appointmentStatusList;
 
+    }
+
+    private AppointmentStatus getAppointmentStatusFromResultSet( ResultSet resultSet) throws SQLException {
+        AppointmentStatus appointmentStatus = new AppointmentStatus();
+        appointmentStatus.setId(resultSet.getInt("id"));
+        appointmentStatus.setBusinessId(resultSet.getInt("businessId"));
+        appointmentStatus.setName(resultSet.getString("StatusName"));
+        appointmentStatus.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
+        return appointmentStatus;
     }
 }

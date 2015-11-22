@@ -19,6 +19,26 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/FlexibleUIConfig/location")
 public class LocationController {
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView GetAppointmentStatusHome(HttpSession httpSession){
+        ModelAndView modelAndView;
+
+        if (httpSession.getAttribute("User") == null) {
+            modelAndView = ModelViewHelper.GetLoginForm(null);
+        }
+        else{
+            User user = (User)httpSession.getAttribute("User");
+
+            try {
+                modelAndView = new ModelViewHelper().getModelViewForLocationsHome(user);
+            }
+            catch (Exception ex){
+                modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
+            }
+        }
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView AddLocationForBusinessForm(HttpSession httpSession){
         ModelAndView modelAndView;

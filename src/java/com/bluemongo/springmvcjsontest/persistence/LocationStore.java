@@ -1,7 +1,6 @@
 package com.bluemongo.springmvcjsontest.persistence;
 
 import com.bluemongo.springmvcjsontest.model.Business;
-import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.model.Location;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,12 +22,12 @@ public class LocationStore {
     private static final Logger logger = LogManager.getLogger(BusinessStore.class);
 
     public void saveNew(Location location){
-        String query = "insert into location(locationName, businessId) values (?,?)";
+        String query = "insert into location(locationName, businessId, backgroundColourHexCode) values (?,?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,location.getLocationName());
+            preparedStatement.setString(1,location.getName());
             preparedStatement.setInt(2, location.getBusinessId());
-
+            preparedStatement.setString(3,location.getBackgroundColourHexCode());
             preparedStatement.executeUpdate();
             logger.info("new Location inserted.");
         }
@@ -41,7 +40,7 @@ public class LocationStore {
 
     public List<Location> getAll(int businessId, boolean isActive) {
         List<Location> locationList = new ArrayList<>();
-        String query = " SELECT id, createdDate, locationName, businessId FROM location where businessId = ? AND isActive = ?; ";
+        String query = " SELECT id, createdDate, locationName, businessId, backgroundColourHexCode FROM location where businessId = ? AND isActive = ?; ";
 
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
@@ -65,7 +64,7 @@ public class LocationStore {
 
     public Location get(int locationId) {
         Location location = null;
-        String query = " SELECT id, createdDate, locationName, businessId FROM location where id=? AND isActive = ?; ";
+        String query = " SELECT id, createdDate, locationName, businessId, backgroundColourHexCode FROM location where id=? AND isActive = ?; ";
 
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
@@ -87,10 +86,9 @@ public class LocationStore {
         Business business = new BusinessStore().get(resultSet.getInt("businessId"));
         Location location = new Location();
         location.setId(resultSet.getInt("id"));
-
         location.setBusinessId(business!=null? business.getId(): null);
-
-        location.setLocationName(resultSet.getNString("locationName"));
+        location.setName(resultSet.getNString("locationName"));
+        location.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
         return location;
     }
 }

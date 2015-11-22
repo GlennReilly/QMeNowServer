@@ -7,19 +7,21 @@ import com.bluemongo.springmvcjsontest.persistence.LocationStore;
  */
 public class Location {
     int id;
-    String locationName;
+    String name;
+    String backgroundColourHexCode;
     int businessId;
+
     private LocationStore locationStore = new LocationStore();
 
     public void save(){
         locationStore.saveNew(this);
     }
 
-    public String getLocationName() {
-        if(locationName == null){
-            locationName = "";
+    public String getName() {
+        if(name == null){
+            name = "";
         }
-        return locationName;
+        return name;
     }
 
     public int getId() {
@@ -30,8 +32,8 @@ public class Location {
         this.id = id;
     }
 
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setBusinessId(int businessId) {
@@ -42,4 +44,11 @@ public class Location {
         return businessId;
     }
 
+    public String getBackgroundColourHexCode() {
+        return backgroundColourHexCode;
+    }
+
+    public void setBackgroundColourHexCode(String backgroundColourHexCode) {
+        this.backgroundColourHexCode = backgroundColourHexCode;
+    }
 }

@@ -44,7 +44,7 @@
         </div>
         <table>
             <thead>
-            <tr style="background-color: #1c94c4; color: white;">
+            <tr>
                 <th>
                     Appointment Date
                 </th>

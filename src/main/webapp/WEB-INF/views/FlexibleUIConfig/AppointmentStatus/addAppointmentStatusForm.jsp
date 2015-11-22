@@ -20,11 +20,12 @@
   <div>
     <div>
       <div class="label2">
-        <label>New Appointment Status name:</label><form:input path="statusName" />
+        <label>New Appointment Status name:</label><form:input path="name" />
       </div>
-<%--      <div class="label2">
-        <label>Background colour hex code:</label><form:input path="backgroundColourHexCode" />
-      </div>--%>
+     <div class="label2">
+        <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
+      </div>
+
     </div>
     <div class="label2">
       <input type="submit">

@@ -7,9 +7,10 @@ import com.bluemongo.springmvcjsontest.persistence.AppointmentStatusStore;
  */
 public class AppointmentStatus  {
     private int id;
-    private String statusName;
+    private String name;
     private int businessId;
     AppointmentStatusStore store = new AppointmentStatusStore();
+    private String backgroundColourHexCode;
 
     public int saveNew() {
         int newId = store.saveNew(this);
@@ -24,12 +25,12 @@ public class AppointmentStatus  {
         this.id = id;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public String getName() {
+        return name;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setBusinessId(int businessId) {
@@ -38,5 +39,13 @@ public class AppointmentStatus  {
 
     public int getBusinessId() {
         return businessId;
+    }
+
+    public void setBackgroundColourHexCode(String backgroundColourHexCode) {
+        this.backgroundColourHexCode = backgroundColourHexCode;
+    }
+
+    public String getBackgroundColourHexCode() {
+        return backgroundColourHexCode;
     }
 }

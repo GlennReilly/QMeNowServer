@@ -60,7 +60,7 @@ public class testModels {
     public void testCreateAppointmentStatus(){
         AppointmentStatus appointmentStatus = new AppointmentStatus();
         appointmentStatus.setBusinessId(1);
-        appointmentStatus.setStatusName("expected");
+        appointmentStatus.setName("expected");
         int newId = appointmentStatus.saveNew();
         assertNotNull(newId);
     }

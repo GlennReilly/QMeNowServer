@@ -24,18 +24,38 @@
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${pageMessage}</div>
 <br/>
+<c:if test="${empty appointmentTypes}">
+    <div>No appointment types found</div>
+</c:if>
 
-<c:forEach items="${appointmentTypes}" var="appointmentType">
-    <div style="padding-left: 50px;">
-        <span>
-            <c:out value="${appointmentType.name}"></c:out>
-        </span>
-        <div style="background-color: <c:out  value="${appointmentType.backgroundColourHexCode}"></c:out>; width: 80px; height: 30px; "></div>
-
-    </div>
-    <br/>
-</c:forEach>
-<br/>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Colour</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <c:forEach items="${appointmentTypes}" var="location">
+        <tr>
+            <td>
+            <span>
+                <c:out value="${location.name}"></c:out>
+            </span>
+            </td>
+            <td>
+                <div style="background-color: <c:out  value="${location.backgroundColourHexCode}"></c:out>; width: 80px; height: 30px; "></div>
+            </td>
+            <td>
+                <a href="<spring:url value='/FlexibleUIConfig/appointmentType/update/${location.id}' />" >update</a>
+            </td>
+            <td>
+                <a href="<spring:url value='/FlexibleUIConfig/appointmentType/delete/${location.id}' />" >delete</a>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 <ul>
     <li><a href="<spring:url value='/FlexibleUIConfig/appointmentType/add'/>">Add a new appointment type for your business</a></li>
 </ul>

@@ -2,6 +2,7 @@ package com.bluemongo.springmvcjsontest.model;
 
 
 import com.bluemongo.springmvcjsontest.persistence.*;
+import org.apache.commons.lang3.*;
 import utils.InputHelper;
 
 import java.text.ParseException;
@@ -64,13 +65,22 @@ public class Appointment {
     }
 
     public void setStrAppointmentDate(String strAppointmentDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            this.setAppointmentDate(sdf.parse(strAppointmentDate));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         this.strAppointmentDate = strAppointmentDate;
+        checkAndSetAppointmentDateAndTime(strAppointmentDate);
+
+    }
+
+    private void checkAndSetAppointmentDateAndTime(String strAppointmentDate) {
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+
+        if (!StringUtils.isBlank(this.strAppointmentDate) && !StringUtils.isBlank(this.strAppointmentTime)) {
+            try {
+                this.setAppointmentDate(sdf.parse(this.strAppointmentDate + " " + this.strAppointmentTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public String getStrAppointmentTime() {
@@ -79,6 +89,7 @@ public class Appointment {
 
     public void setStrAppointmentTime(String strAppointmentTime) {
         this.strAppointmentTime = strAppointmentTime;
+        checkAndSetAppointmentDateAndTime(strAppointmentDate);
     }
 
     public int getLocationId() {
@@ -90,7 +101,7 @@ public class Appointment {
         Location location = new LocationStore().get(this.locationId);
         locationName = "";
         if(location != null) {
-            locationName = location.getLocationName();
+            locationName = location.getName();
         }
     }
 

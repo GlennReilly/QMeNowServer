@@ -30,8 +30,11 @@
   <div>
     <div>
       <div class="label2">
-        <label>location name:</label><form:input path="locationName"/>
+        <label>location name:</label><form:input path="name"/>
       </div>
+        <div class="label2">
+            <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
+        </div>
     </div>
     <div class="label2">
       <input type="submit">

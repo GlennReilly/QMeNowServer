@@ -22,11 +22,22 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Details</th>
+        </tr>
+    </thead>
     <c:forEach items="${customerList}" var="customer">
-        <c:out value="${customer.firstName} ${customer.lastName}"/>
-        <span class="listLink"><a href='<spring:url value="../details/${customer.id}"/>'>view</a></span>
-        <br/>
+    <tr>
+        <td>
+            <c:out value="${customer.firstName} ${customer.lastName}"/>
+        </td>
+        <td>
+            <span class="listLink"><a href='<spring:url value="../details/${customer.id}"/>'>view</a></span>
+        </td>
+    </tr>
     </c:forEach>
 </body>
 </html>

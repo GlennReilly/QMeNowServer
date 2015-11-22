@@ -26,16 +26,14 @@ public class AppointmentTypeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView GetAppointmentTypeHome(HttpSession httpSession){
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView;
 
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         }
         else{
             User user = (User)httpSession.getAttribute("User");
-/*            Business business = new BusinessStore().get(user.getBusinessId());
-            List<AppointmentType> appointmentTypes;
-*/
+
             try {
                 modelAndView = new ModelViewHelper().getModelViewForAppointmentTypeHome(user);
             }
@@ -43,7 +41,6 @@ public class AppointmentTypeController {
                 modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
             }
         }
-
         return modelAndView;
     }
 

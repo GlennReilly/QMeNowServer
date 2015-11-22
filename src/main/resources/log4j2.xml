@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration statusName="debug">
+<Configuration name="debug">
     <Properties>
         <Property contactName="log-path">${sys:catalina.home}/logs</Property>
     </Properties>

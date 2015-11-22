@@ -167,7 +167,7 @@ use DemoJunk1;
 create table location(
   id int(11) NOT NULL AUTO_INCREMENT,
   createdDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  locationName varchar(100),
+  name varchar(100),
   businessId int,
   PRIMARY KEY (id)
 );
@@ -186,7 +186,7 @@ create table appointmentStatus (
   id int(11) NOT NULL AUTO_INCREMENT,
   createdDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   businessId int,
-  statusName varchar(100),
+  name varchar(100),
   PRIMARY KEY (id)
 );
 

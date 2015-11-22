@@ -66,7 +66,7 @@
 
     <form:errors path="*" cssClass="errorblock" element="div" />
 
-    Please select a file to upload : <input type="file" name="logo" />
+    Please select a logo to upload : <input type="file" name="logo" />
     <input type="submit" value="upload" />
 		<span><form:errors path="logo" cssClass="error" />
 		</span>
