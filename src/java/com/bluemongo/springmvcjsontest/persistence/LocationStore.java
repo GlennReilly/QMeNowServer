@@ -22,12 +22,18 @@ public class LocationStore {
     private static final Logger logger = LogManager.getLogger(BusinessStore.class);
 
     public void saveNew(Location location){
-        String query = "insert into location(locationName, businessId, backgroundColourHexCode) values (?,?,?)";
+        //String query = "insert into location(locationName, businessId, backgroundColourHexCode) values (?,?,?)";
+
+        String query = " insert into location(locationName, businessId, backgroundColourHexCode)" +
+                " select ?,?,? from DUAL" +
+                " WHERE NOT exists (select id from location where locationName = ?);";
+
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,location.getName());
             preparedStatement.setInt(2, location.getBusinessId());
             preparedStatement.setString(3,location.getBackgroundColourHexCode());
+            preparedStatement.setString(4,location.getName());
             preparedStatement.executeUpdate();
             logger.info("new Location inserted.");
         }

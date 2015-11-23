@@ -59,7 +59,8 @@ public class AppointmentStatusController {
                 appointmentStatus.setBusinessId(user.getBusinessId());
                 int newAppointmentTypeId = new AppointmentStatusStore().saveNew(appointmentStatus);
                 String message = "Appointment Status saved successfully: " + newAppointmentTypeId;
-                modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+                //modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+                modelAndView = new ModelViewHelper().getModelViewForAppointmentStatusHome(user);
             }
             catch (Exception ex){
                 modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());

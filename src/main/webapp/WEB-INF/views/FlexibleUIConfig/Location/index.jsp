@@ -30,7 +30,7 @@
 
 <table>
     <thead>
-    <tr>
+    <tr class="resultsTable">
         <th>Name</th>
         <th>Colour</th>
         <th>Update</th>

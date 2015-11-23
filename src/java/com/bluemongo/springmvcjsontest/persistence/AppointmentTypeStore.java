@@ -20,13 +20,19 @@ public class AppointmentTypeStore {
 
     public int saveNew(AppointmentType appointmentType) {
         int lastInsertedId = -1;
-        String query = "insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson) values (?,?,?,?)";
+        //String query = "insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson) values (?,?,?,?)";
+
+        String query = " insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson)" +
+                " select ?,?,?,? from DUAL" +
+                " WHERE NOT exists (select id from appointmentType where name = ?);";
+
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, appointmentType.getBusinessId());
             preparedStatement.setString(2, appointmentType.getName());
             preparedStatement.setString(3, appointmentType.getBackgroundColourHexCode());
             preparedStatement.setString(4, appointmentType.getStyleJson());
+            preparedStatement.setString(5, appointmentType.getName());
             preparedStatement.executeUpdate();
             logger.info("new AppointmentType inserted.");
 

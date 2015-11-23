@@ -52,6 +52,11 @@ public class BusinessController implements ServletContextAware
 
     @RequestMapping(value = "/edit/{businessId}", method = RequestMethod.GET)
     public ModelAndView EditBusinessDetails(@PathVariable int businessId, HttpSession httpSession){
+        ModelAndView modelAndView = getModelAndViewForBusinessDetailsForm(businessId, httpSession);
+        return modelAndView;
+    }
+
+    private ModelAndView getModelAndViewForBusinessDetailsForm(@PathVariable int businessId, HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("pageTitle", "Edit Business Details");
         modelAndView.setViewName("FlexibleUIConfig/Business/addEditBusinessForm");
@@ -87,7 +92,9 @@ public class BusinessController implements ServletContextAware
     }
 
     @RequestMapping(value = "/uploadLogo", method = RequestMethod.POST)
-    public String UploadLogo(@RequestParam("logo") MultipartFile logo, HttpSession httpSession){
+    public ModelAndView UploadLogo(@RequestParam("logo") MultipartFile logo, HttpSession httpSession){
+        ModelAndView modelAndView;
+
         if(!httpSession.getAttribute("businessId").equals(null)) {
             int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
             Business business = new BusinessStore().get(businessId);
@@ -107,28 +114,30 @@ public class BusinessController implements ServletContextAware
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        return "You successfully uploaded your logo.";
+                        //return "You successfully uploaded your logo.";
+                        modelAndView = getModelAndViewForBusinessDetailsForm(businessId, httpSession);
+                        modelAndView.addObject("pageMessage", "You successfully uploaded your logo.");
+
                     } else {
-                        return "Sorry, that's not an image.";
+                        //return "Sorry, that's not an image.";
+                        modelAndView = ModelViewHelper.GetModelViewForError("Sorry, that's not an image.");
                     }
                 }
                 else{
-                    return "Sorry, that file is larger than the allowed " + maxFileSizeBytes/1000 + "KB";
+                    //return "Sorry, that file is larger than the allowed " + maxFileSizeBytes/1000 + "KB";
+                    modelAndView = ModelViewHelper.GetModelViewForError("Sorry, that file is larger than the allowed " + maxFileSizeBytes/1000 + "KB");
                 }
             }
             else{
-                return "You failed to upload because the file was empty.";
+                //return "You failed to upload because the file was empty.";
+                modelAndView = ModelViewHelper.GetModelViewForError("You failed to upload because the file was empty.");
             }
         }
         else{
-            return "Sorry, but businessId found";
+            //return "Sorry, but businessId found";
+            modelAndView = ModelViewHelper.GetModelViewForError("Sorry, but businessId found");
         }
-
-
-
-        //ModelAndView modelAndView = new ModelAndView();
-
-        //return modelAndView;
+        return modelAndView;
     }
 
     @RequestMapping(value = "/barcode")
@@ -140,7 +149,7 @@ public class BusinessController implements ServletContextAware
         if (httpSession.getAttribute("User") != null) {
             User user = (User)httpSession.getAttribute("User");
             int businessId = user.getBusinessId(); //TODO need to work on whether we use the currently logged in users businessId or a separate one. What about admin editing?
-            //TODO maybe each business would have a separate user just for showing the QRCode.
+            //TODO maybe each business would have a separate user just for showing the QRCode?
             if (businessId > 0){
                 httpSession.setAttribute("businessId", businessId);
             }

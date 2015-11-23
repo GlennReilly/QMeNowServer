@@ -24,7 +24,7 @@
 <div class="pageMessage">${message}</div>
 <table>
     <thead>
-    <tr>
+    <tr class="resultsTable">
         <th>Name</th>
         <th>Details</th>
         </tr>

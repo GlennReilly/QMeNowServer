@@ -61,7 +61,8 @@ public class LocationController {
             LocationStore locationStore = new LocationStore();
             locationStore.saveNew(location);
             String message = "Location saved successfully."; // + newAppointmentId;
-             modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+             //modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+            modelAndView = new ModelViewHelper().getModelViewForLocationsHome(user);
         } else{
             modelAndView = ModelViewHelper.GetLoginForm("Please log in");
         }

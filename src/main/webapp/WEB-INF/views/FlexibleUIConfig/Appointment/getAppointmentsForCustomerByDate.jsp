@@ -44,7 +44,7 @@
         </div>
         <table>
             <thead>
-            <tr>
+            <tr class="resultsTable">
                 <th>
                     Appointment Date
                 </th>

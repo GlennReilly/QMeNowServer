@@ -21,12 +21,19 @@ public class AppointmentStatusStore {
 
     public int saveNew(AppointmentStatus appointmentStatus) {
         int lastInsertedId = -1;
-        String query = "insert into appointmentStatus(businessId, statusName, backgroundColourHexCode) values (?,?,?)";
+        //String query = "insert into appointmentStatus(businessId, statusName, backgroundColourHexCode) values (?,?,?)";
+
+        String query = " insert into appointmentStatus(businessId, statusName, backgroundColourHexCode)" +
+        " select ?,?,? from DUAL" +
+        " WHERE NOT exists (select id from appointmentStatus where statusName = ?);";
+
+
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, appointmentStatus.getBusinessId());
             preparedStatement.setString(2, appointmentStatus.getName());
             preparedStatement.setString(3, appointmentStatus.getBackgroundColourHexCode());
+            preparedStatement.setString(4, appointmentStatus.getName());
 
             preparedStatement.executeUpdate();
             logger.info("new AppointmentStatusStore inserted.");
