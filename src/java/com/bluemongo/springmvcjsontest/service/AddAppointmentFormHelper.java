@@ -1,6 +1,7 @@
 package com.bluemongo.springmvcjsontest.service;
 
 import com.bluemongo.springmvcjsontest.model.Appointment;
+import com.bluemongo.springmvcjsontest.model.AppointmentStatus;
 import com.bluemongo.springmvcjsontest.model.AppointmentType;
 import com.bluemongo.springmvcjsontest.model.Location;
 import com.bluemongo.springmvcjsontest.persistence.LocationStore;
@@ -21,6 +22,7 @@ public class AddAppointmentFormHelper {
     private List<Location> activeLocations = new ArrayList<>();
     //private List<Customer> customersList = new ArrayList<>();
     private List<AppointmentType> appointmentTypeList  = new ArrayList<>();
+    private List<AppointmentStatus> appointmentStatusList;
 
     public AddAppointmentFormHelper(){}
     public AddAppointmentFormHelper(int userId, int businessId){
@@ -34,6 +36,7 @@ public class AddAppointmentFormHelper {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+        this.getAppointment().setCustomerId(customerId);
     }
 
     public int getBusinessId() {
@@ -105,5 +108,13 @@ public class AddAppointmentFormHelper {
         //appointment.setCustomerId(this.customerId);
         int updatedAppointmentId = appointment.saveUpdate();
         return updatedAppointmentId;
+    }
+
+    public void setAppointmentStatusList(List<AppointmentStatus> appointmentStatusList) {
+        this.appointmentStatusList = appointmentStatusList;
+    }
+
+    public List<AppointmentStatus> getAppointmentStatusList() {
+        return appointmentStatusList;
     }
 }

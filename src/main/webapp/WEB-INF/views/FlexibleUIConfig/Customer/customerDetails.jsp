@@ -22,7 +22,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./add/" method="post">
+<form:form action="/FlexibleUIConfig/customer/update" method="post">
     <div>
         <div>
             <div class="label2">
@@ -48,7 +48,7 @@
                             </div>--%>
         </div>
         <div class="label2">
-            <input type="submit"/>
+            <input type="submit" value="update"/>
         </div>
     </div>
 </form:form>

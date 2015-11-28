@@ -3,6 +3,7 @@ package com.bluemongo.springmvcjsontest.persistence;
 import com.bluemongo.springmvcjsontest.model.Appointment;
 import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.service.AppointmentResult;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.*;
@@ -62,6 +63,9 @@ public class AppointmentStore {
                 preparedStatement.setTimestamp(2, new Timestamp(appointment.getAppointmentDate().getTime()));
             }
             else {
+                if(StringUtils.isNotEmpty(appointment.getStrAppointmentDate())){
+                    preparedStatement.setTimestamp(2, null);
+                }
                 preparedStatement.setTimestamp(2, null);
             }
             preparedStatement.setInt(3, appointment.getStatus());
@@ -70,7 +74,7 @@ public class AppointmentStore {
             preparedStatement.setBoolean(6, appointment.isComplete());
             preparedStatement.setInt(7, appointment.getId());
             preparedStatement.executeUpdate();
-            logger.info("new appointment inserted.");
+            logger.info("appointment updated.");
 
             resultSet = preparedStatement.getGeneratedKeys();
             if(resultSet.next()){
@@ -246,7 +250,7 @@ public class AppointmentStore {
         Appointment appointment = new Appointment(resultSet.getInt("id"));
         appointment.setCustomerId(resultSet.getInt("customerId"));
         appointment.setAppointmentTypeId(resultSet.getInt("appointmentTypeId"));
-        appointment.setAppointmentDate(resultSet.getDate("appointmentDate"));
+        appointment.setAppointmentDate(new Date(resultSet.getTimestamp("appointmentDate").getTime()));
         appointment.setMessageToCustomer(resultSet.getNString("messageToUser"));
         appointment.setStatus(resultSet.getInt("status"));
         appointment.setLocationId(resultSet.getInt("locationId"));

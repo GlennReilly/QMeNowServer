@@ -22,8 +22,6 @@ public class LocationStore {
     private static final Logger logger = LogManager.getLogger(BusinessStore.class);
 
     public void saveNew(Location location){
-        //String query = "insert into location(locationName, businessId, backgroundColourHexCode) values (?,?,?)";
-
         String query = " insert into location(locationName, businessId, backgroundColourHexCode)" +
                 " select ?,?,? from DUAL" +
                 " WHERE NOT exists (select id from location where locationName = ?);";
@@ -41,7 +39,6 @@ public class LocationStore {
         {
             logger.info(ex.getMessage());
         }
-
     }
 
     public List<Location> getAll(int businessId, boolean isActive) {
@@ -96,5 +93,24 @@ public class LocationStore {
         location.setName(resultSet.getNString("locationName"));
         location.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
         return location;
+    }
+
+    public void saveUpdate(Location location) {
+
+        String query = " update location set locationName=?, businessId=?, backgroundColourHexCode=? where id=?;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,location.getName());
+            preparedStatement.setInt(2, location.getBusinessId());
+            preparedStatement.setString(3,location.getBackgroundColourHexCode());
+            preparedStatement.setInt(4,location.getId());
+            preparedStatement.executeUpdate();
+            logger.info("Location updated.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
     }
 }

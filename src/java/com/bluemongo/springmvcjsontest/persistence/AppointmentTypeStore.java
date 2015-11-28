@@ -102,4 +102,20 @@ public class AppointmentTypeStore {
         }
         return appointmentType;
     }
+
+    public void saveUpdate(AppointmentType appointmentType) {
+        String query = "update appointmentType set name=?, backgroundColourHexCode=? where id=?";
+        try(Connection connection = dbHelper.getConnection()){
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, appointmentType.getName());
+            preparedStatement.setString(2, appointmentType.getBackgroundColourHexCode());
+            preparedStatement.setInt(3, appointmentType.getId());
+            preparedStatement.execute();
+
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -2,20 +2,17 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.AppointmentType;
 
-import com.bluemongo.springmvcjsontest.model.Business;
 import com.bluemongo.springmvcjsontest.model.User;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentTypeStore;
-import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by glenn on 20/10/15.
@@ -48,10 +45,10 @@ public class AppointmentTypeController {
 
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public ModelAndView GetAppointmentTypeAddForm(HttpSession httpSession){
-        return ModelViewHelper.GetModelViewForAddAppointmentType(httpSession);
+        return ModelViewHelper.GetModelViewForAddEditAppointmentType(httpSession, null);
     }
 
-    @RequestMapping(value="/add", method = RequestMethod.POST)
+    @RequestMapping(value="/addOrUpdate", method = RequestMethod.POST)
     public ModelAndView AddAppointmentType(@ModelAttribute AppointmentType appointmentType, HttpSession httpSession){
         ModelAndView modelAndView;
 
@@ -62,6 +59,13 @@ public class AppointmentTypeController {
             User user = (User)httpSession.getAttribute("User");
             try {
                 appointmentType.setBusinessId(user.getBusinessId());
+                if (httpSession.getAttribute("currentlyEditingAppointmentTypeId") != null){
+                    int currentlyEditingAppointmentTypeId = Integer.parseInt(httpSession.getAttribute("currentlyEditingAppointmentTypeId").toString());
+                    appointmentType.setId(currentlyEditingAppointmentTypeId);
+                    new AppointmentTypeStore().saveUpdate(appointmentType);
+                    httpSession.setAttribute("currentlyEditingAppointmentTypeId", null);
+                }
+
                 int newAppointmentTypeId = new AppointmentTypeStore().saveNew(appointmentType);
                 String message = "Appointment Type saved successfully: " + newAppointmentTypeId;
                 //modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
@@ -73,5 +77,11 @@ public class AppointmentTypeController {
         }
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/update/{appointmentTypeId}", method = RequestMethod.GET)
+    public ModelAndView GetEditAppointmentTypeForm(HttpSession httpSession, @PathVariable int appointmentTypeId){
+        httpSession.setAttribute("currentlyEditingAppointmentTypeId", appointmentTypeId);
+        return ModelViewHelper.GetModelViewForAddEditAppointmentType(httpSession, appointmentTypeId);
     }
 }

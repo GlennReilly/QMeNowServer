@@ -25,7 +25,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./add/" method="post">
+<form:form action="/FlexibleUIConfig/customer/add" method="post">
     <div>
         <div>
             <div class="label2">

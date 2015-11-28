@@ -39,9 +39,9 @@
 
         <div class="label2">
           <label>status:</label>
-          <form:select path="">
+          <form:select path="appointment.status">
               <form:option value="0" label="Please select" />
-              <%--<form:options items="${command.activeLocations}" itemValue="id" itemLabel="name" />--%>
+              <form:options items="${command.appointmentStatusList}" itemValue="id" itemLabel="name" />
           </form:select>
         </div>
 

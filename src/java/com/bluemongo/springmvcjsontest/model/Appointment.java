@@ -19,12 +19,14 @@ public class Appointment {
     private String strAppointmentTime;
     private Date appointmentDate;
     private int locationId;
+    private String locationName;
     private int customerId;
     private int appointmentTypeId;
     private int status;
+    private String statusName;
     private boolean isComplete;
     private AppointmentStore appointmentStore = new AppointmentStore();
-    private String locationName;
+
     private String appointmentTypeName;
 
 
@@ -52,8 +54,18 @@ public class Appointment {
 
     public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
-        setStrAppointmentDate(appointmentDate);
+        setStrAppointmentDateAndTime(appointmentDate);
     }
+
+    public void updateAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public void setStrAppointmentDateAndTime(Date appointmentDate) {
+        setStrAppointmentDate(appointmentDate);
+        setStrAppointmentTime(appointmentDate);
+    }
+
 
     public String getStrAppointmentDate() {
         return strAppointmentDate;
@@ -66,31 +78,47 @@ public class Appointment {
 
     public void setStrAppointmentDate(String strAppointmentDate) {
         this.strAppointmentDate = strAppointmentDate;
-        checkAndSetAppointmentDateAndTime(strAppointmentDate);
-
-    }
-
-    private void checkAndSetAppointmentDateAndTime(String strAppointmentDate) {
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-
-        if (!StringUtils.isBlank(this.strAppointmentDate) && !StringUtils.isBlank(this.strAppointmentTime)) {
-            try {
-                this.setAppointmentDate(sdf.parse(this.strAppointmentDate + " " + this.strAppointmentTime));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+        updateAppointmentDateAndTimeFromStrings();
     }
 
     public String getStrAppointmentTime() {
         return strAppointmentTime;
     }
 
+    private void setStrAppointmentTime(Date appointmentDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+        String timeString  = sdf.format(appointmentDate);
+        setStrAppointmentTime(timeString);
+    }
+
     public void setStrAppointmentTime(String strAppointmentTime) {
         this.strAppointmentTime = strAppointmentTime;
-        checkAndSetAppointmentDateAndTime(strAppointmentDate);
+        updateAppointmentDateAndTimeFromStrings();
     }
+
+    private Date updateAppointmentDateAndTimeFromStrings() {
+
+        if (!StringUtils.isBlank(this.strAppointmentDate) && StringUtils.isBlank(this.strAppointmentTime)) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                this.updateAppointmentDate(sdf.parse(this.strAppointmentDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!StringUtils.isBlank(this.strAppointmentDate) && !StringUtils.isBlank(this.strAppointmentTime)) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+            try {
+                this.updateAppointmentDate(sdf.parse(this.strAppointmentDate + " " + this.strAppointmentTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return this.getAppointmentDate();
+    }
+
+
 
     public int getLocationId() {
         return locationId;
@@ -123,6 +151,8 @@ public class Appointment {
 
     public void setStatus(int status) {
         this.status = status;
+        AppointmentStatus appointmentStatus = new AppointmentStatusStore().get(status);
+        this.statusName = appointmentStatus.getName();
     }
 
     public int getStatus() {
@@ -169,7 +199,7 @@ public class Appointment {
         return locationName;
     }
 
-
-
-
+    public String getStatusName() {
+        return statusName;
+    }
 }

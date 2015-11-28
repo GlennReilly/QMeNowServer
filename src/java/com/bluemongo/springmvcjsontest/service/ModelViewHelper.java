@@ -82,6 +82,8 @@ public class ModelViewHelper {
         addAppointmentFormHelper.setBusinessId(businessId);
         addAppointmentFormHelper.setCustomerId(customerId);
         Customer customer = new CustomerStore().get(businessId, customerId);
+        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(businessId);
+        addAppointmentFormHelper.setAppointmentStatusList(appointmentStatusList);
         List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(true, businessId);
         addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
         populateHeaderValues(businessId, modelAndView);
@@ -104,6 +106,8 @@ public class ModelViewHelper {
         addAppointmentFormHelper.setBusinessId(businessId);
         addAppointmentFormHelper.setCustomerId(customerId);
         Customer customer = new CustomerStore().get(businessId, customerId);
+        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(businessId);
+        addAppointmentFormHelper.setAppointmentStatusList(appointmentStatusList);
         List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(true, businessId);
         addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
         populateHeaderValues(businessId, modelAndView);
@@ -118,17 +122,27 @@ public class ModelViewHelper {
         return modelAndView;
     }
 
-    public static ModelAndView GetModeViewForAddLocation(int businessId, String message) {
+    public static ModelAndView GetModeViewForAddEditLocation(Integer businessId, String message, Integer locationId) {
         ModelAndView modelAndView = new ModelAndView();
-        populateHeaderValues(businessId, modelAndView);
-        Location location = new Location();
-        location.setBusinessId(businessId);
+        Location location;
+        String pageTitle;
+        if (locationId != null)
+        {
+            location = new LocationStore().get(locationId);
+            pageTitle = "Edit Location";
+        }
+        else {
+            location = new Location();
+            location.setBusinessId(businessId);
+            pageTitle = "Add Location";
+        }
         populateHeaderValues(businessId, modelAndView);
         modelAndView.addObject("command", location);
-        modelAndView.addObject("pageTitle", "Add Location");
-        message = (message == null) ? "" :  message;
+        modelAndView.addObject("pageTitle", pageTitle);
+        message = (message == null) ? "" : message;
         modelAndView.addObject("message", message);
-        modelAndView.setViewName("FlexibleUIConfig/Location/addBusinessLocation");
+        modelAndView.setViewName("FlexibleUIConfig/Location/addEditBusinessLocation");
+
         return modelAndView;
     }
 
@@ -138,21 +152,33 @@ public class ModelViewHelper {
         modelAndView.addObject("logoName", business.getLogoName());
     }
 
-    public static ModelAndView GetModelViewForAddAppointmentType(HttpSession httpSession) {
+    public static ModelAndView GetModelViewForAddEditAppointmentType(HttpSession httpSession, Integer appointmentTypeId) {
         ModelAndView modelAndView;
 
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         }
-        else {
+        else
+        {
             User user = (User) httpSession.getAttribute("User");
+            AppointmentType appointmentType;
+            String pageTitle = "";
+            if (appointmentTypeId != null) {
+                appointmentType = new AppointmentTypeStore().get(user.getBusinessId(), appointmentTypeId);
+                pageTitle = "Edit Appointment Type";
+            }
+            else {
+                appointmentType = new AppointmentType();
+                pageTitle = "Add Appointment Type";
+            }
+
             modelAndView = new ModelAndView();
-            modelAndView.setViewName("/FlexibleUIConfig/AppointmentType/addAppointmentTypeForm");
-            AppointmentType appointmentType = new AppointmentType();
+            modelAndView.setViewName("FlexibleUIConfig/AppointmentType/addEditAppointmentTypeForm");
+
             appointmentType.setBusinessId(user.getBusinessId());
             populateHeaderValues(user.getBusinessId(), modelAndView);
             modelAndView.addObject("command", appointmentType);
-            modelAndView.addObject("pageTitle", "Add Appointment Type");
+            modelAndView.addObject("pageTitle", pageTitle);
         }
 
         return  modelAndView;
@@ -192,21 +218,30 @@ public class ModelViewHelper {
         return modelAndView;
     }
 
-    public static ModelAndView GetModelViewForAddAppointmentStatus(HttpSession httpSession) {
+    public static ModelAndView GetModelViewForAddEditAppointmentStatus(HttpSession httpSession, Integer appointmentStatusId) {
         ModelAndView modelAndView;
 
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         }
         else {
+            AppointmentStatus appointmentStatus;
+            String pageTitle;
+            if(appointmentStatusId!=null){
+                appointmentStatus = new AppointmentStatusStore().get(appointmentStatusId);
+                pageTitle = "Edit Appointment Status";
+            }
+            else{
+                appointmentStatus = new AppointmentStatus();
+                pageTitle = "Add Appointment Status";
+            }
             User user = (User) httpSession.getAttribute("User");
             modelAndView = new ModelAndView();
-            modelAndView.setViewName("/FlexibleUIConfig/AppointmentStatus/addAppointmentStatusForm");
-            AppointmentStatus appointmentStatus = new AppointmentStatus();
+            modelAndView.setViewName("FlexibleUIConfig/AppointmentStatus/addEditAppointmentStatusForm");
             appointmentStatus.setBusinessId(user.getBusinessId());
             populateHeaderValues(user.getBusinessId(), modelAndView);
             modelAndView.addObject("command", appointmentStatus);
-            modelAndView.addObject("pageTitle", "Add Appointment Status");
+            modelAndView.addObject("pageTitle", pageTitle);
         }
 
         return  modelAndView;

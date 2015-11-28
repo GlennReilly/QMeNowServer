@@ -134,18 +134,6 @@ public class CustomerStore {
         firstName = firstName == null? "%%" : "%" + firstName + "%";
         lastName = lastName == null? "%%" : "%" + lastName + "%";
 
-/*        if (customerIdStr.equals(null)|| customerIdStr.equals("")){
-            customerIdStr = "%%";
-        }*/
-
-/*        if (firstName.equals(null)|| firstName.equals("")){
-            firstName = "%%";
-        }
-
-        if (lastName.equals(null)|| lastName.equals("")){
-            lastName = "%%";
-        }*/
-
         String query = "SELECT id, firstName, lastName, phoneNumber, physicalAddress, " +
                 "emailAddress, businessId, DOB, active FROM customer where id like ? AND firstName like ? And lastName like ? AND businessId = ?";
 
@@ -167,5 +155,27 @@ public class CustomerStore {
         }
 
         return customerList;
+    }
+
+    public void saveUpdate(Customer customer) {
+        String query = "update customer set firstName=?, lastName=?, physicalAddress=?, emailAddress=?, phoneNumber=?, DOB=? where id=?";
+        try (Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, customer.getFirstName());
+            preparedStatement.setString(2, customer.getLastName());
+            preparedStatement.setString(3, customer.getPhysicalAddress());
+            preparedStatement.setString(4, customer.getEmailAddress());
+            preparedStatement.setString(5, customer.getPhoneNumber());
+            if (customer.getDOB() != null) {
+                preparedStatement.setDate(6, new java.sql.Date(customer.getDOB().getTime()));
+            } else {
+                preparedStatement.setDate(6, null);
+            }
+            preparedStatement.setInt(7, customer.getId());
+            preparedStatement.executeUpdate();
+            logger.info("Customer updated.");
+        } catch (Exception ex) {
+            logger.info(ex.getMessage());
+        }
     }
 }

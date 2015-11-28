@@ -105,7 +105,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/details/{customerId}", method = RequestMethod.GET)
     public ModelAndView ShowCustomerDetails(HttpSession httpSession, @PathVariable int customerId){
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView;
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         }
@@ -113,17 +113,44 @@ public class CustomerController {
             User user = (User)httpSession.getAttribute("User");
             Customer customer = new CustomerStore().get(user.getBusinessId(), customerId);
             if (customer != null){
-                Business business = new BusinessStore().get(user.getBusinessId());
-                modelAndView.addObject("businessName", business.getBusinessName());
-                modelAndView.addObject("logoName", business.getLogoName());
-                modelAndView.addObject("command", customer);
-                modelAndView.addObject("pageTitle", "Customer Details");
-                modelAndView.setViewName("FlexibleUIConfig/Customer/customerDetails");
+                modelAndView = getModelViewForCustomerEdit(httpSession, user, customer);
             }else {
                 modelAndView = ModelViewHelper.GetModelViewForError("Sorry, there was an error retrieving that customer.");
             }
         }
 
+        return modelAndView;
+    }
+
+    private static ModelAndView getModelViewForCustomerEdit(HttpSession httpSession, User user, Customer customer) {
+        ModelAndView modelAndView = new ModelAndView();
+        Business business = new BusinessStore().get(user.getBusinessId());
+        modelAndView.addObject("businessName", business.getBusinessName());
+        modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("command", customer);
+        modelAndView.addObject("pageTitle", "Customer Details");
+        modelAndView.setViewName("FlexibleUIConfig/Customer/customerDetails");
+        httpSession.setAttribute("CurrentlyEditingCustomerId", customer.getId());
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/update", method = RequestMethod.POST)
+    public ModelAndView UpdateCustomer(HttpSession httpSession, Customer customer){
+        ModelAndView modelAndView = new ModelAndView();
+        if (httpSession.getAttribute("User") == null) {
+            modelAndView = ModelViewHelper.GetLoginForm(null);
+        }
+        else {
+            User user = (User) httpSession.getAttribute("User");
+            if (httpSession.getAttribute("CurrentlyEditingCustomerId") != null){
+                int currentlyEditingCustomerId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingCustomerId").toString());
+                customer.setId(currentlyEditingCustomerId);
+                new CustomerStore().saveUpdate(customer);
+                modelAndView = getModelViewForCustomerEdit(httpSession, user, customer);
+                modelAndView.addObject("message", "Customer updated successfully.");
+                httpSession.setAttribute("CurrentlyEditingCustomerId", null);
+            }
+        }
         return modelAndView;
     }
 }

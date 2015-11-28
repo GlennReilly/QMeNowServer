@@ -21,7 +21,6 @@ public class AppointmentStatusStore {
 
     public int saveNew(AppointmentStatus appointmentStatus) {
         int lastInsertedId = -1;
-        //String query = "insert into appointmentStatus(businessId, statusName, backgroundColourHexCode) values (?,?,?)";
 
         String query = " insert into appointmentStatus(businessId, statusName, backgroundColourHexCode)" +
         " select ?,?,? from DUAL" +
@@ -70,6 +69,26 @@ public class AppointmentStatusStore {
 
     }
 
+    public AppointmentStatus get(int statusId){
+        AppointmentStatus appointmentStatus = new AppointmentStatus();
+        String query = "select id, statusName, businessId, backgroundColourHexCode from appointmentStatus where id = ?";
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, statusId);
+
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                appointmentStatus = getAppointmentStatusFromResultSet(resultSet);
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return appointmentStatus;
+
+    }
+
     private AppointmentStatus getAppointmentStatusFromResultSet( ResultSet resultSet) throws SQLException {
         AppointmentStatus appointmentStatus = new AppointmentStatus();
         appointmentStatus.setId(resultSet.getInt("id"));
@@ -77,5 +96,25 @@ public class AppointmentStatusStore {
         appointmentStatus.setName(resultSet.getString("StatusName"));
         appointmentStatus.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
         return appointmentStatus;
+    }
+
+    public void saveUpdate(AppointmentStatus appointmentStatus) {
+        String query = " update appointmentStatus set businessId=?, statusName=?, backgroundColourHexCode=? WHERE id  = ?;";
+
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, appointmentStatus.getBusinessId());
+            preparedStatement.setString(2, appointmentStatus.getName());
+            preparedStatement.setString(3, appointmentStatus.getBackgroundColourHexCode());
+            preparedStatement.setInt(4, appointmentStatus.getId());
+
+            preparedStatement.executeUpdate();
+            logger.info("Appointment Status updated.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
     }
 }

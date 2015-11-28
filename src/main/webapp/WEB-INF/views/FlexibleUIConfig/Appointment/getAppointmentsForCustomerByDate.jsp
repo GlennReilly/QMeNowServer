@@ -52,6 +52,9 @@
                     Appointment #
                 </th>
                 <th>
+                    Status
+                </th>
+                <th>
                     Location
                 </th>
                 <th>
@@ -75,6 +78,9 @@
                     </td>
                     <td>
                         <c:out value="${appointmentResult.appointment.id}" />
+                    </td>
+                    <td>
+                        <c:out value="${appointmentResult.appointment.statusName}" />
                     </td>
                     <td>
                         <c:out value="${appointmentResult.appointment.locationName}" />
