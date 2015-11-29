@@ -23,7 +23,7 @@ public class AppointmentStore {
 
         public int saveNew(Appointment appointment) {
         int lastInsertedId = -1;
-        String query = "insert into appointment(appointmentTypeId, appointmentDate, customerId, status, messageToUser, locationId, isComplete) values (?,?,?,?,?,?,?)";
+        String query = "insert into appointment(appointmentTypeId, appointmentDate, customerId, statusId, messageToUser, locationId, isComplete) values (?,?,?,?,?,?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, appointment.getAppointmentTypeId());
@@ -55,7 +55,7 @@ public class AppointmentStore {
 
     public int saveUpdate(Appointment appointment) {
         int lastInsertedId = -1;
-        String query = "update appointment set appointmentTypeId = ?, appointmentDate = ?, status = ?, messageToUser = ?, locationId = ?, isComplete = ? where id = ?";
+        String query = "update appointment set appointmentTypeId = ?, appointmentDate = ?, statusId = ?, messageToUser = ?, locationId = ?, isComplete = ? where id = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, appointment.getAppointmentTypeId());
@@ -92,7 +92,7 @@ public class AppointmentStore {
         //TODO needs work or renaming
         //chronologically ordered list
         Appointment appointment = null;
-        String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status, locationId, isComplete FROM appointment" +
+        String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete FROM appointment" +
                 " where id = ?;";
 
         try(Connection connection = dbHelper.getConnection()){
@@ -115,7 +115,7 @@ public class AppointmentStore {
             //TODO needs work or renaming
             //chronologically ordered list
             List<Appointment> appointmentList = new ArrayList<>();
-            String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status, locationId, isComplete FROM appointment" +
+            String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete FROM appointment" +
                     " where userId = ?;";
 
             try(Connection connection = dbHelper.getConnection()){
@@ -150,7 +150,7 @@ public class AppointmentStore {
     }
 
     private void getResultsForAllCustomers(int businessId, Date fromDate, Date toDate, List<AppointmentResult> appointmentResultList) {
-        String query = "SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status, locationId, isComplete, " +
+        String query = "SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete, " +
                 "customer.businessId FROM appointment " +
                 "inner join customer on appointment.customerId = customer.id" +
                 " where customer.businessId = ? AND appointmentDate BETWEEN ? AND ? " +
@@ -173,7 +173,7 @@ public class AppointmentStore {
     }
 
     private void getResultsForCustomer(int businessId, int customerId, Date fromDate, Date toDate, List<AppointmentResult> appointmentResultList) {
-        String query = "SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status, locationId, isComplete, " +
+        String query = "SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete, " +
                 "customer.businessId FROM appointment " +
                 "inner join customer on appointment.customerId = customer.id" +
                 " where customer.businessId = ? AND appointmentDate BETWEEN ? AND ? " +
@@ -201,7 +201,7 @@ public class AppointmentStore {
     public List<Appointment> getAllForDate(int userId, Date date){
         //chronologically ordered list
         List<Appointment> appointmentList = new ArrayList<>();
-        String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status, locationId, isComplete FROM appointment" +
+        String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete FROM appointment" +
                 " where userId = ? and appointmentDate between ? and DATE_ADD(?,INTERVAL 1 day) ;";
 
         try(Connection connection = dbHelper.getConnection()){
@@ -226,8 +226,8 @@ public class AppointmentStore {
     public List<Appointment> getAll(int customerId){
         //TODO chronologically ordered list?
         List<Appointment> appointmentList = new ArrayList<>();
-        String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, status, locationId, isComplete FROM appointment" +
-                " where customerId = ?;";
+        String query = "SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete FROM appointment" +
+                " where customerId = ? ORDER BY appointmentDate DESC;";
 
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query);
@@ -246,13 +246,54 @@ public class AppointmentStore {
         return appointmentList;
     }
 
+
+    public List<Appointment> getAll(Integer appointmentTypeId, Integer statusId, Integer locationId){
+        List<Appointment> appointmentList = new ArrayList<>();
+        StringBuilder sbQuery = new StringBuilder();
+        sbQuery.append("SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete FROM appointment");
+        sbQuery.append(appointmentTypeId!=null? " AND appointmentTypeId=?":"");
+        sbQuery.append(statusId!=null? " AND statusId=?":"");
+        sbQuery.append(locationId!=null? " AND locationId=?":"");
+        sbQuery.append(" ORDER BY appointmentDate DESC;");
+
+        try(Connection connection = dbHelper.getConnection()){
+            preparedStatement = connection.prepareStatement(sbQuery.toString());
+            int paramenterCount = 0;
+            if (appointmentTypeId != null) {
+                paramenterCount++;
+                preparedStatement.setInt(paramenterCount, appointmentTypeId);
+            }
+            if (statusId != null) {
+                paramenterCount++;
+                preparedStatement.setInt(paramenterCount, statusId);
+            }
+            if (locationId != null) {
+                paramenterCount++;
+                preparedStatement.setInt(paramenterCount, locationId);
+            }
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Appointment appointment = getAppointmentFromResultSet(resultSet);
+                appointmentList.add(appointment);
+            }
+        }
+        catch (Exception ex){
+            logger.info(ex.getMessage());
+        }
+
+        return appointmentList;
+    }
+
+
     private Appointment getAppointmentFromResultSet(ResultSet resultSet) throws SQLException {
         Appointment appointment = new Appointment(resultSet.getInt("id"));
         appointment.setCustomerId(resultSet.getInt("customerId"));
         appointment.setAppointmentTypeId(resultSet.getInt("appointmentTypeId"));
         appointment.setAppointmentDate(new Date(resultSet.getTimestamp("appointmentDate").getTime()));
         appointment.setMessageToCustomer(resultSet.getNString("messageToUser"));
-        appointment.setStatus(resultSet.getInt("status"));
+        appointment.setStatus(resultSet.getInt("statusId"));
         appointment.setLocationId(resultSet.getInt("locationId"));
         appointment.setIsComplete(resultSet.getBoolean("isComplete"));
         return appointment;

@@ -1,13 +1,16 @@
 package com.bluemongo.springmvcjsontest.controller;
 
+import com.bluemongo.springmvcjsontest.model.Appointment;
 import com.bluemongo.springmvcjsontest.model.Location;
 import com.bluemongo.springmvcjsontest.model.User;
+import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import com.bluemongo.springmvcjsontest.persistence.LocationStore;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by glenn on 19/10/15.
@@ -99,5 +102,19 @@ public class LocationController {
             }
         }
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/delete/{locationId}", method = RequestMethod.GET)
+    public String deleteLocation(HttpSession httpSession, @PathVariable int locationId){
+        String result = "";
+        List<Appointment> appointmentList = new AppointmentStore().getAll(null,null,locationId);
+        if (appointmentList.size()>0){
+
+        }else{
+            //ok to delete this location
+            new LocationStore().setInactive(locationId);
+        }
+
+        return result;
     }
 }

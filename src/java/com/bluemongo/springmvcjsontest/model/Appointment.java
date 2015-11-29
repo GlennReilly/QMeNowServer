@@ -18,12 +18,17 @@ public class Appointment {
     private String strAppointmentDate;
     private String strAppointmentTime;
     private Date appointmentDate;
+
     private int locationId;
     private String locationName;
+
     private int customerId;
+
     private int appointmentTypeId;
+
     private int status;
     private String statusName;
+
     private boolean isComplete;
     private AppointmentStore appointmentStore = new AppointmentStore();
 

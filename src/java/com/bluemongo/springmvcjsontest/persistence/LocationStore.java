@@ -113,4 +113,8 @@ public class LocationStore {
             logger.info(ex.getMessage());
         }
     }
+
+    public void setInactive(int locationId) {
+        //TODO this
+    }
 }

@@ -94,6 +94,7 @@ public class CustomerController {
                     modelAndView.addObject("command", customerList.get(0));
                     modelAndView.addObject("pageTitle", "Customer Details");
                     modelAndView.setViewName("FlexibleUIConfig/Customer/customerDetails");
+                    httpSession.setAttribute("CurrentlyEditingCustomerId", customerList.get(0).getId());
                 }
             }else{
                 modelAndView = ModelViewHelper.GetModelViewForError("No matching customers found.");
