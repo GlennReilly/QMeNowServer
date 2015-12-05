@@ -21,7 +21,7 @@ public class BusinessStore {
 
     public int saveNew(Business business){
         int lastInsertedId = -1;
-        String query = "insert into business(businessName, phoneNumber, emailAddress, physicalAddress, contactName) values (?,?,?,?,?)";
+        String query = "insert into business(businessName, phoneNumber, emailAddress, physicalAddress, contactName, defaultLocationId) values (?,?,?,?,?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, business.getBusinessName());
@@ -29,6 +29,7 @@ public class BusinessStore {
             preparedStatement.setString(3, business.getEmailAddress());
             preparedStatement.setString(4, business.getPhysicalAddress());
             preparedStatement.setString(5, business.getContactName());
+            preparedStatement.setInt(6,business.getDefaultLocationId());
             preparedStatement.executeUpdate();
             logger.info("new Customer inserted.");
 
@@ -46,7 +47,7 @@ public class BusinessStore {
 
     public int saveUpdate(Business business) {
         int lastInsertedId = -1;
-        String query = "update business set businessName=?, phoneNumber=?, emailAddress=?, physicalAddress=?, contactName=? where id = ?";
+        String query = "update business set businessName=?, phoneNumber=?, emailAddress=?, physicalAddress=?, contactName=?, defaultLocationId=? where id = ?";
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, business.getBusinessName());
@@ -54,7 +55,8 @@ public class BusinessStore {
             preparedStatement.setString(3, business.getEmailAddress());
             preparedStatement.setString(4, business.getPhysicalAddress());
             preparedStatement.setString(5, business.getContactName());
-            preparedStatement.setInt(6, business.getId());
+            preparedStatement.setInt(6,business.getDefaultLocationId());
+            preparedStatement.setInt(7, business.getId());
             preparedStatement.executeUpdate();
 
         } catch (ClassNotFoundException e) {
@@ -67,7 +69,7 @@ public class BusinessStore {
 
     public List<Business> getAll(boolean isActive){
         List<Business> businessList = new ArrayList<>();
-        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName from business where active = ?";
+        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName, defaultLocationId from business where active = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setBoolean(1, isActive);
@@ -94,12 +96,13 @@ public class BusinessStore {
         business.setPhysicalAddress(resultSet.getNString("physicalAddress"));
         business.setContactName(resultSet.getString("contactName"));
         business.setLogoName(resultSet.getString("logoName"));
+        business.setDefaultLocationId(resultSet.getInt("defaultLocationId"));
         return business;
     }
 
     public Business get(int businessId) {
         Business business = null;
-        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName from business where id = ? AND active = ?";
+        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName, defaultLocationId from business where id = ? AND active = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);

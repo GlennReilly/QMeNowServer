@@ -33,6 +33,7 @@ public class Appointment {
     private AppointmentStore appointmentStore = new AppointmentStore();
 
     private String appointmentTypeName;
+    private String appointmentTypePrefix;
 
 
     public Appointment(){}
@@ -180,6 +181,7 @@ public class Appointment {
             appointmentType = new AppointmentTypeStore().get(customer.getBusinessId(), this.appointmentTypeId);
         }
         this.appointmentTypeName = appointmentType != null? appointmentType.getName(): "";
+        this.appointmentTypePrefix = appointmentType != null? appointmentType.getPrefix(): "";
     }
 
     public String getAppointmentTypeName() {
@@ -187,8 +189,20 @@ public class Appointment {
         return this.appointmentTypeName;
     }
 
+    public String getAppointmentTypePrefix() {
+        return appointmentTypePrefix;
+    }
+
     public boolean isComplete() {
         return isComplete;
+    }
+
+    public boolean getIsComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(boolean complete) {
+        isComplete = complete;
     }
 
     public void setIsComplete(boolean isComplete) {

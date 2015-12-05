@@ -20,10 +20,9 @@ public class AppointmentTypeStore {
 
     public int saveNew(AppointmentType appointmentType) {
         int lastInsertedId = -1;
-        //String query = "insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson) values (?,?,?,?)";
 
-        String query = " insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson)" +
-                " select ?,?,?,? from DUAL" +
+        String query = " insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson, prefix)" +
+                " select ?,?,?,?,? from DUAL" +
                 " WHERE NOT exists (select id from appointmentType where name = ?);";
 
         try(Connection connection = dbHelper.getConnection()) {
@@ -33,6 +32,7 @@ public class AppointmentTypeStore {
             preparedStatement.setString(3, appointmentType.getBackgroundColourHexCode());
             preparedStatement.setString(4, appointmentType.getStyleJson());
             preparedStatement.setString(5, appointmentType.getName());
+            preparedStatement.setString(6, appointmentType.getPrefix());
             preparedStatement.executeUpdate();
             logger.info("new AppointmentType inserted.");
 
@@ -48,9 +48,9 @@ public class AppointmentTypeStore {
         return lastInsertedId;
     }
 
-    public List<AppointmentType> getAll(boolean isActive, int businessId){
+    public List<AppointmentType> getAll(int businessId, boolean isActive){
         List<AppointmentType> appointmentTypeList = new ArrayList<>();
-        String query = "select id, name, backgroundColourHexCode, styleJson, businessId from appointmentType where isActive = ? AND businessId = ?";
+        String query = "select id, name, backgroundColourHexCode, styleJson, businessId, prefix from appointmentType where isActive = ? AND businessId = ?";
 
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query);
@@ -78,12 +78,13 @@ public class AppointmentTypeStore {
         appointmentType.setName(resultSet.getString("name"));
         appointmentType.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
         appointmentType.setStyleJson(resultSet.getString("styleJson"));
+        appointmentType.setPrefix(resultSet.getString("prefix"));
         return appointmentType;
     }
 
     public AppointmentType get(int businessId, int appointmentTypeId) {
         AppointmentType appointmentType = null;
-        String query = "select id, name, backgroundColourHexCode, styleJson, businessId from appointmentType where isActive = ? AND businessId = ? AND id=?";
+        String query = "select id, name, backgroundColourHexCode, styleJson, businessId, prefix from appointmentType where isActive = ? AND businessId = ? AND id=?";
 
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query);
@@ -104,18 +105,34 @@ public class AppointmentTypeStore {
     }
 
     public void saveUpdate(AppointmentType appointmentType) {
-        String query = "update appointmentType set name=?, backgroundColourHexCode=? where id=?";
+        String query = "update appointmentType set name=?, backgroundColourHexCode=?, prefix=? where id=?";
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, appointmentType.getName());
             preparedStatement.setString(2, appointmentType.getBackgroundColourHexCode());
-            preparedStatement.setInt(3, appointmentType.getId());
+            preparedStatement.setString(3, appointmentType.getPrefix());
+            preparedStatement.setInt(4, appointmentType.getId());
             preparedStatement.execute();
 
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setInactive(int appointmentTypeId) {
+        String query = " update appointmentType set isActive=0 where id=?;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,appointmentTypeId);
+            preparedStatement.executeUpdate();
+            logger.info("Appointment Status deactivated.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
         }
     }
 }

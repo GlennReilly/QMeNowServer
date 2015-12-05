@@ -24,6 +24,9 @@
           <label>New Appointment Type name:</label><form:input path="name" />
         </div>
         <div class="label2">
+          <label>prefix:</label><form:input path="prefix" />
+        </div>
+        <div class="label2">
           <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
         </div>
       </div>

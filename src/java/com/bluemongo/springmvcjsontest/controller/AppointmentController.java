@@ -141,6 +141,26 @@ public class AppointmentController {
     }
 
 
+
+    public ModelAndView GetAllFiltered(HttpSession httpSession, Integer locationId, Integer appointmentTypeId, Integer appointmentStatusId){
+        ModelAndView modelAndView;
+
+        User user;
+        if (httpSession.getAttribute("User") != null){
+            user = (User)httpSession.getAttribute("User");
+            GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper = new GetAppointmentSearchResultsHelper();
+            getAppointmentSearchResultsHelper.setBusinessId(user.getBusinessId());
+            getAppointmentSearchResultsHelper.generateSearchResults();
+            modelAndView = ModelViewHelper.GetAppointmentSearchResults(getAppointmentSearchResultsHelper, null, httpSession);
+        }
+        else{
+            modelAndView = ModelViewHelper.GetLoginForm("Please log in");
+        }
+
+        return modelAndView;
+    }
+
+
 /*    @RequestMapping(value = "/get?{customerId}", method = RequestMethod.GET)
     public ModelAndView GetAllForDateRange2( HttpSession httpSession, @ModelAttribute GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper){
         ModelAndView modelAndView;

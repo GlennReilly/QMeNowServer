@@ -49,13 +49,13 @@ public class AppointmentStatusStore {
         return lastInsertedId;
     }
 
-    public List<AppointmentStatus> getAll(int businessId){
+    public List<AppointmentStatus> getAll(int businessId, boolean isActive) {
         List<AppointmentStatus> appointmentStatusList = new ArrayList<>();
-        String query = "select id, statusName, businessId, backgroundColourHexCode from appointmentStatus where businessId = ?";
+        String query = "select id, statusName, businessId, backgroundColourHexCode from appointmentStatus where businessId = ? AND isActive = ?; ";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
-
+            preparedStatement.setBoolean(2, isActive);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 appointmentStatusList.add(getAppointmentStatusFromResultSet(resultSet));
@@ -71,7 +71,7 @@ public class AppointmentStatusStore {
 
     public AppointmentStatus get(int statusId){
         AppointmentStatus appointmentStatus = new AppointmentStatus();
-        String query = "select id, statusName, businessId, backgroundColourHexCode from appointmentStatus where id = ?";
+        String query = "select id, statusName, businessId, backgroundColourHexCode from appointmentStatus where id = ? AND isActive = ?; ";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, statusId);
@@ -111,6 +111,21 @@ public class AppointmentStatusStore {
 
             preparedStatement.executeUpdate();
             logger.info("Appointment Status updated.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+    }
+
+    public void setInactive(int appointmentStatusId) {
+        String query = " update appointmentStatus set isActive=0 where id=?;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,appointmentStatusId);
+            preparedStatement.executeUpdate();
+            logger.info("Appointment Status deactivated.");
         }
         catch(Exception ex)
         {

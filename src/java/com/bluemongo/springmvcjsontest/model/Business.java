@@ -15,6 +15,7 @@ public class Business {
     private String contactName = "";
     private MultipartFile logo;
     private String logoName;
+    private int defaultLocationId;
 
 
     public int saveNew() {
@@ -93,5 +94,13 @@ public class Business {
 
     public String getLogoName() {
         return logoName;
+    }
+
+    public int getDefaultLocationId() {
+        return defaultLocationId;
+    }
+
+    public void setDefaultLocationId(int defaultLocationId) {
+        this.defaultLocationId = defaultLocationId;
     }
 }

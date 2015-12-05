@@ -136,31 +136,45 @@ public class AppointmentStore {
         }
 
 
-    public List<AppointmentResult> get(int businessId, int customerId, Date fromDate, Date toDate){
+    public List<AppointmentResult> get(int businessId, int customerId, Date fromDate, Date toDate, Boolean isComplete){
         //TODO chronologically ordered list?
         List<AppointmentResult> appointmentResultList = new ArrayList<>();
 
         if(customerId > 0) {
             getResultsForCustomer(businessId, customerId, fromDate, toDate, appointmentResultList);
         } else {
-            getResultsForAllCustomers(businessId, fromDate, toDate, appointmentResultList);
+            getResultsForAllCustomers(businessId, fromDate, toDate, appointmentResultList, isComplete);
         }
 
         return appointmentResultList;
     }
 
-    private void getResultsForAllCustomers(int businessId, Date fromDate, Date toDate, List<AppointmentResult> appointmentResultList) {
+    private void getResultsForAllCustomers(int businessId, Date fromDate, Date toDate, List<AppointmentResult> appointmentResultList, Boolean isComplete) {
+
+        String isCompleteSegment = isComplete==null? "" : " AND isComplete=?";
+        String dateSegment = "";
+        if (fromDate != null && toDate != null) {
+            dateSegment = " AND appointmentDate BETWEEN ? AND ? ";
+        }else{
+            dateSegment = "";
+        }
+
         String query = "SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete, " +
-                "customer.businessId FROM appointment " +
-                "inner join customer on appointment.customerId = customer.id" +
-                " where customer.businessId = ? AND appointmentDate BETWEEN ? AND ? " +
-                "ORDER by appointmentDate ASC ;";
+                " customer.businessId FROM appointment " +
+                " inner join customer on appointment.customerId = customer.id" +
+                " where customer.businessId = ? " +
+                dateSegment +
+                isCompleteSegment +
+                " ORDER by appointmentDate ASC ;";
 
         try (Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
             preparedStatement.setDate(2, new java.sql.Date(fromDate.getTime()));
             preparedStatement.setDate(3, new java.sql.Date(toDate.getTime()));
+            if(isCompleteSegment != "") {
+                preparedStatement.setBoolean(4, isComplete);
+            }
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -247,43 +261,65 @@ public class AppointmentStore {
     }
 
 
-    public List<Appointment> getAll(Integer appointmentTypeId, Integer statusId, Integer locationId){
-        List<Appointment> appointmentList = new ArrayList<>();
+    public List<AppointmentResult> getAll(Integer appointmentTypeId, Integer statusId, Integer locationId){
+        //List<Appointment> appointmentList = new ArrayList<>();
+        List<AppointmentResult> appointmentResultList = new ArrayList<>();
         StringBuilder sbQuery = new StringBuilder();
-        sbQuery.append("SELECT id, createdDate, appointmentTypeId, appointmentDate, customerId, messageToUser, statusId, locationId, isComplete FROM appointment");
-        sbQuery.append(appointmentTypeId!=null? " AND appointmentTypeId=?":"");
-        sbQuery.append(statusId!=null? " AND statusId=?":"");
-        sbQuery.append(locationId!=null? " AND locationId=?":"");
+        sbQuery.append(" SELECT appointment.id, createdDate, appointmentTypeId, appointmentDate, customerId, businessId, messageToUser, statusId, locationId, isComplete FROM appointment");
+        sbQuery.append(" inner join customer on appointment.customerId = customer.id");
+
+        if (appointmentTypeId != null || statusId != null || locationId != null ){
+            sbQuery.append(" WHERE ");
+        }
+
+        sbQuery.append(appointmentTypeId!=null? " appointmentTypeId=?":"");
+
+        if ( appointmentTypeId!=null && (statusId != null || locationId != null )){
+            sbQuery.append(" AND ");
+        }
+
+        sbQuery.append(statusId!=null? " statusId=?":"");
+
+        if ( locationId != null  && (statusId != null || appointmentTypeId != null )){
+            sbQuery.append(" AND ");
+        }
+
+        sbQuery.append(locationId!=null? " locationId=?":"");
         sbQuery.append(" ORDER BY appointmentDate DESC;");
 
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(sbQuery.toString());
-            int paramenterCount = 0;
+            int parameterCount = 0;
             if (appointmentTypeId != null) {
-                paramenterCount++;
-                preparedStatement.setInt(paramenterCount, appointmentTypeId);
+                parameterCount++;
+                preparedStatement.setInt(parameterCount, appointmentTypeId);
             }
             if (statusId != null) {
-                paramenterCount++;
-                preparedStatement.setInt(paramenterCount, statusId);
+                parameterCount++;
+                preparedStatement.setInt(parameterCount, statusId);
             }
             if (locationId != null) {
-                paramenterCount++;
-                preparedStatement.setInt(paramenterCount, locationId);
+                parameterCount++;
+                preparedStatement.setInt(parameterCount, locationId);
             }
 
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
-                Appointment appointment = getAppointmentFromResultSet(resultSet);
-                appointmentList.add(appointment);
+
+                while (resultSet.next()) {
+
+                    AppointmentResult appointmentResult = getAppointmentResultFromResultSet(resultSet);
+                    appointmentResultList.add(appointmentResult);
+
+/*                Appointment appointment = getAppointmentFromResultSet(resultSet);
+                appointmentList.add(appointment);*/
             }
         }
         catch (Exception ex){
             logger.info(ex.getMessage());
         }
 
-        return appointmentList;
+        return appointmentResultList;
     }
 
 

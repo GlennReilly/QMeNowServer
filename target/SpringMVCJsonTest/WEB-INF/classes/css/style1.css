@@ -95,7 +95,9 @@ body{
     font-size: 1.5vh;
     font-weight: bold;
     color: DarkRed;
-    padding-top: 2vh;
+    padding-top: 0.5vh;
+    padding-bottom: 2vh;
+    padding-left: 3vh;
 }
 
 .pageSubHeading{

@@ -82,9 +82,9 @@ public class ModelViewHelper {
         addAppointmentFormHelper.setBusinessId(businessId);
         addAppointmentFormHelper.setCustomerId(customerId);
         Customer customer = new CustomerStore().get(businessId, customerId);
-        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(businessId);
+        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(businessId, true);
         addAppointmentFormHelper.setAppointmentStatusList(appointmentStatusList);
-        List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(true, businessId);
+        List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(businessId, true);
         addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
         populateHeaderValues(businessId, modelAndView);
         modelAndView.addObject("command", addAppointmentFormHelper);
@@ -106,9 +106,9 @@ public class ModelViewHelper {
         addAppointmentFormHelper.setBusinessId(businessId);
         addAppointmentFormHelper.setCustomerId(customerId);
         Customer customer = new CustomerStore().get(businessId, customerId);
-        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(businessId);
+        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(businessId, true);
         addAppointmentFormHelper.setAppointmentStatusList(appointmentStatusList);
-        List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(true, businessId);
+        List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(businessId, true);
         addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
         populateHeaderValues(businessId, modelAndView);
         modelAndView.addObject("command", addAppointmentFormHelper);
@@ -187,7 +187,7 @@ public class ModelViewHelper {
     public ModelAndView getModelViewForAppointmentTypeHome(User user) {
         ModelAndView modelAndView = new ModelAndView();
         List<AppointmentType> appointmentTypes;
-        appointmentTypes = new AppointmentTypeStore().getAll(true, user.getBusinessId());
+        appointmentTypes = new AppointmentTypeStore().getAll(user.getBusinessId(),true);
         populateHeaderValues(user.getBusinessId(), modelAndView);
         modelAndView.addObject("appointmentTypes", appointmentTypes);
         modelAndView.addObject("pageTitle", "Appointment Types");
@@ -321,12 +321,28 @@ public class ModelViewHelper {
         return  modelAndView;
     }
 
+    public static ModelAndView GetAppointmentsFiltered(List<AppointmentResult> appointmentResultList, String message, HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (httpSession.getAttribute("User") == null) {
+            modelAndView = ModelViewHelper.GetLoginForm(null);
+        }
+        else {
+            User user = (User) httpSession.getAttribute("User");
+            populateHeaderValues(user.getBusinessId(), modelAndView);
+            modelAndView.addObject("command", appointmentResultList);
+            modelAndView.addObject("message", message);
+            modelAndView.addObject("pageTitle", "Show Appointments");
+            modelAndView.setViewName("/FlexibleUIConfig/Appointment/showAppointmentList");
+        }
+        return  modelAndView;
+    }
+
 
     public ModelAndView getModelViewForAppointmentStatusHome(User user) {
         ModelAndView modelAndView;
             modelAndView = new ModelAndView();
             modelAndView.setViewName("/FlexibleUIConfig/AppointmentStatus/index");
-            List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(user.getBusinessId());
+            List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(user.getBusinessId(),true);
             populateHeaderValues(user.getBusinessId(), modelAndView);
             modelAndView.addObject("appointmentStatuses", appointmentStatusList);
             modelAndView.addObject("pageTitle", "Appointment Statuses");

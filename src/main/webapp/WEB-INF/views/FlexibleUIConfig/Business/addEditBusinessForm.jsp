@@ -47,8 +47,17 @@
             <div class="label2">
                 <label>street address:</label><form:input path="physicalAddress"/>
             </div>
+            <div class="label2">
+                <label>default location:</label>
+                <form:select path="defaultLocationId">
+                    <form:option value="0" label="Please select" />
+                    <form:options items="${activeLocations}" itemValue="id" itemLabel="name" />
+                </form:select>
+            </div>
+            <div style="font-size: 8pt; padding-left: 300px;">* new appointments will be created at this location if no existing appointment is found.</div>
+            <div style="font-size: 8pt; padding-left: 300px;">Set this to 'Please select' if you don't want walk-in appointments created.</div>
         </div>
-        <div class="label2">
+        <div class="label2" style="margin-top: 20px;">
             <c:choose>
                 <c:when test="${empty command.id || command.id eq 0 }">
                     <c:set var="buttonText" value="Save New Business" />

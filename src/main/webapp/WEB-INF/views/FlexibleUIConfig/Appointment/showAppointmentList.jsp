@@ -19,27 +19,8 @@
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
 <form:form action="/FlexibleUIConfig/appointment/get" method="post">
-    <input type="hidden" id="customerId" value="${customerId}">
-    <form:hidden path="customerId" />
-        <div>
-            <div class="label2">
-                <label>from date:</label><form:input path="strFromDate" />
-            </div>
-            <div class="label2">
-                <label>to date:</label><form:input path="strToDate" />
-            </div>
-        </div>
-        <div class="label2">
-            <input type="submit" value="Search">
-        </div>
 
-    <c:if test="${empty command.appointmentResultList}">
-        <div style="display: table; padding-top: 1vh;">
-            Choose from the above options and click 'Search' to continue.
-        </div>
-    </c:if>
-    <c:if test="${!empty command.appointmentResultList}">
-        <div class="pageSubHeading" style="display: table;">
+    <div class="pageSubHeading" style="display: table;">
             Search Results:
         </div>
         <table>
@@ -74,7 +55,7 @@
                 </th>
             </tr>
             </thead>
-            <c:forEach items="${command.appointmentResultList}" var="appointmentResult"  >
+            <c:forEach items="${command}" var="appointmentResult"  >
                 <tr>
                     <td>
                         <c:out value="${appointmentResult.appointment.appointmentDate}" />
@@ -107,18 +88,11 @@
             </c:forEach>
         </table>
 
-    </c:if>
 
 
 </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
 <script src="<spring:url value='/resources/scripts/jquery-ui.min.js'/>" ></script>
-<script>
-    $(function() {
-        $( "#strFromDate" ).datepicker({dateFormat: "dd-mm-yy"});
-        $( "#strToDate" ).datepicker({dateFormat: "dd-mm-yy"});
-    });
-</script>
 
 </body>
 </html>

@@ -115,6 +115,17 @@ public class LocationStore {
     }
 
     public void setInactive(int locationId) {
-        //TODO this
+        String query = " update location set isActive=0 where id=?;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,locationId);
+            preparedStatement.executeUpdate();
+            logger.info("Location deactivated.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
     }
 }

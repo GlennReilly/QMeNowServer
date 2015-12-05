@@ -3,6 +3,8 @@ package com.bluemongo.springmvcjsontest.controller;
 import com.bluemongo.springmvcjsontest.model.AppointmentStatus;
 import com.bluemongo.springmvcjsontest.model.User;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStatusStore;
+import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
+import com.bluemongo.springmvcjsontest.service.AppointmentResult;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by glenn on 21/10/15.
@@ -91,7 +94,26 @@ public class AppointmentStatusController {
     }
 
     return modelAndView;
-}
+    }
+
+
+    @RequestMapping(value = "/delete/{appointmentStatusId}", method = RequestMethod.GET)
+    public ModelAndView deactivate(HttpSession httpSession, @PathVariable int appointmentStatusId){
+        String result;
+        ModelAndView modelAndView;
+        List<AppointmentResult> appointmentResultList = new AppointmentStore().getAll(null,appointmentStatusId,null);
+        if (appointmentResultList.size()>0){
+            result = "the appointment status you want to delete still has active appointments.";
+            modelAndView = ModelViewHelper.GetAppointmentsFiltered(appointmentResultList,result,httpSession);
+        }else{
+            //ok to delete this location
+            new AppointmentStatusStore().setInactive(appointmentStatusId);
+            result = "appointment status deactivated.";
+            modelAndView = GetAppointmentStatusHome(httpSession);
+            modelAndView.addObject("pageMessage", result);
+        }
+        return modelAndView;
+    }
 
 
 }

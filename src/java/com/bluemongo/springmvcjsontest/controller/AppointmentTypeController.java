@@ -3,7 +3,9 @@ package com.bluemongo.springmvcjsontest.controller;
 import com.bluemongo.springmvcjsontest.model.AppointmentType;
 
 import com.bluemongo.springmvcjsontest.model.User;
+import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentTypeStore;
+import com.bluemongo.springmvcjsontest.service.AppointmentResult;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by glenn on 20/10/15.
@@ -83,5 +86,24 @@ public class AppointmentTypeController {
     public ModelAndView GetEditAppointmentTypeForm(HttpSession httpSession, @PathVariable int appointmentTypeId){
         httpSession.setAttribute("currentlyEditingAppointmentTypeId", appointmentTypeId);
         return ModelViewHelper.GetModelViewForAddEditAppointmentType(httpSession, appointmentTypeId);
+    }
+
+
+    @RequestMapping(value = "/delete/{appointmentTypeId}", method = RequestMethod.GET)
+    public ModelAndView deactivate(HttpSession httpSession, @PathVariable int appointmentTypeId){
+        String result;
+        ModelAndView modelAndView;
+        List<AppointmentResult> appointmentResultList = new AppointmentStore().getAll(appointmentTypeId,null,null);
+        if (appointmentResultList.size()>0){
+            result = "the appointment type you want to delete still has active appointments.";
+            modelAndView = ModelViewHelper.GetAppointmentsFiltered(appointmentResultList,result,httpSession);
+        }else{
+            //ok to delete this location
+            new AppointmentTypeStore().setInactive(appointmentTypeId);
+            result = "appointment type deactivated.";
+            modelAndView = GetAppointmentTypeHome(httpSession);
+            modelAndView.addObject("pageMessage", result);
+        }
+        return modelAndView;
     }
 }

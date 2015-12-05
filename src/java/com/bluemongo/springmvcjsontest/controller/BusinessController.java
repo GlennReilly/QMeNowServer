@@ -2,8 +2,10 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.BarcodePayload;
 import com.bluemongo.springmvcjsontest.model.Business;
+import com.bluemongo.springmvcjsontest.model.Location;
 import com.bluemongo.springmvcjsontest.model.User;
 import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
+import com.bluemongo.springmvcjsontest.persistence.LocationStore;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.List;
 
 /**
  * Created by glenn on 17/10/15.
@@ -60,11 +63,14 @@ public class BusinessController implements ServletContextAware
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("pageTitle", "Edit Business Details");
         modelAndView.setViewName("FlexibleUIConfig/Business/addEditBusinessForm");
+        List<Location> locationList = new LocationStore().getAll(businessId, true);
         Business business = new BusinessStore().get(businessId);
         httpSession.setAttribute("businessId", business.getId()); //TODO should this be user.businessId? What about Admin editing other businesses?
         modelAndView.addObject("command", business);
         modelAndView.addObject("businessName", business.getBusinessName());
         modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("activeLocations", locationList);
+
         return modelAndView;
     }
 

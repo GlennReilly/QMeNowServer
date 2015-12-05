@@ -20,8 +20,16 @@ public class GetAppointmentSearchResultsHelper {
     Date toDate;
     int customerId;
     int businessId;
+    Boolean isComplete;
 
 
+    public Boolean getComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(Boolean complete) {
+        isComplete = complete;
+    }
 
     public void setStrFromDate(String strFromDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -52,7 +60,7 @@ public class GetAppointmentSearchResultsHelper {
     }
 
     public void generateSearchResults(){
-        appointmentResultList = appointmentStore.get(businessId, customerId, fromDate, toDate);
+        appointmentResultList = appointmentStore.get(businessId, customerId, fromDate, toDate, isComplete);
     }
 
     public List<AppointmentResult> getAppointmentResultList() {

@@ -8,6 +8,7 @@ import java.util.Date;
 public class AppointmentType {
     private int id;
     private String name;
+    private String prefix;
     private String backgroundColourHexCode;
     private String styleJson;
     private Date createdDate;
@@ -27,6 +28,14 @@ public class AppointmentType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public String getBackgroundColourHexCode() {

@@ -25,7 +25,7 @@
 <div class="pageMessage">${pageMessage}</div>
 <br/>
 <c:if test="${empty locations}">
-    <div>No appointment types found</div>
+    <div>No locations found</div>
 </c:if>
 
 <table>
@@ -37,21 +37,21 @@
         <th>Delete</th>
     </tr>
     </thead>
-    <c:forEach items="${locations}" var="location">
+    <c:forEach items="${locations}" var="appointmentType">
         <tr>
             <td>
             <span>
-                <c:out value="${location.name}"></c:out>
+                <c:out value="${appointmentType.name}"></c:out>
             </span>
             </td>
             <td>
-                <div style="background-color: <c:out  value="${location.backgroundColourHexCode}"></c:out>; width: 80px; height: 30px; "></div>
+                <div style="background-color: <c:out  value="${appointmentType.backgroundColourHexCode}"></c:out>; width: 80px; height: 30px; "></div>
             </td>
             <td>
-                <a href="<spring:url value='/FlexibleUIConfig/location/update/${location.id}' />" >update</a>
+                <a href="<spring:url value='/FlexibleUIConfig/location/update/${appointmentType.id}' />" >update</a>
             </td>
             <td>
-                <a href="<spring:url value='/FlexibleUIConfig/location/delete/${location.id}' />" >delete</a>
+                <a href="<spring:url value='/FlexibleUIConfig/location/delete/${appointmentType.id}' />" >delete</a>
             </td>
         </tr>
     </c:forEach>
