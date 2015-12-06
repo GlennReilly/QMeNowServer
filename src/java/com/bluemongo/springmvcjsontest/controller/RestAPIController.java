@@ -1,7 +1,8 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.api.UserAppointmentService;
+import com.bluemongo.springmvcjsontest.api.AppointmentServiceAPI;
 import com.bluemongo.springmvcjsontest.model.*;
+import com.bluemongo.springmvcjsontest.service.AppointmentResult;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/REST")
-public class RestAPIController implements UserAppointmentService {
+public class RestAPIController implements AppointmentServiceAPI {
 
     @RequestMapping(value="/buttonStyle/add", method = RequestMethod.POST)
     public String AddButtonStyle(@ModelAttribute ButtonStyle buttonStyle){
@@ -115,7 +116,6 @@ public class RestAPIController implements UserAppointmentService {
         return appConfig;
     }
 
-    @Override
     @RequestMapping(value = "/user/getAppointmentsTest/{userId}", method = RequestMethod.GET)
     public List<Appointment> getUserAppointmentsTest(@PathVariable int userId){
         List<Appointment> appointmentList = new ArrayList<>();
@@ -133,18 +133,13 @@ public class RestAPIController implements UserAppointmentService {
     }
 
 
-
-
     @Override
-    @RequestMapping(value = "/user/getAppointments/{userId}", method = RequestMethod.GET)
-    public List<Appointment> getUserAppointments(@PathVariable int userId) {
+    public List<AppointmentResult> getAppointmentsByUserIDAndName(int customerId, String firstName, String lastName) {
         return null;
     }
 
     @Override
-    public List<UserDetails> getUserMatchesByName(String firstName, String lastName) {
+    public List<AppointmentResult> getAppointments(int userId) {
         return null;
     }
-
-
 }

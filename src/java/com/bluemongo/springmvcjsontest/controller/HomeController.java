@@ -1,6 +1,5 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.api.UserAppointmentService;
 import com.bluemongo.springmvcjsontest.model.*;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import org.apache.logging.log4j.LogManager;
@@ -8,9 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 
