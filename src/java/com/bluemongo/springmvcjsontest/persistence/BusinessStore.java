@@ -69,7 +69,7 @@ public class BusinessStore {
 
     public List<Business> getAll(boolean isActive){
         List<Business> businessList = new ArrayList<>();
-        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName, defaultLocationId from business where active = ?";
+        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName, logoFilePath, defaultLocationId from business where active = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setBoolean(1, isActive);
@@ -95,14 +95,15 @@ public class BusinessStore {
         business.setEmailAddress(resultSet.getString("emailAddress"));
         business.setPhysicalAddress(resultSet.getNString("physicalAddress"));
         business.setContactName(resultSet.getString("contactName"));
-        business.setLogoName(resultSet.getString("logoName"));
+        business.setLogoName(resultSet.getString("logoName"), resultSet.getString("logoFilePath"));
         business.setDefaultLocationId(resultSet.getInt("defaultLocationId"));
+        //business.setLogoFilePath(resultSet.getString("logoFilePath"));
         return business;
     }
 
     public Business get(int businessId) {
         Business business = null;
-        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName, defaultLocationId from business where id = ? AND active = ?";
+        String query = "select id, businessName, phoneNumber, emailAddress, physicalAddress, contactName, logoName, logoFilePath, defaultLocationId from business where id = ? AND active = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
@@ -145,12 +146,13 @@ public class BusinessStore {
         return reconfigurableAppConfigList;
     }
 
-    public void setLogoName(int businessId, String logoName) {
-        String query = "update business set logoName=? where id=?";
+    public void setLogoName(int businessId, String logoName, String logoFilePath) {
+        String query = "update business set logoName=?, logoFilePath=? where id=?";
         try(Connection connection = dbHelper.getConnection()){
           preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, logoName);
-            preparedStatement.setInt(2, businessId);
+            preparedStatement.setString(2, logoFilePath);
+            preparedStatement.setInt(3, businessId);
             preparedStatement.execute();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

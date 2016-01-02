@@ -75,7 +75,7 @@ public class AppointmentStatusStore {
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, statusId);
-
+            preparedStatement.setBoolean(2, true);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 appointmentStatus = getAppointmentStatusFromResultSet(resultSet);

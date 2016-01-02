@@ -1,11 +1,10 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.model.Appointment;
 import com.bluemongo.springmvcjsontest.model.Location;
 import com.bluemongo.springmvcjsontest.model.User;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import com.bluemongo.springmvcjsontest.persistence.LocationStore;
-import com.bluemongo.springmvcjsontest.service.AppointmentResult;
+import com.bluemongo.springmvcjsontest.service.AppointmentAndCustomer;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -109,7 +108,7 @@ public class LocationController {
     public ModelAndView deactivate(HttpSession httpSession, @PathVariable int locationId){
         String result;
         ModelAndView modelAndView;
-        List<AppointmentResult> appointmentResultList = new AppointmentStore().getAll(null,null,locationId);
+        List<AppointmentAndCustomer> appointmentResultList = new AppointmentStore().getAll(null,null,locationId);
         if (appointmentResultList.size()>0){
             result = "the location you want to delete still has active appointments.";
             modelAndView = ModelViewHelper.GetAppointmentsFiltered(appointmentResultList,result,httpSession);

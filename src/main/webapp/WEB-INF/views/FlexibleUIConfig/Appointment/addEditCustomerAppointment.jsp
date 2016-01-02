@@ -39,26 +39,29 @@
 
         <div class="label2">
           <label>status:</label>
-          <form:select path="appointment.status">
+          <form:select path="appointment.status" onchange="loadStatusColour(this.value);">
               <form:option value="0" label="Please select" />
               <form:options items="${command.appointmentStatusList}" itemValue="id" itemLabel="name" />
           </form:select>
+            <div id="divStatusColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.statusHexCode}' />;"></div>
         </div>
 
         <div class="label2">
           <label>location:</label>
-          <form:select path="appointment.locationId">
+          <form:select path="appointment.locationId" onchange="loadLocationColour(this.value);">
             <form:option value="0" label="Please select" />
             <form:options items="${command.activeLocations}" itemValue="id" itemLabel="name" />
           </form:select>
+            <div id="divLocationColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.locationHexCode}' />;"></div>
         </div>
 
         <div class="label2">
           <label>appointment type:</label>
-          <form:select path="appointment.appointmentTypeId">
+          <form:select path="appointment.appointmentTypeId" onchange="loadAppointmentTypeColour(this.value);">
             <form:option value="0" label="Please select" />
             <form:options items="${command.appointmentTypeList}" itemValue="id" itemLabel="name" />
           </form:select>
+            <div id="divAppointmentTypeColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.appTypeHexCode}' />;"></div>
         </div>
 
         <div class="label2">
@@ -78,6 +81,9 @@
       <input type="submit" value="${buttonText}">
     </div>
   </div>
+
+
+
   </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
 <script src="<spring:url value='/resources/scripts/jquery-ui.min.js'/>" ></script>
@@ -87,6 +93,44 @@
         $( "#strAppointmentDate" ).datepicker({dateFormat: "dd-mm-yy"});
         $("#strAppointmentTime").ptTimeSelect();
     });
+</script>
+
+<script>
+    var StatusBackgroundColourMap = {};
+    <c:forEach items="${command.appointmentStatusList}" var="status" varStatus="loop">
+        StatusBackgroundColourMap['${status.id}'] = '<c:out value="${status.backgroundColourHexCode}" />';
+    </c:forEach>
+
+    function loadStatusColour(statusId){
+        if(statusId in StatusBackgroundColourMap){
+            $('#divStatusColour').css("background-color",StatusBackgroundColourMap[statusId]);
+        }
+    }
+
+
+    var LocationBackgroundColourMap = {};
+    <c:forEach items="${command.activeLocations}" var="location" varStatus="loop">
+    LocationBackgroundColourMap['${location.id}'] = '<c:out value="${location.backgroundColourHexCode}" />';
+    </c:forEach>
+
+    function loadLocationColour(locationId){
+        if(locationId in LocationBackgroundColourMap){
+            $('#divLocationColour').css("background-color",LocationBackgroundColourMap[locationId]);
+        }
+    }
+
+
+    var AppointmentTypeBackgroundColourMap = {};
+    <c:forEach items="${command.appointmentTypeList}" var="appointmentType" varStatus="loop">
+    AppointmentTypeBackgroundColourMap['${appointmentType.id}'] = '<c:out value="${appointmentType.backgroundColourHexCode}" />';
+    </c:forEach>
+
+    function loadAppointmentTypeColour(appointmentTypeId){
+        if(appointmentTypeId in AppointmentTypeBackgroundColourMap){
+            $('#divAppointmentTypeColour').css("background-color",AppointmentTypeBackgroundColourMap[appointmentTypeId]);
+        }
+    }
+
 </script>
 </body>
 </html>

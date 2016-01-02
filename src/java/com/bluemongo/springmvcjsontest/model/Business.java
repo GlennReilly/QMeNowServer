@@ -16,6 +16,7 @@ public class Business {
     private MultipartFile logo;
     private String logoName;
     private int defaultLocationId;
+    private String logoFilePath;
 
 
     public int saveNew() {
@@ -87,12 +88,18 @@ public class Business {
         this.logo = logo;
     }
 
-    public void setLogoName(String logoName) {
+    public void setLogoName(String logoName, String absolutePath) {
         this.logoName = logoName;
-        new BusinessStore().setLogoName(this.getId(),logoName);
+        this.setLogoFilePath(absolutePath);
+        new BusinessStore().setLogoName(this.getId(),logoName, absolutePath);
     }
 
     public String getLogoName() {
+/*        String fileName = getBusinessName() + "_" + getId() + "_" + logo.getOriginalFilename();
+        String filePathAndName = "/" + fileName;
+        String imageRelativePath = "/resources/images" + filePathAndName;
+        File logoFile = new File(servletContext.getRealPath("/") + imageRelativePath);*/
+
         return logoName;
     }
 
@@ -102,5 +109,14 @@ public class Business {
 
     public void setDefaultLocationId(int defaultLocationId) {
         this.defaultLocationId = defaultLocationId;
+    }
+
+
+    public void setLogoFilePath(String logoFilePath) {
+        this.logoFilePath = logoFilePath;
+    }
+
+    public String getLogoFilePath() {
+        return logoFilePath;
     }
 }

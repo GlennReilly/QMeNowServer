@@ -12,7 +12,7 @@ import java.util.List;
  * Created by glenn on 24/10/15.
  */
 public class GetAppointmentSearchResultsHelper {
-    List<AppointmentResult> appointmentResultList = new ArrayList<>();
+    List<AppointmentAndCustomer> appointmentResultList = new ArrayList<>();
     AppointmentStore appointmentStore = new AppointmentStore();
     String strFromDate;
     String strToDate;
@@ -60,14 +60,14 @@ public class GetAppointmentSearchResultsHelper {
     }
 
     public void generateSearchResults(){
-        appointmentResultList = appointmentStore.get(businessId, customerId, fromDate, toDate, isComplete);
+        appointmentResultList = appointmentStore.getAppointmentsAndCustomer(businessId, customerId, fromDate, toDate, isComplete);
     }
 
-    public List<AppointmentResult> getAppointmentResultList() {
+    public List<AppointmentAndCustomer> getAppointmentResultList() {
         return appointmentResultList;
     }
 
-    public void setAppointmentResultList(List<AppointmentResult> appointmentResultList) {
+    public void setAppointmentResultList(List<AppointmentAndCustomer> appointmentResultList) {
         this.appointmentResultList = appointmentResultList;
     }
 

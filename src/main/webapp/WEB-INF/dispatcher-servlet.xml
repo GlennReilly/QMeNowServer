@@ -24,6 +24,7 @@
     <bean class="com.bluemongo.springmvcjsontest.controller.AppointmentTypeController"></bean>
     <bean class="com.bluemongo.springmvcjsontest.controller.AppointmentStatusController"></bean>
     <bean class="com.bluemongo.springmvcjsontest.controller.RestAPIController"></bean>
+    <bean class="com.bluemongo.springmvcjsontest.controller.APIController"></bean>
     <!--    <bean class="com.bluemongo.springMvcTest.controller.AnotherController"></bean>-->
 
 

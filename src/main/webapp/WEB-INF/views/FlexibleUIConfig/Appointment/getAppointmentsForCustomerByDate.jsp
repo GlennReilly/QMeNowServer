@@ -48,13 +48,13 @@
                 <th>
                     Appointment Date
                 </th>
-                <th>
+                <th colspan="2">
                     Appointment #
                 </th>
-                <th>
+                <th colspan="2">
                     Status
                 </th>
-                <th>
+                <th colspan="2">
                     Location
                 </th>
                 <th>
@@ -83,10 +83,25 @@
                         <c:out value="${appointmentResult.appointment.appointmentTypePrefix}${appointmentResult.appointment.id}" />
                     </td>
                     <td>
+                        <c:if test="${not empty appointmentResult.appointment.appTypeHexCode}">
+                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.appTypeHexCode}"></div>
+                        </c:if>
+                    </td>
+                    <td>
                         <c:out value="${appointmentResult.appointment.statusName}" />
                     </td>
                     <td>
+                        <c:if test="${not empty appointmentResult.appointment.statusHexCode}">
+                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.statusHexCode}"></div>
+                        </c:if>
+                    </td>
+                    <td>
                         <c:out value="${appointmentResult.appointment.locationName}" />
+                    </td>
+                    <td>
+                        <c:if test="${not empty appointmentResult.appointment.locationHexCode}">
+                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.locationHexCode}"></div>
+                        </c:if>
                     </td>
                     <td>
                         <c:out value="${appointmentResult.appointment.appointmentTypeName}" />

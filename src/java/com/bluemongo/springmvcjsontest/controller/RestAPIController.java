@@ -2,7 +2,7 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.api.AppointmentServiceAPI;
 import com.bluemongo.springmvcjsontest.model.*;
-import com.bluemongo.springmvcjsontest.service.AppointmentResult;
+import com.bluemongo.springmvcjsontest.service.AppointmentAndCustomer;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import org.springframework.web.bind.annotation.*;
 
@@ -134,12 +134,22 @@ public class RestAPIController implements AppointmentServiceAPI {
 
 
     @Override
-    public List<AppointmentResult> getAppointmentsByUserIDAndName(int customerId, String firstName, String lastName) {
+    public AppointmentsResponse getAppointmentsByUserIDAndName(Integer customerId, String firstName, String lastName) {
         return null;
     }
 
     @Override
-    public List<AppointmentResult> getAppointments(int userId) {
+    public AppointmentsResponse getAppointmentsToday(Integer customerId) {
+        return null;
+    }
+
+    @Override
+    public List<Appointment> getAppointmentsTest(Integer customerId) {
+        return null;
+    }
+
+    @Override
+    public List<String> doTest(Integer userId) {
         return null;
     }
 }

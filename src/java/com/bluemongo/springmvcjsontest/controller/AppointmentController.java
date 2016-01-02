@@ -2,13 +2,9 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.api.AppointmentServiceAPI;
 import com.bluemongo.springmvcjsontest.model.Appointment;
-import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.model.User;
-import com.bluemongo.springmvcjsontest.model.UserDetails;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
-import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import com.bluemongo.springmvcjsontest.service.AddAppointmentFormHelper;
-import com.bluemongo.springmvcjsontest.service.AppointmentResult;
 import com.bluemongo.springmvcjsontest.service.GetAppointmentSearchResultsHelper;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/FlexibleUIConfig/appointment")
-public class AppointmentController implements AppointmentServiceAPI{
+public class AppointmentController{
 
     @RequestMapping(value = "/add/{customerId}", method = RequestMethod.GET)
     public ModelAndView getAddAppointmentForm( HttpSession httpSession, @PathVariable int customerId){
@@ -88,7 +84,7 @@ public class AppointmentController implements AppointmentServiceAPI{
         User user;
         if (httpSession.getAttribute("User") != null){
             user = (User)httpSession.getAttribute("User");
-            Appointment appointment = new AppointmentStore().get(appointmentId);
+            Appointment appointment = new AppointmentStore().getAppointmentsAndCustomer(appointmentId);
             httpSession.setAttribute("CurrentlyEditingAppointmentId", appointmentId);
             modelAndView = ModelViewHelper.GetModelViewForEditAppointment(appointment.getCustomerId(), user.getBusinessId(), null, httpSession, appointment);
         }
@@ -167,33 +163,6 @@ public class AppointmentController implements AppointmentServiceAPI{
         }
 
         return modelAndView;
-    }
-
-    @Override
-    public List<AppointmentResult> getAppointments(int customerId) {
-        List<AppointmentResult> appointmentResults = new ArrayList<AppointmentResult>();
-        Date fromDate = Calendar.getInstance().getTime();
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 1);
-        Date toDate = cal.getTime();
-        //Customer customer = new CustomerStore().get(customerId);
-        appointmentResults = new AppointmentStore().get(customerId, fromDate, toDate, false);
-
-        return appointmentResults;
-
-    }
-
-    @Override
-    public List<AppointmentResult> getAppointmentsByUserIDAndName(int customerId, String firstName, String lastName) {
-        List<AppointmentResult> appointmentResults = new ArrayList<AppointmentResult>();
-        Date fromDate = Calendar.getInstance().getTime();
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 1);
-        Date toDate = cal.getTime();
-        //Customer customer = new CustomerStore().get(customerId);
-        appointmentResults = new AppointmentStore().get(customerId, fromDate, toDate, false);
-
-        return appointmentResults;
     }
 
 

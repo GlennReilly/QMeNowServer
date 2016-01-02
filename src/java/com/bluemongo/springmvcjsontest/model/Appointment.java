@@ -17,7 +17,7 @@ public class Appointment {
     private String messageToCustomer;
     private String strAppointmentDate;
     private String strAppointmentTime;
-    private Date appointmentDate;
+    private transient Date appointmentDate;
 
     private int locationId;
     private String locationName;
@@ -30,10 +30,14 @@ public class Appointment {
     private String statusName;
 
     private boolean isComplete;
-    private AppointmentStore appointmentStore = new AppointmentStore();
+    private transient AppointmentStore appointmentStore = new AppointmentStore();
 
     private String appointmentTypeName;
     private String appointmentTypePrefix;
+
+    private String statusHexCode;
+    private String appTypeHexCode;
+    private String locationHexCode;
 
 
     public Appointment(){}
@@ -220,5 +224,29 @@ public class Appointment {
 
     public String getStatusName() {
         return statusName;
+    }
+
+    public String getLocationHexCode() {
+        return locationHexCode;
+    }
+
+    public void setLocationHexCode(String locationHexCode) {
+        this.locationHexCode = locationHexCode;
+    }
+
+    public String getAppTypeHexCode() {
+        return appTypeHexCode;
+    }
+
+    public void setAppTypeHexCode(String appTypeHexCode) {
+        this.appTypeHexCode = appTypeHexCode;
+    }
+
+    public String getStatusHexCode() {
+        return statusHexCode;
+    }
+
+    public void setStatusHexCode(String statusHexCode) {
+        this.statusHexCode = statusHexCode;
     }
 }

@@ -321,7 +321,7 @@ public class ModelViewHelper {
         return  modelAndView;
     }
 
-    public static ModelAndView GetAppointmentsFiltered(List<AppointmentResult> appointmentResultList, String message, HttpSession httpSession) {
+    public static ModelAndView GetAppointmentsFiltered(List<AppointmentAndCustomer> appointmentResultList, String message, HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView();
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);

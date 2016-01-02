@@ -4,8 +4,8 @@ package com.bluemongo.springmvcjsontest.model;
  * Created by glenn on 31/08/15.
  */
 public class UserCredentials {
-    String username = "";
-    String password = "";
+    String username = "frank";
+    String password = "frank$";
 
     public String getUsername() {
         return username;

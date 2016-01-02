@@ -14,6 +14,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +29,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Hashtable;
@@ -39,7 +42,30 @@ import java.util.List;
 @RequestMapping("/FlexibleUIConfig/business")
 public class BusinessController implements ServletContextAware
 {
-        private ServletContext servletContext;
+
+    private ServletContext servletContext;
+
+
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping(value = "/photo2", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] testphoto(HttpSession httpSession) throws IOException {
+        if(httpSession.getAttribute("businessId") != null) {
+            int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
+            Business business = new BusinessStore().get(businessId);
+            String resourceBase = "/resources/images/";
+            InputStream in = servletContext.getResourceAsStream(resourceBase + business.getLogoName());
+            return IOUtils.toByteArray(in);
+        }else{
+            return null;
+        }
+    }
 
     @RequestMapping(value = "/{businessId}", method = RequestMethod.GET)
     public ModelAndView ShowBusinessDetails(@PathVariable int businessId, HttpSession httpSession){
@@ -116,7 +142,7 @@ public class BusinessController implements ServletContextAware
 
                         try {
                             logo.transferTo(logoFile);
-                            business.setLogoName(fileName);
+                            business.setLogoName(fileName, logoFile.getAbsolutePath());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -242,11 +268,6 @@ public class BusinessController implements ServletContextAware
         Date now = Calendar.getInstance().getTime();
         String dateString = InputHelper.getISO8601StringFromDate(now);
         return dateString;
-    }
-
-    @Override
-    public void setServletContext(ServletContext servletContext) {
-        this.servletContext = servletContext;
     }
 
 

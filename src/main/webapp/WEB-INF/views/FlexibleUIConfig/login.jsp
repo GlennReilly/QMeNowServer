@@ -19,7 +19,7 @@
     <form:form action="/login/" method="post">
         <div>
             <div class="label2">
-                <label>username:</label><form:input path="username" id="username"/>
+                <label>username:</label><form:input path="username" id="username" />
             </div>
             <div class="label2">
                 <label>password:</label><form:password path="password" id="password" />

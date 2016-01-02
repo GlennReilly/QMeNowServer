@@ -17,14 +17,16 @@ public class AddAppointmentFormHelper {
     private int customerId;
     private int userId = -1;
     private int businessId = -1;
-    Appointment appointment;
+    Appointment appointment = new Appointment();
     private int selectedUserId;
     private List<Location> activeLocations = new ArrayList<>();
     //private List<Customer> customersList = new ArrayList<>();
     private List<AppointmentType> appointmentTypeList  = new ArrayList<>();
     private List<AppointmentStatus> appointmentStatusList;
 
-    public AddAppointmentFormHelper(){}
+    public AddAppointmentFormHelper(){
+
+    }
     public AddAppointmentFormHelper(int userId, int businessId){
         this.userId = userId;
         this.businessId = businessId;

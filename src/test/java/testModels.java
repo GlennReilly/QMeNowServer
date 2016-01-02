@@ -72,12 +72,12 @@ public class testModels {
         assertTrue(appointmentList.size() > 0);
     }
 
-    @Test
+/*    @Test
     public void testGetAllAppointmentsForUserForToday(){
         AppointmentStore appointmentStore = new AppointmentStore();
         List<Appointment> appointmentList = appointmentStore.getAllForToday(1);
         assertTrue(appointmentList.size() > 0);
-    }
+    }*/
 
     @Test
     public void testGetAllAppointmentsForUserForDate(){

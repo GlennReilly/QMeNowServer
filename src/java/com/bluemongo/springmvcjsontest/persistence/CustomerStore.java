@@ -130,7 +130,8 @@ public class CustomerStore {
     public List<Customer> get(int businessId, String customerIdStr, String firstName, String lastName) {
         List<Customer> customerList = new ArrayList<>();
 
-        customerIdStr = customerIdStr == null? "%%" : "%" + customerIdStr + "%";
+        //customerIdStr = customerIdStr == null? "%%" : "%" + customerIdStr + "%";
+        customerIdStr = customerIdStr == null | customerIdStr == "" ? "%%" :  customerIdStr;
         firstName = firstName == null? "%%" : "%" + firstName + "%";
         lastName = lastName == null? "%%" : "%" + lastName + "%";
 
