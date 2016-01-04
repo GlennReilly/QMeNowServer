@@ -10,15 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d36dc02-edb4-4daa-8655-08d7a9335ab0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/model/UserCredentials.class" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/model/UserCredentials.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/model/UserCredentials.class" afterPath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/model/UserCredentials.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentStatus.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStatusStore.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStatusStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/addEditCustomerAppointment.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/addEditCustomerAppointment.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/login.jsp" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/views/FlexibleUIConfig/login.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql" afterPath="$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql" />
     </list>
     <ignored path="SpringMVCJsonTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -181,14 +175,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="APIController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="APIController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38751346">
+            <state vertical-scroll-proportion="0.0">
               <caret line="45" column="64" selection-start-line="45" selection-start-column="64" selection-end-line="45" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateDBAndTablesV2.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.39935413">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -246,7 +250,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Location.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/showUserHome.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer/customerList.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer/addCustomerForm.jsp" />
@@ -297,6 +300,7 @@
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStatusStore.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java" />
+        <option value="$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql" />
       </list>
     </option>
   </component>
@@ -1598,7 +1602,7 @@
       <workItem from="1450316783473" duration="3376000" />
       <workItem from="1450591956923" duration="6087000" />
       <workItem from="1451035341265" duration="3407000" />
-      <workItem from="1451075531217" duration="15377000" />
+      <workItem from="1451075531217" duration="15486000" />
     </task>
     <task id="LOCAL-00001" summary="implemented log4j2.">
       <created>1424527602321</created>
@@ -1780,11 +1784,17 @@
       <option name="project" value="LOCAL" />
       <updated>1451721671947</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Added appointment status list to Appointment Response JSON.">
+      <created>1451900758691</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1451900758691</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="826679000" />
+    <option name="totallyTimeSpent" value="826788000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1903,7 +1913,8 @@
     <MESSAGE value="Added new DB tables creation script" />
     <MESSAGE value="Refactored getAppointments methods for API calls" />
     <MESSAGE value="Added display colours in appointment list and details views" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added display colours in appointment list and details views" />
+    <MESSAGE value="Added appointment status list to Appointment Response JSON." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added appointment status list to Appointment Response JSON." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2219,13 +2230,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5816327">
           <caret line="49" column="54" selection-start-line="49" selection-start-column="54" selection-end-line="49" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82439023">
-          <caret line="130" column="42" selection-start-line="130" selection-start-column="42" selection-end-line="130" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -2671,11 +2675,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38751346">
+        <state vertical-scroll-proportion="0.0">
           <caret line="45" column="64" selection-start-line="45" selection-start-column="64" selection-end-line="45" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39935413">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

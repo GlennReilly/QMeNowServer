@@ -12,14 +12,17 @@ CREATE TABLE `appointment` (
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `appointmentStatus` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `createdDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `businessId` int(11) DEFAULT NULL,
   `statusName` varchar(100) DEFAULT NULL,
   `backgroundColourHexCode` varchar(10) DEFAULT NULL,
   `isActive` bit(1) DEFAULT b'1',
+  `sequenceNumber` int(11) DEFAULT '0',
+  `customerInitiated` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `appointmentType` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
