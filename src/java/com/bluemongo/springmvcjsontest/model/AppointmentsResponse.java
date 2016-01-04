@@ -8,6 +8,7 @@ import java.util.List;
 public class AppointmentsResponse {
     private List<Appointment> appointmentList;
     private String appointmentCreationURL;
+    private List<AppointmentStatus> appointmentStatusList;
 
     public void setAppointmentList(List<Appointment> appointmentList) {
         this.appointmentList = appointmentList;
@@ -23,5 +24,13 @@ public class AppointmentsResponse {
 
     public String getAppointmentCreationURL() {
         return appointmentCreationURL;
+    }
+
+    public List<AppointmentStatus> getAppointmentStatusList() {
+        return appointmentStatusList;
+    }
+
+    public void setAppointmentStatusList(List<AppointmentStatus> appointmentStatusList) {
+        this.appointmentStatusList = appointmentStatusList;
     }
 }

@@ -2,6 +2,7 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.api.AppointmentServiceAPI;
 import com.bluemongo.springmvcjsontest.model.*;
+import com.bluemongo.springmvcjsontest.persistence.AppointmentStatusStore;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
@@ -25,7 +26,7 @@ import java.util.List;
 public class APIController implements AppointmentServiceAPI {
 
 
-    //http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/7
+    // http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/7
     @Override
     @RequestMapping(value = "/AppointmentsToday/{customerId}", method = RequestMethod.GET)
     public AppointmentsResponse getAppointmentsToday(@PathVariable Integer customerId) {
@@ -42,6 +43,9 @@ public class APIController implements AppointmentServiceAPI {
         appointments = new AppointmentStore().get(customerId, fromDate, toDate, false);
         AppointmentsResponse appointmentsResponse = new AppointmentsResponse();
         appointmentsResponse.setAppointmentList(appointments);
+        Customer customer = new CustomerStore().get(customerId);
+        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(customer.getBusinessId(), true);
+        appointmentsResponse.setAppointmentStatusList(appointmentStatusList);
         return appointmentsResponse;
 
     }
@@ -89,6 +93,8 @@ public class APIController implements AppointmentServiceAPI {
         appointmentsResponse.setAppointmentList(appointments);
         Customer customer = new CustomerStore().get(customerId);
         Business business = new BusinessStore().get(customer.getBusinessId());
+        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(customer.getBusinessId(), true);
+        appointmentsResponse.setAppointmentStatusList(appointmentStatusList);
         if(business.getDefaultLocationId() > 0){
             String appointmentCreationURL = "/FlexibleUIConfig/api/v1/Appointments/";
             appointmentsResponse.setAppointmentCreationURL(appointmentCreationURL);

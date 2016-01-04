@@ -45,7 +45,7 @@
           </form:select>
             <div id="divStatusColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.statusHexCode}' />;"></div>
         </div>
-
+5
         <div class="label2">
           <label>location:</label>
           <form:select path="appointment.locationId" onchange="loadLocationColour(this.value);">

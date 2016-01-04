@@ -51,7 +51,7 @@ public class AppointmentStatusStore {
 
     public List<AppointmentStatus> getAll(int businessId, boolean isActive) {
         List<AppointmentStatus> appointmentStatusList = new ArrayList<>();
-        String query = "select id, statusName, businessId, backgroundColourHexCode from appointmentStatus where businessId = ? AND isActive = ?; ";
+        String query = "select id, statusName, businessId, backgroundColourHexCode, sequenceNumber, customerInitiated  from appointmentStatus where businessId = ? AND isActive = ?; ";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
@@ -71,7 +71,7 @@ public class AppointmentStatusStore {
 
     public AppointmentStatus get(int statusId){
         AppointmentStatus appointmentStatus = new AppointmentStatus();
-        String query = "select id, statusName, businessId, backgroundColourHexCode from appointmentStatus where id = ? AND isActive = ?; ";
+        String query = "select id, statusName, businessId, backgroundColourHexCode, sequenceNumber, customerInitiated from appointmentStatus where id = ? AND isActive = ?; ";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, statusId);
@@ -95,6 +95,8 @@ public class AppointmentStatusStore {
         appointmentStatus.setBusinessId(resultSet.getInt("businessId"));
         appointmentStatus.setName(resultSet.getString("StatusName"));
         appointmentStatus.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
+        appointmentStatus.setSequenceNumber(resultSet.getInt("sequenceNumber"));
+        appointmentStatus.setCustomerInitiated(resultSet.getBoolean("customerInitiated"));
         return appointmentStatus;
     }
 

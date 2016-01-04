@@ -11,6 +11,8 @@ public class AppointmentStatus  {
     private int businessId;
     AppointmentStatusStore store = new AppointmentStatusStore();
     private String backgroundColourHexCode;
+    private int sequenceNumber;
+    private boolean customerInitiated;
 
     public int saveNew() {
         int newId = store.saveNew(this);
@@ -47,5 +49,21 @@ public class AppointmentStatus  {
 
     public String getBackgroundColourHexCode() {
         return backgroundColourHexCode;
+    }
+
+    public int getSequenceNumber() {
+        return sequenceNumber;
+    }
+
+    public void setSequenceNumber(int sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
+    }
+
+    public boolean isCustomerInitiated() {
+        return customerInitiated;
+    }
+
+    public void setCustomerInitiated(boolean customerInitiated) {
+        this.customerInitiated = customerInitiated;
     }
 }
