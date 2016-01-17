@@ -146,28 +146,24 @@ public class BusinessController implements ServletContextAware
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        //return "You successfully uploaded your logo.";
+
                         modelAndView = getModelAndViewForBusinessDetailsForm(businessId, httpSession);
                         modelAndView.addObject("pageMessage", "You successfully uploaded your logo.");
 
                     } else {
-                        //return "Sorry, that's not an image.";
                         modelAndView = ModelViewHelper.GetModelViewForError("Sorry, that's not an image.");
                     }
                 }
                 else{
-                    //return "Sorry, that file is larger than the allowed " + maxFileSizeBytes/1000 + "KB";
                     modelAndView = ModelViewHelper.GetModelViewForError("Sorry, that file is larger than the allowed " + maxFileSizeBytes/1000 + "KB");
                 }
             }
             else{
-                //return "You failed to upload because the file was empty.";
                 modelAndView = ModelViewHelper.GetModelViewForError("You failed to upload because the file was empty.");
             }
         }
         else{
-            //return "Sorry, but businessId found";
-            modelAndView = ModelViewHelper.GetModelViewForError("Sorry, but businessId found");
+            modelAndView = ModelViewHelper.GetModelViewForError("Sorry, no businessId found");
         }
         return modelAndView;
     }
@@ -205,7 +201,6 @@ public class BusinessController implements ServletContextAware
 
             String jsonBarcodePayload = getBarcodePayload(business);
 
-        /*try {*/
             BitMatrix byteMatrix = qrCodeWriter.encode(jsonBarcodePayload, BarcodeFormat.QR_CODE, width, height, hintMap);
             // Make the BufferedImage to hold the QRCode
             int matrixWidth = byteMatrix.getWidth();
@@ -226,13 +221,6 @@ public class BusinessController implements ServletContextAware
                 }
             }
             ImageIO.write(image, fileType, qrFile);
-
-/*        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
 
             modelAndView.setViewName("/FlexibleUIConfig/Barcode/index");
         }
@@ -256,9 +244,6 @@ public class BusinessController implements ServletContextAware
 
         return jsonBarcodePayload;
 
-/*
-
-        return JsonConvert.SerializeObject(barcodePayload);*/
     }
 
     private String getFormattedNowDateString() {

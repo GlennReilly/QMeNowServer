@@ -45,7 +45,7 @@ public class BarcodeController implements ServletContextAware {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/makeQRCode")
+/*    @RequestMapping(value = "/makeQRCode")
     public ModelAndView MakeQRCode(String txtcontent) throws WriterException, IOException
     {
         int height = 250;
@@ -65,38 +65,31 @@ public class BarcodeController implements ServletContextAware {
 
         String jsonBarcodePayload = getBarcodePayload(txtcontent);
 
-        /*try {*/
-            BitMatrix byteMatrix = qrCodeWriter.encode(jsonBarcodePayload, BarcodeFormat.QR_CODE, width, height, hintMap);
-            // Make the BufferedImage to hold the QRCode
-            int matrixWidth = byteMatrix.getWidth();
-            BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, BufferedImage.TYPE_INT_RGB);
-            image.createGraphics();
+        BitMatrix byteMatrix = qrCodeWriter.encode(jsonBarcodePayload, BarcodeFormat.QR_CODE, width, height, hintMap);
+        // Make the BufferedImage to hold the QRCode
+        int matrixWidth = byteMatrix.getWidth();
+        BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, BufferedImage.TYPE_INT_RGB);
+        image.createGraphics();
 
-            Graphics2D graphics = (Graphics2D) image.getGraphics();
-            graphics.setColor(Color.WHITE);
-            graphics.fillRect(0, 0, matrixWidth, matrixWidth);
-            // Paint and saveNew the image using the ByteMatrix
-            graphics.setColor(Color.BLACK);
+        Graphics2D graphics = (Graphics2D) image.getGraphics();
+        graphics.setColor(Color.WHITE);
+        graphics.fillRect(0, 0, matrixWidth, matrixWidth);
+        // Paint and saveNew the image using the ByteMatrix
+        graphics.setColor(Color.BLACK);
 
-            for (int i = 0; i < matrixWidth; i++) {
-                for (int j = 0; j < matrixWidth; j++) {
-                    if (byteMatrix.get(i, j)) {
-                        graphics.fillRect(i, j, 1, 1);
-                    }
+        for (int i = 0; i < matrixWidth; i++) {
+            for (int j = 0; j < matrixWidth; j++) {
+                if (byteMatrix.get(i, j)) {
+                    graphics.fillRect(i, j, 1, 1);
                 }
             }
-            ImageIO.write(image, fileType, qrFile);
-
-/*        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        }
+        ImageIO.write(image, fileType, qrFile);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/FlexibleUIConfig/Barcode/index");
         return modelAndView;
-    }
+    }*/
 
     private String getBarcodePayload(String txtcontent) {
 
@@ -111,9 +104,6 @@ public class BarcodeController implements ServletContextAware {
 
         return jsonBarcodePayload;
 
-/*
-
-        return JsonConvert.SerializeObject(barcodePayload);*/
     }
 
     private String getFormattedNowDateString() {
