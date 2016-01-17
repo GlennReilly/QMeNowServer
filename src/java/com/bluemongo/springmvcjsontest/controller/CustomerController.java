@@ -181,7 +181,7 @@ public class CustomerController implements ServletContextAware
 
     @RequestMapping(value = "/barcode/{customerId}")
     public ModelAndView getBarcodeForCustomerId(HttpSession httpSession, @PathVariable Integer customerId) throws WriterException, IOException {
-        int height = 250;
+        int height = 100;
         int width = 250;
         ModelAndView modelAndView = new ModelAndView();
 
@@ -212,17 +212,18 @@ public class CustomerController implements ServletContextAware
             BitMatrix byteMatrix = code39Writer.encode(customerId.toString(), BarcodeFormat.CODE_39, width, height, hintMap);
             // Make the BufferedImage to hold the barcode
             int matrixWidth = byteMatrix.getWidth();
-            BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, BufferedImage.TYPE_INT_RGB);
+            int matrixHeight = byteMatrix.getHeight();
+            BufferedImage image = new BufferedImage(matrixWidth, matrixHeight, BufferedImage.TYPE_INT_RGB);
             image.createGraphics();
 
             Graphics2D graphics = (Graphics2D) image.getGraphics();
             graphics.setColor(Color.WHITE);
-            graphics.fillRect(0, 0, matrixWidth, matrixWidth);
+            graphics.fillRect(0, 0, matrixWidth, matrixHeight);
             // Paint and saveNew the image using the ByteMatrix
             graphics.setColor(Color.BLACK);
 
             for (int i = 0; i < matrixWidth; i++) {
-                for (int j = 0; j < matrixWidth; j++) {
+                for (int j = 0; j < matrixHeight; j++) {
                     if (byteMatrix.get(i, j)) {
                         graphics.fillRect(i, j, 1, 1);
                     }

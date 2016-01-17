@@ -12,10 +12,7 @@
     <list default="true" id="1d36dc02-edb4-4daa-8655-08d7a9335ab0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/addEditCustomerAppointment.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/addEditCustomerAppointment.jsp" />
     </list>
     <ignored path="SpringMVCJsonTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -142,8 +139,8 @@
       <file leaf-file-name="CustomerController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64181525">
-              <caret line="183" column="22" selection-start-line="183" selection-start-column="22" selection-end-line="183" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.4667747">
+              <caret line="183" column="23" selection-start-line="183" selection-start-column="23" selection-end-line="183" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1563,7 +1560,7 @@
       <workItem from="1450591956923" duration="6087000" />
       <workItem from="1451035341265" duration="3407000" />
       <workItem from="1451075531217" duration="17634000" />
-      <workItem from="1452989205962" duration="3598000" />
+      <workItem from="1452989205962" duration="4979000" />
     </task>
     <task id="LOCAL-00001" summary="implemented log4j2.">
       <created>1424527602321</created>
@@ -1757,11 +1754,17 @@
       <option name="project" value="LOCAL" />
       <updated>1451900869418</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="basic 2d barcode (Code 39) creation for customerId">
+      <created>1453024516628</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1453024516628</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="832534000" />
+    <option name="totallyTimeSpent" value="833915000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1856,7 +1859,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="basic mySql connectivity (write)." />
     <MESSAGE value="basic mySql connectivity (now included db generation script)." />
     <MESSAGE value="added basic Phrase class and helper." />
     <MESSAGE value="improved helper cleantext method, functional phrase persistence." />
@@ -1881,7 +1883,8 @@
     <MESSAGE value="Added display colours in appointment list and details views" />
     <MESSAGE value="Added appointment status list to Appointment Response JSON." />
     <MESSAGE value="Updated DB table creation script for AppointmentStatus table." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated DB table creation script for AppointmentStatus table." />
+    <MESSAGE value="basic 2d barcode (Code 39) creation for customerId" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic 2d barcode (Code 39) creation for customerId" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2674,8 +2677,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64181525">
-          <caret line="183" column="22" selection-start-line="183" selection-start-column="22" selection-end-line="183" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.4667747">
+          <caret line="183" column="23" selection-start-line="183" selection-start-column="23" selection-end-line="183" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
