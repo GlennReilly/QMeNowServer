@@ -50,6 +50,9 @@
         <div class="label2">
             <input type="submit" value="update"/>
         </div>
+        <div>
+            <img src="<c:out value="${command.barcodeImageString}"></c:out>" />
+        </div>
     </div>
 </form:form>
 <span class="listLink"><a href='<spring:url value="/FlexibleUIConfig/appointment/add/${command.id}"/>'>add appointment</a></span>

@@ -1,31 +1,19 @@
 package com.bluemongo.springmvcjsontest.controller;
 
 
-import com.bluemongo.springmvcjsontest.model.BarcodePayload;
+import com.bluemongo.springmvcjsontest.model.QRCodePayload;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import utils.InputHelper;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Hashtable;
 
 /**
  * Created by glenn on 1/10/15.
@@ -95,12 +83,12 @@ public class BarcodeController implements ServletContextAware {
 
         String formattedNow = getFormattedNowDateString();
 
-        BarcodePayload barcodePayload = new BarcodePayload();
-        barcodePayload.setCustomerName("test customer name");
-        barcodePayload.setDateTimeString(formattedNow);
-        barcodePayload.setContent(txtcontent);
+        QRCodePayload QRCodePayload = new QRCodePayload();
+        QRCodePayload.setBusinessName("test customer name");
+        QRCodePayload.setDateTimeString(formattedNow);
+        QRCodePayload.setContent(txtcontent);
         Gson gson = new Gson();
-        String jsonBarcodePayload = gson.toJson(barcodePayload);
+        String jsonBarcodePayload = gson.toJson(QRCodePayload);
 
         return jsonBarcodePayload;
 

@@ -1,6 +1,6 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.model.BarcodePayload;
+import com.bluemongo.springmvcjsontest.model.QRCodePayload;
 import com.bluemongo.springmvcjsontest.model.Business;
 import com.bluemongo.springmvcjsontest.model.Location;
 import com.bluemongo.springmvcjsontest.model.User;
@@ -235,12 +235,12 @@ public class BusinessController implements ServletContextAware
 
         String formattedNow = getFormattedNowDateString();
 
-        BarcodePayload barcodePayload = new BarcodePayload();
-        barcodePayload.setCustomerName(business.getBusinessName());
-        barcodePayload.setDateTimeString(formattedNow);
-        barcodePayload.setContent(business.getPhysicalAddress());
+        QRCodePayload QRCodePayload = new QRCodePayload();
+        QRCodePayload.setBusinessName(business.getBusinessName());
+        QRCodePayload.setDateTimeString(formattedNow);
+        QRCodePayload.setContent(business.getPhysicalAddress());
         Gson gson = new Gson();
-        String jsonBarcodePayload = gson.toJson(barcodePayload);
+        String jsonBarcodePayload = gson.toJson(QRCodePayload);
 
         return jsonBarcodePayload;
 

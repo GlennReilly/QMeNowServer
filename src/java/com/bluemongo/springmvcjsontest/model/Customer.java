@@ -1,9 +1,23 @@
 package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -21,19 +35,22 @@ public class Customer {
     private Gender gender;
     private Date DOB;
     private int businessId;
+    private String barcodeImageString = "";
+
+
 
     public Customer() {}
 
 
     public Customer(int id) {
         this.id = id;
+        setBarcodeImageString();
     }
 
 
     public static Customer get(int businessId, int customerId) {
         return customerStore.get(businessId, customerId);
     }
-
 
 /*
     public List<Customer> getAllCustomers(boolean active){
@@ -53,6 +70,7 @@ public class Customer {
 
     public void setId(int id) {
         this.id = id;
+        setBarcodeImageString();
     }
 
     public String getFirstName() {
@@ -127,5 +145,60 @@ public class Customer {
     }
 
     public enum Gender {NOT_SPECIFIED, MALE, FEMALE,}
+
+    public void setBarcodeImageString(String barcodeImageString) {
+        this.barcodeImageString = getBarcodeImageString();
+    }
+
+    public void setBarcodeImageString(){
+        Hashtable hintMap = new Hashtable();
+        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        int height = 250;
+        int width = 250;
+        BitMatrix byteMatrix = null;
+        try {
+            byteMatrix = qrCodeWriter.encode(String.valueOf(this.id), BarcodeFormat.QR_CODE, width, height, hintMap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        // Make the BufferedImage to hold the barcode
+        int matrixWidth = byteMatrix.getWidth();
+        int matrixHeight = byteMatrix.getHeight();
+        BufferedImage image = new BufferedImage(matrixWidth, matrixHeight, BufferedImage.TYPE_INT_RGB);
+        image.createGraphics();
+
+        Graphics2D graphics = (Graphics2D) image.getGraphics();
+        graphics.setColor(Color.WHITE);
+        graphics.fillRect(0, 0, matrixWidth, matrixHeight);
+        // Paint and saveNew the image using the ByteMatrix
+        graphics.setColor(Color.BLACK);
+
+        for (int i = 0; i < matrixWidth; i++) {
+            for (int j = 0; j < matrixHeight; j++) {
+                if (byteMatrix.get(i, j)) {
+                    graphics.fillRect(i, j, 1, 1);
+                }
+            }
+        }
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        try {
+            ImageIO.write(image, "png", baos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String imageString = "data:image/png;base64," +
+                DatatypeConverter.printBase64Binary(baos.toByteArray());
+
+
+        this.barcodeImageString = imageString;
+    }
+
+    public String getBarcodeImageString(){
+        return barcodeImageString;
+    }
 
 }

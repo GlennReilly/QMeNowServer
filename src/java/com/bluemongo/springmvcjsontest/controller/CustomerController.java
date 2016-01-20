@@ -1,6 +1,6 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.model.BarcodePayload;
+import com.bluemongo.springmvcjsontest.model.QRCodePayload;
 import com.bluemongo.springmvcjsontest.model.Business;
 import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.model.User;
@@ -13,20 +13,24 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.oned.Code39Writer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
+import utils.InputHelper;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.DatatypeConverter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -181,8 +185,6 @@ public class CustomerController implements ServletContextAware
 
     @RequestMapping(value = "/barcode/{customerId}")
     public ModelAndView getBarcodeForCustomerId(HttpSession httpSession, @PathVariable Integer customerId) throws WriterException, IOException {
-        int height = 100;
-        int width = 250;
         ModelAndView modelAndView = new ModelAndView();
 
         if (httpSession.getAttribute("User") != null) {
@@ -196,6 +198,7 @@ public class CustomerController implements ServletContextAware
         if (httpSession.getAttribute("businessId") != null) {
             int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
             Business business = new BusinessStore().get(businessId);
+            modelAndView.addObject("Business", business);
 
             String fileType = "gif";
             String fileName = "barcode" + "_" + customerId;
@@ -203,13 +206,14 @@ public class CustomerController implements ServletContextAware
             String imageRelativePath = "/resources/images" + filePath;
             File qrFile = new File(servletContext.getRealPath("/") + imageRelativePath);
             modelAndView.addObject("QRCodePath", imageRelativePath);
-            modelAndView.addObject("Business", business);
+
 
             Hashtable hintMap = new Hashtable();
             hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-            Code39Writer code39Writer = new Code39Writer();
-
-            BitMatrix byteMatrix = code39Writer.encode(customerId.toString(), BarcodeFormat.CODE_39, width, height, hintMap);
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            int height = 250;
+            int width = 250;
+            BitMatrix byteMatrix = qrCodeWriter.encode(customerId.toString(), BarcodeFormat.QR_CODE, width, height, hintMap);
             // Make the BufferedImage to hold the barcode
             int matrixWidth = byteMatrix.getWidth();
             int matrixHeight = byteMatrix.getHeight();
@@ -229,8 +233,19 @@ public class CustomerController implements ServletContextAware
                     }
                 }
             }
-            ImageIO.write(image, fileType, qrFile);
 
+            ImageIO.write(image, fileType, qrFile);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            String imageString = "data:image/png;base64," +
+                    DatatypeConverter.printBase64Binary(baos.toByteArray());
+
+            try {
+                ImageIO.write(image, "png", baos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String something = imageString;
             modelAndView.setViewName("/FlexibleUIConfig/Barcode/index");
         }
         else{
@@ -238,6 +253,30 @@ public class CustomerController implements ServletContextAware
         }
 
         return modelAndView;
+    }
+
+    private String getBarcodePayload(Business business) {
+
+        String formattedNow = getFormattedNowDateString();
+
+        QRCodePayload QRCodePayload = new QRCodePayload();
+        QRCodePayload.setBusinessName(business.getBusinessName());
+        QRCodePayload.setDateTimeString(formattedNow);
+        QRCodePayload.setContent(business.getPhysicalAddress());
+        Gson gson = new Gson();
+        String jsonBarcodePayload = gson.toJson(QRCodePayload);
+
+        return jsonBarcodePayload;
+
+    }
+
+    private String getFormattedNowDateString() {
+        //"yyyy-MM-dd'T'HH:mm:ssz" ISO8601
+        //2015-10-10T11:16+00:00
+
+        Date now = Calendar.getInstance().getTime();
+        String dateString = InputHelper.getISO8601StringFromDate(now);
+        return dateString;
     }
 
 
