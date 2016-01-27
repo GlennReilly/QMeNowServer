@@ -1,6 +1,7 @@
 package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
+import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -8,6 +9,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.springframework.web.bind.annotation.PathVariable;
+import utils.InputHelper;
 
 import javax.imageio.ImageIO;
 import javax.xml.bind.DatatypeConverter;
@@ -15,9 +17,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Hashtable;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -79,6 +79,7 @@ public class Customer {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        setBarcodeImageString();
     }
 
     public String getLastName() {
@@ -93,6 +94,7 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        setBarcodeImageString();
     }
 
     public String getPhoneNumber() {
@@ -158,7 +160,7 @@ public class Customer {
         int width = 250;
         BitMatrix byteMatrix = null;
         try {
-            byteMatrix = qrCodeWriter.encode(String.valueOf(this.id), BarcodeFormat.QR_CODE, width, height, hintMap);
+            byteMatrix = qrCodeWriter.encode(getBarcodePayload(this), BarcodeFormat.QR_CODE, width, height, hintMap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -199,6 +201,34 @@ public class Customer {
 
     public String getBarcodeImageString(){
         return barcodeImageString;
+    }
+
+
+    private String getBarcodePayload(Customer customer) {
+
+        String formattedNow = getFormattedNowDateString();
+
+        QRCodePayload QRCodePayload = new QRCodePayload();
+        QRCodePayload.setDateTimeString(formattedNow);
+        QRCodePayload.setCustomerId(customer.getId());
+        QRCodePayload.setCustomerFirstName(customer.getFirstName());
+        QRCodePayload.setCustomerLastName(customer.getLastName());
+        QRCodePayload.setContent("");
+
+        Gson gson = new Gson();
+        String jsonBarcodePayload = gson.toJson(QRCodePayload);
+
+        return jsonBarcodePayload;
+
+    }
+
+    private String getFormattedNowDateString() {
+        //"yyyy-MM-dd'T'HH:mm:ssz" ISO8601
+        //2015-10-10T11:16+00:00
+
+        Date now = Calendar.getInstance().getTime();
+        String dateString = InputHelper.getISO8601StringFromDate(now);
+        return dateString;
     }
 
 }
