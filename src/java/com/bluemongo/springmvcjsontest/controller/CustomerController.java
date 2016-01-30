@@ -1,6 +1,5 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.model.QRCodePayload;
 import com.bluemongo.springmvcjsontest.model.Business;
 import com.bluemongo.springmvcjsontest.model.Customer;
 import com.bluemongo.springmvcjsontest.model.User;
@@ -8,30 +7,12 @@ import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import com.bluemongo.springmvcjsontest.service.GetFindCustomerHelper;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
-import com.google.gson.Gson;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
-import utils.InputHelper;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.DatatypeConverter;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Hashtable;
 import java.util.List;
 
 /**

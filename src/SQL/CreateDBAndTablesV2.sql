@@ -68,6 +68,11 @@ CREATE TABLE `business` (
   `contactName` varchar(100) DEFAULT NULL,
   `logoName` varchar(100) DEFAULT NULL,
   `defaultLocationId` int(11) DEFAULT NULL,
+  `logoFilePath` varchar(400) DEFAULT NULL,
+  `buttonColourHexCode` varchar(10) DEFAULT NULL,
+  `headerColourHexCode` varchar(10) DEFAULT NULL,
+  `backgroundColourHexCode` varchar(10) DEFAULT NULL,
+  `footerColourHexCode` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 

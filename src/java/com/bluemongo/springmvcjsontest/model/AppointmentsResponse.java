@@ -6,9 +6,25 @@ import java.util.List;
  * Created by glenn on 13/12/15.
  */
 public class AppointmentsResponse {
+    private BusinessDTO business = new BusinessDTO();
     private List<Appointment> appointmentList;
     private String appointmentCreationURL;
     private List<AppointmentStatus> appointmentStatusList;
+
+    public void setBusiness(Business business) {
+        this.business.setBusinessName(business.getBusinessName());
+        this.business.setPhoneNumber(business.getPhoneNumber());
+        this.business.setEmailAddress(business.getEmailAddress());
+        this.business.setPhysicalAddress(business.getPhysicalAddress());
+        this.business.setButtonColourHexCode(business.getButtonColourHexCode());
+        this.business.setHeaderColourHexCode(business.getHeaderColourHexCode());
+        this.business.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
+        this.business.setFooterColourHexCode(business.getFooterColourHexCode());
+    }
+
+    public BusinessDTO getBusiness() {
+        return business;
+    }
 
     public void setAppointmentList(List<Appointment> appointmentList) {
         this.appointmentList = appointmentList;

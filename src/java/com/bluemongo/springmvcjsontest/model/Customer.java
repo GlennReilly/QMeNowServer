@@ -8,7 +8,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import org.springframework.web.bind.annotation.PathVariable;
 import utils.InputHelper;
 
 import javax.imageio.ImageIO;
@@ -18,7 +17,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by glenn on 1/09/15.
@@ -208,15 +206,15 @@ public class Customer {
 
         String formattedNow = getFormattedNowDateString();
 
-        QRCodePayload QRCodePayload = new QRCodePayload();
-        QRCodePayload.setDateTimeString(formattedNow);
-        QRCodePayload.setCustomerId(customer.getId());
-        QRCodePayload.setCustomerFirstName(customer.getFirstName());
-        QRCodePayload.setCustomerLastName(customer.getLastName());
-        QRCodePayload.setContent("");
+        CustomerQRCodePayload customerQRCodePayload = new CustomerQRCodePayload();
+        customerQRCodePayload.setDateTimeString(formattedNow);
+        customerQRCodePayload.setCustomerId(customer.getId());
+        customerQRCodePayload.setCustomerFirstName(customer.getFirstName());
+        customerQRCodePayload.setCustomerLastName(customer.getLastName());
+        customerQRCodePayload.setContent("");
 
         Gson gson = new Gson();
-        String jsonBarcodePayload = gson.toJson(QRCodePayload);
+        String jsonBarcodePayload = gson.toJson(customerQRCodePayload);
 
         return jsonBarcodePayload;
 

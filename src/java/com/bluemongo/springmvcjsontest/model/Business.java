@@ -3,6 +3,7 @@ package com.bluemongo.springmvcjsontest.model;
 import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import org.springframework.web.multipart.MultipartFile;
 
+
 /**
  * Created by glenn on 31/08/15.
  */
@@ -12,11 +13,16 @@ public class Business {
     private String phoneNumber = "";
     private String emailAddress = "";
     private String physicalAddress = "";
-    private String contactName = "";
-    private MultipartFile logo;
-    private String logoName;
+    private transient String contactName = "";
+    private transient MultipartFile logo;
+    private transient String logoName;
     private int defaultLocationId;
-    private String logoFilePath;
+    private transient String logoFilePath;
+    private String buttonColourHexCode;
+    private String headerColourHexCode;
+    private String backgroundColourHexCode;
+    private String footerColourHexCode;
+
 
 
     public int saveNew() {
@@ -118,5 +124,37 @@ public class Business {
 
     public String getLogoFilePath() {
         return logoFilePath;
+    }
+
+    public String getButtonColourHexCode() {
+        return buttonColourHexCode;
+    }
+
+    public void setButtonColourHexCode(String buttonColourHexCode) {
+        this.buttonColourHexCode = buttonColourHexCode;
+    }
+
+    public String getHeaderColourHexCode() {
+        return headerColourHexCode;
+    }
+
+    public void setHeaderColourHexCode(String headerColourHexCode) {
+        this.headerColourHexCode = headerColourHexCode;
+    }
+
+    public String getBackgroundColourHexCode() {
+        return backgroundColourHexCode;
+    }
+
+    public void setBackgroundColourHexCode(String backgroundColourHexCode) {
+        this.backgroundColourHexCode = backgroundColourHexCode;
+    }
+
+    public String getFooterColourHexCode() {
+        return footerColourHexCode;
+    }
+
+    public void setFooterColourHexCode(String footerColourHexCode) {
+        this.footerColourHexCode = footerColourHexCode;
     }
 }

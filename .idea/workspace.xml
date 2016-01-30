@@ -9,13 +9,26 @@
     <bookmark url="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/CustomerStore.java" line="21" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d36dc02-edb4-4daa-8655-08d7a9335ab0" name="Default" comment="">
+    <list default="true" id="1d36dc02-edb4-4daa-8655-08d7a9335ab0" name="Default" comment="Refactored qrcodePayloads, added hex colours to be used in the UI.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/BusinessDTO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/BusinessQRCodePayload.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/QRCodePayload.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/CustomerQRCodePayload.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/model/Customer.class" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/classes/com/bluemongo/springmvcjsontest/model/Customer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/model/Customer.class" afterPath="$PROJECT_DIR$/target/classes/com/bluemongo/springmvcjsontest/model/Customer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql" afterPath="$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Business.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Business.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Customer.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Customer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/BusinessStore.java" afterPath="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/BusinessStore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Business/addEditBusinessForm.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Business/addEditBusinessForm.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/SpringMVCJsonTest/WEB-INF/dispatcher-servlet.xml" />
     </list>
     <ignored path="SpringMVCJsonTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,61 +108,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CustomerController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java">
+      <file leaf-file-name="CustomerQRCodePayload.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/CustomerQRCodePayload.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="185" column="0" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
-                <element signature="e#1710#1711#0" expanded="false" />
-                <element signature="e#1762#1763#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="customerDetails.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer/customerDetails.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="79" selection-start-line="53" selection-start-column="79" selection-end-line="53" selection-end-column="79" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QRCodePayload.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/QRCodePayload.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="31" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BarcodeController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="86" column="22" selection-start-line="86" selection-start-column="22" selection-end-line="86" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#3543#3544#0" expanded="false" />
-                <element signature="e#3595#3596#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BusinessController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="238" column="21" selection-start-line="238" selection-start-column="21" selection-end-line="238" selection-end-column="21" />
-              <folding>
-                <element signature="e#1728#1729#0" expanded="false" />
-                <element signature="e#1780#1781#0" expanded="false" />
+                <element signature="e#551#552#0" expanded="true" />
+                <element signature="e#588#589#0" expanded="true" />
+                <element signature="e#648#649#0" expanded="true" />
+                <element signature="e#700#701#0" expanded="true" />
+                <element signature="e#734#735#0" expanded="true" />
+                <element signature="e#764#765#0" expanded="true" />
+                <element signature="e#810#811#0" expanded="true" />
+                <element signature="e#843#844#0" expanded="true" />
+                <element signature="e#887#888#0" expanded="true" />
+                <element signature="e#927#928#0" expanded="true" />
+                <element signature="e#993#994#0" expanded="true" />
+                <element signature="e#1051#1052#0" expanded="true" />
+                <element signature="e#1094#1095#0" expanded="true" />
+                <element signature="e#1133#1134#0" expanded="true" />
+                <element signature="e#1197#1198#0" expanded="true" />
+                <element signature="e#1253#1254#0" expanded="true" />
+                <element signature="e#1291#1292#0" expanded="true" />
+                <element signature="e#1324#1325#0" expanded="true" />
+                <element signature="e#1377#1378#0" expanded="true" />
+                <element signature="e#1421#1422#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,37 +143,75 @@
         <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="64" selection-start-line="45" selection-start-column="64" selection-end-line="45" selection-end-column="64" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Customer.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Customer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.86451614">
-              <caret line="216" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
+              <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomerStore.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/CustomerStore.java">
+      <file leaf-file-name="addEditBusinessForm.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Business/addEditBusinessForm.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.962963">
+              <caret line="53" column="108" selection-start-line="53" selection-start-column="108" selection-end-line="53" selection-end-column="108" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BusinessController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+              <caret line="239" column="42" selection-start-line="239" selection-start-column="42" selection-end-line="239" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BusinessQRCodePayload.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/BusinessQRCodePayload.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="51" column="54" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="54" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <marker date="1449845700703" expanded="true" signature="663:788" placeholder="insert into customer..." />
-                <marker date="1449845700703" expanded="true" signature="2119:2303" placeholder="SELECT id, f..customer..." />
-                <marker date="1449845700703" expanded="true" signature="2942:3107" placeholder="SELECT id, f..customer..." />
-                <marker date="1449845700703" expanded="true" signature="3745:3915" placeholder="SELECT id, f..customer..." />
-                <marker date="1449845700703" expanded="true" signature="5645:5855" placeholder="SELECT id, f..customer..." />
-                <marker date="1449845700703" expanded="true" signature="6639:6750" placeholder="update custo..." />
+                <element signature="e#941#942#0" expanded="true" />
+                <element signature="e#983#984#0" expanded="true" />
+                <element signature="e#1053#1054#0" expanded="true" />
+                <element signature="e#1115#1116#0" expanded="true" />
+                <element signature="e#1161#1162#0" expanded="true" />
+                <element signature="e#1203#1204#0" expanded="true" />
+                <element signature="e#1273#1274#0" expanded="true" />
+                <element signature="e#1335#1336#0" expanded="true" />
+                <element signature="e#1385#1386#0" expanded="true" />
+                <element signature="e#1431#1432#0" expanded="true" />
+                <element signature="e#1625#1626#0" expanded="true" />
+                <element signature="e#1667#1668#0" expanded="true" />
+                <element signature="e#1737#1738#0" expanded="true" />
+                <element signature="e#1799#1800#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateDBAndTablesV2.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7588805">
+              <caret line="76" column="54" selection-start-line="76" selection-start-column="54" selection-end-line="76" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppointmentsResponse.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="52" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+              <folding>
+                <element signature="e#1050#1051#0" expanded="true" />
+                <element signature="e#1081#1082#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -228,9 +250,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Location/addEditBusinessLocation.jsp" />
-        <option value="$PROJECT_DIR$/src/main/resources/css/style1.css" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/GetAppointmentSearchResultsHelper.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/AppointmentStatus/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Location/index.jsp" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/LocationController.java" />
@@ -238,7 +257,6 @@
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/AppointmentStatusController.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/LocationStore.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/ModelViewHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Business/addEditBusinessForm.jsp" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentType.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/AppointmentType/addEditAppointmentTypeForm.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/AppointmentType/index.jsp" />
@@ -250,9 +268,7 @@
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/AppointmentAndCustomer.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/service/AddAppointmentFormHelper.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/AppointmentController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/CustomerStore.java" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/BusinessStore.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentResponse.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/api/AppointmentServiceAPI.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestAPIController.java" />
@@ -260,25 +276,31 @@
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Appointment.java" />
         <option value="$PROJECT_DIR$/src/test/java/testModels.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStore.java" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Business.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/login.jsp" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/UserCredentials.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/getAppointmentsForCustomerByDate.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/showAppointmentList.jsp" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentStatus.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStatusStore.java" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java" />
-        <option value="$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Appointment/addEditCustomerAppointment.jsp" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java" />
-        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/BarcodePayload.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/QrcodePayload.java" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/QRCodePayload.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer/customerDetails.jsp" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Business/addEditBusinessForm.jsp" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/BusinessStore.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Business.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/BusinessDTO.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" />
         <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Customer.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/CustomerQRCodePayload.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/BusinessQRCodePayload.java" />
+        <option value="$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java" />
+        <option value="$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql" />
       </list>
     </option>
   </component>
@@ -367,10 +389,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="57" />
-    <option name="y" value="21" />
-    <option name="width" value="1863" />
-    <option name="height" value="1059" />
+    <option name="x" value="1920" />
+    <option name="y" value="24" />
+    <option name="width" value="1920" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -509,134 +531,6 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpringMVCJsonTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpringMVCJsonTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpringMVCJsonTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpringMVCJsonTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlexibleUIConfig" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpringMVCJsonTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpringMVCJsonTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlexibleUIConfig" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Customer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpringMVCJsonTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpringMVCJsonTest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -653,10 +547,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -796,15 +686,20 @@
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.bluemongo.springmvcjsontest.model" />
+      <recent name="com.bluemongo.springmvcjsontest.service" />
+      <recent name="com.bluemongo.springmvcjsontest.persistence" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.bluemongo.springmvcjsontest.controller" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Business" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Customer" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig" />
       <recent name="$PROJECT_DIR$/src/main/webapp" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
-    </key>
-    <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="com.bluemongo.springmvcjsontest.controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
@@ -816,10 +711,8 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.bluemongo.springmvcjsontest.controller" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.bluemongo.springmvcjsontest.model" />
-      <recent name="com.bluemongo.springmvcjsontest.service" />
-      <recent name="com.bluemongo.springmvcjsontest.persistence" />
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="com.bluemongo.springmvcjsontest.persistence.BusinessStore" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 8.0.18">
@@ -1556,7 +1449,7 @@
       <workItem from="1451035341265" duration="3407000" />
       <workItem from="1451075531217" duration="17634000" />
       <workItem from="1452989205962" duration="22485000" />
-      <workItem from="1453795851375" duration="2025000" />
+      <workItem from="1453795851375" duration="16908000" />
     </task>
     <task id="LOCAL-00001" summary="implemented log4j2.">
       <created>1424527602321</created>
@@ -1768,11 +1661,17 @@
       <option name="project" value="LOCAL" />
       <updated>1453285231051</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="added barcode (Code 39) creation for customerId as data URL">
+      <created>1453888029561</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1453888029561</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="853446000" />
+    <option name="totallyTimeSpent" value="868329000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1784,8 +1683,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="57" y="21" width="1863" height="1059" extended-state="6" />
-    <editor active="true" />
+    <frame x="1920" y="24" width="1920" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1796,18 +1695,19 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34827945" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09711846" sideWeight="0.4947994" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3243243" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3253389" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21188773" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2054429" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28988528" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29348987" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2827443" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37330553" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1818,7 +1718,6 @@
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08591249" sideWeight="0.50520056" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2900208" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1867,7 +1766,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added basic Phrase class and helper." />
     <MESSAGE value="improved helper cleantext method, functional phrase persistence." />
     <MESSAGE value="added expired and invalid qrcode images, demo endpoint method for retrofit, other stuff." />
     <MESSAGE value="added ISO8601 dateformatting util and appointment details." />
@@ -1892,7 +1790,8 @@
     <MESSAGE value="Updated DB table creation script for AppointmentStatus table." />
     <MESSAGE value="basic 2d barcode (Code 39) creation for customerId" />
     <MESSAGE value="added barcode (Code 39) creation for customerId as data URL" />
-    <option name="LAST_COMMIT_MESSAGE" value="added barcode (Code 39) creation for customerId as data URL" />
+    <MESSAGE value="Refactored qrcodePayloads, added hex colours to be used in the UI." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored qrcodePayloads, added hex colours to be used in the UI." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1932,18 +1831,6 @@
           <line>90</line>
           <properties />
           <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java</url>
-          <line>74</line>
-          <properties />
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java</url>
-          <line>88</line>
-          <properties />
-          <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/testBarcodeParsing.java</url>
@@ -1989,15 +1876,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/BusinessStore.java</url>
-          <line>49</line>
+          <line>56</line>
           <properties />
           <option name="timeStamp" value="149" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java</url>
-          <line>112</line>
-          <properties />
-          <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/AppointmentTypeController.java</url>
@@ -2013,7 +1894,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java</url>
-          <line>174</line>
+          <line>155</line>
           <properties />
           <option name="timeStamp" value="226" />
         </line-breakpoint>
@@ -2031,13 +1912,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java</url>
-          <line>167</line>
+          <line>148</line>
           <properties />
           <option name="timeStamp" value="229" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java</url>
-          <line>136</line>
+          <line>117</line>
           <properties />
           <option name="timeStamp" value="231" />
         </line-breakpoint>
@@ -2085,7 +1966,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java</url>
-          <line>84</line>
+          <line>86</line>
           <properties />
           <option name="timeStamp" value="253" />
         </line-breakpoint>
@@ -2097,25 +1978,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java</url>
-          <line>99</line>
+          <line>80</line>
           <properties />
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java</url>
-          <line>83</line>
+          <line>64</line>
           <properties />
           <option name="timeStamp" value="263" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java</url>
-          <line>127</line>
+          <line>108</line>
           <properties />
           <option name="timeStamp" value="264" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java</url>
-          <line>48</line>
+          <line>50</line>
           <properties />
           <option name="timeStamp" value="276" />
         </line-breakpoint>
@@ -2139,24 +2020,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Business.java</url>
-          <line>119</line>
+          <line>125</line>
           <properties />
           <option name="timeStamp" value="289" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Customer.java</url>
-          <line>71</line>
+          <line>69</line>
           <properties />
           <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Customer.java</url>
-          <line>210</line>
+          <line>208</line>
           <properties />
           <option name="timeStamp" value="300" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/BusinessStore.java</url>
+          <line>69</line>
+          <properties />
+          <option name="timeStamp" value="301" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java</url>
+          <line>48</line>
+          <properties />
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java</url>
+          <line>234</line>
+          <properties />
+          <option name="timeStamp" value="303" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="301" />
+      <option name="time" value="304" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
@@ -2169,65 +2068,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentTypeStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="41" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
-          <folding>
-            <marker date="1449145762734" expanded="true" signature="703:926" placeholder="insert into appointmentType..." />
-            <marker date="1449145762734" expanded="true" signature="814:926" placeholder="select ?,?,?..DUAL..." />
-            <marker date="1449145762734" expanded="true" signature="880:925" placeholder="select id fr..appointmentType..." />
-            <marker date="1449145762734" expanded="true" signature="2129:2259" placeholder="select id, n..appointmentType..." />
-            <marker date="1449145762734" expanded="true" signature="3730:3869" placeholder="select id, n..appointmentType..." />
-            <marker date="1449145762734" expanded="true" signature="4643:4724" placeholder="update appoi..." />
-            <marker date="1449145762734" expanded="true" signature="5440:5488" placeholder="update appoi..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/AppointmentType/addEditAppointmentTypeForm.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38435373">
-          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="27" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/AppointmentType/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5816327">
-          <caret line="49" column="54" selection-start-line="49" selection-start-column="54" selection-end-line="49" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SQL/CreateDbAndTable.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2292683">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Business/addEditBusinessForm.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20177384">
-          <caret line="51" column="52" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4187298">
-          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75120384">
-          <caret line="26" column="75" selection-start-line="26" selection-start-column="75" selection-end-line="26" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.36/mysql-connector-java-5.1.36.jar!/com/mysql/jdbc/PreparedStatement.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.206897">
@@ -2277,25 +2117,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/BusinessStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="144" column="9" selection-start-line="144" selection-start-column="9" selection-end-line="144" selection-end-column="9" />
-          <folding>
-            <marker date="1449885975052" expanded="true" signature="734:865" placeholder="insert into business..." />
-            <marker date="1449885975052" expanded="true" signature="1972:2105" placeholder="update busin..." />
-            <marker date="1449885975052" expanded="true" signature="3140:3294" placeholder="select id, b..business..." />
-            <marker date="1449885975052" expanded="true" signature="4744:4909" placeholder="select id, b..business..." />
-            <marker date="1449885975052" expanded="true" signature="5622:5774" placeholder="SELECT id, t..ConfigStore..." />
-            <marker date="1449885975052" expanded="true" signature="6576:6633" placeholder="update busin..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1052#1053#0" expanded="false" />
+            <element signature="e#1080#1081#0" expanded="false" />
+            <element signature="e#1114#1115#0" expanded="false" />
+            <element signature="e#1142#1143#0" expanded="false" />
+            <element signature="e#1194#1195#0" expanded="false" />
+            <element signature="e#1270#1271#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2306,63 +2140,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestAPIController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.76749194">
-          <caret line="145" column="4" selection-start-line="145" selection-start-column="4" selection-end-line="145" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/testModels.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4187298">
           <caret line="74" column="2" selection-start-line="74" selection-start-column="0" selection-end-line="79" selection-end-column="7" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.1.4.RELEASE/spring-web-4.1.4.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36624205">
-          <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Business.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="36" selection-start-line="99" selection-start-column="36" selection-end-line="99" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#976#977#0" expanded="false" />
-            <element signature="e#1001#1002#0" expanded="false" />
-            <element signature="e#1034#1035#0" expanded="false" />
-            <element signature="e#1062#1063#0" expanded="false" />
-            <element signature="e#1101#1102#0" expanded="false" />
-            <element signature="e#1136#1137#0" expanded="false" />
-            <element signature="e#1192#1193#0" expanded="false" />
-            <element signature="e#1240#1241#0" expanded="false" />
-            <element signature="e#1278#1279#0" expanded="false" />
-            <element signature="e#1312#1313#0" expanded="false" />
-            <element signature="e#1366#1367#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1451#1452#0" expanded="false" />
-            <element signature="e#1486#1487#0" expanded="false" />
-            <element signature="e#1542#1543#0" expanded="false" />
-            <element signature="e#1590#1591#0" expanded="false" />
-            <element signature="e#1632#1633#0" expanded="false" />
-            <element signature="e#1670#1671#0" expanded="false" />
-            <element signature="e#1732#1733#0" expanded="false" />
-            <element signature="e#1786#1787#0" expanded="false" />
-            <element signature="e#1824#1825#0" expanded="false" />
-            <element signature="e#1858#1859#0" expanded="false" />
-            <element signature="e#1912#1913#0" expanded="false" />
-            <element signature="e#1958#1959#0" expanded="false" />
-            <element signature="e#2751#2752#0" expanded="false" />
-            <element signature="e#2791#2792#0" expanded="false" />
-            <element signature="e#2854#2855#0" expanded="false" />
-            <element signature="e#2912#2913#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2488,22 +2270,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="80" column="44" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39935413">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="64" selection-start-line="45" selection-start-column="64" selection-end-line="45" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="false" />
+            <element signature="e#1142#1143#0" expanded="false" />
+            <element signature="e#1180#1181#0" expanded="false" />
+            <element signature="e#1364#1365#0" expanded="false" />
+            <element signature="e#1397#1398#0" expanded="false" />
+            <element signature="e#1446#1447#0" expanded="false" />
+            <element signature="e#1490#1491#0" expanded="false" />
+            <element signature="e#1520#1521#0" expanded="false" />
+            <element signature="e#1549#1550#0" expanded="false" />
+            <element signature="e#1590#1591#0" expanded="false" />
+            <element signature="e#1626#1627#0" expanded="false" />
+            <element signature="e#1842#1843#0" expanded="false" />
+            <element signature="e#1876#1877#0" expanded="false" />
+            <element signature="e#1935#1936#0" expanded="false" />
+            <element signature="e#1981#1982#0" expanded="false" />
+            <element signature="e#2406#2407#0" expanded="false" />
+            <element signature="e#2443#2444#0" expanded="false" />
+            <element signature="e#2500#2501#0" expanded="false" />
+            <element signature="e#2552#2553#0" expanded="false" />
+            <element signature="e#2817#2818#0" expanded="false" />
+            <element signature="e#2859#2860#0" expanded="false" />
+            <element signature="e#3417#3418#0" expanded="false" />
+            <element signature="e#3461#3462#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2519,20 +2309,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.1135594">
           <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7585089">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/api/AppointmentServiceAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.095623985">
-          <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2543,48 +2320,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Appointment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.029173419">
-          <caret line="37" column="32" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/AppointmentStatusStore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="53" column="118" selection-start-line="53" selection-start-column="118" selection-end-line="53" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="238" column="21" selection-start-line="238" selection-start-column="21" selection-end-line="238" selection-end-column="21" />
-          <folding>
-            <element signature="e#1728#1729#0" expanded="false" />
-            <element signature="e#1780#1781#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/QRCodePayload.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BarcodeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="22" selection-start-line="86" selection-start-column="22" selection-end-line="86" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3543#3544#0" expanded="false" />
-            <element signature="e#3595#3596#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2615,18 +2354,251 @@
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/CustomerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="185" column="0" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+          <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
           <folding>
-            <element signature="e#1710#1711#0" expanded="false" />
-            <element signature="e#1762#1763#0" expanded="false" />
+            <element signature="e#1035#1036#0" expanded="false" />
+            <element signature="e#1087#1088#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/AppointmentType/addEditAppointmentTypeForm.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49491525">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="30" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/DBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <marker date="1439813308881" expanded="true" signature="976:1001" placeholder="select * fro..ConfigStore..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/persistence/BusinessStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76337117">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding>
+            <marker date="1454140699770" expanded="true" signature="463:705" placeholder="select id, b..business..." />
+            <marker date="1454140699770" expanded="true" signature="1037:1285" placeholder="insert into business..." />
+            <marker date="1454140699770" expanded="true" signature="2713:2963" placeholder="update busin..." />
+            <marker date="1454140699770" expanded="true" signature="4346:4363" placeholder="select id, b..business..." />
+            <marker date="1454140699770" expanded="true" signature="6186:6214" placeholder="select id, b..business..." />
+            <marker date="1454140699770" expanded="true" signature="6927:7079" placeholder="SELECT id, t..ConfigStore..." />
+            <marker date="1454140699770" expanded="true" signature="7881:7938" placeholder="update busin..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/FlexibleUIConfig/Business/addEditBusinessForm.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.962963">
+          <caret line="53" column="108" selection-start-line="53" selection-start-column="108" selection-end-line="53" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Appointment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37925446">
+          <caret line="37" column="32" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/RestAPIController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.3864408">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/api/AppointmentServiceAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2706645">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.1.4.RELEASE/spring-web-4.1.4.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38745388">
+          <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Business.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30716723">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1342#1343#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31891027">
+          <caret line="13" column="83" selection-start-line="13" selection-start-column="83" selection-end-line="13" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/CustomerQRCodePayload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#551#552#0" expanded="true" />
+            <element signature="e#588#589#0" expanded="true" />
+            <element signature="e#648#649#0" expanded="true" />
+            <element signature="e#700#701#0" expanded="true" />
+            <element signature="e#734#735#0" expanded="true" />
+            <element signature="e#764#765#0" expanded="true" />
+            <element signature="e#810#811#0" expanded="true" />
+            <element signature="e#843#844#0" expanded="true" />
+            <element signature="e#887#888#0" expanded="true" />
+            <element signature="e#927#928#0" expanded="true" />
+            <element signature="e#993#994#0" expanded="true" />
+            <element signature="e#1051#1052#0" expanded="true" />
+            <element signature="e#1094#1095#0" expanded="true" />
+            <element signature="e#1133#1134#0" expanded="true" />
+            <element signature="e#1197#1198#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#1291#1292#0" expanded="true" />
+            <element signature="e#1324#1325#0" expanded="true" />
+            <element signature="e#1377#1378#0" expanded="true" />
+            <element signature="e#1421#1422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/APIController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="71" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/Customer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.86451614">
-          <caret line="216" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="209" column="62" selection-start-line="209" selection-start-column="62" selection-end-line="209" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/BusinessDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34676006">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="14" selection-end-column="39" />
+          <folding>
+            <element signature="e#481#482#0" expanded="false" />
+            <element signature="e#506#507#0" expanded="false" />
+            <element signature="e#539#540#0" expanded="false" />
+            <element signature="e#567#568#0" expanded="false" />
+            <element signature="e#606#607#0" expanded="false" />
+            <element signature="e#641#642#0" expanded="false" />
+            <element signature="e#697#698#0" expanded="false" />
+            <element signature="e#745#746#0" expanded="false" />
+            <element signature="e#783#784#0" expanded="false" />
+            <element signature="e#817#818#0" expanded="false" />
+            <element signature="e#871#872#0" expanded="false" />
+            <element signature="e#917#918#0" expanded="false" />
+            <element signature="e#956#957#0" expanded="false" />
+            <element signature="e#991#992#0" expanded="false" />
+            <element signature="e#1047#1048#0" expanded="false" />
+            <element signature="e#1095#1096#0" expanded="false" />
+            <element signature="e#1137#1138#0" expanded="false" />
+            <element signature="e#1175#1176#0" expanded="false" />
+            <element signature="e#1237#1238#0" expanded="false" />
+            <element signature="e#1291#1292#0" expanded="false" />
+            <element signature="e#1338#1339#0" expanded="false" />
+            <element signature="e#1380#1381#0" expanded="false" />
+            <element signature="e#1450#1451#0" expanded="false" />
+            <element signature="e#1512#1513#0" expanded="false" />
+            <element signature="e#1558#1559#0" expanded="false" />
+            <element signature="e#1600#1601#0" expanded="false" />
+            <element signature="e#1670#1671#0" expanded="false" />
+            <element signature="e#1732#1733#0" expanded="false" />
+            <element signature="e#1782#1783#0" expanded="false" />
+            <element signature="e#1828#1829#0" expanded="false" />
+            <element signature="e#2022#2023#0" expanded="false" />
+            <element signature="e#2064#2065#0" expanded="false" />
+            <element signature="e#2134#2135#0" expanded="false" />
+            <element signature="e#2196#2197#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/AppointmentsResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="52" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+          <folding>
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1081#1082#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/controller/BusinessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="239" column="42" selection-start-line="239" selection-start-column="42" selection-end-line="239" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/com/bluemongo/springmvcjsontest/model/BusinessQRCodePayload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="54" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="54" />
+          <folding>
+            <element signature="e#941#942#0" expanded="true" />
+            <element signature="e#983#984#0" expanded="true" />
+            <element signature="e#1053#1054#0" expanded="true" />
+            <element signature="e#1115#1116#0" expanded="true" />
+            <element signature="e#1161#1162#0" expanded="true" />
+            <element signature="e#1203#1204#0" expanded="true" />
+            <element signature="e#1273#1274#0" expanded="true" />
+            <element signature="e#1335#1336#0" expanded="true" />
+            <element signature="e#1385#1386#0" expanded="true" />
+            <element signature="e#1431#1432#0" expanded="true" />
+            <element signature="e#1625#1626#0" expanded="true" />
+            <element signature="e#1667#1668#0" expanded="true" />
+            <element signature="e#1737#1738#0" expanded="true" />
+            <element signature="e#1799#1800#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SQL/CreateDBAndTablesV2.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7588805">
+          <caret line="76" column="54" selection-start-line="76" selection-start-column="54" selection-end-line="76" selection-end-column="54" />
           <folding />
         </state>
       </provider>

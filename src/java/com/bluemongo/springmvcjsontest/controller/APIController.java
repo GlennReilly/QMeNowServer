@@ -45,6 +45,8 @@ public class APIController implements AppointmentServiceAPI {
         appointmentsResponse.setAppointmentList(appointments);
         Customer customer = new CustomerStore().get(customerId);
         List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(customer.getBusinessId(), true);
+        Business business = new BusinessStore().get(customer.getBusinessId());
+        appointmentsResponse.setBusiness(business);
         appointmentsResponse.setAppointmentStatusList(appointmentStatusList);
         return appointmentsResponse;
 

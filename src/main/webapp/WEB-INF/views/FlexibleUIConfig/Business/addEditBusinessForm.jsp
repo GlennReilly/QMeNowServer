@@ -48,6 +48,18 @@
                 <label>street address:</label><form:input path="physicalAddress"/>
             </div>
             <div class="label2">
+                <label>Button colour hex code:</label><form:input type="color" path="buttonColourHexCode" />
+            </div>
+            <div class="label2">
+                <label>Header colour hex code:</label><form:input type="color" path="headerColourHexCode" />
+            </div>
+            <div class="label2">
+                <label>Button colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
+            </div>
+            <div class="label2">
+                <label>Header colour hex code:</label><form:input type="color" path="footerColourHexCode" />
+            </div>
+            <div class="label2">
                 <label>default location:</label>
                 <form:select path="defaultLocationId">
                     <form:option value="0" label="Please select" />
