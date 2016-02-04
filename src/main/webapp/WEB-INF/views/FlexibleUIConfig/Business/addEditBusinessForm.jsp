@@ -54,11 +54,11 @@
                 <label>Header colour hex code:</label><form:input type="color" path="headerColourHexCode" />
             </div>
             <div class="label2">
-                <label>Button colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
+                <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
             </div>
-            <div class="label2">
-                <label>Header colour hex code:</label><form:input type="color" path="footerColourHexCode" />
-            </div>
+<%--            <div class="label2">
+                <label>Footer colour hex code:</label><form:input type="color" path="footerColourHexCode" />
+            </div>--%>
             <div class="label2">
                 <label>default location:</label>
                 <form:select path="defaultLocationId">

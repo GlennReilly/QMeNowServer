@@ -116,7 +116,8 @@ public class CustomerStore {
     }
 
     private Customer getCustomerFromResultSet() throws SQLException {
-        Customer customer = new Customer(resultSet.getInt("id"));
+        Customer customer = new Customer();
+        customer.setId(resultSet.getInt("id"));
         customer.setFirstName(resultSet.getNString("firstName"));
         customer.setLastName(resultSet.getNString("lastName"));
         customer.setPhoneNumber(resultSet.getString("phoneNumber"));
