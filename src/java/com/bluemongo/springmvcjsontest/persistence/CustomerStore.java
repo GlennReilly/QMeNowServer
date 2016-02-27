@@ -125,6 +125,7 @@ public class CustomerStore {
         customer.setEmailAddress(resultSet.getNString("emailAddress"));
         customer.setBusinessId(resultSet.getInt("businessId"));
         customer.setDOB(resultSet.getDate("DOB"));
+        customer.setBarcodeImageString();
         return customer;
     }
 

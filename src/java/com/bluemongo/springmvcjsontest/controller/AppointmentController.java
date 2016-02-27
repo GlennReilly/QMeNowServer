@@ -1,6 +1,5 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.api.AppointmentServiceAPI;
 import com.bluemongo.springmvcjsontest.model.Appointment;
 import com.bluemongo.springmvcjsontest.model.User;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
@@ -11,10 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by glenn on 11/10/15.
@@ -84,7 +79,7 @@ public class AppointmentController{
         User user;
         if (httpSession.getAttribute("User") != null){
             user = (User)httpSession.getAttribute("User");
-            Appointment appointment = new AppointmentStore().getAppointmentsAndCustomer(appointmentId);
+            Appointment appointment = new AppointmentStore().getAppointment(appointmentId);
             httpSession.setAttribute("CurrentlyEditingAppointmentId", appointmentId);
             modelAndView = ModelViewHelper.GetModelViewForEditAppointment(appointment.getCustomerId(), user.getBusinessId(), null, httpSession, appointment);
         }

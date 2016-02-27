@@ -55,7 +55,7 @@ public class AppointmentStore {
 
     public int saveUpdate(Appointment appointment) {
         int lastInsertedId = -1;
-        String query = "update appointment set appointmentTypeId = ?, appointmentDate = ?, statusId = ?, messageToUser = ?, locationId = ?, isComplete = ? where id = ?";
+        String query = "update appointment set appointmentTypeId=?, appointmentDate=?, statusId=?, messageToUser=?, locationId=?, isComplete=?, checkInDate=? where id = ?";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, appointment.getAppointmentTypeId());
@@ -72,7 +72,10 @@ public class AppointmentStore {
             preparedStatement.setString(4, appointment.getMessageToCustomer());
             preparedStatement.setInt(5, appointment.getLocationId());
             preparedStatement.setBoolean(6, appointment.isComplete());
-            preparedStatement.setInt(7, appointment.getId());
+            if (appointment.getCheckInDate() != null) {
+                preparedStatement.setTimestamp(7, new Timestamp(appointment.getCheckInDate().getTime()));
+            }
+            preparedStatement.setInt(8, appointment.getId());
             preparedStatement.executeUpdate();
             logger.info("appointment updated.");
 
@@ -88,9 +91,7 @@ public class AppointmentStore {
         return lastInsertedId;
     }
 
-    public Appointment getAppointmentsAndCustomer(int appointmentId){
-        //TODO needs work or renaming
-        //chronologically ordered list
+    public Appointment getAppointment(int appointmentId){
         Appointment appointment = null;
         String query = getQueryStringBuilder().toString()
                 + " where app.id = ?;";
@@ -364,7 +365,7 @@ public class AppointmentStore {
         StringBuilder sbQuery = new StringBuilder();
         sbQuery.append(" SELECT app.id, app.createdDate, appointmentTypeId, appointmentDate, customerId, customer.businessId, messageToUser, statusId, locationId, isComplete, ");
         sbQuery.append(" appstatus.backgroundColourHexCode as appStatusHexCode, apptype.backgroundColourHexCode as appTypeHexCode,");
-        sbQuery.append(" location.backgroundColourHexCode as locationHexCode");
+        sbQuery.append(" location.backgroundColourHexCode as locationHexCode, checkInDate");
         sbQuery.append(" FROM appointment app");
         sbQuery.append(" inner join customer on app.customerId = customer.id");
         sbQuery.append(" inner join appointmentStatus appstatus on app.statusId = appstatus.id");
@@ -386,6 +387,12 @@ public class AppointmentStore {
         appointment.setStatusHexCode(resultSet.getString("appStatusHexCode"));
         appointment.setAppTypeHexCode(resultSet.getString("appTypeHexCode"));
         appointment.setLocationHexCode(resultSet.getString("locationHexCode"));
+        if(resultSet.getTimestamp("checkInDate") != null) {
+            appointment.setCheckInDate(new Date(resultSet.getTimestamp("checkInDate").getTime()));
+        }
+        else{
+            appointment.setCheckInDate(null);
+        }
         return appointment;
     }
 

@@ -59,5 +59,6 @@
 <ul>
     <li><a href="<spring:url value='/FlexibleUIConfig/location/add'/>">Add a new location for your business</a></li>
 </ul>
+<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
 </body>
 </html>

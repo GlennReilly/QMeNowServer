@@ -29,6 +29,6 @@
             </div>
         </div>
     </form:form>
-
+<tags:jsIncludes></tags:jsIncludes>
 </body>
 </html>

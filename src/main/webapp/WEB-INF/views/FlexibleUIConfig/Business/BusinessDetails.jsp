@@ -44,5 +44,6 @@
         </div>
     </div>
 </form:form>
+<tags:jsIncludes logoPath="${command.logoName}"></tags:jsIncludes>
 </body>
 </html>

@@ -38,6 +38,8 @@ public class Appointment {
     private String statusHexCode;
     private String appTypeHexCode;
     private String locationHexCode;
+    private transient Date checkInDate;
+    private String strCheckInDateTime;
 
 
     public Appointment(){}
@@ -248,5 +250,30 @@ public class Appointment {
 
     public void setStatusHexCode(String statusHexCode) {
         this.statusHexCode = statusHexCode;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+        if(checkInDate != null) {
+            this.setStrCheckInDateTime(InputHelper.getISO8601StringFromDate(checkInDate));
+        }
+        this.saveUpdate();
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public String getStrCheckInDateTime() {
+        String returnVal = "";
+        if (checkInDate != null) {
+            returnVal = InputHelper.getISO8601StringFromDate(checkInDate);
+        }
+        return returnVal;
+    }
+
+
+    public void setStrCheckInDateTime(String strCheckInDateTime) {
+        this.strCheckInDateTime = strCheckInDateTime;
     }
 }

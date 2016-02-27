@@ -57,5 +57,6 @@
 </form:form>
 <span class="listLink"><a href='<spring:url value="/FlexibleUIConfig/appointment/add/${command.id}"/>'>add appointment</a></span>
 <span class="listLink"><a href='<spring:url value="/FlexibleUIConfig/appointment/getAllForDateRange/${command.id}"/>'>show all appointments</a></span>
+<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
 </body>
 </html>

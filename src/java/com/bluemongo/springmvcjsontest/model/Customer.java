@@ -1,5 +1,6 @@
 package com.bluemongo.springmvcjsontest.model;
 
+import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
@@ -38,7 +39,9 @@ public class Customer {
 
 
 
-    public Customer() {}
+    public Customer() {
+
+    }
 
 
     public Customer(int id) {
@@ -147,16 +150,16 @@ public class Customer {
 
     public enum Gender {NOT_SPECIFIED, MALE, FEMALE,}
 
-    public void setBarcodeImageString(String barcodeImageString) {
+/*    public void setBarcodeImageString(String barcodeImageString) {
         this.barcodeImageString = getBarcodeImageString();
-    }
+    }*/
 
     public void setBarcodeImageString(){
         Hashtable hintMap = new Hashtable();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        int height = 250;
-        int width = 250;
+        int height = 300;
+        int width = 300;
         BitMatrix byteMatrix = null;
         try {
             byteMatrix = qrCodeWriter.encode(getBarcodePayload(this), BarcodeFormat.QR_CODE, width, height, hintMap);
@@ -217,6 +220,15 @@ public class Customer {
         customerQRCodePayload.setCustomerFirstName(customer.getFirstName());
         customerQRCodePayload.setCustomerLastName(customer.getLastName());
         customerQRCodePayload.setContent("");
+
+        Business business = new BusinessStore().get(customer.getBusinessId());
+        if (business != null) {
+            customerQRCodePayload.getBusinessDTO().setId(business.getId());
+            customerQRCodePayload.getBusinessDTO().setBusinessName(business.getBusinessName());
+            customerQRCodePayload.getBusinessDTO().setBackgroundColourHexCode(business.getBackgroundColourHexCode());
+            customerQRCodePayload.getBusinessDTO().setHeaderColourHexCode(business.getHeaderColourHexCode());
+            customerQRCodePayload.getBusinessDTO().setButtonColourHexCode(business.getButtonColourHexCode());
+        }
 
         Gson gson = new Gson();
         String jsonBarcodePayload = gson.toJson(customerQRCodePayload);

@@ -55,5 +55,6 @@
         </div>
     </div>
 </form:form>
+<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
 </body>
 </html>

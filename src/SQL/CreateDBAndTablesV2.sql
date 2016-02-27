@@ -8,8 +8,9 @@ CREATE TABLE `appointment` (
   `statusId` int(11) DEFAULT NULL,
   `locationId` int(11) DEFAULT NULL,
   `isComplete` bit(1) DEFAULT b'0',
+  `checkInDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `appointmentStatus` (
   `id` int(11) NOT NULL,

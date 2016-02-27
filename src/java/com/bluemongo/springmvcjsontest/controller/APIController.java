@@ -24,33 +24,53 @@ import java.util.List;
 @RestController
 @RequestMapping("/FlexibleUIConfig/api/v1")
 public class APIController implements AppointmentServiceAPI {
-
+enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
 
     // http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/7
     @Override
-    @RequestMapping(value = "/AppointmentsToday/{customerId}", method = RequestMethod.GET)
-    public AppointmentsResponse getAppointmentsToday(@PathVariable Integer customerId) {
+    @RequestMapping(value = "/AppointmentsToday/{businessId}/{customerId}", method = RequestMethod.GET)
+    public AppointmentsResponse getAppointmentsToday(@PathVariable Integer businessId, @PathVariable Integer customerId) {
         //public List<Appointment> getAppointmentsToday(@PathVariable Integer customerId) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        Date fromDate = cal.getTime();
-        cal.add(Calendar.DATE, 1);
-        Date toDate = cal.getTime();
-        List<Appointment> appointments;
-        appointments = new AppointmentStore().get(customerId, fromDate, toDate, false);
         AppointmentsResponse appointmentsResponse = new AppointmentsResponse();
-        appointmentsResponse.setAppointmentList(appointments);
         Customer customer = new CustomerStore().get(customerId);
-        List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(customer.getBusinessId(), true);
-        Business business = new BusinessStore().get(customer.getBusinessId());
-        appointmentsResponse.setBusiness(business);
-        appointmentsResponse.setAppointmentStatusList(appointmentStatusList);
-        return appointmentsResponse;
+        if (customer.getBusinessId() != businessId){
+            appointmentsResponse.addErrorMessage(Errors.CUSTOMER_NOT_IN_THIS_BUSINESS.toString());
+        }
+        else {
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            Date fromDate = cal.getTime();
+            cal.add(Calendar.DATE, 1);
+            Date toDate = cal.getTime();
+            List<Appointment> appointments;
+            appointments = new AppointmentStore().get(customerId, fromDate, toDate, false);
 
+            appointmentsResponse.setAppointmentList(appointments);
+            //Customer customer = new CustomerStore().get(customerId);
+            List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(customer.getBusinessId(), true);
+            Business business = new BusinessStore().get(customer.getBusinessId());
+            appointmentsResponse.setBusiness(business);
+            appointmentsResponse.setAppointmentStatusList(appointmentStatusList);
+        }
+        return appointmentsResponse;
     }
+
+    // http://10.1.1.7:8080/FlexibleUIConfig/api/v1/Appointment/CheckIn/{id}
+    @Override
+    @RequestMapping(value = "/Appointment/{id}/CheckIn")
+    public AppointmentsResponse checkInAppointment(@PathVariable("id") int appointmentId, @RequestBody AppointmentCheckInDTO appointmentCheckIn){
+        AppointmentsResponse appointmentsResponse = new AppointmentsResponse();
+        appointmentsResponse.setAppointmentCreationURL("successful " + appointmentCheckIn.getCheckInDateTimeString());
+        //save checkin date, prevent button from showing again until that date is removed.
+        Appointment appointment = new AppointmentStore().getAppointment(appointmentId);
+        appointment.setCheckInDate(Calendar.getInstance().getTime());
+        return appointmentsResponse;
+    }
+
+
 
     //http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsTodayTest/7
     @Override

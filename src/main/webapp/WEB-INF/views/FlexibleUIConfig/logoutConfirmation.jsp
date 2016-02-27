@@ -23,5 +23,6 @@
     <br/>
     <input type="submit" value="Yes, logout">
 </form:form>
+<tags:jsIncludes logoPath="${command.logoName}"></tags:jsIncludes>
 </body>
 </html>

@@ -65,5 +65,6 @@
 <ul>
     <li><a href="<spring:url value='/FlexibleUIConfig/appointmentType/add'/>">Add a new appointment type for your business</a></li>
 </ul>
+<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
 </body>
 </html>

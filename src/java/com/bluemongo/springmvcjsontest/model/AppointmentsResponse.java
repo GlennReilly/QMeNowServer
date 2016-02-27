@@ -1,5 +1,6 @@
 package com.bluemongo.springmvcjsontest.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,19 +8,16 @@ import java.util.List;
  */
 public class AppointmentsResponse {
     private BusinessDTO business = new BusinessDTO();
-    private List<Appointment> appointmentList;
+    private List<Appointment> appointmentList = new ArrayList<>();
+    private List<AppointmentStatus> appointmentStatusList = new ArrayList<>();
+    private List<String> errorsList = new ArrayList<>();
     private String appointmentCreationURL;
-    private List<AppointmentStatus> appointmentStatusList;
 
     public void setBusiness(Business business) {
         this.business.setBusinessName(business.getBusinessName());
-        this.business.setPhoneNumber(business.getPhoneNumber());
-        this.business.setEmailAddress(business.getEmailAddress());
-        this.business.setPhysicalAddress(business.getPhysicalAddress());
         this.business.setButtonColourHexCode(business.getButtonColourHexCode());
         this.business.setHeaderColourHexCode(business.getHeaderColourHexCode());
         this.business.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
-        this.business.setFooterColourHexCode(business.getFooterColourHexCode());
     }
 
     public BusinessDTO getBusiness() {
@@ -48,5 +46,13 @@ public class AppointmentsResponse {
 
     public void setAppointmentStatusList(List<AppointmentStatus> appointmentStatusList) {
         this.appointmentStatusList = appointmentStatusList;
+    }
+
+    public void addErrorMessage(String errorMessage) {
+        this.errorsList.add(errorMessage);
+    }
+
+    public List<String> getErrorsList() {
+        return errorsList;
     }
 }

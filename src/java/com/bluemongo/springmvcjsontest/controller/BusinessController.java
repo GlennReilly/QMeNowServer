@@ -167,8 +167,8 @@ public class BusinessController implements ServletContextAware
 
     @RequestMapping(value = "/barcode")
     public ModelAndView getBarcodeForBusiness(HttpSession httpSession) throws WriterException, IOException {
-        int height = 250;
-        int width = 250;
+        int height = 300;
+        int width = 300;
         ModelAndView modelAndView = new ModelAndView();
 
         if (httpSession.getAttribute("User") != null) {
@@ -233,12 +233,12 @@ public class BusinessController implements ServletContextAware
         String formattedNow = getFormattedNowDateString();
 
         BusinessQRCodePayload businessQRCodePayload = new BusinessQRCodePayload();
+        businessQRCodePayload.getBusinessDTO().setId(business.getId());
         businessQRCodePayload.setBusinessName(business.getBusinessName());
         businessQRCodePayload.setDateTimeString(formattedNow);
         businessQRCodePayload.setButtonColourHexCode(business.getButtonColourHexCode());
         businessQRCodePayload.setHeaderColourHexCode(business.getHeaderColourHexCode());
         businessQRCodePayload.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
-        businessQRCodePayload.setFooterColourHexCode(business.getFooterColourHexCode());
         businessQRCodePayload.setContent(business.getPhysicalAddress());
         Gson gson = new Gson();
         String jsonBarcodePayload = gson.toJson(businessQRCodePayload);

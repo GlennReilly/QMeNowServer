@@ -39,5 +39,6 @@
         </td>
     </tr>
     </c:forEach>
+    <tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
 </body>
 </html>

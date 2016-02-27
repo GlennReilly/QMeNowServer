@@ -139,7 +139,14 @@ public class RestAPIController implements AppointmentServiceAPI {
     }
 
     @Override
-    public AppointmentsResponse getAppointmentsToday(Integer customerId) {
+    public AppointmentsResponse checkInAppointment(int appointmentId, AppointmentCheckInDTO appointmentCheckIn) {
+        return null;
+    }
+
+
+
+    @Override
+    public AppointmentsResponse getAppointmentsToday(Integer businessId, Integer customerId) {
         return null;
     }
 

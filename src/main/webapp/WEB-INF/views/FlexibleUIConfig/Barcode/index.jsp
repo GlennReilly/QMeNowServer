@@ -26,5 +26,6 @@
         <a href="./">refresh</a>
         <br/>
         <img src="<spring:url value='${QRCodePath}'/>" />
+    <tags:jsIncludes logoPath="${Business.logoName}"></tags:jsIncludes>
     </body>
 </html>

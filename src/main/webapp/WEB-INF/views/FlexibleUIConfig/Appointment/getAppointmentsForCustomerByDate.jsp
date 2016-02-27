@@ -134,6 +134,6 @@
         $( "#strToDate" ).datepicker({dateFormat: "dd-mm-yy"});
     });
 </script>
-
+<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
 </body>
 </html>

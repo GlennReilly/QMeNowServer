@@ -5,19 +5,49 @@ package com.bluemongo.springmvcjsontest.model;
  */
 public class CustomerQRCodePayload {
     private String dateTimeString;
-    //private String businessName;
+    private BusinessDTO businessDTO = new BusinessDTO();
     private String customerFirstName;
     private String customerLastName;
     private Integer customerId;
     private String Content;
 
-/*    public String getBusinessName() {
-        return businessName;
+
+    public BusinessDTO getBusinessDTO() {
+        return businessDTO;
+    }
+
+    public String getBusinessName() {
+        return businessDTO.getBusinessName();
     }
 
     public void setBusinessName(String businessName) {
-        this.businessName = businessName;
-    }*/
+        businessDTO.setBusinessName(businessName);
+    }
+
+    public String getButtonColourHexCode() {
+        return businessDTO.getButtonColourHexCode();
+    }
+
+    public void setButtonColourHexCode(String buttonColourHexCode) {
+        this.businessDTO.setBackgroundColourHexCode(buttonColourHexCode);
+    }
+
+    public String getHeaderColourHexCode() {
+        return businessDTO.getHeaderColourHexCode();
+    }
+
+    public void setHeaderColourHexCode(String headerColourHexCode) {
+        this.businessDTO.setHeaderColourHexCode(headerColourHexCode);
+    }
+
+    public String getBackgroundColourHexCode() {
+        return businessDTO.getBackgroundColourHexCode();
+    }
+
+    public void setBackgroundColourHexCode(String backgroundColourHexCode) {
+        this.businessDTO.setBackgroundColourHexCode(backgroundColourHexCode);
+    }
+
 
     public String getDateTimeString() {
         return dateTimeString;
