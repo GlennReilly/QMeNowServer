@@ -49,5 +49,6 @@
 </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
 <script src="<spring:url value='/resources/scripts/addButtonStyleForm.js'/>" ></script>
+<tags:jsIncludes logoPath="${command.logoName}"></tags:jsIncludes>
 </body>
 </html>

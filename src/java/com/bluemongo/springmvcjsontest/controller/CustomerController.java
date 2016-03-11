@@ -20,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/FlexibleUIConfig/customer")
-public class CustomerController implements ServletContextAware
+public class CustomerController extends GenericController implements ServletContextAware
 {
     private ServletContext servletContext;
 
@@ -69,9 +69,7 @@ public class CustomerController implements ServletContextAware
         else{
             User user = (User)httpSession.getAttribute("User");
             modelAndView = ModelViewHelper.GetModelViewForFindCustomer(user, null);
-            Business business = new BusinessStore().get(user.getBusinessId());
-            modelAndView.addObject("businessName", business.getBusinessName());
-            modelAndView.addObject("logoName", business.getLogoName());
+            addHeaderDetails(modelAndView, user.getBusinessId());
         }
         return modelAndView;
     }
@@ -85,9 +83,9 @@ public class CustomerController implements ServletContextAware
         else{
             User user = (User)httpSession.getAttribute("User");
             modelAndView = new ModelAndView();
-            Business business = new BusinessStore().get(user.getBusinessId());
-            modelAndView.addObject("businessName", business.getBusinessName());
-            modelAndView.addObject("logoName", business.getLogoName());
+
+            addHeaderDetails(modelAndView, user.getBusinessId());
+
             String customerIdStr = getFindCustomerHelper.getCustomerIdStr();
             String firstName = getFindCustomerHelper.getFirstName();
             String lastName = getFindCustomerHelper.getLastName();
@@ -113,14 +111,22 @@ public class CustomerController implements ServletContextAware
         return modelAndView;
     }
 
+/*    private void addHeaderDetails(ModelAndView modelAndView, User user) {
+        Business business = new BusinessStore().get(user.getBusinessId());
+        modelAndView.addObject("businessName", business.getBusinessName());
+        modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("headerColour", business.getHeaderColourHexCode());
+    }*/
+
     @RequestMapping(value = "/details/{customerId}", method = RequestMethod.GET)
     public ModelAndView ShowCustomerDetails(HttpSession httpSession, @PathVariable int customerId){
-        ModelAndView modelAndView;
+        ModelAndView modelAndView = null;
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         }
         else{
             User user = (User)httpSession.getAttribute("User");
+            addHeaderDetails(modelAndView, user.getBusinessId());
             Customer customer = new CustomerStore().get(user.getBusinessId(), customerId);
             if (customer != null){
                 modelAndView = getModelViewForCustomerEdit(httpSession, user, customer);
@@ -132,14 +138,15 @@ public class CustomerController implements ServletContextAware
         return modelAndView;
     }
 
-    private static ModelAndView getModelViewForCustomerEdit(HttpSession httpSession, User user, Customer customer) {
+    private ModelAndView getModelViewForCustomerEdit(HttpSession httpSession, User user, Customer customer) {
         ModelAndView modelAndView = new ModelAndView();
-        Business business = new BusinessStore().get(user.getBusinessId());
-        modelAndView.addObject("businessName", business.getBusinessName());
-        modelAndView.addObject("logoName", business.getLogoName());
+
+        addHeaderDetails(modelAndView, user.getBusinessId());
+
         modelAndView.addObject("command", customer);
         modelAndView.addObject("pageTitle", "Customer Details");
         modelAndView.setViewName("FlexibleUIConfig/Customer/customerDetails");
+        addHeaderDetails(modelAndView, user.getBusinessId());
         httpSession.setAttribute("CurrentlyEditingCustomerId", customer.getId());
         return modelAndView;
     }
@@ -152,6 +159,7 @@ public class CustomerController implements ServletContextAware
         }
         else {
             User user = (User) httpSession.getAttribute("User");
+            addHeaderDetails(modelAndView, user.getBusinessId());
             if (httpSession.getAttribute("CurrentlyEditingCustomerId") != null){
                 int currentlyEditingCustomerId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingCustomerId").toString());
                 customer.setId(currentlyEditingCustomerId);

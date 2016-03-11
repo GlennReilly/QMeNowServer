@@ -37,11 +37,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/FlexibleUIConfig/business")
-public class BusinessController implements ServletContextAware
+public class BusinessController extends GenericController implements ServletContextAware
 {
-
     private ServletContext servletContext;
-
 
     @Override
     public void setServletContext(ServletContext servletContext) {
@@ -70,11 +68,11 @@ public class BusinessController implements ServletContextAware
         modelAndView.setViewName("/FlexibleUIConfig/Business/BusinessDetails");
         Business business = new BusinessStore().get(businessId);
         httpSession.setAttribute("businessId", business.getId());
+        addHeaderDetails(modelAndView, businessId);
         modelAndView.addObject("command", business);
-        modelAndView.addObject("businessName", business.getBusinessName());
-        modelAndView.addObject("logoName", business.getLogoName());
         return modelAndView;
     }
+
 
     @RequestMapping(value = "/edit/{businessId}", method = RequestMethod.GET)
     public ModelAndView EditBusinessDetails(@PathVariable int businessId, HttpSession httpSession){
@@ -90,8 +88,7 @@ public class BusinessController implements ServletContextAware
         Business business = new BusinessStore().get(businessId);
         httpSession.setAttribute("businessId", business.getId()); //TODO should this be user.businessId? What about Admin editing other businesses?
         modelAndView.addObject("command", business);
-        modelAndView.addObject("businessName", business.getBusinessName());
-        modelAndView.addObject("logoName", business.getLogoName());
+        addHeaderDetails(modelAndView, businessId);
         modelAndView.addObject("activeLocations", locationList);
 
         return modelAndView;

@@ -43,5 +43,6 @@
         <li></li>
         <li><a href="<spring:url value='/FlexibleUIConfig/appointment/getAllForDateRange'/>"> Get all appointments for date range</a></li>
     </ul>
+<tags:jsIncludes logoPath="${Business.logoName}"></tags:jsIncludes>
 </body>
 </html>

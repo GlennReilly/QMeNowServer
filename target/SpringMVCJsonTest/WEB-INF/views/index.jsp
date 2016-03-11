@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <configName></configName>
@@ -29,5 +30,6 @@ Welcome to SpringMVCJsonTest
     <li><a href="./phrase/createPhrase?phraseString=insert_phraseString_here">/phrase/createPhrase?phraseString=insert_phraseString_here</a></li>
     <li><a href="./phrase/newPhraseForm">/phrase/newPhraseForm</a></li>
 </ul>
+<tags:jsIncludes logoPath="${command.logoName}"></tags:jsIncludes>
 </body>
 </html>

@@ -150,6 +150,14 @@ public class ModelViewHelper {
         Business business = new BusinessStore().get(businessId);
         modelAndView.addObject("businessName", business.getBusinessName());
         modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("headerColour", business.getHeaderColourHexCode());
+    }
+
+    public void addHeaderDetails(ModelAndView modelAndView, int businessId) {
+        Business business = new BusinessStore().get(businessId);
+        modelAndView.addObject("businessName", business.getBusinessName());
+        modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("headerColour", business.getHeaderColourHexCode());
     }
 
     public static ModelAndView GetModelViewForAddEditAppointmentType(HttpSession httpSession, Integer appointmentTypeId) {
@@ -235,6 +243,7 @@ public class ModelViewHelper {
                 appointmentStatus = new AppointmentStatus();
                 pageTitle = "Add Appointment Status";
             }
+
             User user = (User) httpSession.getAttribute("User");
             modelAndView = new ModelAndView();
             modelAndView.setViewName("FlexibleUIConfig/AppointmentStatus/addEditAppointmentStatusForm");
@@ -361,4 +370,5 @@ public class ModelViewHelper {
 
         return  modelAndView;
     }
+
 }
