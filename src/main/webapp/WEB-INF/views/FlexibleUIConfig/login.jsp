@@ -13,11 +13,11 @@
 <head>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
-<body>
+<body style="background-color:#F3F781;">
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
     <form:form action="/login/" method="post">
-        <div>
+        <div style="background-color:#FFFFFF; width: 500px; padding: 50px; margin-left: 100px; border-radius: 10px;">
             <div class="label2">
                 <label>username:</label><form:input path="username" id="username" />
             </div>

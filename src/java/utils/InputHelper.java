@@ -18,9 +18,13 @@ public class InputHelper {
         String returnString = Normalizer.normalize(stringToClean, Form.NFC);
         returnString = returnString.replace("<","")
                 .replace(">","")
+                .replace("<","")
+                .replace("!","")
                 .replace("[","")
                 .replace("]","")
-                .replace(";","");
+                .replace(";","")
+                .replace("\"","")
+                .replace("'","");
         return returnString;
     }
 

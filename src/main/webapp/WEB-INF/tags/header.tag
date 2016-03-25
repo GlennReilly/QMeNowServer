@@ -4,10 +4,11 @@
 <%@ attribute name="logoPath" required="false" %>
 <%@ attribute name="businessName" required="false" %>
 <%@ attribute name="headerColour" required="false" %>
+
 <div style="padding-bottom: 4vh; width:40vw;">
     <c:if test="${not empty logoPath}">
-        <div id="logoDiv" style="float:left;width:100%; height: 100px;background-color:${headerColour};">
-            <img id="logoImg" style="width: 75px;" src="/resources/images/<c:out value="${logoPath}"/>">
+        <div id="logoDiv" style="float:left;width:100%;  padding: 20px;background-color:${headerColour};">
+            <img id="logoImg" style="width: 100px;" src="/resources/images/<c:out value="${logoPath}"/>">
         </div>
     </c:if>
     <div class="businessName"><c:out value="${businessName}" /></div>

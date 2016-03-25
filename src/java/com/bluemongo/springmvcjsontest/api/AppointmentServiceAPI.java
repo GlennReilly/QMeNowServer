@@ -4,9 +4,11 @@ import com.bluemongo.springmvcjsontest.model.Appointment;
 import com.bluemongo.springmvcjsontest.model.AppointmentCheckInDTO;
 import com.bluemongo.springmvcjsontest.model.AppointmentsResponse;
 import com.bluemongo.springmvcjsontest.service.AppointmentAndCustomer;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -43,6 +45,8 @@ public interface AppointmentServiceAPI{
     //@GET("/SpringMVCJsonTest/FlexibleUIConfig/api/v1/Customer/getByName?firstName={firstName}&lastName={lastName}")
     //List<UserDetails> getUserMatchesByName(String firstName, String lastName);
 
-
+    //@RequestMapping(value = "/logo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    //@GET("/FlexibleUIConfig/api/v1/Business/getLogo)
+    byte[] getLogo(HttpSession httpSession) throws IOException;
 
 }

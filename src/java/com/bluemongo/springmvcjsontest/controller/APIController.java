@@ -9,8 +9,10 @@ import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/FlexibleUIConfig/api/v1")
-public class APIController implements AppointmentServiceAPI {
+public class APIController implements AppointmentServiceAPI, ServletContextAware {
 enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
 
     // http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/7
@@ -135,4 +137,35 @@ enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
 
         return stringList;
     }
+
+    private ServletContext servletContext;
+
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
+
+
+    @Override
+    @RequestMapping(value = "/Business/getLogo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getLogo(HttpSession httpSession) throws IOException {
+        if(httpSession.getAttribute("businessId") != null) {
+            int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
+            Business business = new BusinessStore().get(businessId);
+            String resourceBase = "/resources/images/";
+
+            InputStream in = servletContext.getResourceAsStream(resourceBase + business.getLogoName());
+            byte[] logoByteArray = IOUtils.toByteArray(in);
+
+            if (logoByteArray.length == 0) {
+                in = servletContext.getResourceAsStream(resourceBase + "noLogo.png");
+               logoByteArray = IOUtils.toByteArray(in);
+            }
+
+            return logoByteArray;
+        }else{
+            return null;
+        }
+    }
+
 }

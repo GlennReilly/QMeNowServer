@@ -49,8 +49,8 @@ public class BusinessController extends GenericController implements ServletCont
 
 
     @ResponseBody
-    @RequestMapping(value = "/photo2", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] testphoto(HttpSession httpSession) throws IOException {
+    @RequestMapping(value = "/logo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getLogo(HttpSession httpSession) throws IOException {
         if(httpSession.getAttribute("businessId") != null) {
             int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
             Business business = new BusinessStore().get(businessId);
@@ -129,7 +129,7 @@ public class BusinessController extends GenericController implements ServletCont
             if (!logo.isEmpty()) {
                 if (logo.getSize() < maxFileSizeBytes) {
                     if (logo.getContentType().contains("image")) {
-                        String fileName = business.getBusinessName() + "_" + business.getId() + "_" + logo.getOriginalFilename();
+                        String fileName = InputHelper.cleanText(business.getBusinessName() + "_" + business.getId() + "_" + logo.getOriginalFilename()).replace(" ", "");
                         String filePathAndName = "/" + fileName;
                         String imageRelativePath = "/resources/images" + filePathAndName;
                         File logoFile = new File(servletContext.getRealPath("/") + imageRelativePath);

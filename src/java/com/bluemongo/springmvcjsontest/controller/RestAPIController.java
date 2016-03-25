@@ -6,6 +6,8 @@ import com.bluemongo.springmvcjsontest.service.AppointmentAndCustomer;
 import com.bluemongo.springmvcjsontest.service.ConfigHelper;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,6 +138,11 @@ public class RestAPIController implements AppointmentServiceAPI {
     @Override
     public AppointmentsResponse getAppointmentsByUserIDAndName(Integer customerId, String firstName, String lastName) {
         return null;
+    }
+
+    @Override
+    public byte[] getLogo(HttpSession httpSession) throws IOException {
+        return new byte[0];
     }
 
     @Override

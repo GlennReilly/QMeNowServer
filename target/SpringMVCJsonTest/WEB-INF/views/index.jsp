@@ -14,7 +14,7 @@
     <configName></configName>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
-<body>
+<body style="background-color: ${business.backgroundColourHexCode}">
 Welcome to SpringMVCJsonTest
 <br/>
 <ul>
