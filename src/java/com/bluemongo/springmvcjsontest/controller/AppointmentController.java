@@ -122,7 +122,8 @@ public class AppointmentController{
         return modelAndView;
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    //@RequestMapping(value = "/get", method = RequestMethod.POST)
+    @RequestMapping(value = "/get")
     public ModelAndView GetAllForDateRange(HttpSession httpSession, @ModelAttribute GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper){
         ModelAndView modelAndView;
 

@@ -1,10 +1,12 @@
 package com.bluemongo.springmvcjsontest.service;
 
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,11 +36,23 @@ public class GetAppointmentSearchResultsHelper {
     public void setStrFromDate(String strFromDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            fromDate = sdf.parse(strFromDate);
+
+            if(StringUtils.isEmpty(strFromDate)){
+                Date date = new Date();                      // timestamp now
+                Calendar cal = Calendar.getInstance();       // get calendar instance
+                cal.setTime(date);                           // set cal to date
+                cal.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
+                cal.set(Calendar.MINUTE, 0);                 // set minute in hour
+                cal.set(Calendar.SECOND, 0);                 // set second in minute
+                cal.set(Calendar.MILLISECOND, 0);            // set millis in second
+                fromDate = cal.getTime();             // actually computes the new Date
+            }else {
+                fromDate = sdf.parse(strFromDate);
+            }
+            this.strFromDate = sdf.format(fromDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        this.strFromDate = strFromDate;
     }
 
     public String getStrFromDate() {
@@ -52,11 +66,20 @@ public class GetAppointmentSearchResultsHelper {
     public void setStrToDate(String strToDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            toDate = sdf.parse(strToDate);
+            if(StringUtils.isEmpty(strToDate)){
+                Calendar nextDayCal = Calendar.getInstance();
+                nextDayCal.setTime(getFromDate());
+                nextDayCal.add(Calendar.DATE, 1);
+                toDate = toDate == null ? nextDayCal.getTime() : toDate;
+            }
+            else{
+                toDate = sdf.parse(strToDate);
+            }
+            this.strToDate = sdf.format(toDate);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        this.strToDate = strToDate;
     }
 
     public void generateSearchResults(){
@@ -80,6 +103,7 @@ public class GetAppointmentSearchResultsHelper {
     }
 
     public Date getFromDate() {
+        fromDate = fromDate ==  null ? Calendar.getInstance().getTime(): fromDate;
         return fromDate;
     }
 
@@ -88,6 +112,10 @@ public class GetAppointmentSearchResultsHelper {
     }
 
     public Date getToDate() {
+        Calendar nextDayCal = Calendar.getInstance();
+        nextDayCal.setTime(getFromDate());
+        nextDayCal.add(Calendar.DATE, 1);
+        toDate = toDate == null ? nextDayCal.getTime() : toDate;
         return toDate;
     }
 

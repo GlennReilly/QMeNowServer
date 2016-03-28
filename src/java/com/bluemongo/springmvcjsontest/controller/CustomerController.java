@@ -125,10 +125,10 @@ public class CustomerController extends GenericController implements ServletCont
         }
         else{
             User user = (User)httpSession.getAttribute("User");
-            populateHeaderValues(user.getBusinessId(), modelAndView);
             Customer customer = new CustomerStore().get(user.getBusinessId(), customerId);
             if (customer != null){
                 modelAndView = getModelViewForCustomerEdit(httpSession, user, customer);
+                populateHeaderValues(user.getBusinessId(), modelAndView);
             }else {
                 modelAndView = ModelViewHelper.GetModelViewForError("Sorry, there was an error retrieving that customer.");
             }

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
@@ -18,10 +19,11 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointment/get" method="post">
+<form:form action="/FlexibleUIConfig/appointment/get" method="get">
     <input type="hidden" id="customerId" value="${customerId}">
     <form:hidden path="customerId" />
         <div>
+            <div class="pageMessage" style="margin-left: 150px;">(leave these fields blank to search the current day)</div>
             <div class="label2">
                 <label>from date:</label><form:input path="strFromDate" />
             </div>
@@ -77,7 +79,7 @@
             <c:forEach items="${command.appointmentResultList}" var="appointmentResult"  >
                 <tr>
                     <td>
-                        <c:out value="${appointmentResult.appointment.appointmentDate}" />
+                        <fmt:formatDate pattern="E d MMM h:mma" value="${appointmentResult.appointment.appointmentDate}" />
                     </td>
                     <td>
                         <c:out value="${appointmentResult.appointment.appointmentTypePrefix}${appointmentResult.appointment.id}" />
