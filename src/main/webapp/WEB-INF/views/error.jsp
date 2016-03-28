@@ -12,7 +12,7 @@
     <configName></configName>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
-<body>
+<body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>

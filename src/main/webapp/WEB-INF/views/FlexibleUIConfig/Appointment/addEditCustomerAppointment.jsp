@@ -16,7 +16,7 @@
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery-ui.min.css'/>" />
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery.ptTimeSelect.css'/>" />
 </head>
-<body>
+<body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
 <tags:header
         logoPath="${logoFileName}"

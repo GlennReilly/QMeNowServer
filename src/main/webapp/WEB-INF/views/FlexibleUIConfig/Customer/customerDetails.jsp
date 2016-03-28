@@ -14,7 +14,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
-<body>
+<body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
 <tags:header
         logoPath="${logoFileName}">
@@ -40,12 +40,6 @@
             <div class="label2">
                 <label>street address:</label><form:input path="physicalAddress"/>
             </div>
-    <%--            <div class="label2">
-                <label>DOB:</label><form:input path="DOB"/>
-            </div>
-            <div class="label2">
-                <label>gender:</label><form:input path="gender"/>
-            </div>--%>
         </div>
         <div class="label2">
             <input type="submit" value="update"/>

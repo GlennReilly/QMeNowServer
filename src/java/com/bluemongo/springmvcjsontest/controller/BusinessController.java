@@ -192,6 +192,7 @@ public class BusinessController extends GenericController implements ServletCont
             //TODO maybe each business would have a separate user just for showing the QRCode?
             if (businessId > 0){
                 httpSession.setAttribute("businessId", businessId);
+                populateHeaderValues(businessId, modelAndView);
             }
         }
 

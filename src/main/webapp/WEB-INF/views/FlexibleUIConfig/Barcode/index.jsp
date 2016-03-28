@@ -15,7 +15,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
-    <body>
+<body style="background-color: ${backgroundColourHexCode}">
     <tags:header
             logoPath="${Business.logoFileName}"
             businessName="${Business.businessName}">

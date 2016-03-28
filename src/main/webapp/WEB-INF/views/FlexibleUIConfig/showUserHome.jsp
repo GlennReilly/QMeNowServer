@@ -14,11 +14,11 @@
 <head>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
-<body style="background-color: ${command.backgroundColourHexCode}">
+<body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
 <tags:header
-        logoPath="${Business.logoFileName}"
-        businessName="${Business.businessName}"
+        logoPath="${logoFileName}"
+        businessName="${businessName}"
         >
 </tags:header>
 

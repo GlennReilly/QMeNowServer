@@ -14,6 +14,7 @@ public class GenericController {
         modelAndView.addObject("businessName", business.getBusinessName());
         modelAndView.addObject("logoFileName", business.getLogoFileName());
         modelAndView.addObject("headerColour", business.getHeaderColourHexCode());
+        modelAndView.addObject("backgroundColourHexCode", business.getBackgroundColourHexCode());
     }
 
 

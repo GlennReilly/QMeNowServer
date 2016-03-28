@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery-ui.min.css'/>" />
 </head>
-<body>
+<body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
 <tags:header
         logoPath="${logoFileName}"
