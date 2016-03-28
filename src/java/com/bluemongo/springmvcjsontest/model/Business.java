@@ -15,7 +15,7 @@ public class Business {
     private String physicalAddress = "";
     private transient String contactName = "";
     private transient MultipartFile logo;
-    private transient String logoName;
+    private transient String logoFileName;
     private int defaultLocationId;
     private transient String logoFilePath;
     private String buttonColourHexCode;
@@ -94,19 +94,19 @@ public class Business {
         this.logo = logo;
     }
 
-    public void setLogoName(String logoName, String absolutePath) {
-        this.logoName = logoName;
+    public void setLogoFileName(String logoName, String absolutePath) {
+        this.logoFileName = logoName;
         this.setLogoFilePath(absolutePath);
-        new BusinessStore().setLogoName(this.getId(),logoName, absolutePath);
+        new BusinessStore().setLogoFileName(this.getId(),logoName, absolutePath);
     }
 
-    public String getLogoName() {
+    public String getLogoFileName() {
 /*        String fileName = getBusinessName() + "_" + getId() + "_" + logo.getOriginalFilename();
         String filePathAndName = "/" + fileName;
         String imageRelativePath = "/resources/images" + filePathAndName;
         File logoFile = new File(servletContext.getRealPath("/") + imageRelativePath);*/
 
-        return logoName;
+        return logoFileName;
     }
 
     public int getDefaultLocationId() {

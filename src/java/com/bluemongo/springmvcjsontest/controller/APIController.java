@@ -146,7 +146,7 @@ enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
     }
 
 
-    @Override
+/*    @Override
     @RequestMapping(value = "/Business/getLogo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getLogo(HttpSession httpSession) throws IOException {
         if(httpSession.getAttribute("businessId") != null) {
@@ -154,18 +154,21 @@ enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
             Business business = new BusinessStore().get(businessId);
             String resourceBase = "/resources/images/";
 
-            InputStream in = servletContext.getResourceAsStream(resourceBase + business.getLogoName());
-            byte[] logoByteArray = IOUtils.toByteArray(in);
+            InputStream in = null;
+            byte[] logoByteArray = new byte[0];
 
-            if (logoByteArray.length == 0) {
+            in = servletContext.getResourceAsStream(resourceBase + business.getLogoFileName());
+
+            if(in == null) {
                 in = servletContext.getResourceAsStream(resourceBase + "noLogo.png");
-               logoByteArray = IOUtils.toByteArray(in);
+
             }
+            logoByteArray = IOUtils.toByteArray(in);
 
             return logoByteArray;
         }else{
             return null;
         }
-    }
+    }*/
 
 }

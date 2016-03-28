@@ -15,12 +15,16 @@ public class AddUserFormHelper {
     private List<Business> activeBusinesses = new ArrayList<>();
     private int selectedBusinessId;
 
-    public void setSelectedBusinessId(int selectedBusinessId) {
+/*    public AddUserFormHelper(int selectedBusinessId) {
         this.selectedBusinessId = selectedBusinessId;
-    }
+    }*/
 
     public int getSelectedBusinessId() {
         return selectedBusinessId;
+    }
+
+    public void setSelectedBusinessId(int selectedBusinessId) {
+        this.selectedBusinessId = selectedBusinessId;
     }
 
     public List<Business> getActiveBusinesses() {

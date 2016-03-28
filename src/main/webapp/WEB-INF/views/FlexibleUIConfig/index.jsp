@@ -28,6 +28,6 @@
     <li><a href="./buttonStyle/add">Add a new button style</a></li>
     <li><a href="./edit/42">/FlexibleUIConfig/edit/42</a></li>
 </ul>
-<tags:jsIncludes logoPath="${command.logoName}"></tags:jsIncludes>
+<tags:jsIncludes logoPath="${command.logoFileName}"></tags:jsIncludes>
 </body>
 </html>

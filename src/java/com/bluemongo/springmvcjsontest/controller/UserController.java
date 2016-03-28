@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping("/FlexibleUIConfig/user")
-public class UserController {
+public class UserController extends GenericController{
     // User methods
     @RequestMapping(value="/add", method = RequestMethod.GET)
     public ModelAndView GetUserAddForm(HttpSession httpSession){
@@ -29,6 +29,8 @@ public class UserController {
             modelAndView.setViewName("/FlexibleUIConfig/addUserForm");
             modelAndView.addObject("command", new AddUserFormHelper());
             modelAndView.addObject("pageTitle", "Add a user");
+            int businessId = ((User)httpSession.getAttribute("User")).getBusinessId();
+            populateHeaderValues(businessId, modelAndView);
         }
         return  modelAndView;
     }

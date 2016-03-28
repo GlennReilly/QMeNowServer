@@ -17,7 +17,7 @@
 <body style="background-color: ${command.backgroundColourHexCode}">
 <tags:menu></tags:menu>
 <tags:header
-        logoPath="${Business.logoName}"
+        logoPath="${Business.logoFileName}"
         businessName="${Business.businessName}"
         >
 </tags:header>
@@ -43,6 +43,6 @@
         <li></li>
         <li><a href="<spring:url value='/FlexibleUIConfig/appointment/getAllForDateRange'/>"> Get all appointments for date range</a></li>
     </ul>
-<tags:jsIncludes logoPath="${Business.logoName}"></tags:jsIncludes>
+<tags:jsIncludes logoPath="${Business.logoFileName}"></tags:jsIncludes>
 </body>
 </html>

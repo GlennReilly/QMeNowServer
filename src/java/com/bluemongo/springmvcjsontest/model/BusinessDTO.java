@@ -9,12 +9,7 @@ public class BusinessDTO {
     private String buttonColourHexCode;
     private String headerColourHexCode;
     private String backgroundColourHexCode;
-    //private String footerColourHexCode;
-    /*    private String phoneNumber = "";
-    private String emailAddress = "";
-    private String physicalAddress = "";*/
-
-
+    private String logoFileName;
 
 
     public int getId() {
@@ -57,35 +52,11 @@ public class BusinessDTO {
         this.backgroundColourHexCode = backgroundColourHexCode;
     }
 
-/*    public String getFooterColourHexCode() {
-        return footerColourHexCode;
+    public String getLogoFileName() {
+        return logoFileName;
     }
 
-    public void setFooterColourHexCode(String footerColourHexCode) {
-        this.footerColourHexCode = footerColourHexCode;
-    }*/
-
-    /*    public String getPhoneNumber() {
-        return phoneNumber;
+    public void setLogoFileName(String logoFileName) {
+        this.logoFileName = logoFileName;
     }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getPhysicalAddress() {
-        return physicalAddress;
-    }
-
-    public void setPhysicalAddress(String physicalAddress) {
-        this.physicalAddress = physicalAddress;
-    }*/
 }

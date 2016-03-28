@@ -46,7 +46,25 @@ public class BusinessController extends GenericController implements ServletCont
         this.servletContext = servletContext;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/{businessId}/getLogo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getLogo(@PathVariable int businessId) throws IOException {
+        Business business = new BusinessStore().get(businessId);
+        String resourceBase = "/resources/images/";
 
+        InputStream in = null;
+        byte[] logoByteArray = new byte[0];
+
+        in = servletContext.getResourceAsStream(resourceBase + business.getLogoFileName());
+
+        if(in == null) {
+            in = servletContext.getResourceAsStream(resourceBase + "noLogo.png");
+
+        }
+        logoByteArray = IOUtils.toByteArray(in);
+
+        return logoByteArray;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/logo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
@@ -55,7 +73,7 @@ public class BusinessController extends GenericController implements ServletCont
             int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
             Business business = new BusinessStore().get(businessId);
             String resourceBase = "/resources/images/";
-            InputStream in = servletContext.getResourceAsStream(resourceBase + business.getLogoName());
+            InputStream in = servletContext.getResourceAsStream(resourceBase + business.getLogoFileName());
             return IOUtils.toByteArray(in);
         }else{
             return null;
@@ -68,7 +86,7 @@ public class BusinessController extends GenericController implements ServletCont
         modelAndView.setViewName("/FlexibleUIConfig/Business/BusinessDetails");
         Business business = new BusinessStore().get(businessId);
         httpSession.setAttribute("businessId", business.getId());
-        addHeaderDetails(modelAndView, businessId);
+        populateHeaderValues(businessId, modelAndView);
         modelAndView.addObject("command", business);
         return modelAndView;
     }
@@ -88,7 +106,7 @@ public class BusinessController extends GenericController implements ServletCont
         Business business = new BusinessStore().get(businessId);
         httpSession.setAttribute("businessId", business.getId()); //TODO should this be user.businessId? What about Admin editing other businesses?
         modelAndView.addObject("command", business);
-        addHeaderDetails(modelAndView, businessId);
+        populateHeaderValues(businessId, modelAndView);
         modelAndView.addObject("activeLocations", locationList);
 
         return modelAndView;
@@ -136,7 +154,7 @@ public class BusinessController extends GenericController implements ServletCont
 
                         try {
                             logo.transferTo(logoFile);
-                            business.setLogoName(fileName, logoFile.getAbsolutePath());
+                            business.setLogoFileName(fileName, logoFile.getAbsolutePath());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -236,6 +254,7 @@ public class BusinessController extends GenericController implements ServletCont
         businessQRCodePayload.setButtonColourHexCode(business.getButtonColourHexCode());
         businessQRCodePayload.setHeaderColourHexCode(business.getHeaderColourHexCode());
         businessQRCodePayload.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
+        businessQRCodePayload.setLogoFileName(business.getLogoFileName());
         businessQRCodePayload.setContent(business.getPhysicalAddress());
         Gson gson = new Gson();
         String jsonBarcodePayload = gson.toJson(businessQRCodePayload);

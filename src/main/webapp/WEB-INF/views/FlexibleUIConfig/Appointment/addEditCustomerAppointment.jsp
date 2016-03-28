@@ -19,7 +19,7 @@
 <body>
 <tags:menu></tags:menu>
 <tags:header
-        logoPath="${logoName}"
+        logoPath="${logoFileName}"
         businessName="${businessName}">
 </tags:header>
 
@@ -85,7 +85,7 @@
 
 
   </form:form>
-<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
+<tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
 <script src="<spring:url value='/resources/scripts/jquery-ui.min.js'/>" ></script>
 <script src="<spring:url value='/resources/scripts/jquery.ptTimeSelect.js'/>" ></script>

@@ -12,7 +12,7 @@
 <body>
 <tags:menu></tags:menu>
 <tags:header
-        logoPath="${logoName}"
+        logoPath="${logoFileName}"
         businessName="${businessName}">
 </tags:header>
 
@@ -134,6 +134,6 @@
         $( "#strToDate" ).datepicker({dateFormat: "dd-mm-yy"});
     });
 </script>
-<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
+<tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 </body>
 </html>

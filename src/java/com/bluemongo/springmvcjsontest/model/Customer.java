@@ -9,7 +9,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import utils.InputHelper;
 
 import javax.imageio.ImageIO;
@@ -228,6 +227,7 @@ public class Customer {
             customerQRCodePayload.getBusinessDTO().setBackgroundColourHexCode(business.getBackgroundColourHexCode());
             customerQRCodePayload.getBusinessDTO().setHeaderColourHexCode(business.getHeaderColourHexCode());
             customerQRCodePayload.getBusinessDTO().setButtonColourHexCode(business.getButtonColourHexCode());
+            customerQRCodePayload.getBusinessDTO().setLogoFileName(business.getLogoFileName());
         }
 
         Gson gson = new Gson();

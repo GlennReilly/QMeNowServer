@@ -47,6 +47,6 @@ public interface AppointmentServiceAPI{
 
     //@RequestMapping(value = "/logo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
     //@GET("/FlexibleUIConfig/api/v1/Business/getLogo)
-    byte[] getLogo(HttpSession httpSession) throws IOException;
+    //byte[] getLogo(HttpSession httpSession) throws IOException;
 
 }

@@ -107,7 +107,7 @@ public class BusinessStore {
         business.setEmailAddress(resultSet.getString("emailAddress"));
         business.setPhysicalAddress(resultSet.getNString("physicalAddress"));
         business.setContactName(resultSet.getString("contactName"));
-        business.setLogoName(resultSet.getString("logoName"), resultSet.getString("logoFilePath"));
+        business.setLogoFileName(resultSet.getString("logoName"), resultSet.getString("logoFilePath"));
         business.setDefaultLocationId(resultSet.getInt("defaultLocationId"));
         business.setButtonColourHexCode(resultSet.getString("buttonColourHexCode"));
         business.setHeaderColourHexCode(resultSet.getString("headerColourHexCode"));
@@ -162,7 +162,7 @@ public class BusinessStore {
         return reconfigurableAppConfigList;
     }
 
-    public void setLogoName(int businessId, String logoName, String logoFilePath) {
+    public void setLogoFileName(int businessId, String logoName, String logoFilePath) {
         String query = "update business set logoName=?, logoFilePath=? where id=?";
         try(Connection connection = dbHelper.getConnection()){
           preparedStatement = connection.prepareStatement(query);

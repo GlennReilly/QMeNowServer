@@ -19,7 +19,7 @@
 <body>
 <tags:menu></tags:menu>
 <tags:header
-        logoPath="${logoName}"
+        logoPath="${logoFileName}"
         businessName="${businessName}">
 </tags:header>
 
@@ -41,6 +41,6 @@
     </div>
   </div>
 </form:form>
-<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
+<tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 </body>
 </html>

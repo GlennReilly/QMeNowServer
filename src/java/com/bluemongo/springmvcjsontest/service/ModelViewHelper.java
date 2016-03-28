@@ -1,5 +1,6 @@
 package com.bluemongo.springmvcjsontest.service;
 
+import com.bluemongo.springmvcjsontest.controller.GenericController;
 import com.bluemongo.springmvcjsontest.model.*;
 import com.bluemongo.springmvcjsontest.persistence.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by glenn on 20/10/15.
  */
-public class ModelViewHelper {
+public class ModelViewHelper extends GenericController {
 
     public static ModelAndView GetStartPage(){
         ModelAndView modelAndView = new ModelAndView();
@@ -38,6 +39,7 @@ public class ModelViewHelper {
             httpSession.setAttribute("User", validUser);
             if (validUser.getUserType().equals(User.UserType.USER)) {
                 modelAndView = ModelViewHelper.GetModelViewForUserHome(validUser, null);
+                httpSession.setAttribute("businessId", validUser.getBusinessId());
             }else if (validUser.getUserType().equals(User.UserType.ADMIN)) {
                 modelAndView = ModelViewHelper.GetModelViewForAdminHome(validUser, null);
             }
@@ -146,19 +148,21 @@ public class ModelViewHelper {
         return modelAndView;
     }
 
-    private static void populateHeaderValues(int businessId, ModelAndView modelAndView) {
+/*    private static void populateHeaderValues(int businessId, ModelAndView modelAndView) {
         Business business = new BusinessStore().get(businessId);
         modelAndView.addObject("businessName", business.getBusinessName());
-        modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("logoName", business.getLogoFileName());
         modelAndView.addObject("headerColour", business.getHeaderColourHexCode());
-    }
+    }*/
 
-    public void addHeaderDetails(ModelAndView modelAndView, int businessId) {
+
+
+/*    public void addHeaderDetails(ModelAndView modelAndView, int businessId) {
         Business business = new BusinessStore().get(businessId);
         modelAndView.addObject("businessName", business.getBusinessName());
-        modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("logoName", business.getLogoFileName());
         modelAndView.addObject("headerColour", business.getHeaderColourHexCode());
-    }
+    }*/
 
     public static ModelAndView GetModelViewForAddEditAppointmentType(HttpSession httpSession, Integer appointmentTypeId) {
         ModelAndView modelAndView;

@@ -1,7 +1,6 @@
 package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.Business;
-import com.bluemongo.springmvcjsontest.model.User;
 import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -10,10 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class GenericController {
 
-    public void addHeaderDetails(ModelAndView modelAndView, int businessId) {
+    public static void populateHeaderValues(int businessId, ModelAndView modelAndView) {
         Business business = new BusinessStore().get(businessId);
         modelAndView.addObject("businessName", business.getBusinessName());
-        modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("logoFileName", business.getLogoFileName());
         modelAndView.addObject("headerColour", business.getHeaderColourHexCode());
     }
+
+
 }

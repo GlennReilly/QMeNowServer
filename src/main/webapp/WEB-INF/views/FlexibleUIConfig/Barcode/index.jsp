@@ -17,7 +17,7 @@
 </head>
     <body>
     <tags:header
-            logoPath="${Business.logoName}"
+            logoPath="${Business.logoFileName}"
             businessName="${Business.businessName}">
     </tags:header>
     <div class="pageTitle">${pageTitle}</div>
@@ -26,6 +26,6 @@
         <a href="./">refresh</a>
         <br/>
         <img src="<spring:url value='${QRCodePath}'/>" />
-    <tags:jsIncludes logoPath="${Business.logoName}"></tags:jsIncludes>
+    <tags:jsIncludes logoPath="${Business.logoFileName}"></tags:jsIncludes>
     </body>
 </html>

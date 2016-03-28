@@ -17,7 +17,7 @@
 <body>
 <tags:menu></tags:menu>
 <tags:header
-        logoPath="${logoName}"
+        logoPath="${logoFileName}"
         businessName="${businessName}">
 </tags:header>
 
@@ -65,6 +65,6 @@
 <ul>
     <li><a href="<spring:url value='/FlexibleUIConfig/appointmentType/add'/>">Add a new appointment type for your business</a></li>
 </ul>
-<tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
+<tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 </body>
 </html>

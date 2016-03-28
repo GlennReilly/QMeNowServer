@@ -16,6 +16,6 @@
 <tags:menu></tags:menu>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<tags:jsIncludes logoPath="${command.logoName}"></tags:jsIncludes>
+<tags:jsIncludes logoPath="${command.logoFileName}"></tags:jsIncludes>
 </body>
 </html>

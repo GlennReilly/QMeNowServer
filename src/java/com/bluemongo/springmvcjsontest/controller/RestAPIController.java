@@ -140,10 +140,6 @@ public class RestAPIController implements AppointmentServiceAPI {
         return null;
     }
 
-    @Override
-    public byte[] getLogo(HttpSession httpSession) throws IOException {
-        return new byte[0];
-    }
 
     @Override
     public AppointmentsResponse checkInAppointment(int appointmentId, AppointmentCheckInDTO appointmentCheckIn) {

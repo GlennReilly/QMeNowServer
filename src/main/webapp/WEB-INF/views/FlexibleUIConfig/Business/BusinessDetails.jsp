@@ -11,8 +11,8 @@
 <body style="background-color: ${command.backgroundColourHexCode}">
 <tags:menu></tags:menu>
 <tags:header
-        logoPath="${logoName}"
-        businessName="${businessName}"
+        logoPath="${command.logoFileName}"
+        businessName="${command.businessName}"
         headerColour="${headerColour}">
 </tags:header>
 
@@ -45,6 +45,6 @@
         </div>
     </div>
 </form:form>
-<tags:jsIncludes logoPath="${command.logoName}"></tags:jsIncludes>
+<tags:jsIncludes logoPath="${command.logoFileName}"></tags:jsIncludes>
 </body>
 </html>

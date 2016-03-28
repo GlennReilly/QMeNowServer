@@ -18,6 +18,7 @@ public class AppointmentsResponse {
         this.business.setButtonColourHexCode(business.getButtonColourHexCode());
         this.business.setHeaderColourHexCode(business.getHeaderColourHexCode());
         this.business.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
+        this.business.setLogoFileName(business.getLogoFileName());
     }
 
     public BusinessDTO getBusiness() {

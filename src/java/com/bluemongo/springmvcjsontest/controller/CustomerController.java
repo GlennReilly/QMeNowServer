@@ -69,7 +69,7 @@ public class CustomerController extends GenericController implements ServletCont
         else{
             User user = (User)httpSession.getAttribute("User");
             modelAndView = ModelViewHelper.GetModelViewForFindCustomer(user, null);
-            addHeaderDetails(modelAndView, user.getBusinessId());
+            populateHeaderValues(user.getBusinessId(), modelAndView);
         }
         return modelAndView;
     }
@@ -84,8 +84,7 @@ public class CustomerController extends GenericController implements ServletCont
             User user = (User)httpSession.getAttribute("User");
             modelAndView = new ModelAndView();
 
-            addHeaderDetails(modelAndView, user.getBusinessId());
-
+            populateHeaderValues(user.getBusinessId(), modelAndView);
             String customerIdStr = getFindCustomerHelper.getCustomerIdStr();
             String firstName = getFindCustomerHelper.getFirstName();
             String lastName = getFindCustomerHelper.getLastName();
@@ -114,7 +113,7 @@ public class CustomerController extends GenericController implements ServletCont
 /*    private void addHeaderDetails(ModelAndView modelAndView, User user) {
         Business business = new BusinessStore().get(user.getBusinessId());
         modelAndView.addObject("businessName", business.getBusinessName());
-        modelAndView.addObject("logoName", business.getLogoName());
+        modelAndView.addObject("logoName", business.getLogoFileName());
         modelAndView.addObject("headerColour", business.getHeaderColourHexCode());
     }*/
 
@@ -126,7 +125,7 @@ public class CustomerController extends GenericController implements ServletCont
         }
         else{
             User user = (User)httpSession.getAttribute("User");
-            addHeaderDetails(modelAndView, user.getBusinessId());
+            populateHeaderValues(user.getBusinessId(), modelAndView);
             Customer customer = new CustomerStore().get(user.getBusinessId(), customerId);
             if (customer != null){
                 modelAndView = getModelViewForCustomerEdit(httpSession, user, customer);
@@ -141,12 +140,10 @@ public class CustomerController extends GenericController implements ServletCont
     private ModelAndView getModelViewForCustomerEdit(HttpSession httpSession, User user, Customer customer) {
         ModelAndView modelAndView = new ModelAndView();
 
-        addHeaderDetails(modelAndView, user.getBusinessId());
-
         modelAndView.addObject("command", customer);
         modelAndView.addObject("pageTitle", "Customer Details");
         modelAndView.setViewName("FlexibleUIConfig/Customer/customerDetails");
-        addHeaderDetails(modelAndView, user.getBusinessId());
+        populateHeaderValues(user.getBusinessId(), modelAndView);
         httpSession.setAttribute("CurrentlyEditingCustomerId", customer.getId());
         return modelAndView;
     }
@@ -159,7 +156,7 @@ public class CustomerController extends GenericController implements ServletCont
         }
         else {
             User user = (User) httpSession.getAttribute("User");
-            addHeaderDetails(modelAndView, user.getBusinessId());
+            populateHeaderValues(user.getBusinessId(), modelAndView);
             if (httpSession.getAttribute("CurrentlyEditingCustomerId") != null){
                 int currentlyEditingCustomerId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingCustomerId").toString());
                 customer.setId(currentlyEditingCustomerId);

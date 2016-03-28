@@ -61,4 +61,12 @@ public class BusinessQRCodePayload {
     public void setBackgroundColourHexCode(String backgroundColourHexCode) {
         this.businessDTO.setBackgroundColourHexCode(backgroundColourHexCode);
     }
+
+    public String getLogoFileName() {
+        return businessDTO.getLogoFileName();
+    }
+
+    public void setLogoFileName(String logoFileName) {
+        this.businessDTO.setLogoFileName(logoFileName);
+    }
 }

@@ -17,7 +17,7 @@
 <body>
 <tags:menu></tags:menu>
 <tags:header
-        logoPath="${logoName}">
+        logoPath="${logoFileName}">
 </tags:header>
 
 <div class="pageTitle">${pageTitle}</div>
@@ -39,6 +39,6 @@
         </td>
     </tr>
     </c:forEach>
-    <tags:jsIncludes logoPath="${logoName}"></tags:jsIncludes>
+    <tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 </body>
 </html>

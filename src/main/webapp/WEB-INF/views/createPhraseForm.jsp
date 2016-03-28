@@ -27,6 +27,6 @@
             <input type="submit" value="Submit">
         </fieldset>
     </form:form>
-    <tags:jsIncludes logoPath="${command.logoName}"></tags:jsIncludes>
+    <tags:jsIncludes logoPath="${command.logoFileName}"></tags:jsIncludes>
 </body>
 </html>
