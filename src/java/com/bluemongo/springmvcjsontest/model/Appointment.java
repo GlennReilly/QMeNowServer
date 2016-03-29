@@ -216,7 +216,11 @@ public class Appointment {
     }
 
     public int saveUpdate() {
-        int updatedId = appointmentStore.saveUpdate(this);
+
+        int updatedId = 0;
+        if (!this.getIsComplete()) {
+            updatedId = appointmentStore.saveUpdate(this);
+        }
         return updatedId;
     }
 
@@ -256,8 +260,8 @@ public class Appointment {
         this.checkInDate = checkInDate;
         if(checkInDate != null) {
             this.setStrCheckInDateTime(InputHelper.getISO8601StringFromDate(checkInDate));
+            this.saveUpdate();
         }
-        this.saveUpdate();
     }
 
     public Date getCheckInDate() {

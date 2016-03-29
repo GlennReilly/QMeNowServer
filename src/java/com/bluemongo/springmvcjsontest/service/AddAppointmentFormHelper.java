@@ -20,7 +20,6 @@ public class AddAppointmentFormHelper {
     Appointment appointment = new Appointment();
     private int selectedUserId;
     private List<Location> activeLocations = new ArrayList<>();
-    //private List<Customer> customersList = new ArrayList<>();
     private List<AppointmentType> appointmentTypeList  = new ArrayList<>();
     private List<AppointmentStatus> appointmentStatusList;
 
@@ -71,10 +70,6 @@ public class AddAppointmentFormHelper {
         this.appointment = appointment;
     }
 
-/*    public List<Customer> getActiveCustomers() {
-        CustomerStore customerStore = new CustomerStore();
-        return customerStore.getAll(businessId, true);
-    }*/
 
     public List<Location> getActiveLocations() {
         LocationStore locationStore = new LocationStore();
@@ -90,13 +85,7 @@ public class AddAppointmentFormHelper {
         this.selectedUserId = selectedUserId;
     }
 
-/*    public void setCustomersList(List<Customer> customersList) {
-        this.customersList = customersList;
-    }
 
-    public List<Customer> getCustomersList() {
-        return customersList;
-    }*/
 
     public List<AppointmentType> getAppointmentTypeList() {
         return appointmentTypeList;
@@ -107,7 +96,6 @@ public class AddAppointmentFormHelper {
     }
 
     public int saveUpdate() {
-        //appointment.setCustomerId(this.customerId);
         int updatedAppointmentId = appointment.saveUpdate();
         return updatedAppointmentId;
     }

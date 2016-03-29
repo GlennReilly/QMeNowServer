@@ -51,7 +51,7 @@
                     Appointment Date
                 </th>
                 <th colspan="2">
-                    Appointment #
+                    Ref#
                 </th>
                 <th colspan="2">
                     Status
@@ -115,7 +115,8 @@
                         <c:out value="${appointmentResult.appointment.messageToCustomer}" />
                     </td>
                     <td>
-                        <c:out value="${appointmentResult.appointment.isComplete}" />
+                        <c:if test="${appointmentResult.appointment.isComplete == true}"> Yes </c:if>
+                        <c:if test="${appointmentResult.appointment.isComplete == false}"> No </c:if>
                     </td>
                     <td style="padding-left: 10px;">
                         <a href="<spring:url value='/FlexibleUIConfig/appointment/get/${appointmentResult.appointment.id}' />" >view</a>

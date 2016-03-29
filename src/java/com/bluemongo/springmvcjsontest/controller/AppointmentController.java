@@ -2,6 +2,7 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.model.Appointment;
 import com.bluemongo.springmvcjsontest.model.User;
+import com.bluemongo.springmvcjsontest.persistence.AppointmentStatusStore;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import com.bluemongo.springmvcjsontest.service.AddAppointmentFormHelper;
 import com.bluemongo.springmvcjsontest.service.GetAppointmentSearchResultsHelper;
@@ -42,6 +43,13 @@ public class AppointmentController{
                 addAppointmentFormHelper.setBusinessId((int) httpSession.getAttribute("businessId"));
                 addAppointmentFormHelper.setCustomerId((int) httpSession.getAttribute("customerId"));
             }
+
+
+      /*      if (addAppointmentFormHelper.getAppointment().getStatus() == new AppointmentStatusStore.) {
+
+            }*/
+
+
 
             if (httpSession.getAttribute("CurrentlyEditingAppointmentId") != null) {
                 int appointmentId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingAppointmentId").toString());
@@ -122,7 +130,7 @@ public class AppointmentController{
         return modelAndView;
     }
 
-    //@RequestMapping(value = "/get", method = RequestMethod.POST)
+
     @RequestMapping(value = "/get")
     public ModelAndView GetAllForDateRange(HttpSession httpSession, @ModelAttribute GetAppointmentSearchResultsHelper getAppointmentSearchResultsHelper){
         ModelAndView modelAndView;

@@ -29,6 +29,12 @@
 
 <form:form action="../addOrUpdate/" method="post">
   <div>
+      <div>
+          <div class="label2">
+              <c:if test="${command.appointment.id > 0}">
+                <span style="font-size: 20pt; font-weight: bold;"><c:out value="${command.appointment.appointmentTypePrefix}${command.appointment.id}" /></span>
+              </c:if>
+      </div>
       <div class="label2">
           <label>appointment date:</label><form:input path="appointment.strAppointmentDate" id="strAppointmentDate" />
       </div>
@@ -45,6 +51,10 @@
           </form:select>
             <div id="divStatusColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.statusHexCode}' />;"></div>
         </div>
+        <div class="label2">
+              <label>complete:</label><form:checkbox path="appointment.isComplete" id="isCompleteCheck"></form:checkbox>
+        </div>
+
 
         <div class="label2">
           <label>location:</label>
@@ -67,7 +77,7 @@
         <div class="label2">
           <label>message to Customer:</label><form:input path="appointment.messageToCustomer" />
         </div>
-
+<div>
       <c:choose>
           <c:when test="${empty command.appointment.id || command.appointment.id eq 0 }">
             <c:set var="buttonText" value="Save New Appointment" />
@@ -76,9 +86,9 @@
               <c:set var="buttonText" value="Update Appointment" />
           </c:otherwise>
       </c:choose>
-
+</div>
     <div class="label2">
-      <input type="submit" value="${buttonText}">
+      <input type="submit" value="${buttonText}" id="btnUpdateOrAddAppointment">
     </div>
   </div>
 
@@ -93,6 +103,13 @@
     $(function() {
         $( "#strAppointmentDate" ).datepicker({dateFormat: "dd-mm-yy"});
         $("#strAppointmentTime").ptTimeSelect();
+    });
+    $("#isCompleteCheck").change(function(){
+        if($("#isCompleteCheck").is(":checked")){
+            $("#btnUpdateOrAddAppointment").prop("disabled", true);
+        }else{
+            $("#btnUpdateOrAddAppointment").prop("disabled", false);
+        }
     });
 </script>
 

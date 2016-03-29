@@ -13,7 +13,7 @@
 <head>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
-<body style="background-color:#a0f7af;">
+<body style="background-color:#d3f7b6;">
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
     <form:form action="/login/" method="post">

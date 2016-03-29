@@ -74,6 +74,8 @@ public class AppointmentStore {
             preparedStatement.setBoolean(6, appointment.isComplete());
             if (appointment.getCheckInDate() != null) {
                 preparedStatement.setTimestamp(7, new Timestamp(appointment.getCheckInDate().getTime()));
+            }else{
+                preparedStatement.setTimestamp(7, null);
             }
             preparedStatement.setInt(8, appointment.getId());
             preparedStatement.executeUpdate();
@@ -177,6 +179,7 @@ public class AppointmentStore {
                 preparedStatement.setBoolean(4, isComplete);
             }
             resultSet = preparedStatement.executeQuery();
+            //System.out.println(preparedStatement.toString());
 
             while (resultSet.next()) {
                 AppointmentAndCustomer appointmentResult = getAppointmentResultFromResultSet(resultSet);
@@ -207,6 +210,7 @@ public class AppointmentStore {
                 preparedStatement.setBoolean(4, isComplete);
             }
             resultSet = preparedStatement.executeQuery();
+            System.out.println(preparedStatement.toString());
 
             while (resultSet.next()) {
                 AppointmentAndCustomer appointmentResult = getAppointmentResultFromResultSet(resultSet);
