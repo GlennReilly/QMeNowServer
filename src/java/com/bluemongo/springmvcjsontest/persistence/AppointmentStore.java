@@ -173,8 +173,8 @@ public class AppointmentStore {
         try (Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
-            preparedStatement.setDate(2, new java.sql.Date(fromDate.getTime()));
-            preparedStatement.setDate(3, new java.sql.Date(toDate.getTime()));
+            preparedStatement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
+            preparedStatement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
             if(isCompleteSegment != "") {
                 preparedStatement.setBoolean(4, isComplete);
             }
@@ -210,7 +210,7 @@ public class AppointmentStore {
                 preparedStatement.setBoolean(4, isComplete);
             }
             resultSet = preparedStatement.executeQuery();
-            System.out.println(preparedStatement.toString());
+            //System.out.println(preparedStatement.toString());
 
             while (resultSet.next()) {
                 AppointmentAndCustomer appointmentResult = getAppointmentResultFromResultSet(resultSet);

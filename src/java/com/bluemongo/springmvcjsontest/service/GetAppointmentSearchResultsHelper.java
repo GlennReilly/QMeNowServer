@@ -70,10 +70,21 @@ public class GetAppointmentSearchResultsHelper {
                 Calendar nextDayCal = Calendar.getInstance();
                 nextDayCal.setTime(getFromDate());
                 nextDayCal.add(Calendar.DATE, 1);
+                nextDayCal.add(Calendar.HOUR_OF_DAY, 23);
+                nextDayCal.add(Calendar.MINUTE, 59);
+                nextDayCal.add(Calendar.SECOND, 59);
+
                 toDate = toDate == null ? nextDayCal.getTime() : toDate;
             }
             else{
                 toDate = sdf.parse(strToDate);
+                Calendar toDateCal = Calendar.getInstance();
+                toDateCal.setTime(toDate);
+                //toDateCal.add(Calendar.DATE, 1);
+                toDateCal.add(Calendar.HOUR_OF_DAY, 23);
+                toDateCal.add(Calendar.MINUTE, 59);
+                toDateCal.add(Calendar.SECOND, 59);
+                toDate = toDateCal.getTime();
             }
             this.strToDate = sdf.format(toDate);
 

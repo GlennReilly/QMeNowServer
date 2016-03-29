@@ -45,7 +45,7 @@
 
         <div class="label2">
           <label>status:</label>
-          <form:select path="appointment.status" onchange="loadStatusColour(this.value);">
+          <form:select path="appointment.status" id="ddlStatus" onchange="loadStatusColour(this.value);">
               <form:option value="0" label="Please select" />
               <form:options items="${command.appointmentStatusList}" itemValue="id" itemLabel="name" />
           </form:select>
@@ -58,7 +58,7 @@
 
         <div class="label2">
           <label>location:</label>
-          <form:select path="appointment.locationId" onchange="loadLocationColour(this.value);">
+          <form:select path="appointment.locationId" id="ddlLocation" onchange="loadLocationColour(this.value);">
             <form:option value="0" label="Please select" />
             <form:options items="${command.activeLocations}" itemValue="id" itemLabel="name" />
           </form:select>
@@ -67,7 +67,7 @@
 
         <div class="label2">
           <label>appointment type:</label>
-          <form:select path="appointment.appointmentTypeId" onchange="loadAppointmentTypeColour(this.value);">
+          <form:select path="appointment.appointmentTypeId" id="ddlAppointmentType" onchange="loadAppointmentTypeColour(this.value);">
             <form:option value="0" label="Please select" />
             <form:options items="${command.appointmentTypeList}" itemValue="id" itemLabel="name" />
           </form:select>
@@ -75,7 +75,7 @@
         </div>
 
         <div class="label2">
-          <label>message to Customer:</label><form:input path="appointment.messageToCustomer" />
+          <label>message to Customer:</label><form:input id="txtMessageToCustomer" path="appointment.messageToCustomer" />
         </div>
 <div>
       <c:choose>
@@ -106,9 +106,21 @@
     });
     $("#isCompleteCheck").change(function(){
         if($("#isCompleteCheck").is(":checked")){
-            $("#btnUpdateOrAddAppointment").prop("disabled", true);
+            //$("#btnUpdateOrAddAppointment").prop("disabled", true);
+            $("#strAppointmentDate").prop("disabled", true);
+            $("#strAppointmentTime").prop("disabled", true);
+            $("#ddlStatus").prop("disabled", true);
+            $("#ddlLocation").prop("disabled", true);
+            $("#ddlAppointmentType").prop("disabled", true);
+            $("#txtMessageToCustomer").prop("disabled", true);
         }else{
-            $("#btnUpdateOrAddAppointment").prop("disabled", false);
+            //$("#btnUpdateOrAddAppointment").prop("disabled", false);
+            $("#strAppointmentDate").prop("disabled", false);
+            $("#strAppointmentTime").prop("disabled", false);
+            $("#ddlStatus").prop("disabled", false);
+            $("#ddlLocation").prop("disabled", false);
+            $("#ddlAppointmentType").prop("disabled", false);
+            $("#txtMessageToCustomer").prop("disabled", false);
         }
     });
 </script>
