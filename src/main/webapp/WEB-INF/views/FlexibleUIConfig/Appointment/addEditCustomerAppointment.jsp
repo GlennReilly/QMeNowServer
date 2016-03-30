@@ -103,9 +103,10 @@
     $(function() {
         $( "#strAppointmentDate" ).datepicker({dateFormat: "dd-mm-yy"});
         $("#strAppointmentTime").ptTimeSelect();
+        doCompleteCheck();
     });
-    $("#isCompleteCheck").change(function(){
-        if($("#isCompleteCheck").is(":checked")){
+    function doCompleteCheck() {
+        if ($("#isCompleteCheck").is(":checked")) {
             //$("#btnUpdateOrAddAppointment").prop("disabled", true);
             $("#strAppointmentDate").prop("disabled", true);
             $("#strAppointmentTime").prop("disabled", true);
@@ -113,7 +114,7 @@
             $("#ddlLocation").prop("disabled", true);
             $("#ddlAppointmentType").prop("disabled", true);
             $("#txtMessageToCustomer").prop("disabled", true);
-        }else{
+        } else {
             //$("#btnUpdateOrAddAppointment").prop("disabled", false);
             $("#strAppointmentDate").prop("disabled", false);
             $("#strAppointmentTime").prop("disabled", false);
@@ -122,6 +123,9 @@
             $("#ddlAppointmentType").prop("disabled", false);
             $("#txtMessageToCustomer").prop("disabled", false);
         }
+    }
+    $("#isCompleteCheck").change(function(){
+        doCompleteCheck();
     });
 </script>
 

@@ -216,12 +216,13 @@ public class Appointment {
     }
 
     public int saveUpdate() {
-
-        int updatedId = 0;
-        if (!this.getIsComplete()) {
-            updatedId = appointmentStore.saveUpdate(this);
+        if (getIsComplete()) {
+            int  updatedId = appointmentStore.setCompleted(this);
+            return updatedId;
+        } else {
+            int  updatedId = appointmentStore.saveUpdate(this);
+            return updatedId;
         }
-        return updatedId;
     }
 
     public String getLocationName() {

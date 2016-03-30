@@ -44,19 +44,17 @@ public class AppointmentController{
                 addAppointmentFormHelper.setCustomerId((int) httpSession.getAttribute("customerId"));
             }
 
-
-      /*      if (addAppointmentFormHelper.getAppointment().getStatus() == new AppointmentStatusStore.) {
-
-            }*/
-
-
-
             if (httpSession.getAttribute("CurrentlyEditingAppointmentId") != null) {
                 int appointmentId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingAppointmentId").toString());
                 addAppointmentFormHelper.getAppointment().setId(appointmentId);
                 addAppointmentFormHelper.saveUpdate();
-                message = "Appointment updated successfully. ";
+                String RefNum = "";
+                if (httpSession.getAttribute("CurrentlyEditingRefNum") != null){
+                    RefNum =httpSession.getAttribute("CurrentlyEditingRefNum").toString();
+                }
+                message = "Appointment " + RefNum + " updated successfully. ";
                 httpSession.setAttribute("CurrentlyEditingAppointmentId", null);
+                httpSession.setAttribute("CurrentlyEditingRefNum", null);
             } else {
                 int newAppointmentId = addAppointmentFormHelper.saveNew();
                 message = "Appointment " + newAppointmentId + " saved successfully. ";
@@ -67,8 +65,8 @@ public class AppointmentController{
                 user = (User) httpSession.getAttribute("User");
             }
             Appointment appointment = addAppointmentFormHelper.getAppointment();
-            modelAndView = ModelViewHelper.GetModelViewForEditAppointment(appointment.getCustomerId(), user.getBusinessId(), message, httpSession, appointment);
-            //modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+            //modelAndView = ModelViewHelper.GetModelViewForEditAppointment(appointment.getCustomerId(), user.getBusinessId(), message, httpSession, appointment);
+            modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
         }
         else{
             modelAndView = ModelViewHelper.GetLoginForm("Please log in");
@@ -88,6 +86,7 @@ public class AppointmentController{
         if (httpSession.getAttribute("User") != null){
             user = (User)httpSession.getAttribute("User");
             Appointment appointment = new AppointmentStore().getAppointment(appointmentId);
+            httpSession.setAttribute("CurrentlyEditingRefNum",appointment.getAppointmentTypePrefix() +  appointment.getId());
             httpSession.setAttribute("CurrentlyEditingAppointmentId", appointmentId);
             modelAndView = ModelViewHelper.GetModelViewForEditAppointment(appointment.getCustomerId(), user.getBusinessId(), null, httpSession, appointment);
         }

@@ -93,6 +93,28 @@ public class AppointmentStore {
         return lastInsertedId;
     }
 
+    public int setCompleted(Appointment appointment) {
+        int lastInsertedId = -1;
+        String query = "update appointment set isComplete=? where id = ?";
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setBoolean(1, appointment.getIsComplete());
+            preparedStatement.setInt(2, appointment.getId());
+            preparedStatement.executeUpdate();
+            logger.info("appointment updated.");
+
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                lastInsertedId = resultSet.getInt(1);
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return lastInsertedId;
+    }
+
     public Appointment getAppointment(int appointmentId){
         Appointment appointment = null;
         String query = getQueryStringBuilder().toString()
