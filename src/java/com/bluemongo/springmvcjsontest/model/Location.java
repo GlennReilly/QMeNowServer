@@ -10,6 +10,7 @@ public class Location {
     String name;
     String backgroundColourHexCode;
     int businessId;
+    private boolean isDefault;
 
     private LocationStore locationStore = new LocationStore();
 
@@ -50,5 +51,13 @@ public class Location {
 
     public void setBackgroundColourHexCode(String backgroundColourHexCode) {
         this.backgroundColourHexCode = backgroundColourHexCode;
+    }
+
+    public boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(boolean aDefault) {
+        isDefault = aDefault;
     }
 }

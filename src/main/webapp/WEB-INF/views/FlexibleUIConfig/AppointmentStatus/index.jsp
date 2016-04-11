@@ -33,6 +33,7 @@
     <tr class="resultsTable">
         <th>Name</th>
         <th>Colour</th>
+        <th>Default?</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
@@ -40,12 +41,18 @@
     <c:forEach items="${appointmentStatuses}" var="appointmentType">
         <tr>
             <td>
-            <span>
-                <c:out value="${appointmentType.name}"></c:out>
-            </span>
+                <span>
+                    <c:out value="${appointmentType.name}"></c:out>
+                </span>
             </td>
             <td>
                 <div style="background-color: <c:out  value="${appointmentType.backgroundColourHexCode}"></c:out>; width: 80px; height: 30px; "></div>
+            </td>
+            <td>
+                <span>
+                    <c:if test="${appointmentType.isDefault == true}"> Yes </c:if>
+                    <c:if test="${appointmentType.isDefault == false}"> No </c:if>
+                </span>
             </td>
             <td>
                 <a href="<spring:url value='/FlexibleUIConfig/appointmentStatus/update/${appointmentType.id}' />" >update</a>

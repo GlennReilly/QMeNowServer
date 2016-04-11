@@ -7,7 +7,10 @@ import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentTypeStore;
 import com.bluemongo.springmvcjsontest.service.AppointmentAndCustomer;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +18,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import static com.bluemongo.springmvcjsontest.controller.GenericController.populateHeaderValues;
 
 /**
  * Created by glenn on 20/10/15.
  */
 @Controller
 @RequestMapping(value = "/FlexibleUIConfig/appointmentType")
+
 public class AppointmentTypeController {
+    private static final Logger logger =  LogManager.getLogger(AppointmentTypeController.class);
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView GetAppointmentTypeHome(HttpSession httpSession){
@@ -52,8 +62,29 @@ public class AppointmentTypeController {
     }
 
     @RequestMapping(value="/addOrUpdate", method = RequestMethod.POST)
-    public ModelAndView AddAppointmentType(@ModelAttribute AppointmentType appointmentType, HttpSession httpSession){
+    public ModelAndView AddOrEditAppointmentType(@ModelAttribute("appointmentType") @Valid AppointmentType appointmentType, BindingResult bindingResult, HttpSession httpSession){
         ModelAndView modelAndView;
+
+        if (bindingResult.hasErrors()) {
+            logger.info("AppointmentType error.");
+
+            //return new ModelAndView("FlexibleUIConfig/AppointmentType/addEditAppointmentTypeForm");
+
+           User user = (User) httpSession.getAttribute("User");
+
+            String pageTitle = "Edit Appointment Type";
+
+            modelAndView = new ModelAndView();
+            modelAndView.setViewName("FlexibleUIConfig/AppointmentType/addEditAppointmentTypeForm");
+
+            appointmentType.setBusinessId(user.getBusinessId());
+            populateHeaderValues(user.getBusinessId(), modelAndView);
+            modelAndView.addObject("appointmentType", appointmentType);
+            modelAndView.addObject("pageTitle", pageTitle);
+            modelAndView.addObject("result", bindingResult);
+
+            return modelAndView;
+        }
 
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);

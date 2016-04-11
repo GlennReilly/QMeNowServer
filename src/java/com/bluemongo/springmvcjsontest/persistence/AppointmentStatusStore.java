@@ -12,6 +12,7 @@ import java.util.List;
  * Created by glenn on 16/10/15.
  */
 public class AppointmentStatusStore {
+    private static final String COLUMNS = " id, statusName, businessId, backgroundColourHexCode, sequenceNumber, customerInitiated, isActive, isDefault ";
     private DBHelper dbHelper = new DBHelper();
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -22,8 +23,8 @@ public class AppointmentStatusStore {
     public int saveNew(AppointmentStatus appointmentStatus) {
         int lastInsertedId = -1;
 
-        String query = " insert into appointmentStatus(businessId, statusName, backgroundColourHexCode)" +
-        " select ?,?,? from DUAL" +
+        String query = " insert into appointmentStatus(businessId, statusName, backgroundColourHexCode, isDefault)" +
+        " select ?,?,?,? from DUAL" +
         " WHERE NOT exists (select id from appointmentStatus where statusName = ?);";
 
 
@@ -32,7 +33,8 @@ public class AppointmentStatusStore {
             preparedStatement.setInt(1, appointmentStatus.getBusinessId());
             preparedStatement.setString(2, appointmentStatus.getName());
             preparedStatement.setString(3, appointmentStatus.getBackgroundColourHexCode());
-            preparedStatement.setString(4, appointmentStatus.getName());
+            preparedStatement.setBoolean(4, appointmentStatus.getIsDefault());
+            preparedStatement.setString(5, appointmentStatus.getName());
 
             preparedStatement.executeUpdate();
             logger.info("new AppointmentStatusStore inserted.");
@@ -51,7 +53,7 @@ public class AppointmentStatusStore {
 
     public List<AppointmentStatus> getAll(int businessId, boolean isActive) {
         List<AppointmentStatus> appointmentStatusList = new ArrayList<>();
-        String query = "select id, statusName, businessId, backgroundColourHexCode, sequenceNumber, customerInitiated  from appointmentStatus where businessId = ? AND isActive = ?; ";
+        String query = "select " + COLUMNS + " from appointmentStatus where businessId = ? AND isActive = ?; ";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, businessId);
@@ -71,7 +73,7 @@ public class AppointmentStatusStore {
 
     public AppointmentStatus get(int statusId){
         AppointmentStatus appointmentStatus = new AppointmentStatus();
-        String query = "select id, statusName, businessId, backgroundColourHexCode, sequenceNumber, customerInitiated from appointmentStatus where id = ? AND isActive = ?; ";
+        String query = "select " + COLUMNS + " from appointmentStatus where id = ? AND isActive = ?; ";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, statusId);
@@ -97,11 +99,12 @@ public class AppointmentStatusStore {
         appointmentStatus.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
         appointmentStatus.setSequenceNumber(resultSet.getInt("sequenceNumber"));
         appointmentStatus.setCustomerInitiated(resultSet.getBoolean("customerInitiated"));
+        appointmentStatus.setIsDefault(resultSet.getBoolean("isDefault")) ;
         return appointmentStatus;
     }
 
     public void saveUpdate(AppointmentStatus appointmentStatus) {
-        String query = " update appointmentStatus set businessId=?, statusName=?, backgroundColourHexCode=? WHERE id  = ?;";
+        String query = "update appointmentStatus set businessId=?, statusName=?, backgroundColourHexCode=?, isDefault=?  WHERE id  = ?;";
 
 
         try(Connection connection = dbHelper.getConnection()) {
@@ -112,6 +115,11 @@ public class AppointmentStatusStore {
             preparedStatement.setInt(4, appointmentStatus.getId());
 
             preparedStatement.executeUpdate();
+
+            if (appointmentStatus.getIsDefault()) {
+                setDefault(appointmentStatus.getId());
+            }
+
             logger.info("Appointment Status updated.");
         }
         catch(Exception ex)
@@ -133,5 +141,53 @@ public class AppointmentStatusStore {
         {
             logger.info(ex.getMessage());
         }
+    }
+
+    public void setDefault(int appointmentStatusId){
+        String queryNukeExisting = "update appointmentStatus set isDefault=?;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(queryNukeExisting);
+            preparedStatement.setBoolean(1,false);
+            preparedStatement.executeUpdate();
+            logger.info("Appointment Status getIsDefault deactivated.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+
+        String queryUpdate = "update appointmentStatus set isDefault=1 where id=?";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(queryUpdate);
+            preparedStatement.setInt(1,appointmentStatusId);
+            preparedStatement.executeUpdate();
+            logger.info("Appointment Status getIsDefault set.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+    }
+
+    public int getDefault()
+    {
+        int output = 0;
+        String query = "select id from appointmentStatus where isDefault=1;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                output = resultSet.getInt("id");
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return output;
     }
 }

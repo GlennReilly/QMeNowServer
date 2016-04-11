@@ -2,10 +2,7 @@ package com.bluemongo.springmvcjsontest.controller;
 
 import com.bluemongo.springmvcjsontest.api.AppointmentServiceAPI;
 import com.bluemongo.springmvcjsontest.model.*;
-import com.bluemongo.springmvcjsontest.persistence.AppointmentStatusStore;
-import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
-import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
-import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
+import com.bluemongo.springmvcjsontest.persistence.*;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +31,21 @@ enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
     public AppointmentsResponse getAppointmentsToday(@PathVariable Integer businessId, @PathVariable Integer customerId) {
         //public List<Appointment> getAppointmentsToday(@PathVariable Integer customerId) {
         AppointmentsResponse appointmentsResponse = new AppointmentsResponse();
+
+        if (customerId == 0) { //TODO if customerId == 0 then no user details in app, create anonymous appointment to return to user.
+            //create new empty customer
+            Customer newCustomer = new Customer();
+            newCustomer.setBusinessId(businessId);
+            customerId = new CustomerStore().saveNew(newCustomer);
+            //create new appointment for this customer
+            Appointment newAppointment = new Appointment();
+            newAppointment.setCustomerId(customerId);
+            newAppointment.setStatus(new AppointmentStatusStore().getDefault());
+            newAppointment.setAppointmentTypeId(new AppointmentTypeStore().getDefault());
+            newAppointment.setLocationId(new LocationStore().getDefault());
+            newAppointment.saveNew();
+
+        }
         Customer customer = new CustomerStore().get(customerId);
         if (customer.getBusinessId() != businessId){
             appointmentsResponse.addErrorMessage(Errors.CUSTOMER_NOT_IN_THIS_BUSINESS.toString());
@@ -57,6 +69,7 @@ enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
             appointmentsResponse.setBusiness(business);
             appointmentsResponse.setAppointmentStatusList(appointmentStatusList);
         }
+
         return appointmentsResponse;
     }
 

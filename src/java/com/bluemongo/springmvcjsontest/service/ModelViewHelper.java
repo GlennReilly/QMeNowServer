@@ -77,6 +77,19 @@ public class ModelViewHelper extends GenericController {
         return modelAndView;
     }
 
+    public static ModelAndView GetModelViewForLookupAppointmentByRefNum(User validUser, String message) {
+        ModelAndView modelAndView = new ModelAndView();
+        BusinessStore businessStore = new BusinessStore();
+        Business business = businessStore.get(validUser.getBusinessId());
+        populateHeaderValues(validUser.getBusinessId(), modelAndView);
+        modelAndView.addObject("pageTitle", "Look up Appointment by RefNum");
+        message = (message == null) ? "" :  message;
+        modelAndView.addObject("message", message);
+        modelAndView.addObject("Business", business);
+        modelAndView.setViewName("FlexibleUIConfig/Appointment/lookupAppointmentByRefNum");
+        return modelAndView;
+    }
+
     public static ModelAndView GetModelViewForAddAppointment(int customerId, int businessId, String message, HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
         AddAppointmentFormHelper addAppointmentFormHelper = new AddAppointmentFormHelper();
@@ -189,7 +202,7 @@ public class ModelViewHelper extends GenericController {
 
             appointmentType.setBusinessId(user.getBusinessId());
             populateHeaderValues(user.getBusinessId(), modelAndView);
-            modelAndView.addObject("command", appointmentType);
+            modelAndView.addObject("appointmentType", appointmentType);
             modelAndView.addObject("pageTitle", pageTitle);
         }
 

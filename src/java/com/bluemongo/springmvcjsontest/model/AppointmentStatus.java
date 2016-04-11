@@ -13,6 +13,7 @@ public class AppointmentStatus  {
     private String backgroundColourHexCode;
     private int sequenceNumber;
     private boolean customerInitiated;
+    private boolean isDefault;
 
     public int saveNew() {
         int newId = store.saveNew(this);
@@ -65,5 +66,13 @@ public class AppointmentStatus  {
 
     public void setCustomerInitiated(boolean customerInitiated) {
         this.customerInitiated = customerInitiated;
+    }
+
+    public boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(boolean aDefault) {
+        isDefault = aDefault;
     }
 }

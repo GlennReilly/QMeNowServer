@@ -264,6 +264,7 @@ public class AppointmentStore {
             if(isCompleteSegment != "") {
                 preparedStatement.setBoolean(4, isComplete);
             }
+            String queryString = preparedStatement.toString();
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

@@ -17,12 +17,13 @@ public class AppointmentTypeStore {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private static final Logger logger = LogManager.getLogger(AppointmentTypeStore.class);
+    private static final String COLUMNS = " id, name, backgroundColourHexCode, styleJson, businessId, prefix, isDefault ";
 
     public int saveNew(AppointmentType appointmentType) {
         int lastInsertedId = -1;
 
-        String query = " insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson, prefix)" +
-                " select ?,?,?,?,? from DUAL" +
+        String query = " insert into appointmentType(businessId, name, backgroundColourHexCode, styleJson, prefix, isDefault)" +
+                " select ?,?,?,?,?,? from DUAL" +
                 " WHERE NOT exists (select id from appointmentType where name = ?);";
 
         try(Connection connection = dbHelper.getConnection()) {
@@ -31,8 +32,9 @@ public class AppointmentTypeStore {
             preparedStatement.setString(2, appointmentType.getName());
             preparedStatement.setString(3, appointmentType.getBackgroundColourHexCode());
             preparedStatement.setString(4, appointmentType.getStyleJson());
-            preparedStatement.setString(5, appointmentType.getName());
-            preparedStatement.setString(6, appointmentType.getPrefix());
+            preparedStatement.setString(5, appointmentType.getPrefix());
+            preparedStatement.setBoolean(6, appointmentType.getIsDefault());
+            preparedStatement.setString(7, appointmentType.getName());
             preparedStatement.executeUpdate();
             logger.info("new AppointmentType inserted.");
 
@@ -50,7 +52,7 @@ public class AppointmentTypeStore {
 
     public List<AppointmentType> getAll(int businessId, boolean isActive){
         List<AppointmentType> appointmentTypeList = new ArrayList<>();
-        String query = "select id, name, backgroundColourHexCode, styleJson, businessId, prefix from appointmentType where isActive = ? AND businessId = ?";
+        String query = "select" + COLUMNS + " from appointmentType where isActive = ? AND businessId = ?";
 
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query);
@@ -79,12 +81,13 @@ public class AppointmentTypeStore {
         appointmentType.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
         appointmentType.setStyleJson(resultSet.getString("styleJson"));
         appointmentType.setPrefix(resultSet.getString("prefix"));
+        appointmentType.setIsDefault(resultSet.getBoolean("isDefault"));
         return appointmentType;
     }
 
     public AppointmentType get(int businessId, int appointmentTypeId) {
         AppointmentType appointmentType = null;
-        String query = "select id, name, backgroundColourHexCode, styleJson, businessId, prefix from appointmentType where isActive = ? AND businessId = ? AND id=?";
+        String query = "select" + COLUMNS + " from appointmentType where isActive = ? AND businessId = ? AND id=?";
 
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query);
@@ -114,6 +117,10 @@ public class AppointmentTypeStore {
             preparedStatement.setInt(4, appointmentType.getId());
             preparedStatement.execute();
 
+            if (appointmentType.getIsDefault()) {
+                setDefault(appointmentType.getId());
+            }
+
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -134,5 +141,54 @@ public class AppointmentTypeStore {
         {
             logger.info(ex.getMessage());
         }
+    }
+
+
+    public void setDefault(int appointmentTypeId){
+        String queryNukeExisting = "update appointmentType set isDefault=?;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(queryNukeExisting);
+            preparedStatement.setBoolean(1,false);
+            preparedStatement.executeUpdate();
+            logger.info("Appointment Type getIsDefault deactivated.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+
+        String queryUpdate = "update appointmentType set isDefault=1 where id=?";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(queryUpdate);
+            preparedStatement.setInt(1,appointmentTypeId);
+            preparedStatement.executeUpdate();
+            logger.info("Appointment Type getIsDefault set.");
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+    }
+
+    public int getDefault()
+    {
+        int output = 0;
+        String query = "select id from appointmentType where isDefault=1;";
+
+        try(Connection connection = dbHelper.getConnection()) {
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                output = resultSet.getInt("id");
+            }
+        }
+        catch(Exception ex)
+        {
+            logger.info(ex.getMessage());
+        }
+        return output;
     }
 }

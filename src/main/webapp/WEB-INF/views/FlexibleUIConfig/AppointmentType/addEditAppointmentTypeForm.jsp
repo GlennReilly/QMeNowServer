@@ -17,7 +17,8 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointmentType/addOrUpdate" method="post">
+<form:form modelAttribute="appointmentType" action="/FlexibleUIConfig/appointmentType/addOrUpdate" method="post">
+    <%--<form:errors path="*" cssClass="errorblock" element="div" />--%>
   <div>
       <div>
         <div class="label2">
@@ -25,10 +26,14 @@
         </div>
         <div class="label2">
           <label>prefix:</label><form:input path="prefix" />
+              <form:errors path="prefix" cssClass="error" />
         </div>
         <div class="label2">
           <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
         </div>
+          <div class="label2">
+              <label>is Default?</label><form:checkbox path="isDefault" id="isDefaultCheck"></form:checkbox>
+          </div>
       </div>
       <c:choose>
           <c:when test="${empty command.id || command.id eq 0 }">

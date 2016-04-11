@@ -42,6 +42,7 @@
         <li><a href="<spring:url value='/FlexibleUIConfig/user/add'/>"> Add a new user</a></li>
         <li></li>
         <li><a href="<spring:url value='/FlexibleUIConfig/appointment/getAllForDateRange'/>"> Get all appointments for date range</a></li>
+        <li><a href="<spring:url value='/FlexibleUIConfig/appointment/lookupAppointmentByRefNum'/>"> look up Appointment by RefNum</a></li>
     </ul>
 <tags:jsIncludes logoPath="${Business.logoFileName}"></tags:jsIncludes>
 </body>

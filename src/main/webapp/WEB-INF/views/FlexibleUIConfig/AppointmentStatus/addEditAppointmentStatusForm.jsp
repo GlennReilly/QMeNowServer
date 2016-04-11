@@ -21,11 +21,14 @@
   <div>
     <div>
       <div class="label2">
-        <label>New Appointment Status name:</label><form:input path="name" />
+        <label>Appointment Status name:</label><form:input path="name" />
       </div>
      <div class="label2">
         <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
       </div>
+        <div class="label2">
+            <label>is Default?</label><form:checkbox path="isDefault" id="isDefaultCheck"></form:checkbox>
+        </div>
 
     </div>
       <c:choose>

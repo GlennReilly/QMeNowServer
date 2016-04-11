@@ -1,5 +1,7 @@
 package com.bluemongo.springmvcjsontest.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -8,11 +10,16 @@ import java.util.Date;
 public class AppointmentType {
     private int id;
     private String name;
+
+    @NotNull(message="AppointmentType prefix be null")
+    @Pattern(regexp = "\\w{1,4}", message = "letters only please")
     private String prefix;
+
     private String backgroundColourHexCode;
     private String styleJson;
     private Date createdDate;
     private int businessId;
+    private boolean isDefault;
 
     public int getId() {
         return id;
@@ -68,5 +75,13 @@ public class AppointmentType {
 
     public void setBusinessId(int businessId) {
         this.businessId = businessId;
+    }
+
+    public boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(boolean aDefault) {
+        isDefault = aDefault;
     }
 }

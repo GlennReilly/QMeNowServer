@@ -9,6 +9,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery-ui.min.css'/>" />
+    <meta http-equiv="refresh" content="30"/>
 </head>
 <body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
@@ -82,7 +83,7 @@
                         <fmt:formatDate pattern="E d MMM h:mma" value="${appointmentResult.appointment.appointmentDate}" />
                     </td>
                     <td>
-                        <c:out value="${appointmentResult.appointment.appointmentTypePrefix}${appointmentResult.appointment.id}" />
+                        <c:out value="${appointmentResult.appointment.appointmentTypePrefix}-${appointmentResult.appointment.id}" />
                     </td>
                     <td>
                         <c:if test="${not empty appointmentResult.appointment.appTypeHexCode}">
@@ -124,7 +125,7 @@
                 </tr>
             </c:forEach>
         </table>
-
+    <div  style="text-align: center; margin-top: 40px; color: ${headerColour}; font-weight:bold; font-size: 0.8em;" >These results auto-refresh every 30 seconds</div>
     </c:if>
 
 
