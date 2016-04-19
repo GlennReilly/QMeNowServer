@@ -8,6 +8,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery-ui.min.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/DataTables/datatables.min.css'/>" />
 </head>
 <body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
@@ -23,7 +24,7 @@
     <div class="pageSubHeading" style="display: table;">
             Search Results:
         </div>
-        <table>
+        <table id="resultsTable" data-page-length='5'>
             <thead>
             <tr class="resultsTable">
                 <th>
@@ -32,10 +33,10 @@
                 <th colspan="2">
                     Appointment #
                 </th>
-                <th colspan="2">
+                <th>
                     Status
                 </th>
-                <th colspan="2">
+                <th>
                     Location
                 </th>
                 <th>
@@ -106,8 +107,13 @@
 
 
 </form:form>
-<%--<script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
-<script src="<spring:url value='/resources/scripts/jquery-ui.min.js'/>" ></script>--%>
+
 <tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
+<script type="text/javascript" src="<spring:url value='/resources/DataTables/datatables.min.js'/>"></script>
+<script>
+    $(function(){
+        $("#resultsTable").DataTable();
+    });
+</script>
 </body>
 </html>

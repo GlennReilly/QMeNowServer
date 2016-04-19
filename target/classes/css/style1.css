@@ -163,3 +163,6 @@ th, td{
     margin: 16px;
 }
 
+#resultsTable_wrapper{
+    width: 70%;
+}

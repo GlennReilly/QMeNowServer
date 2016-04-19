@@ -27,7 +27,7 @@ public interface AppointmentServiceAPI{
     AppointmentsResponse checkInAppointment(int appointmentId, AppointmentCheckInDTO appointmentCheckIn);
 
     //@GET("/FlexibleUIConfig/api/v1/Appointments/{customerId}")
-    // http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/7
+    // eg: http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
     AppointmentsResponse getAppointmentsToday(Integer businessId, Integer customerId);
 
 

@@ -13,6 +13,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/DataTables/datatables.min.css'/>" />
 </head>
 <body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
@@ -28,7 +29,7 @@
     <div>No locations found</div>
 </c:if>
 
-<table>
+<table id="resultsTable">
     <thead>
     <tr class="resultsTable">
         <th>Name</th>
@@ -67,5 +68,11 @@
     <li><a href="<spring:url value='/FlexibleUIConfig/location/add'/>">Add a new location for your business</a></li>
 </ul>
 <tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
+<script type="text/javascript" src="<spring:url value='/resources/DataTables/datatables.min.js'/>"></script>
+<script>
+    $(function() {
+        $("#resultsTable").DataTable();
+    });
+</script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery-ui.min.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/DataTables/datatables.min.css'/>" />
     <meta http-equiv="refresh" content="30"/>
 </head>
 <body style="background-color: ${backgroundColourHexCode}">
@@ -45,19 +46,19 @@
         <div class="pageSubHeading" style="display: table;">
             Search Results:
         </div>
-        <table>
+        <table id="resultsTable">
             <thead>
             <tr class="resultsTable">
                 <th>
                     Appointment Date
                 </th>
-                <th colspan="2">
+                <th>
                     Ref#
                 </th>
-                <th colspan="2">
+                <th>
                     Status
                 </th>
-                <th colspan="2">
+                <th>
                     Location
                 </th>
                 <th>
@@ -83,27 +84,21 @@
                         <fmt:formatDate pattern="E d MMM h:mma" value="${appointmentResult.appointment.appointmentDate}" />
                     </td>
                     <td>
-                        <c:out value="${appointmentResult.appointment.appointmentTypePrefix}-${appointmentResult.appointment.id}" />
-                    </td>
-                    <td>
+                        <c:out value="${appointmentResult.appointment.appointmentTypePrefix}${appointmentResult.appointment.id}" />
                         <c:if test="${not empty appointmentResult.appointment.appTypeHexCode}">
-                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.appTypeHexCode}"></div>
+                            <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.appTypeHexCode}"></img>
                         </c:if>
                     </td>
                     <td>
                         <c:out value="${appointmentResult.appointment.statusName}" />
-                    </td>
-                    <td>
                         <c:if test="${not empty appointmentResult.appointment.statusHexCode}">
-                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.statusHexCode}"></div>
+                            <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.statusHexCode}"></img>
                         </c:if>
                     </td>
                     <td>
                         <c:out value="${appointmentResult.appointment.locationName}" />
-                    </td>
-                    <td>
                         <c:if test="${not empty appointmentResult.appointment.locationHexCode}">
-                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.locationHexCode}"></div>
+                            <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.locationHexCode}"></img>
                         </c:if>
                     </td>
                     <td>
@@ -132,12 +127,17 @@
 </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>
 <script src="<spring:url value='/resources/scripts/jquery-ui.min.js'/>" ></script>
+
+
+<tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
+<script type="text/javascript" src="<spring:url value='/resources/DataTables/datatables.min.js'/>"></script>
 <script>
     $(function() {
         $( "#strFromDate" ).datepicker({dateFormat: "dd-mm-yy"});
         $( "#strToDate" ).datepicker({dateFormat: "dd-mm-yy"});
+
+        $("#resultsTable").DataTable();
     });
 </script>
-<tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 </body>
 </html>

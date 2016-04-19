@@ -7,22 +7,26 @@ import java.util.List;
  * Created by glenn on 13/12/15.
  */
 public class AppointmentsResponse {
-    private BusinessDTO business = new BusinessDTO();
+    private BusinessDTO businessDTO = new BusinessDTO();
     private List<Appointment> appointmentList = new ArrayList<>();
     private List<AppointmentStatus> appointmentStatusList = new ArrayList<>();
     private List<String> errorsList = new ArrayList<>();
     private String appointmentCreationURL;
 
-    public void setBusiness(Business business) {
-        this.business.setBusinessName(business.getBusinessName());
-        this.business.setButtonColourHexCode(business.getButtonColourHexCode());
-        this.business.setHeaderColourHexCode(business.getHeaderColourHexCode());
-        this.business.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
-        this.business.setLogoFileName(business.getLogoFileName());
+    public void setBusinessDTOFromBusiness(Business business) {
+        this.businessDTO.setBusinessName(business.getBusinessName());
+        this.businessDTO.setButtonColourHexCode(business.getButtonColourHexCode());
+        this.businessDTO.setHeaderColourHexCode(business.getHeaderColourHexCode());
+        this.businessDTO.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
+        this.businessDTO.setLogoFileName(business.getLogoFileName());
     }
 
-    public BusinessDTO getBusiness() {
-        return business;
+    public void setBusinessDTO(BusinessDTO businessDTO) {
+        this.businessDTO = businessDTO;
+    }
+
+    public BusinessDTO getBusinessDTO() {
+        return businessDTO;
     }
 
     public void setAppointmentList(List<Appointment> appointmentList) {

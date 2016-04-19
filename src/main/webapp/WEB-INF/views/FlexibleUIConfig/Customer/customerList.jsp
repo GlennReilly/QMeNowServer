@@ -13,6 +13,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/DataTables/datatables.min.css'/>" />
 </head>
 <body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
@@ -22,15 +23,19 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<table>
+    <table id="resultsTable">
     <thead>
     <tr class="resultsTable">
+        <th>Customer Id</th>
         <th>Name</th>
         <th>Details</th>
         </tr>
     </thead>
     <c:forEach items="${customerList}" var="customer">
     <tr>
+        <td>
+            <c:out value="${customer.id}"/>
+        </td>
         <td>
             <c:out value="${customer.firstName} ${customer.lastName}"/>
         </td>
@@ -40,5 +45,11 @@
     </tr>
     </c:forEach>
     <tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
+    <script type="text/javascript" src="<spring:url value='/resources/DataTables/datatables.min.js'/>"></script>
+    <script>
+        $(function(){
+            $("#resultsTable").DataTable();
+        });
+    </script>
 </body>
 </html>

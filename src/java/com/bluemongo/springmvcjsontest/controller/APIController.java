@@ -3,15 +3,10 @@ package com.bluemongo.springmvcjsontest.controller;
 import com.bluemongo.springmvcjsontest.api.AppointmentServiceAPI;
 import com.bluemongo.springmvcjsontest.model.*;
 import com.bluemongo.springmvcjsontest.persistence.*;
-import org.apache.commons.io.IOUtils;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,7 +20,7 @@ import java.util.List;
 public class APIController implements AppointmentServiceAPI, ServletContextAware {
 enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
 
-    // http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/7
+    // eg: http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
     @Override
     @RequestMapping(value = "/AppointmentsToday/{businessId}/{customerId}", method = RequestMethod.GET)
     public AppointmentsResponse getAppointmentsToday(@PathVariable Integer businessId, @PathVariable Integer customerId) {
@@ -37,6 +32,9 @@ enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
             Customer newCustomer = new Customer();
             newCustomer.setBusinessId(businessId);
             customerId = new CustomerStore().saveNew(newCustomer);
+            newCustomer.setFirstName("newCustomer");
+            newCustomer.setLastName("LastName"+customerId);
+            new CustomerStore().saveUpdate(newCustomer);
             //create new appointment for this customer
             Appointment newAppointment = new Appointment();
             newAppointment.setCustomerId(customerId);
@@ -66,7 +64,7 @@ enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
             //Customer customer = new CustomerStore().get(customerId);
             List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(customer.getBusinessId(), true);
             Business business = new BusinessStore().get(customer.getBusinessId());
-            appointmentsResponse.setBusiness(business);
+            appointmentsResponse.setBusinessDTOFromBusiness(business);
             appointmentsResponse.setAppointmentStatusList(appointmentStatusList);
         }
 

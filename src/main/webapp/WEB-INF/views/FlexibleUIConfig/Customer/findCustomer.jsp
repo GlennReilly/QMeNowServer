@@ -16,7 +16,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./find/" method="post">
+<form:form action="/FlexibleUIConfig/customer/find/" method="post">
     <div>
         <div>
             <div class="label2">
