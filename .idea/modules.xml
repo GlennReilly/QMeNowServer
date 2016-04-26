@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpringMVCJsonTest.iml" filepath="$PROJECT_DIR$/SpringMVCJsonTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QMeNowServer.iml" filepath="$PROJECT_DIR$/QMeNowServer.iml" />
     </modules>
   </component>
 </project>

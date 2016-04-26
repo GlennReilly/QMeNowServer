@@ -65,6 +65,9 @@
                     Type
                 </th>
                 <th>
+                    Customer Id
+                </th>
+                <th>
                     Customer name
                 </th>
                 <th>
@@ -80,41 +83,44 @@
             </thead>
             <c:forEach items="${command.appointmentResultList}" var="appointmentResult"  >
                 <tr>
-                    <td>
+                    <td style="text-align: right;">
                         <fmt:formatDate pattern="E d MMM h:mma" value="${appointmentResult.appointment.appointmentDate}" />
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.appointmentTypePrefix}${appointmentResult.appointment.id}" />
                         <c:if test="${not empty appointmentResult.appointment.appTypeHexCode}">
                             <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.appTypeHexCode}"></img>
                         </c:if>
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.statusName}" />
                         <c:if test="${not empty appointmentResult.appointment.statusHexCode}">
                             <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.statusHexCode}"></img>
                         </c:if>
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.locationName}" />
                         <c:if test="${not empty appointmentResult.appointment.locationHexCode}">
                             <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.locationHexCode}"></img>
                         </c:if>
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.appointmentTypeName}" />
                     </td>
-                    <td>
+                    <td style="text-align: center;">
+                        <c:out value="${appointmentResult.customer.id}" />
+                    </td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.customer.name}" />
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.messageToCustomer}" />
                     </td>
-                    <td>
+                    <td style="text-align: center;">
                         <c:if test="${appointmentResult.appointment.isComplete == true}"> Yes </c:if>
                         <c:if test="${appointmentResult.appointment.isComplete == false}"> No </c:if>
                     </td>
-                    <td style="padding-left: 10px;">
+                    <td style="text-align: center;">
                         <a href="<spring:url value='/FlexibleUIConfig/appointment/get/${appointmentResult.appointment.id}' />" >view</a>
                     </td>
                 </tr>
