@@ -20,14 +20,71 @@ import java.util.List;
 public class APIController implements AppointmentServiceAPI, ServletContextAware {
 enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
 
-    // eg: http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
+    //AppointmentsResponse getAppointmentsToday(Integer businessId, Integer customerId, String firstName, String lastName);
     @Override
+    @RequestMapping(value = "/AppointmentsToday/{businessId}", method = RequestMethod.GET)
+    public AppointmentsResponse getAppointmentsToday(@PathVariable Integer businessId, @RequestParam Integer customerId,
+                                                        @RequestParam String firstName, @RequestParam String lastName) {
+        AppointmentsResponse appointmentsResponse = new AppointmentsResponse();
+
+        if (customerId == 0) {
+            //create new empty customer
+            Customer newCustomer = new Customer();
+            newCustomer.setBusinessId(businessId);
+            customerId = new CustomerStore().saveNew(newCustomer);
+            newCustomer.setFirstName("newCustomer");
+            newCustomer.setLastName("LastName"+customerId);
+            new CustomerStore().saveUpdate(newCustomer);
+            //create new appointment for this customer
+            Appointment newAppointment = new Appointment();
+            newAppointment.setCustomerId(customerId);
+            newAppointment.setStatus(new AppointmentStatusStore().getDefault());
+            newAppointment.setAppointmentTypeId(new AppointmentTypeStore().getDefault());
+            newAppointment.setLocationId(new LocationStore().getDefault());
+            newAppointment.saveNew();
+
+        }
+        Customer customer = new CustomerStore().get(customerId);
+        if (customer==null || customer.getBusinessId() != businessId){
+            appointmentsResponse.addErrorMessage(Errors.CUSTOMER_NOT_IN_THIS_BUSINESS.toString());
+        }
+        else {
+            //does supplied name match customerId?
+            if (customer.getFirstName().equalsIgnoreCase(firstName) && customer.getLastName().equalsIgnoreCase(lastName)) {
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY, 0);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);
+                cal.set(Calendar.MILLISECOND, 0);
+                Date fromDate = cal.getTime();
+                cal.add(Calendar.DATE, 1);
+                Date toDate = cal.getTime();
+                List<Appointment> appointments;
+                appointments = new AppointmentStore().get(customerId, fromDate, toDate, false);
+
+                appointmentsResponse.setAppointmentList(appointments);
+                //Customer customer = new CustomerStore().get(customerId);
+                List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(customer.getBusinessId(), true);
+                Business business = new BusinessStore().get(customer.getBusinessId());
+                appointmentsResponse.setBusinessDTOFromBusiness(business);
+                appointmentsResponse.setAppointmentStatusList(appointmentStatusList);
+            }
+            else{
+                appointmentsResponse.addErrorMessage(Errors.CUSTOMER_NOT_IN_THIS_BUSINESS.toString());
+            }
+        }
+
+        return appointmentsResponse;
+    }
+
+    // eg: http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
+/*    @Override
     @RequestMapping(value = "/AppointmentsToday/{businessId}/{customerId}", method = RequestMethod.GET)
     public AppointmentsResponse getAppointmentsToday(@PathVariable Integer businessId, @PathVariable Integer customerId) {
         //public List<Appointment> getAppointmentsToday(@PathVariable Integer customerId) {
         AppointmentsResponse appointmentsResponse = new AppointmentsResponse();
 
-        if (customerId == 0) { //TODO if customerId == 0 then no user details in app, create anonymous appointment to return to user.
+        if (customerId == 0) {
             //create new empty customer
             Customer newCustomer = new Customer();
             newCustomer.setBusinessId(businessId);
@@ -69,7 +126,7 @@ enum Errors{CUSTOMER_NOT_IN_THIS_BUSINESS}
         }
 
         return appointmentsResponse;
-    }
+    }*/
 
     // http://10.1.1.7:8080/FlexibleUIConfig/api/v1/Appointment/CheckIn/{id}
     @Override

@@ -28,7 +28,8 @@ public interface AppointmentServiceAPI{
 
     //@GET("/FlexibleUIConfig/api/v1/Appointments/{customerId}")
     // eg: http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
-    AppointmentsResponse getAppointmentsToday(Integer businessId, Integer customerId);
+    // eg: http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1?customerId=1&firstName=bob&lastName=Socks
+    AppointmentsResponse getAppointmentsToday(Integer businessId, Integer customerId, String firstName, String lastName);
 
 
 

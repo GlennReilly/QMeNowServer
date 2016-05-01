@@ -146,9 +146,13 @@ public class RestAPIController implements AppointmentServiceAPI {
         return null;
     }
 
-
-
     @Override
+    public AppointmentsResponse getAppointmentsToday(Integer businessId, Integer customerId, String firstName, String lastName) {
+        return null;
+    }
+
+
+    //@Override
     public AppointmentsResponse getAppointmentsToday(Integer businessId, Integer customerId) {
         return null;
     }
