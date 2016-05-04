@@ -26,24 +26,43 @@
 <div class="pageMessage">${message}</div>
 
 <br/>
+<fieldset class="userHomeFieldSet">
+    <legend>Your Business</legend>
     <ul>
         <li><a href="<spring:url value='/FlexibleUIConfig/business/${Business.id}'/>">Show your business details</a></li>
         <li><a href="<spring:url value='/FlexibleUIConfig/business/barcode/'/>">Show the QRCode for your business</a></li>
-        <li></li>
-        <li><a href="<spring:url value='/FlexibleUIConfig/customer/add'/>"> Add a new customer</a></li>
-        <li><a href="<spring:url value='/FlexibleUIConfig/customer/find'/>">Find a customer</a></li>
-        <li></li>
-        <li><a href="<spring:url value='/FlexibleUIConfig/appointmentType/'/>">View or change appointment types for your business</a></li>
-        <li></li>
-        <li><a href="<spring:url value='/FlexibleUIConfig/appointmentStatus/'/>">View or change appointment statuses for your business</a></li>
-        <li></li>
         <li><a href="<spring:url value='/FlexibleUIConfig/location/'/>">View or change locations for your business</a></li>
-        <li></li>
-        <li><a href="<spring:url value='/FlexibleUIConfig/user/add'/>"> Add a new user</a></li>
-        <li></li>
+    </ul>
+</fieldset>
+<fieldset class="userHomeFieldSet">
+    <legend>Appointment Search</legend>
+    <ul>
         <li><a href="<spring:url value='/FlexibleUIConfig/appointment/getAllForDateRange'/>"> Get all appointments for date range</a></li>
         <li><a href="<spring:url value='/FlexibleUIConfig/appointment/lookupAppointmentByRefNum'/>"> look up Appointment by RefNum</a></li>
     </ul>
+</fieldset>
+<fieldset class="userHomeFieldSet">
+    <legend>Customers</legend>
+    <ul>
+        <li><a href="<spring:url value='/FlexibleUIConfig/customer/add'/>"> Add a new customer</a></li>
+        <li><a href="<spring:url value='/FlexibleUIConfig/customer/find'/>">Find a customer</a></li>
+    </ul>
+</fieldset>
+<fieldset class="userHomeFieldSet">
+    <legend>Appointment Status and Type</legend>
+    <ul>
+        <li><a href="<spring:url value='/FlexibleUIConfig/appointmentType/'/>">View or change appointment types for your business</a></li>
+        <li><a href="<spring:url value='/FlexibleUIConfig/appointmentStatus/'/>">View or change appointment statuses for your business</a></li>
+    </ul>
+</fieldset>
+<fieldset class="userHomeFieldSet">
+    <legend>User Management</legend>
+    <ul>
+        <li><a href="<spring:url value='/FlexibleUIConfig/user/add'/>"> Add a new user</a></li>
+    </ul>
+</fieldset>
+
+
 <tags:jsIncludes logoPath="${Business.logoFileName}"></tags:jsIncludes>
 </body>
 </html>

@@ -51,7 +51,7 @@
           </form:select>
             <div id="divStatusColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.statusHexCode}' />;"></div>
         </div>
-        <div class="label2">
+        <div class="label2" style="margin-bottom: 50px;">
               <label>complete:</label><form:checkbox path="appointment.isComplete" id="isCompleteCheck"></form:checkbox>
         </div>
 

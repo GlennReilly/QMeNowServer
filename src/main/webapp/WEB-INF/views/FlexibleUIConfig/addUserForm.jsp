@@ -24,9 +24,10 @@
 </tags:header>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./add/" method="post">
+<form:form action="/FlexibleUIConfig/user/add" method="post">
   <div>
       <div class="label2">
+          <label>business:</label>
           <form:select path="selectedBusinessId">
               <form:option value="0" label="Please select" />
               <form:options items="${command.activeBusinesses}" itemValue="id" itemLabel="businessName" />

@@ -13,11 +13,19 @@ body{
 }
 
 .businessName{
-    font-size: 24pt;
+    padding-top: 45px;
+    font-size: 34pt;
     font-weight:bold;
-    color: #1c94c4;
-    padding: 20px;
+    /*color: #1c94c4;*/
+    /*color: #f6f6f6;*/
+    /*padding: 20px;*/
     float:left;
+}
+
+.userHomeFieldSet{
+    width: 37vw;
+    margin-bottom: 40px;
+    border: solid black 2px;
 }
 
 .divCustomerDetails{
