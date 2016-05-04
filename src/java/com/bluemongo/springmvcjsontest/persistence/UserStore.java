@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Created by glenn on 1/09/15.
  */
+
 public class UserStore {
     private DBHelper dbHelper = new DBHelper();
     private PreparedStatement preparedStatement = null;

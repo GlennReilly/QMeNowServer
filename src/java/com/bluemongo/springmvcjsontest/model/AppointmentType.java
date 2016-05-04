@@ -11,7 +11,7 @@ public class AppointmentType {
     private int id;
     private String name;
 
-    @NotNull(message="AppointmentType prefix be null")
+    @NotNull(message="please enter an AppointmentType prefix")
     @Pattern(regexp = "\\w{1,4}", message = "letters only please")
     private String prefix;
 

@@ -15,7 +15,7 @@ use DemoJunk1;
 /*
  *
  */
-create user 'user456'@'localhost' identified by 'userHotDogFiasco$';
+create newUser 'user456'@'localhost' identified by 'userHotDogFiasco$';
 grant insert,execute,select,delete on DemoJunk1.* to 'user456'@'localhost';
 /*
  *

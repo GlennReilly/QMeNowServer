@@ -12,7 +12,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
-  <%--<configName>Add a user</configName>--%>
+  <%--<configName>Add a newUser</configName>--%>
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body style="background-color: ${backgroundColourHexCode}">
@@ -24,34 +24,42 @@
 </tags:header>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./add/" method="post">
+<form:form action="/FlexibleUIConfig/user/add" method="post">
   <div>
       <div class="label2">
+          <label>business:</label>
           <form:select path="selectedBusinessId">
               <form:option value="0" label="Please select" />
               <form:options items="${command.activeBusinesses}" itemValue="id" itemLabel="businessName" />
           </form:select>
       </div>
     <div class="label2">
-      <label>first name:</label><form:input path="user.firstName" />
+      <label>first name:</label>
+        <input type="text" name="newUser.firstName">
     </div>
     <div class="label2">
-      <label>last name:</label><form:input path="user.lastName" />
+      <label>last name:</label>
+        <input type="text" name="newUser.lastName">
     </div>
       <div class="label2">
-          <label>username:</label><form:input path="user.username" />
+          <label>username:</label>
+          <input type="text" name="newUser.username">
       </div>
       <div class="label2">
-          <label>password:</label><form:input path="user.password" />
+          <label>password:</label>
+          <input type="password" name="newUser.password">
       </div>
       <div class="label2">
-          <label>phone Number:</label><form:input path="user.phoneNumber" />
+          <label>phone Number:</label>
+          <input type="text" name="newUser.phoneNumber">
       </div>
       <div class="label2">
-          <label>email address:</label><form:input path="user.emailAddress" />
+          <label>email address:</label>
+          <input type="text" name="newUser.emailAddress">
       </div>
       <div class="label2">
-          <label>physical address:</label><form:input path="user.physicalAddress" />
+          <label>physical address:</label>
+          <input type="text" name="newUser.physicalAddress">
       </div>
       <div class="label2">
         <input type="submit">

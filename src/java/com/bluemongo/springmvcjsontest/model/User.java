@@ -2,6 +2,7 @@ package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.UserStore;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public class User {
     private static UserStore userStore = new UserStore();
     private int id;
     private int businessId;
+
+    @NotNull(message="please enter a first name")
     private String firstName = "";
     private String lastName = "";
     private String name = "";

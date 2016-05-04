@@ -20,7 +20,7 @@
     <div>
         <div>
             <div class="label2">
-                <label>user id:</label><form:input path="customerIdStr" />
+                <label>newUser id:</label><form:input path="customerIdStr" />
             </div>
             <div class="label2">
                 <label>first name:</label><form:input path="firstName" />

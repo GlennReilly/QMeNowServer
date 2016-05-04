@@ -9,8 +9,6 @@ import com.bluemongo.springmvcjsontest.service.AppointmentAndCustomer;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -67,8 +66,6 @@ public class AppointmentTypeController {
 
         if (bindingResult.hasErrors()) {
             logger.info("AppointmentType error.");
-
-            //return new ModelAndView("FlexibleUIConfig/AppointmentType/addEditAppointmentTypeForm");
 
            User user = (User) httpSession.getAttribute("User");
 
