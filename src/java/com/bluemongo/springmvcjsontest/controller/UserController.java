@@ -40,16 +40,34 @@ public class UserController extends GenericController{
     }
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public String AddUser(@ModelAttribute("newUser") @Valid AddUserFormHelper newUser, BindingResult bindingResult) {
-        String output = "";
-        newUser.validate(newUser, bindingResult);
-        if (bindingResult.hasErrors()) {
-            logger.info("AddUserFormHelper error.");
-        } else {
-            newUser.save();
-            output = "User saved successfully: " + newUser.getFirstName() + " " + newUser.getLastName();
+    public ModelAndView AddUser(@ModelAttribute("newUser") @Valid AddUserFormHelper newUser, BindingResult bindingResult, HttpSession httpSession) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (httpSession.getAttribute("User") == null) {
+            modelAndView = ModelViewHelper.GetLoginForm(null);
         }
-        return output;
+        else {
+            final User user = (User) httpSession.getAttribute("User");
+            newUser.validate(newUser, bindingResult);
+
+            if (bindingResult.hasErrors()) {
+                logger.info("AddUserFormHelper errors.");
+                modelAndView.setViewName("/FlexibleUIConfig/addUserForm");
+                //modelAndView.addObject("command", new AddUserFormHelper());
+                modelAndView.addObject("newUser", newUser);
+                modelAndView.addObject("pageTitle", "Add a user");
+                modelAndView.addObject("result", bindingResult);
+
+                int businessId = user.getBusinessId();
+                populateHeaderValues(businessId, modelAndView);
+
+            } else {
+                newUser.save();
+                String message = "User saved successfully: " + newUser.getFirstName() + " " + newUser.getLastName();
+                modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+            }
+        }
+        return modelAndView;
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)

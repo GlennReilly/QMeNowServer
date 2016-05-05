@@ -24,18 +24,27 @@
 </tags:header>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/user/add" method="post">
+<form:form modelAttribute="newUser" action="/FlexibleUIConfig/user/add" method="post">
   <div>
       <div class="label2">
-          <label>business:</label>
+<%--          <label>business:</label>
           <form:select path="selectedBusinessId">
               <form:option value="0" label="Please select" />
               <form:options items="${command.activeBusinesses}" itemValue="id" itemLabel="businessName" />
-          </form:select>
+          </form:select>--%>
       </div>
     <div class="label2">
       <label>first name:</label>
         <input type="text" name="newUser.firstName">
+        <form:errors path="firstName" cssClass="error" />
+        <form:errors path="*" cssClass="errorblock" />
+
+<%--        <spring:hasBindErrors name="command">
+            <c:if test="${errors.hasFieldErrors('firstName')}">
+                newUser.firstName is in error!
+            </c:if>
+        </spring:hasBindErrors>--%>
+
     </div>
     <div class="label2">
       <label>last name:</label>
