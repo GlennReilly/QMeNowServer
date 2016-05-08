@@ -17,19 +17,36 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointmentStatus/addOrUpdate" method="post">
+<form:form modelAttribute="appointmentStatus" action="/FlexibleUIConfig/appointmentStatus/addOrUpdate" method="post" cssClass="formBackground">
   <div>
     <div>
-      <div class="label2">
-        <label>Appointment Status name:</label><form:input path="name" />
-      </div>
-     <div class="label2">
-        <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
-      </div>
-        <div class="label2">
-            <label>is Default?</label><form:checkbox path="isDefault" id="isDefaultCheck"></form:checkbox>
+        <div style="clear: both;">
+            <div class="formLabel">
+                <label>Appointment Status name:</label>
+            </div>
+            <div class="formControl">
+                <form:input path="name"/>
+                <form:errors path="name" cssClass="error"/>
+            </div>
         </div>
 
+        <div style="clear: both;">
+            <div class="formLabel">
+                <label>Background colour hex code:</label>
+            </div>
+            <div class="formControl">
+                <form:input type="color" path="backgroundColourHexCode"/>
+            </div>
+        </div>
+
+        <div style="clear: both;">
+            <div class="formLabel">
+                <label>is Default?</label>
+            </div>
+            <div class="formControl">
+                <form:checkbox path="isDefault" id="isDefaultCheck"></form:checkbox>
+            </div>
+        </div>
     </div>
       <c:choose>
           <c:when test="${empty command.id || command.id eq 0 }">

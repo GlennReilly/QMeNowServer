@@ -12,6 +12,14 @@ body{
     background-color: darkseagreen;
 }
 
+.formBackground{
+    background-color:whitesmoke;
+    width: 650px;
+    padding: 25px;
+    border-radius: 10px;
+    border: solid 1px darkgray;
+}
+
 .businessName{
     padding-top: 45px;
     font-size: 34pt;
@@ -25,7 +33,9 @@ body{
 .userHomeFieldSet{
     width: 38vw;
     margin-bottom: 40px;
-    border: solid black 2px;
+    border: solid 1px darkgray;
+    background-color: whitesmoke;
+    border-radius: 10px;
 }
 
 .divCustomerDetails{
@@ -61,8 +71,19 @@ body{
 }
 
 .formLabel{
-    padding-right: 30px;
     min-width: 300px;
+    text-align: right;
+    position: relative;
+    float: left;
+    padding: 2px 10px 2px 10px;
+}
+
+.formControl{
+    min-width: 300px;
+    text-align: left;
+    position: relative;
+    float: left;
+    padding: 2px 10px 2px 0;
 }
 
 .labelColumn{

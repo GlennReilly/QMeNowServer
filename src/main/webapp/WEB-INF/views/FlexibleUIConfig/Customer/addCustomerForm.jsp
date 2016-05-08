@@ -25,23 +25,54 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/customer/add" method="post">
+<form:form modelAttribute="customer" action="/FlexibleUIConfig/customer/add" method="post" cssClass="formBackground">
     <div>
         <div>
-            <div class="label2">
-                <label>first name:</label><form:input path="firstName"/>
+            <div style="clear: both;">
+                <div class="formLabel">
+                    <label>first name:</label>
+                 </div>
+                <div class="formControl">
+                    <form:input path="firstName"/>
+                    <form:errors path="firstName" cssClass="error"/>
+                </div>
             </div>
-            <div class="label2">
-                <label>last name:</label><form:input path="lastName"/>
+
+            <div style="clear: both;">
+                <div class="formLabel">
+                    <label>last name:</label>
+                </div>
+                <div class="formControl">
+                    <form:input path="lastName"/>
+                    <form:errors path="lastName" cssClass="error"/>
+                </div>
             </div>
-            <div class="label2">
-                <label>phone number:</label><form:input path="phoneNumber"/>
+
+            <div style="clear: both;">
+                <div class="formLabel">
+                    <label>phone number:</label>
+                </div>
+                <div class="formControl">
+                    <form:input path="phoneNumber"/>
+                </div>
             </div>
-            <div class="label2">
-                <label>email address:</label><form:input path="emailAddress"/>
+
+            <div style="clear: both;">
+                <div class="formLabel">
+                    <label>email address:</label>
+                </div>
+                <div class="formControl">
+                    <form:input path="emailAddress"/>
+                </div>
             </div>
-            <div class="label2">
-                <label>street address:</label><form:input path="physicalAddress"/>
+
+            <div style="clear: both;">
+                <div class="formLabel">
+                    <label>street address:</label>
+                </div>
+                <div class="formControl">
+                    <form:input path="physicalAddress"/>
+                </div>
             </div>
 <%--            <div class="label2">
                 <label>DOB:</label><form:input path="DOB"/>

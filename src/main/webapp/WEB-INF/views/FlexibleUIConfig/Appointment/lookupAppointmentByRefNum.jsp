@@ -20,7 +20,8 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointment/find" method="get">
+<form:form action="/FlexibleUIConfig/appointment/find" method="get" cssClass="formBackground">
+    <%--TODO add validation here --%>
         <div>
             <div class="label2">
                 <label>Appointment Ref Number:</label>

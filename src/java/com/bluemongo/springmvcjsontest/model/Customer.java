@@ -9,6 +9,9 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 import utils.InputHelper;
 
 import javax.imageio.ImageIO;
@@ -22,7 +25,7 @@ import java.util.*;
 /**
  * Created by glenn on 1/09/15.
  */
-public class Customer {
+public class Customer implements Validator {
     private static CustomerStore customerStore = new CustomerStore();
     private int id;
     private String firstName = "";
@@ -40,6 +43,17 @@ public class Customer {
 
     public Customer() {
 
+    }
+
+    @Override
+    public boolean supports(Class<?> aClass) {
+        return Customer.class.equals(aClass);
+    }
+
+    @Override
+    public void validate(Object o, Errors errors) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "", "field required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "", "field required");
     }
 
 
@@ -146,6 +160,7 @@ public class Customer {
     public void setBusinessId(int businessId) {
         this.businessId = businessId;
     }
+
 
     public enum Gender {NOT_SPECIFIED, MALE, FEMALE,}
 

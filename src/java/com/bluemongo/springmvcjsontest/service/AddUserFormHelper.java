@@ -87,5 +87,12 @@ public class AddUserFormHelper implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newUser.firstName", "", "field required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newUser.lastName", "", "field required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newUser.phoneNumber", "", "field required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newUser.emailAddress", "", "field required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newUser.physicalAddress", "", "field required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newUser.username", "", "field required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newUser.password", "", "field required");
+
     }
 }

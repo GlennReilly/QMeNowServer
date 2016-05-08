@@ -6,6 +6,7 @@ import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import com.bluemongo.springmvcjsontest.persistence.LocationStore;
 import com.bluemongo.springmvcjsontest.service.AppointmentAndCustomer;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,27 +55,37 @@ public class LocationController {
     }
 
     @RequestMapping(value="/addOrEdit", method = RequestMethod.POST)
-    public ModelAndView AddLocation(@ModelAttribute Location location, HttpSession httpSession){
+    public ModelAndView AddLocation(@ModelAttribute Location location, BindingResult bindingResult, HttpSession httpSession){
         ModelAndView modelAndView;
         if (httpSession.getAttribute("User") != null) {
             User user = (User)httpSession.getAttribute("User");
-            String message;
+            String message = "";
             location.setBusinessId(user.getBusinessId());
-            if (httpSession.getAttribute("CurrentlyEditingLocationId") != null){
-                int currentlyEditingLocationId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingLocationId").toString());
-                location.setId(currentlyEditingLocationId);
-                new LocationStore().saveUpdate(location);
-                message = "Location updated successfully.";
-                httpSession.setAttribute("CurrentlyEditingLocationId", null);
-            }
-            else {
-                LocationStore locationStore = new LocationStore();
-                locationStore.saveNew(location);
-                message = "Location saved successfully.";
-            }
+            location.validate(location,bindingResult);
 
-            modelAndView = new ModelViewHelper().getModelViewForLocationsHome(user);
-            modelAndView.addObject("message", message);
+            if (bindingResult.hasErrors()) {
+                modelAndView = ModelViewHelper.GetModeViewForAddEditLocation(user.getBusinessId(), null, null);
+                modelAndView.addObject("location", location);
+                modelAndView.addObject("result", bindingResult);
+
+            }else
+            {
+                if (httpSession.getAttribute("CurrentlyEditingLocationId") != null){
+                    int currentlyEditingLocationId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingLocationId").toString());
+                    location.setId(currentlyEditingLocationId);
+                    new LocationStore().saveUpdate(location);
+                    message = "Location updated successfully.";
+                    httpSession.setAttribute("CurrentlyEditingLocationId", null);
+                }
+                else {
+                    LocationStore locationStore = new LocationStore();
+                    locationStore.saveNew(location);
+                    message = "Location saved successfully.";
+                }
+
+                modelAndView = new ModelViewHelper().getModelViewForLocationsHome(user);
+                modelAndView.addObject("message", message);
+            }
         }
         else{
             modelAndView = ModelViewHelper.GetLoginForm("Please log in");

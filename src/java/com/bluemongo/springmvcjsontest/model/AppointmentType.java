@@ -1,5 +1,9 @@
 package com.bluemongo.springmvcjsontest.model;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
@@ -7,7 +11,7 @@ import java.util.Date;
 /**
  * Created by glenn on 20/10/15.
  */
-public class AppointmentType {
+public class AppointmentType implements Validator {
     private int id;
     private String name;
 
@@ -20,6 +24,16 @@ public class AppointmentType {
     private Date createdDate;
     private int businessId;
     private boolean isDefault;
+
+    @Override
+    public boolean supports(Class<?> aClass) {
+        return AppointmentType.class.equals(aClass);
+    }
+
+    @Override
+    public void validate(Object o, Errors errors) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "field required");
+    }
 
     public int getId() {
         return id;
@@ -84,4 +98,6 @@ public class AppointmentType {
     public void setIsDefault(boolean aDefault) {
         isDefault = aDefault;
     }
+
+
 }

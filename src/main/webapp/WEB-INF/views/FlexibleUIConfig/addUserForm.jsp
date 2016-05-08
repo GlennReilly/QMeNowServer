@@ -24,52 +24,89 @@
 </tags:header>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form modelAttribute="newUser" action="/FlexibleUIConfig/user/add" method="post">
+<form:form modelAttribute="newUser" action="/FlexibleUIConfig/user/add" method="post" cssClass="formBackground">
   <div>
       <div class="label2">
-<%--          <label>business:</label>
+              <%--<form:errors path="*" cssClass="errorblock" />--%>
+
+        <%--  <label>business:</label>
           <form:select path="selectedBusinessId">
               <form:option value="0" label="Please select" />
               <form:options items="${command.activeBusinesses}" itemValue="id" itemLabel="businessName" />
           </form:select>--%>
-      </div>
-    <div class="label2">
-      <label>first name:</label>
-        <input type="text" name="newUser.firstName">
-        <form:errors path="firstName" cssClass="error" />
-        <form:errors path="*" cssClass="errorblock" />
 
-<%--        <spring:hasBindErrors name="command">
-            <c:if test="${errors.hasFieldErrors('firstName')}">
-                newUser.firstName is in error!
-            </c:if>
-        </spring:hasBindErrors>--%>
+      </div>
 
-    </div>
-    <div class="label2">
-      <label>last name:</label>
-        <input type="text" name="newUser.lastName">
-    </div>
-      <div class="label2">
-          <label>username:</label>
-          <input type="text" name="newUser.username">
+        <div>
+            <div class="formLabel">
+              <label>first name:</label>
+            </div>
+            <div class="formControl">
+                <input type="text" name="newUser.firstName">
+                <form:errors path="newUser.firstName" cssClass="error" />
+            </div>
+        </div>
+
+      <div style="clear: both;">
+          <div class="formLabel">
+              <label>last name:</label>
+          </div>
+          <div class="formControl">
+              <input type="text" name="newUser.lastName">
+              <form:errors path="newUser.lastName" cssClass="error" />
+          </div>
       </div>
-      <div class="label2">
-          <label>password:</label>
-          <input type="password" name="newUser.password">
+
+      <div style="clear: both;">
+          <div class="formLabel">
+              <label>username:</label>
+          </div>
+          <div class="formControl">
+              <input type="text" name="newUser.username">
+              <form:errors path="newUser.username" cssClass="error" />
+          </div>
       </div>
-      <div class="label2">
-          <label>phone Number:</label>
-          <input type="text" name="newUser.phoneNumber">
+
+      <div style="clear: both;">
+          <div class="formLabel">
+              <label>password:</label>
+          </div>
+          <div class="formControl">
+              <input type="text" name="newUser.password">
+              <form:errors path="newUser.password" cssClass="error" />
+          </div>
       </div>
-      <div class="label2">
-          <label>email address:</label>
-          <input type="text" name="newUser.emailAddress">
+
+      <div style="clear: both;">
+          <div class="formLabel">
+              <label>phone Number:</label>
+          </div>
+          <div class="formControl">
+              <input type="text" name="newUser.phoneNumber">
+              <form:errors path="newUser.phoneNumber" cssClass="error" />
+          </div>
       </div>
-      <div class="label2">
-          <label>physical address:</label>
-          <input type="text" name="newUser.physicalAddress">
+
+      <div style="clear: both;">
+          <div class="formLabel">
+              <label>email Address:</label>
+          </div>
+          <div class="formControl">
+              <input type="text" name="newUser.emailAddress">
+              <form:errors path="newUser.emailAddress" cssClass="error" />
+          </div>
       </div>
+
+      <div style="clear: both;">
+          <div class="formLabel">
+              <label>physical Address:</label>
+          </div>
+          <div class="formControl">
+              <input type="text" name="newUser.physicalAddress">
+              <form:errors path="newUser.physicalAddress" cssClass="error" />
+          </div>
+      </div>
+
       <div class="label2">
         <input type="submit">
       </div>

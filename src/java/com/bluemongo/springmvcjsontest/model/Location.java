@@ -1,11 +1,14 @@
 package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.LocationStore;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
 /**
  * Created by glenn on 13/10/15.
  */
-public class Location {
+public class Location implements Validator {
     int id;
     String name;
     String backgroundColourHexCode;
@@ -59,5 +62,15 @@ public class Location {
 
     public void setIsDefault(boolean aDefault) {
         isDefault = aDefault;
+    }
+
+    @Override
+    public boolean supports(Class<?> aClass) {
+        return Location.class.equals(aClass);
+    }
+
+    @Override
+    public void validate(Object o, Errors errors) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "field required");
     }
 }

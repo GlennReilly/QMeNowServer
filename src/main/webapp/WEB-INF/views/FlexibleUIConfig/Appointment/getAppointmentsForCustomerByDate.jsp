@@ -21,7 +21,9 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointment/get" method="get">
+<form:form action="/FlexibleUIConfig/appointment/get" method="get" cssClass="formBackground">
+    <%--TODO add validation here --%>
+
     <input type="hidden" id="customerId" value="${customerId}">
     <form:hidden path="customerId" />
         <div>

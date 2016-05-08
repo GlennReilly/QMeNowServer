@@ -26,22 +26,44 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/location/addOrEdit/" method="post">
-  <div>
+<form:form modelAttribute="location" action="/FlexibleUIConfig/location/addOrEdit/" method="post" cssClass="formBackground">
     <div>
-      <div class="label2">
-        <label>location name:</label><form:input path="name"/>
-      </div>
-        <div class="label2">
-            <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
+        <div style="clear: both;">
+            <div class="formLabel">
+                <label>location name:</label>
+            </div>
+            <div class="formControl">
+                <form:input path="name"/>
+                <form:errors path="name" cssClass="error"/>
+            </div>
         </div>
-        <div class="label2">
-            <label>is Default?</label><form:checkbox path="isDefault" id="isDefaultCheck"></form:checkbox>
+
+        <div style="clear: both;">
+            <div class="formLabel">
+                <label>Background colour hex code:</label>
+            </div>
+            <div class="formControl">
+                <form:input type="color" path="backgroundColourHexCode"/>
+            </div>
         </div>
-    </div>
-    <div class="label2">
-      <input type="submit">
-    </div>
+
+        <div style="clear: both;">
+            <div class="formLabel">
+                <label>is Default?</label>
+            </div>
+            <div class="formControl">
+                <form:checkbox path="isDefault" id="isDefaultCheck"></form:checkbox>
+            </div>
+        </div>
+
+        <div style="clear: both;">
+            <div class="formLabel">
+                &nbsp;
+            </div>
+            <div class="formControl">
+                <input type="submit">
+            </div>
+        </div>
   </div>
 </form:form>
 <tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>

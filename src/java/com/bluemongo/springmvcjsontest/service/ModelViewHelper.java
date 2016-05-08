@@ -152,7 +152,7 @@ public class ModelViewHelper extends GenericController {
             pageTitle = "Add Location";
         }
         populateHeaderValues(businessId, modelAndView);
-        modelAndView.addObject("command", location);
+        modelAndView.addObject("location", location);
         modelAndView.addObject("pageTitle", pageTitle);
         message = (message == null) ? "" : message;
         modelAndView.addObject("message", message);
@@ -229,7 +229,7 @@ public class ModelViewHelper extends GenericController {
             User user = (User) httpSession.getAttribute("User");
             modelAndView.setViewName("FlexibleUIConfig/Customer/addCustomerForm");
             populateHeaderValues(user.getBusinessId(), modelAndView);
-            modelAndView.addObject("command", new Customer());
+            modelAndView.addObject("customer", new Customer());
             modelAndView.addObject("pageTitle", "Add a Customer");
         }
         return  modelAndView;
@@ -266,7 +266,7 @@ public class ModelViewHelper extends GenericController {
             modelAndView.setViewName("FlexibleUIConfig/AppointmentStatus/addEditAppointmentStatusForm");
             appointmentStatus.setBusinessId(user.getBusinessId());
             populateHeaderValues(user.getBusinessId(), modelAndView);
-            modelAndView.addObject("command", appointmentStatus);
+            modelAndView.addObject("appointmentStatus", appointmentStatus);
             modelAndView.addObject("pageTitle", pageTitle);
         }
 

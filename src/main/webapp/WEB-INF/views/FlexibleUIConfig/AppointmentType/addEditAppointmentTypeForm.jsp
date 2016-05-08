@@ -17,23 +17,47 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form modelAttribute="appointmentType" action="/FlexibleUIConfig/appointmentType/addOrUpdate" method="post">
+<form:form modelAttribute="appointmentType" action="/FlexibleUIConfig/appointmentType/addOrUpdate" method="post" cssClass="formBackground">
     <%--<form:errors path="*" cssClass="errorblock" element="div" />--%>
   <div>
       <div>
-        <div class="label2">
-          <label>New Appointment Type name:</label><form:input path="name" />
-        </div>
-        <div class="label2">
-          <label>prefix:</label><form:input path="prefix" />
-              <form:errors path="prefix" cssClass="error" />
-        </div>
-        <div class="label2">
-          <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
-        </div>
-          <div class="label2">
-              <label>is Default?</label><form:checkbox path="isDefault" id="isDefaultCheck"></form:checkbox>
+          <div style="clear: both;">
+              <div class="formLabel">
+                  <label>New Appointment Type name:</label>
+              </div>
+              <div class="formControl">
+                  <form:input path="name"/>
+                  <form:errors path="name" cssClass="error"/>
+              </div>
           </div>
+
+          <div style="clear: both;">
+              <div class="formLabel">
+                  <label>prefix:</label>
+              </div>
+              <div class="formControl">
+                  <form:input path="prefix"/>
+                  <form:errors path="prefix" cssClass="error"/>
+              </div>
+          </div>
+
+          <div style="clear: both;">
+              <div class="formLabel">
+                  <label>Background colour hex code:</label>
+              </div>
+              <div class="formControl">
+                  <form:input type="color" path="backgroundColourHexCode"/>
+              </div>
+          </div>
+          <div style="clear: both;">
+              <div class="formLabel">
+                  <label>is Default?</label>
+              </div>
+              <div class="formControl">
+                  <form:checkbox path="isDefault" id="isDefaultCheck"></form:checkbox>
+              </div>
+          </div>
+
       </div>
       <c:choose>
           <c:when test="${empty command.id || command.id eq 0 }">

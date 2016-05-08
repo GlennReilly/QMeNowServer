@@ -63,7 +63,7 @@ public class AppointmentTypeController {
     @RequestMapping(value="/addOrUpdate", method = RequestMethod.POST)
     public ModelAndView AddOrEditAppointmentType(@ModelAttribute("appointmentType") @Valid AppointmentType appointmentType, BindingResult bindingResult, HttpSession httpSession){
         ModelAndView modelAndView;
-
+        appointmentType.validate(appointmentType, bindingResult);
         if (bindingResult.hasErrors()) {
             logger.info("AppointmentType error.");
 

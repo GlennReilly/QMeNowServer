@@ -7,6 +7,7 @@ import com.bluemongo.springmvcjsontest.persistence.BusinessStore;
 import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import com.bluemongo.springmvcjsontest.service.GetFindCustomerHelper;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,17 +45,24 @@ public class CustomerController extends GenericController implements ServletCont
     }
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public ModelAndView AddCustomer(@ModelAttribute Customer customer, HttpSession httpSession){
+    public ModelAndView AddCustomer(@ModelAttribute Customer customer, BindingResult bindingResult, HttpSession httpSession){
         ModelAndView modelAndView;
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         }
         else{
-            User user = (User)httpSession.getAttribute("User");
-            customer.setBusinessId(user.getBusinessId());
-            int newCustomerId = customer.saveNew();
-            String message = "Customer saved successfully: " + newCustomerId;
-            modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+            customer.validate(customer, bindingResult);
+            if (bindingResult.hasErrors()) {
+                modelAndView = ModelViewHelper.GetModelViewForCustomerAdd(httpSession);
+                modelAndView.addObject("customer", customer);
+
+            } else {
+                User user = (User)httpSession.getAttribute("User");
+                customer.setBusinessId(user.getBusinessId());
+                int newCustomerId = customer.saveNew();
+                String message = "Customer saved successfully: " + newCustomerId;
+                modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
+            }
         }
 
         return modelAndView;

@@ -1,11 +1,14 @@
 package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStatusStore;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
 /**
  * Created by glenn on 16/10/15.
  */
-public class AppointmentStatus  {
+public class AppointmentStatus implements Validator {
     private int id;
     private String name;
     private int businessId;
@@ -74,5 +77,15 @@ public class AppointmentStatus  {
 
     public void setIsDefault(boolean aDefault) {
         isDefault = aDefault;
+    }
+
+    @Override
+    public boolean supports(Class<?> aClass) {
+        return AppointmentStatus.class.equals(aClass);
+    }
+
+    @Override
+    public void validate(Object o, Errors errors) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "field required");
     }
 }

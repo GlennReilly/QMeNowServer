@@ -7,6 +7,7 @@ import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
 import com.bluemongo.springmvcjsontest.service.AppointmentAndCustomer;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,28 +48,34 @@ public class AppointmentStatusController {
     }
 
     @RequestMapping(value = "/addOrUpdate", method = RequestMethod.POST)
-    public ModelAndView AddAppointmentStatus(@ModelAttribute AppointmentStatus appointmentStatus, HttpSession httpSession) {
+    public ModelAndView AddAppointmentStatus(@ModelAttribute AppointmentStatus appointmentStatus, BindingResult bindingResult, HttpSession httpSession) {
         ModelAndView modelAndView;
 
         if (httpSession.getAttribute("User") == null) {
             modelAndView = ModelViewHelper.GetLoginForm(null);
         } else {
-            User user = (User) httpSession.getAttribute("User");
-            try {
-                appointmentStatus.setBusinessId(user.getBusinessId());
-                if (httpSession.getAttribute("currentlyEditingAppointmentStatusId") != null){
-                    int currentlyEditingAppointmentStatusId = Integer.parseInt(httpSession.getAttribute("currentlyEditingAppointmentStatusId").toString());
-                    appointmentStatus.setId(currentlyEditingAppointmentStatusId);
-                    new AppointmentStatusStore().saveUpdate(appointmentStatus);
-                    httpSession.setAttribute("currentlyEditingAppointmentStatusId", null);
+            appointmentStatus.validate(appointmentStatus, bindingResult);
+            if(bindingResult.hasErrors()){
+             modelAndView = ModelViewHelper.GetModelViewForAddEditAppointmentStatus(httpSession, null);
+             modelAndView.addObject("appointmentStatus", appointmentStatus);
+            }
+            else {
+                User user = (User) httpSession.getAttribute("User");
+                try {
+                    appointmentStatus.setBusinessId(user.getBusinessId());
+                    if (httpSession.getAttribute("currentlyEditingAppointmentStatusId") != null) {
+                        int currentlyEditingAppointmentStatusId = Integer.parseInt(httpSession.getAttribute("currentlyEditingAppointmentStatusId").toString());
+                        appointmentStatus.setId(currentlyEditingAppointmentStatusId);
+                        new AppointmentStatusStore().saveUpdate(appointmentStatus);
+                        httpSession.setAttribute("currentlyEditingAppointmentStatusId", null);
+                    } else {
+                        int newAppointmentTypeId = new AppointmentStatusStore().saveNew(appointmentStatus);
+                        String message = "Appointment Status saved successfully: " + newAppointmentTypeId;
+                    }
+                    modelAndView = new ModelViewHelper().getModelViewForAppointmentStatusHome(user);
+                } catch (Exception ex) {
+                    modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
                 }
-                else {
-                    int newAppointmentTypeId = new AppointmentStatusStore().saveNew(appointmentStatus);
-                    String message = "Appointment Status saved successfully: " + newAppointmentTypeId;
-                }
-                modelAndView = new ModelViewHelper().getModelViewForAppointmentStatusHome(user);
-            } catch (Exception ex) {
-                modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
             }
         }
         return modelAndView;

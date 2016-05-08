@@ -28,8 +28,9 @@
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
 
-<form:form action="/FlexibleUIConfig/business/addOrUpdate/" method="post">
+<form:form action="/FlexibleUIConfig/business/addOrUpdate/" method="post" cssClass="formBackground">
     <%--<form:form action="../addOrUpdate/" method="post">--%>
+    <%--TODO add validation here --%>
     <div>
         <div>
             <div class="label2">
