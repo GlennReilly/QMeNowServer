@@ -23,74 +23,92 @@
         businessName="${businessName}">
 </tags:header>
 
-<div class="pageTitle">${pageTitle}</div>
+<%--<div class="pageTitle">${pageTitle}</div>--%>
 <div class="pageMessage">${message}</div>
 <br/>
 
-<form:form action="../addOrUpdate/" method="post">
-  <div>
-      <div>
-          <div class="label2">
-              <c:if test="${command.appointment.id > 0}">
-                <span style="font-size: 20pt; font-weight: bold;"><c:out value="${command.appointment.appointmentTypePrefix}${command.appointment.id}" /></span>
-              </c:if>
-      </div>
-      <div class="label2">
-          <label>appointment date:</label><form:input path="appointment.strAppointmentDate" id="strAppointmentDate" />
-      </div>
+<form:form action="../addOrUpdate/" method="post" >
 
-      <div class="label2">
-          <label>appointment time:</label><form:input path="appointment.strAppointmentTime" id="strAppointmentTime" />
-      </div>
+    <fieldset class="userHomeFieldSet">
+        <legend>${pageTitle}</legend>
+        <div>
+            <div>
+                <div class="label2">
+                    <c:if test="${command.appointment.id > 0}">
+                        <span style="font-size: 20pt; font-weight: bold;"><c:out
+                                value="${command.appointment.appointmentTypePrefix}${command.appointment.id}"/></span>
+                    </c:if>
+                </div>
+                <div class="label2">
+                    <label>appointment date:</label><form:input path="appointment.strAppointmentDate"
+                                                                id="strAppointmentDate"/>
+                </div>
 
-        <div class="label2">
-          <label>status:</label>
-          <form:select path="appointment.status" id="ddlStatus" onchange="loadStatusColour(this.value);">
-              <form:option value="0" label="Please select" />
-              <form:options items="${command.appointmentStatusList}" itemValue="id" itemLabel="name" />
-          </form:select>
-            <div id="divStatusColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.statusHexCode}' />;"></div>
+                <div class="label2">
+                    <label>appointment time:</label><form:input path="appointment.strAppointmentTime"
+                                                                id="strAppointmentTime"/>
+                </div>
+
+                <div class="label2">
+                    <label>status:</label>
+                    <form:select path="appointment.status" id="ddlStatus" onchange="loadStatusColour(this.value);">
+                        <form:option value="0" label="Please select"/>
+                        <form:options items="${command.appointmentStatusList}" itemValue="id" itemLabel="name"/>
+                    </form:select>
+                    <div id="divStatusColour"
+                         style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
+                                 value='${command.appointment.statusHexCode}'/>;"></div>
+                </div>
+                <div class="label2" style="margin-bottom: 50px;">
+                    <label>complete:</label><form:checkbox path="appointment.isComplete"
+                                                           id="isCompleteCheck"></form:checkbox>
+                </div>
+
+
+                <div class="label2">
+                    <label>location:</label>
+                    <form:select path="appointment.locationId" id="ddlLocation"
+                                 onchange="loadLocationColour(this.value);">
+                        <form:option value="0" label="Please select"/>
+                        <form:options items="${command.activeLocations}" itemValue="id" itemLabel="name"/>
+                    </form:select>
+                    <div id="divLocationColour"
+                         style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
+                                 value='${command.appointment.locationHexCode}'/>;"></div>
+                </div>
+
+                <div class="label2">
+                    <label>appointment type:</label>
+                    <form:select path="appointment.appointmentTypeId" id="ddlAppointmentType"
+                                 onchange="loadAppointmentTypeColour(this.value);">
+                        <form:option value="0" label="Please select"/>
+                        <form:options items="${command.appointmentTypeList}" itemValue="id" itemLabel="name"/>
+                    </form:select>
+                    <div id="divAppointmentTypeColour"
+                         style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
+                                 value='${command.appointment.appTypeHexCode}'/>;"></div>
+                </div>
+
+                <div class="label2">
+                    <label>message to Customer:</label><form:input id="txtMessageToCustomer"
+                                                                   path="appointment.messageToCustomer"/>
+                </div>
+                <div>
+                    <c:choose>
+                        <c:when test="${empty command.appointment.id || command.appointment.id eq 0 }">
+                            <c:set var="buttonText" value="Save New Appointment"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="buttonText" value="Update Appointment"/>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="label2">
+                    <input type="submit" value="${buttonText}" id="btnUpdateOrAddAppointment">
+                </div>
+            </div>
         </div>
-        <div class="label2" style="margin-bottom: 50px;">
-              <label>complete:</label><form:checkbox path="appointment.isComplete" id="isCompleteCheck"></form:checkbox>
-        </div>
-
-
-        <div class="label2">
-          <label>location:</label>
-          <form:select path="appointment.locationId" id="ddlLocation" onchange="loadLocationColour(this.value);">
-            <form:option value="0" label="Please select" />
-            <form:options items="${command.activeLocations}" itemValue="id" itemLabel="name" />
-          </form:select>
-            <div id="divLocationColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.locationHexCode}' />;"></div>
-        </div>
-
-        <div class="label2">
-          <label>appointment type:</label>
-          <form:select path="appointment.appointmentTypeId" id="ddlAppointmentType" onchange="loadAppointmentTypeColour(this.value);">
-            <form:option value="0" label="Please select" />
-            <form:options items="${command.appointmentTypeList}" itemValue="id" itemLabel="name" />
-          </form:select>
-            <div id="divAppointmentTypeColour" style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out value='${command.appointment.appTypeHexCode}' />;"></div>
-        </div>
-
-        <div class="label2">
-          <label>message to Customer:</label><form:input id="txtMessageToCustomer" path="appointment.messageToCustomer" />
-        </div>
-<div>
-      <c:choose>
-          <c:when test="${empty command.appointment.id || command.appointment.id eq 0 }">
-            <c:set var="buttonText" value="Save New Appointment" />
-          </c:when>
-          <c:otherwise>
-              <c:set var="buttonText" value="Update Appointment" />
-          </c:otherwise>
-      </c:choose>
-</div>
-    <div class="label2">
-      <input type="submit" value="${buttonText}" id="btnUpdateOrAddAppointment">
-    </div>
-  </div>
+    </fieldset>
 
 
 

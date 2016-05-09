@@ -19,10 +19,14 @@
         businessName="${businessName}">
 </tags:header>
 
-<div class="pageTitle">${pageTitle}</div>
+<%--<div class="pageTitle">${pageTitle}</div>--%>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointment/get" method="get" cssClass="formBackground">
+<form:form action="/FlexibleUIConfig/appointment/get" method="get">
+<fieldset class="userHomeFieldSet">
+    <legend>${pageTitle}</legend>
+
     <%--TODO add validation here --%>
+
 
     <input type="hidden" id="customerId" value="${customerId}">
     <form:hidden path="customerId" />
@@ -48,7 +52,7 @@
         <div class="pageSubHeading" style="display: table;">
             Search Results:
         </div>
-        <table id="resultsTable">
+        <table id="resultsTable" style="width: 1350px;">
             <thead>
             <tr class="resultsTable">
                 <th>
@@ -130,7 +134,7 @@
         </table>
     <div  style="text-align: center; margin-top: 40px; color: ${headerColour}; font-weight:bold; font-size: 0.8em;" >These results auto-refresh every 30 seconds</div>
     </c:if>
-
+</fieldset>
 
 </form:form>
 <script src="<spring:url value='/resources/scripts/jquery-2.1.4.min.js'/>" ></script>

@@ -20,6 +20,14 @@ body{
     border: solid 1px darkgray;
 }
 
+.userHomeFieldSet{
+    background-color: whitesmoke;
+    width: 38vw;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    border: solid 1px darkgray;
+}
+
 .businessName{
     padding-top: 45px;
     font-size: 34pt;
@@ -30,13 +38,6 @@ body{
     float:left;
 }
 
-.userHomeFieldSet{
-    width: 38vw;
-    margin-bottom: 40px;
-    border: solid 1px darkgray;
-    background-color: whitesmoke;
-    border-radius: 10px;
-}
 
 .divCustomerDetails{
     background-color: #cfeab4;
@@ -196,5 +197,5 @@ th, td{
 }
 
 #resultsTable_wrapper{
-    width: 75%;
+    width: 85%;
 }

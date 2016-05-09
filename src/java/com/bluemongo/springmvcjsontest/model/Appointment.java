@@ -3,6 +3,8 @@ package com.bluemongo.springmvcjsontest.model;
 
 import com.bluemongo.springmvcjsontest.persistence.*;
 import org.apache.commons.lang3.*;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import utils.InputHelper;
 
 import java.text.ParseException;
@@ -12,7 +14,7 @@ import java.util.Date;
 /**
  * Created by glenn on 5/10/15.
  */
-public class Appointment {
+public class Appointment implements Validator{
     private int id;
     private String messageToCustomer;
     private String strAppointmentDate;
@@ -280,5 +282,35 @@ public class Appointment {
 
     public void setStrCheckInDateTime(String strCheckInDateTime) {
         this.strCheckInDateTime = strCheckInDateTime;
+    }
+
+    @Override
+    public boolean supports(Class<?> aClass) {
+        return Appointment.class.equals(aClass);
+    }
+
+    @Override
+    public void validate(Object o, Errors errors) {
+/*        private String strAppointmentDate;
+        private String strAppointmentTime;
+        private transient Date appointmentDate;
+
+        private int locationId;
+        private String locationName;
+
+        private int customerId;
+
+        private int appointmentTypeId;
+
+        private int status;
+        private String statusName;
+
+        private boolean isComplete;
+
+        private String appointmentTypeName;
+        private String appointmentTypePrefix;
+
+        private String strCheckInDateTime;*/
+
     }
 }
