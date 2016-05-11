@@ -134,7 +134,7 @@ public class AppointmentController{
                     addAppointmentFormHelper.setAppointmentStatusList(appointmentStatusList);
                     List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(businessId, true);
                     addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
-
+                    addAppointmentFormHelper.setAppointment(appointment);
                     modelAndView.addObject("addAppointmentFormHelper", addAppointmentFormHelper);
                 }
             } else { //no errors
