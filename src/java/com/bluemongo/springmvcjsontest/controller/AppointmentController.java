@@ -1,15 +1,19 @@
 package com.bluemongo.springmvcjsontest.controller;
 
-import com.bluemongo.springmvcjsontest.model.Appointment;
-import com.bluemongo.springmvcjsontest.model.User;
+import com.bluemongo.springmvcjsontest.model.*;
+import com.bluemongo.springmvcjsontest.persistence.AppointmentStatusStore;
 import com.bluemongo.springmvcjsontest.persistence.AppointmentStore;
+import com.bluemongo.springmvcjsontest.persistence.AppointmentTypeStore;
+import com.bluemongo.springmvcjsontest.persistence.CustomerStore;
 import com.bluemongo.springmvcjsontest.service.AddAppointmentFormHelper;
 import com.bluemongo.springmvcjsontest.service.GetAppointmentSearchResultsHelper;
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -91,38 +95,77 @@ public class AppointmentController{
     }
 
     @RequestMapping(value="/addOrUpdate", method = RequestMethod.POST)
-    public ModelAndView AddAppointment(@ModelAttribute AddAppointmentFormHelper addAppointmentFormHelper, HttpSession httpSession){
-        ModelAndView modelAndView;
+    public ModelAndView AddAppointment(@ModelAttribute AddAppointmentFormHelper addAppointmentFormHelper, BindingResult bindingResult, HttpSession httpSession){
+        ModelAndView modelAndView = new ModelAndView();
         String message;
         if (httpSession.getAttribute("User") != null) {
-            if (httpSession.getAttribute("businessId") != null && httpSession.getAttribute("customerId") != null) {
-                addAppointmentFormHelper.setBusinessId((int) httpSession.getAttribute("businessId"));
-                addAppointmentFormHelper.setCustomerId((int) httpSession.getAttribute("customerId"));
-            }
+            addAppointmentFormHelper.getAppointment().validate(addAppointmentFormHelper.getAppointment(), bindingResult);
 
-            if (httpSession.getAttribute("CurrentlyEditingAppointmentId") != null) {
-                int appointmentId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingAppointmentId").toString());
-                addAppointmentFormHelper.getAppointment().setId(appointmentId);
-                addAppointmentFormHelper.saveUpdate();
-                String RefNum = "";
-                if (httpSession.getAttribute("CurrentlyEditingRefNum") != null){
-                    RefNum =httpSession.getAttribute("CurrentlyEditingRefNum").toString();
+            if (bindingResult.hasErrors()) {
+                int businessId = 0;
+                int customerId = 0;
+                int appointmentId = 0;
+
+                if (httpSession.getAttribute("businessId") != null) {
+                    businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
+                } else {
+                    modelAndView = ModelViewHelper.GetLoginForm("Please log back in");
                 }
-                message = "Appointment " + RefNum + " updated successfully. ";
-                httpSession.setAttribute("CurrentlyEditingAppointmentId", null);
-                httpSession.setAttribute("CurrentlyEditingRefNum", null);
-            } else {
-                int newAppointmentId = addAppointmentFormHelper.saveNew();
-                message = "Appointment " + newAppointmentId + " saved successfully. ";
-            }
 
-            User user = null;
-            if (httpSession.getAttribute("User") != null) {
-                user = (User) httpSession.getAttribute("User");
+                if (httpSession.getAttribute("businessId") != null) {
+                    customerId = Integer.parseInt(httpSession.getAttribute("customerId").toString());
+                } else {
+                    modelAndView = ModelViewHelper.GetLoginForm("Please log back in");
+                }
+
+                if (httpSession.getAttribute("CurrentlyEditingAppointmentId") != null) {
+                    appointmentId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingAppointmentId").toString());
+                }
+
+                String RefNum = "";
+                if (httpSession.getAttribute("CurrentlyEditingRefNum") != null) {
+                    RefNum = httpSession.getAttribute("CurrentlyEditingRefNum").toString();
+                }
+                if (businessId > 0 && customerId > 0 && appointmentId > 0) {
+                    Appointment appointment = new AppointmentStore().getAppointment(appointmentId);
+                    modelAndView = ModelViewHelper.GetModelViewForEditAppointment(customerId, businessId, null, httpSession, appointment);
+
+                    List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(businessId, true);
+                    addAppointmentFormHelper.setAppointmentStatusList(appointmentStatusList);
+                    List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(businessId, true);
+                    addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
+
+                    modelAndView.addObject("addAppointmentFormHelper", addAppointmentFormHelper);
+                }
+            } else { //no errors
+
+                if (httpSession.getAttribute("businessId") != null && httpSession.getAttribute("customerId") != null) {
+                    addAppointmentFormHelper.setBusinessId((int) httpSession.getAttribute("businessId"));
+                    addAppointmentFormHelper.setCustomerId((int) httpSession.getAttribute("customerId"));
+                }
+
+                if (httpSession.getAttribute("CurrentlyEditingAppointmentId") != null) {
+                    int appointmentId = Integer.parseInt(httpSession.getAttribute("CurrentlyEditingAppointmentId").toString());
+                    addAppointmentFormHelper.getAppointment().setId(appointmentId);
+                    addAppointmentFormHelper.saveUpdate();
+                    String RefNum = "";
+                    if (httpSession.getAttribute("CurrentlyEditingRefNum") != null) {
+                        RefNum = httpSession.getAttribute("CurrentlyEditingRefNum").toString();
+                    }
+                    message = "Appointment " + RefNum + " updated successfully. ";
+                    httpSession.setAttribute("CurrentlyEditingAppointmentId", null);
+                    httpSession.setAttribute("CurrentlyEditingRefNum", null);
+                } else {
+                    int newAppointmentId = addAppointmentFormHelper.saveNew();
+                    message = "Appointment " + newAppointmentId + " saved successfully. ";
+                }
+
+                User user = null;
+                if (httpSession.getAttribute("User") != null) {
+                    user = (User) httpSession.getAttribute("User");
+                }
+                modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
             }
-            Appointment appointment = addAppointmentFormHelper.getAppointment();
-            //modelAndView = ModelViewHelper.GetModelViewForEditAppointment(appointment.getCustomerId(), user.getBusinessId(), message, httpSession, appointment);
-            modelAndView = ModelViewHelper.GetModelViewForUserHome(user, message);
         }
         else{
             modelAndView = ModelViewHelper.GetLoginForm("Please log in");
@@ -151,7 +194,7 @@ public class AppointmentController{
             }
         }
         else{
-            modelAndView = ModelViewHelper.GetLoginForm("Please log in");
+            modelAndView = ModelViewHelper.GetLoginForm("Please log back in");
         }
 
         return modelAndView;

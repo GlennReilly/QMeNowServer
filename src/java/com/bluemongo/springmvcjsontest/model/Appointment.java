@@ -4,9 +4,11 @@ package com.bluemongo.springmvcjsontest.model;
 import com.bluemongo.springmvcjsontest.persistence.*;
 import org.apache.commons.lang3.*;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import utils.InputHelper;
 
+import javax.validation.constraints.Min;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +23,7 @@ public class Appointment implements Validator{
     private String strAppointmentTime;
     private transient Date appointmentDate;
 
+    @Min(value = 1, message = "Please select a location")
     private int locationId;
     private String locationName;
 
@@ -291,24 +294,15 @@ public class Appointment implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
-/*        private String strAppointmentDate;
-        private String strAppointmentTime;
-        private transient Date appointmentDate;
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "appointment.strAppointmentDate", "", "field required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "appointment.strAppointmentTime", "", "field required");
+/*
 
         private int locationId;
-        private String locationName;
-
-        private int customerId;
 
         private int appointmentTypeId;
 
         private int status;
-        private String statusName;
-
-        private boolean isComplete;
-
-        private String appointmentTypeName;
-        private String appointmentTypePrefix;
 
         private String strCheckInDateTime;*/
 

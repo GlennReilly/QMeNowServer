@@ -27,37 +27,40 @@
 <div class="pageMessage">${message}</div>
 <br/>
 
-<form:form action="../addOrUpdate/" method="post" >
+<form:form modelAttribute="addAppointmentFormHelper" action="../addOrUpdate/" method="post" >
 
     <fieldset class="userHomeFieldSet">
         <legend>${pageTitle}</legend>
         <div>
             <div>
                 <div class="label2">
-                    <c:if test="${command.appointment.id > 0}">
+                    <c:if test="${addAppointmentFormHelper.appointment.id > 0}">
                         <span style="font-size: 20pt; font-weight: bold;"><c:out
-                                value="${command.appointment.appointmentTypePrefix}${command.appointment.id}"/></span>
+                                value="${addAppointmentFormHelper.appointment.appointmentTypePrefix}${addAppointmentFormHelper.appointment.id}"/></span>
                     </c:if>
                 </div>
                 <div class="label2">
-                    <label>appointment date:</label><form:input path="appointment.strAppointmentDate"
-                                                                id="strAppointmentDate"/>
+                    <label>appointment date:</label>
+                    <form:input path="appointment.strAppointmentDate" id="strAppointmentDate"/>
+                    <form:errors path="appointment.strAppointmentDate" cssClass="error"/>
                 </div>
 
                 <div class="label2">
-                    <label>appointment time:</label><form:input path="appointment.strAppointmentTime"
-                                                                id="strAppointmentTime"/>
+                    <label>appointment time:</label>
+                    <form:input path="appointment.strAppointmentTime" id="strAppointmentTime"/>
+                    <form:errors path="appointment.strAppointmentTime" cssClass="error"/>
                 </div>
 
                 <div class="label2">
                     <label>status:</label>
                     <form:select path="appointment.status" id="ddlStatus" onchange="loadStatusColour(this.value);">
                         <form:option value="0" label="Please select"/>
-                        <form:options items="${command.appointmentStatusList}" itemValue="id" itemLabel="name"/>
+                        <form:options items="${addAppointmentFormHelper.appointmentStatusList}" itemValue="id" itemLabel="name"/>
                     </form:select>
                     <div id="divStatusColour"
                          style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
-                                 value='${command.appointment.statusHexCode}'/>;"></div>
+                                 value='${addAppointmentFormHelper.appointment.statusHexCode}'/>;"></div>
+                    <form:errors path="appointment.status" cssClass="error"/>
                 </div>
                 <div class="label2" style="margin-bottom: 50px;">
                     <label>complete:</label><form:checkbox path="appointment.isComplete"
@@ -70,11 +73,12 @@
                     <form:select path="appointment.locationId" id="ddlLocation"
                                  onchange="loadLocationColour(this.value);">
                         <form:option value="0" label="Please select"/>
-                        <form:options items="${command.activeLocations}" itemValue="id" itemLabel="name"/>
+                        <form:options items="${addAppointmentFormHelper.activeLocations}" itemValue="id" itemLabel="name"/>
                     </form:select>
                     <div id="divLocationColour"
                          style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
-                                 value='${command.appointment.locationHexCode}'/>;"></div>
+                                 value='${addAppointmentFormHelper.appointment.locationHexCode}'/>;"></div>
+                    <form:errors path="appointment.locationId" cssClass="error"/>
                 </div>
 
                 <div class="label2">
@@ -82,11 +86,12 @@
                     <form:select path="appointment.appointmentTypeId" id="ddlAppointmentType"
                                  onchange="loadAppointmentTypeColour(this.value);">
                         <form:option value="0" label="Please select"/>
-                        <form:options items="${command.appointmentTypeList}" itemValue="id" itemLabel="name"/>
+                        <form:options items="${addAppointmentFormHelper.appointmentTypeList}" itemValue="id" itemLabel="name"/>
                     </form:select>
                     <div id="divAppointmentTypeColour"
                          style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
-                                 value='${command.appointment.appTypeHexCode}'/>;"></div>
+                                 value='${addAppointmentFormHelper.appointment.appTypeHexCode}'/>;"></div>
+                    <form:errors path="appointment.appointmentTypeId" cssClass="error"/>
                 </div>
 
                 <div class="label2">
@@ -95,7 +100,7 @@
                 </div>
                 <div>
                     <c:choose>
-                        <c:when test="${empty command.appointment.id || command.appointment.id eq 0 }">
+                        <c:when test="${empty addAppointmentFormHelper.appointment.id || addAppointmentFormHelper.appointment.id eq 0 }">
                             <c:set var="buttonText" value="Save New Appointment"/>
                         </c:when>
                         <c:otherwise>
@@ -149,7 +154,7 @@
 
 <script>
     var StatusBackgroundColourMap = {};
-    <c:forEach items="${command.appointmentStatusList}" var="status" varStatus="loop">
+    <c:forEach items="${addAppointmentFormHelper.appointmentStatusList}" var="status" varStatus="loop">
         StatusBackgroundColourMap['${status.id}'] = '<c:out value="${status.backgroundColourHexCode}" />';
     </c:forEach>
 
@@ -161,7 +166,7 @@
 
 
     var LocationBackgroundColourMap = {};
-    <c:forEach items="${command.activeLocations}" var="location" varStatus="loop">
+    <c:forEach items="${addAppointmentFormHelper.activeLocations}" var="location" varStatus="loop">
     LocationBackgroundColourMap['${location.id}'] = '<c:out value="${location.backgroundColourHexCode}" />';
     </c:forEach>
 
@@ -173,7 +178,7 @@
 
 
     var AppointmentTypeBackgroundColourMap = {};
-    <c:forEach items="${command.appointmentTypeList}" var="appointmentType" varStatus="loop">
+    <c:forEach items="${addAppointmentFormHelper.appointmentTypeList}" var="appointmentType" varStatus="loop">
     AppointmentTypeBackgroundColourMap['${appointmentType.id}'] = '<c:out value="${appointmentType.backgroundColourHexCode}" />';
     </c:forEach>
 
