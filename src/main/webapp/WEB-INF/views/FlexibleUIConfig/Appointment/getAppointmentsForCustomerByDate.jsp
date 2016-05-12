@@ -55,16 +55,16 @@
         <table id="resultsTable" style="width: 1350px;">
             <thead>
             <tr class="resultsTable">
-                <th>
+                <th style="width: 100px;">
                     Appointment Date
                 </th>
-                <th>
+                <th style="width: 100px;">
                     Ref#
                 </th>
-                <th>
+                <th style="width: 100px;">
                     Status
                 </th>
-                <th>
+                <th style="width: 100px;">
                     Location
                 </th>
                 <th>
@@ -80,7 +80,10 @@
                     Message to customer
                 </th>
                 <th>
-                    is Complete?
+                    Complete?
+                </th>
+                <th style="width: 100px;">
+                    Check-in Date
                 </th>
                 <th>
                     View
@@ -125,6 +128,9 @@
                     <td style="text-align: center;">
                         <c:if test="${appointmentResult.appointment.isComplete == true}"> Yes </c:if>
                         <c:if test="${appointmentResult.appointment.isComplete == false}"> No </c:if>
+                    </td>
+                    <td style="text-align: right;">
+                        <fmt:formatDate pattern="E d MMM h:mma" value="${appointmentResult.appointment.checkInDate}" />
                     </td>
                     <td style="text-align: center;">
                         <a href="<spring:url value='/FlexibleUIConfig/appointment/get/${appointmentResult.appointment.id}' />" >view</a>

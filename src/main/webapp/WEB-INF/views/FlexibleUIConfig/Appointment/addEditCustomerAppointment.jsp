@@ -61,6 +61,7 @@
                          style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
                                  value='${addAppointmentFormHelper.appointment.statusHexCode}'/>;"></div>
                     <form:errors path="appointment.status" cssClass="error"/>
+                    <span class="jserror" style="color:red; display: none;">required field</span>
                 </div>
 
                 <div class="label2" style="margin-bottom: 50px;">
@@ -80,6 +81,7 @@
                          style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
                                  value='${addAppointmentFormHelper.appointment.locationHexCode}'/>;"></div>
                     <form:errors path="appointment.locationId" cssClass="error"/>
+                    <span class="jserror" style="color:red; display: none;">required field</span>
                 </div>
 
                 <div class="label2">
@@ -93,13 +95,14 @@
                          style="height:20px; width: 20px; float:right; margin-left: 5px; background-color: <c:out
                                  value='${addAppointmentFormHelper.appointment.appTypeHexCode}'/>;"></div>
                     <form:errors path="appointment.appointmentTypeId" cssClass="error"/>
+                    <span class="jserror" style="color:red; display: none;">required field</span>
                 </div>
 
                 <div class="label2">
                     <label>message to Customer:</label><form:input id="txtMessageToCustomer"
                                                                    path="appointment.messageToCustomer"/>
                 </div>
-                <div>
+<%--                <div>
                     <c:choose>
                         <c:when test="${empty addAppointmentFormHelper.appointment.id || addAppointmentFormHelper.appointment.id eq 0 }">
                             <c:set var="buttonText" value="Save New Appointment"/>
@@ -108,8 +111,9 @@
                             <c:set var="buttonText" value="Update Appointment"/>
                         </c:otherwise>
                     </c:choose>
-                </div>
+                </div>--%>
                 <div class="label2">
+                    <c:set var="buttonText" value="Save Appointment"/>
                     <input type="submit" value="${buttonText}" id="btnUpdateOrAddAppointment">
                 </div>
             </div>
@@ -166,12 +170,16 @@
         }
 
         if(statusId == 0){
-            //alert("show error message");
-            $('#divStatusColour').next(".error").css("display", "inline-block");
+            if ($('#divStatusColour').next(".error").is(":visible")) {
+                $('#divStatusColour').next(".error").css("display", "inline-block");
+            }
+            else{
+                    $('#divStatusColour').next(".jserror").css("display", "inline-block");
+                }
         }
         else{
-            //alert("hide error message");
             $('#divStatusColour').next(".error").css("display", "none");
+            $('#divStatusColour').next(".jserror").css("display", "none");
         }
     }
 
@@ -190,12 +198,17 @@
         }
 
         if(locationId == 0){
-            //alert("show error message");
-            $('#divLocationColour').next(".error").css("display", "inline-block");
+            if ($('#divLocationColour').next(".error").is(":visible")) {
+                $('#divLocationColour').next(".error").css("display", "inline-block");
+            }
+            else{
+                $('#divLocationColour').next(".jserror").css("display", "inline-block");
+            }
         }
         else{
             //alert("hide error message");
             $('#divLocationColour').next(".error").css("display", "none");
+            $('#divLocationColour').next(".jserror").css("display", "none");
         }
     }
 
@@ -213,13 +226,18 @@
             $('#divAppointmentTypeColour').css("background-color","");
         }
 
-        if(appointmentTypeId == 0){
-            //alert("show error message");
-            $('#divAppointmentTypeColour').next(".error").css("display", "inline-block");
+        if(appointmentTypeId == 0) {
+            if ($('#divAppointmentTypeColour').next(".error").is(":visible"))
+            {
+                $('#divAppointmentTypeColour').next(".error").css("display", "inline-block");
+            }
+            else{
+                $('#divAppointmentTypeColour').next(".jserror").css("display", "inline-block");
+            }
         }
         else{
-            //alert("hide error message");
             $('#divAppointmentTypeColour').next(".error").css("display", "none");
+            $('#divAppointmentTypeColour').next(".jserror").css("display", "none");
         }
     }
 
