@@ -27,7 +27,7 @@
 <div class="pageMessage">${message}</div>
 <br/>
 
-<form:form modelAttribute="addAppointmentFormHelper" action="../addOrUpdate/" method="post" >
+<form:form modelAttribute="addAppointmentFormHelper" action="/FlexibleUIConfig/appointment/addOrUpdate/" method="post" >
 
     <fieldset class="userHomeFieldSet">
         <legend>${pageTitle}</legend>
@@ -62,6 +62,7 @@
                                  value='${addAppointmentFormHelper.appointment.statusHexCode}'/>;"></div>
                     <form:errors path="appointment.status" cssClass="error"/>
                 </div>
+
                 <div class="label2" style="margin-bottom: 50px;">
                     <label>complete:</label><form:checkbox path="appointment.isComplete"
                                                            id="isCompleteCheck"></form:checkbox>
@@ -130,7 +131,6 @@
     });
     function doCompleteCheck() {
         if ($("#isCompleteCheck").is(":checked")) {
-            //$("#btnUpdateOrAddAppointment").prop("disabled", true);
             $("#strAppointmentDate").prop("disabled", true);
             $("#strAppointmentTime").prop("disabled", true);
             $("#ddlStatus").prop("disabled", true);
@@ -138,7 +138,6 @@
             $("#ddlAppointmentType").prop("disabled", true);
             $("#txtMessageToCustomer").prop("disabled", true);
         } else {
-            //$("#btnUpdateOrAddAppointment").prop("disabled", false);
             $("#strAppointmentDate").prop("disabled", false);
             $("#strAppointmentTime").prop("disabled", false);
             $("#ddlStatus").prop("disabled", false);
@@ -162,6 +161,18 @@
         if(statusId in StatusBackgroundColourMap){
             $('#divStatusColour').css("background-color",StatusBackgroundColourMap[statusId]);
         }
+        else{
+            $('#divStatusColour').css("background-color","");
+        }
+
+        if(statusId == 0){
+            //alert("show error message");
+            $('#divStatusColour').next(".error").css("display", "inline-block");
+        }
+        else{
+            //alert("hide error message");
+            $('#divStatusColour').next(".error").css("display", "none");
+        }
     }
 
 
@@ -174,6 +185,18 @@
         if(locationId in LocationBackgroundColourMap){
             $('#divLocationColour').css("background-color",LocationBackgroundColourMap[locationId]);
         }
+        else{
+            $('#divLocationColour').css("background-color","");
+        }
+
+        if(locationId == 0){
+            //alert("show error message");
+            $('#divLocationColour').next(".error").css("display", "inline-block");
+        }
+        else{
+            //alert("hide error message");
+            $('#divLocationColour').next(".error").css("display", "none");
+        }
     }
 
 
@@ -185,6 +208,18 @@
     function loadAppointmentTypeColour(appointmentTypeId){
         if(appointmentTypeId in AppointmentTypeBackgroundColourMap){
             $('#divAppointmentTypeColour').css("background-color",AppointmentTypeBackgroundColourMap[appointmentTypeId]);
+        }
+        else{
+            $('#divAppointmentTypeColour').css("background-color","");
+        }
+
+        if(appointmentTypeId == 0){
+            //alert("show error message");
+            $('#divAppointmentTypeColour').next(".error").css("display", "inline-block");
+        }
+        else{
+            //alert("hide error message");
+            $('#divAppointmentTypeColour').next(".error").css("display", "none");
         }
     }
 

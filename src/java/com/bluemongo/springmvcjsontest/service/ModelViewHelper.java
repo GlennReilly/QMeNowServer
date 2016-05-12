@@ -102,7 +102,7 @@ public class ModelViewHelper extends GenericController {
         List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(businessId, true);
         addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
         populateHeaderValues(businessId, modelAndView);
-        modelAndView.addObject("command", addAppointmentFormHelper);
+        modelAndView.addObject("addAppointmentFormHelper", addAppointmentFormHelper);
         modelAndView.addObject("pageTitle", "Add Appointment for " + customer.getName());
         message = (message == null) ? "" :  message;
         modelAndView.addObject("message", message);

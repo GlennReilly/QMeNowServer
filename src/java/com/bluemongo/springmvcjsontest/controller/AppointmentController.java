@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,10 +96,11 @@ public class AppointmentController{
     }
 
     @RequestMapping(value="/addOrUpdate", method = RequestMethod.POST)
-    public ModelAndView AddAppointment(@ModelAttribute AddAppointmentFormHelper addAppointmentFormHelper, BindingResult bindingResult, HttpSession httpSession){
+    public ModelAndView AddAppointment(@ModelAttribute("addAppointmentFormHelper") @Valid AddAppointmentFormHelper addAppointmentFormHelper, BindingResult bindingResult, HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
         String message;
         if (httpSession.getAttribute("User") != null) {
+            User user = (User)httpSession.getAttribute("User");
             addAppointmentFormHelper.getAppointment().validate(addAppointmentFormHelper.getAppointment(), bindingResult);
 
             if (bindingResult.hasErrors()) {
@@ -112,7 +114,7 @@ public class AppointmentController{
                     modelAndView = ModelViewHelper.GetLoginForm("Please log back in");
                 }
 
-                if (httpSession.getAttribute("businessId") != null) {
+                if (httpSession.getAttribute("customerId") != null) {
                     customerId = Integer.parseInt(httpSession.getAttribute("customerId").toString());
                 } else {
                     modelAndView = ModelViewHelper.GetLoginForm("Please log back in");
@@ -126,15 +128,26 @@ public class AppointmentController{
                 if (httpSession.getAttribute("CurrentlyEditingRefNum") != null) {
                     RefNum = httpSession.getAttribute("CurrentlyEditingRefNum").toString();
                 }
-                if (businessId > 0 && customerId > 0 && appointmentId > 0) {
-                    Appointment appointment = new AppointmentStore().getAppointment(appointmentId);
-                    modelAndView = ModelViewHelper.GetModelViewForEditAppointment(customerId, businessId, null, httpSession, appointment);
+                if (businessId > 0 && customerId > 0 ) {
+                    Appointment appointment = null;
+
 
                     List<AppointmentStatus> appointmentStatusList = new AppointmentStatusStore().getAll(businessId, true);
                     addAppointmentFormHelper.setAppointmentStatusList(appointmentStatusList);
                     List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(businessId, true);
                     addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
-                    addAppointmentFormHelper.setAppointment(appointment);
+
+/*                    if (appointmentId > 0) {
+                        appointment = new AppointmentStore().getAppointment(appointmentId);
+                        modelAndView = ModelViewHelper.GetModelViewForEditAppointment(customerId, businessId, null, httpSession, appointment);
+                        addAppointmentFormHelper.setAppointment(appointment);
+                    }else{*/
+                        modelAndView = ModelViewHelper.GetModelViewForAddAppointment(customerId, businessId, null, httpSession);
+                    //}
+
+                    addAppointmentFormHelper.setBusinessId(businessId);
+                    addAppointmentFormHelper.setCustomerId(customerId);
+                    addAppointmentFormHelper.setUserId(user.getId());
                     modelAndView.addObject("addAppointmentFormHelper", addAppointmentFormHelper);
                 }
             } else { //no errors
@@ -160,7 +173,7 @@ public class AppointmentController{
                     message = "Appointment " + newAppointmentId + " saved successfully. ";
                 }
 
-                User user = null;
+                user = null;
                 if (httpSession.getAttribute("User") != null) {
                     user = (User) httpSession.getAttribute("User");
                 }

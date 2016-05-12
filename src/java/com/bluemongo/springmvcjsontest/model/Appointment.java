@@ -296,15 +296,18 @@ public class Appointment implements Validator{
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "appointment.strAppointmentDate", "", "field required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "appointment.strAppointmentTime", "", "field required");
-/*
+        Appointment appointment = (Appointment) o;
+        if (appointment.locationId < 1){
+            errors.rejectValue("appointment.locationId",null, "field required");
+        }
 
-        private int locationId;
+        if (appointment.status < 1){
+            errors.rejectValue("appointment.status",null, "field required");
+        }
 
-        private int appointmentTypeId;
-
-        private int status;
-
-        private String strCheckInDateTime;*/
+        if (appointment.appointmentTypeId < 1){
+            errors.rejectValue("appointment.appointmentTypeId",null, "field required");
+        }
 
     }
 }

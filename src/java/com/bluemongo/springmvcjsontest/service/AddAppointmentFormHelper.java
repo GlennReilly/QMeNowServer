@@ -46,6 +46,7 @@ public class AddAppointmentFormHelper {
 
     public void setBusinessId(int businessId) {
         this.businessId = businessId;
+        getActiveLocations();
     }
 
     public int getUserId() {
