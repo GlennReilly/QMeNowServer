@@ -6,8 +6,9 @@ package com.bluemongo.springmvcjsontest.model;
 public class BusinessQRCodePayload {
     private BusinessDTO businessDTO = new BusinessDTO();
     private String dateTimeString;
-
+    //private String serverAndApplicationURL;
     private String Content;
+
 
 
     public String getDateTimeString() {
@@ -69,4 +70,12 @@ public class BusinessQRCodePayload {
     public void setLogoFileName(String logoFileName) {
         this.businessDTO.setLogoFileName(logoFileName);
     }
+
+/*    public String getServerURL() {
+        return serverAndApplicationURL;
+    }
+
+    public void setServerURL(String serverAndApplicationURL) {
+        this.serverAndApplicationURL = serverAndApplicationURL;
+    }*/
 }

@@ -47,7 +47,7 @@ public class AppointmentTypeController {
                 modelAndView = new ModelViewHelper().getModelViewForAppointmentTypeHome(user);
             }
             catch (Exception ex){
-                modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession,ex.getMessage());
             }
         }
         return modelAndView;
@@ -103,7 +103,7 @@ public class AppointmentTypeController {
                 modelAndView = new ModelViewHelper().getModelViewForAppointmentTypeHome(user);
             }
             catch (Exception ex){
-                modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession,ex.getMessage());
             }
         }
 

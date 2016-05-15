@@ -36,7 +36,7 @@ public class AppointmentStatusController {
             try {
                 modelAndView = new ModelViewHelper().getModelViewForAppointmentStatusHome(user);
             } catch (Exception ex) {
-                modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession, ex.getMessage());
             }
         }
         return modelAndView;
@@ -74,7 +74,7 @@ public class AppointmentStatusController {
                     }
                     modelAndView = new ModelViewHelper().getModelViewForAppointmentStatusHome(user);
                 } catch (Exception ex) {
-                    modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
+                    modelAndView = ModelViewHelper.GetModelViewForError(httpSession,ex.getMessage());
                 }
             }
         }
@@ -96,7 +96,7 @@ public class AppointmentStatusController {
             modelAndView = ModelViewHelper.GetModelViewForAddEditAppointmentStatus(httpSession, appointmentStatusId);
             httpSession.setAttribute("currentlyEditingAppointmentStatusId", appointmentStatusId);
         } catch (Exception ex) {
-            modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
+            modelAndView = ModelViewHelper.GetModelViewForError(httpSession, ex.getMessage());
         }
     }
 

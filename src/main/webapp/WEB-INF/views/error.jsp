@@ -10,9 +10,9 @@
 <html>
 <head>
     <configName></configName>
-  <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
+  <%--<link rel="stylesheet" type="text/css" href="<spring:url value='../resources/css/style1.css'/>" />--%>
 </head>
-<body style="background-color: ${backgroundColourHexCode}">
+<body style="background-color: ${backgroundColourHexCode}; font-family: Verdana, sans-serif;">
 <tags:menu></tags:menu>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>

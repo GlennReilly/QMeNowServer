@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class BusinessStore {
     private static final String SELECT_BUSINESS_FIELDS = "select id, businessName, phoneNumber, emailAddress, physicalAddress, " +
-            "contactName, logoName, logoFilePath, defaultLocationId, buttonColourHexCode, headerColourHexCode, backgroundColourHexCode, footerColourHexCode from business";
+            "contactName, logoName, logoFilePath, defaultLocationId, buttonColourHexCode," +
+            " headerColourHexCode, backgroundColourHexCode, footerColourHexCode, serverBaseURL, applicationAPIURL from business";
     private DBHelper dbHelper = new DBHelper();
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -24,7 +25,7 @@ public class BusinessStore {
     public int saveNew(Business business){
         int lastInsertedId = -1;
         String query = "insert into business(businessName, phoneNumber, emailAddress, physicalAddress, contactName, defaultLocationId, " +
-                "buttonColourHexCode, headerColourHexCode, backgroundColourHexCode, footerColourHexCode) values (?,?,?,?,?,?,?,?,?,?)";
+                "buttonColourHexCode, headerColourHexCode, backgroundColourHexCode, footerColourHexCode, serverBaseURL, applicationAPIURL) values (?,?,?,?,?,?,?,?,?,?,?,?)";
         try(Connection connection = dbHelper.getConnection()) {
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, business.getBusinessName());
@@ -37,6 +38,8 @@ public class BusinessStore {
             preparedStatement.setString(8, business.getHeaderColourHexCode());
             preparedStatement.setString(9, business.getBackgroundColourHexCode());
             preparedStatement.setString(10, business.getFooterColourHexCode());
+            preparedStatement.setString(11, business.getServerBaseURL());
+            preparedStatement.setString(12, business.getApplicationAPIURL());
             preparedStatement.executeUpdate();
             logger.info("new Customer inserted.");
 
@@ -55,7 +58,8 @@ public class BusinessStore {
     public int saveUpdate(Business business) {
         int lastInsertedId = -1;
         String query = "update business set businessName=?, phoneNumber=?, emailAddress=?, physicalAddress=?, " +
-                "contactName=?, defaultLocationId=?, buttonColourHexCode=?, headerColourHexCode=?, backgroundColourHexCode=?, footerColourHexCode=? where id = ?";
+                "contactName=?, defaultLocationId=?, buttonColourHexCode=?, headerColourHexCode=?," +
+                " backgroundColourHexCode=?, footerColourHexCode=?, serverBaseURL=?, applicationAPIURL=?  where id = ?";
         try(Connection connection = dbHelper.getConnection()){
             preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, business.getBusinessName());
@@ -68,7 +72,9 @@ public class BusinessStore {
             preparedStatement.setString(8, business.getHeaderColourHexCode());
             preparedStatement.setString(9, business.getBackgroundColourHexCode());
             preparedStatement.setString(10, business.getFooterColourHexCode());
-            preparedStatement.setInt(11, business.getId());
+            preparedStatement.setString(11, business.getServerBaseURL());
+            preparedStatement.setString(12, business.getApplicationAPIURL());
+            preparedStatement.setInt(13, business.getId());
             preparedStatement.executeUpdate();
 
         } catch (ClassNotFoundException e) {
@@ -113,7 +119,8 @@ public class BusinessStore {
         business.setHeaderColourHexCode(resultSet.getString("headerColourHexCode"));
         business.setBackgroundColourHexCode(resultSet.getString("backgroundColourHexCode"));
         business.setFooterColourHexCode(resultSet.getString("footerColourHexCode"));
-        //business.setLogoFilePath(resultSet.getString("logoFilePath"));
+        business.setServerBaseURL(resultSet.getString("serverBaseURL"));
+        business.setApplicationAPIURL(resultSet.getString("applicationAPIURL"));
         return business;
     }
 
@@ -137,6 +144,12 @@ public class BusinessStore {
         return business;
 
     }
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     public List<ReconfigurableAppConfig> getConfigs(int customerId){
         List<ReconfigurableAppConfig> reconfigurableAppConfigList = new ArrayList<>();

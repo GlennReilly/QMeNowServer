@@ -22,7 +22,8 @@ public class Business {
     private String headerColourHexCode;
     private String backgroundColourHexCode;
     private String footerColourHexCode;
-
+    private String serverBaseURL;
+    private String applicationAPIURL;
 
 
     public int saveNew() {
@@ -156,5 +157,21 @@ public class Business {
 
     public void setFooterColourHexCode(String footerColourHexCode) {
         this.footerColourHexCode = footerColourHexCode;
+    }
+
+    public void setServerBaseURL(String serverBaseURL) {
+        this.serverBaseURL = serverBaseURL;
+    }
+
+    public String getServerBaseURL() {
+        return serverBaseURL;
+    }
+
+    public String getApplicationAPIURL() {
+        return applicationAPIURL;
+    }
+
+    public void setApplicationAPIURL(String applicationAPIURL) {
+        this.applicationAPIURL = applicationAPIURL;
     }
 }

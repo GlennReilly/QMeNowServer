@@ -68,7 +68,7 @@ public class AppointmentController{
         if(appointmentId > 0){
             modelAndView = ShowAppointmentDetails(httpSession, appointmentId);
         }else{
-            modelAndView = ModelViewHelper.GetModelViewForError("Sorry, that appears to be an invalid appointment Id.");
+            modelAndView = ModelViewHelper.GetModelViewForError(httpSession, "Sorry, that appears to be an invalid appointment Id.");
         }
 
         return modelAndView;
@@ -203,7 +203,7 @@ public class AppointmentController{
                 httpSession.setAttribute("CurrentlyEditingAppointmentId", appointmentId);
                 modelAndView = ModelViewHelper.GetModelViewForEditAppointment(appointment.getCustomerId(), user.getBusinessId(), null, httpSession, appointment);
             } else {
-                modelAndView = ModelViewHelper.GetModelViewForError("Sorry, that appears to be an invalid appointment Id.");
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession, "Sorry, that appears to be an invalid appointment Id.");
             }
         }
         else{

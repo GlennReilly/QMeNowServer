@@ -10,6 +10,7 @@ public class BusinessDTO {
     private String headerColourHexCode;
     private String backgroundColourHexCode;
     private String logoFileName;
+    private String serverURL;
 
 
     public int getId() {
@@ -58,5 +59,13 @@ public class BusinessDTO {
 
     public void setLogoFileName(String logoFileName) {
         this.logoFileName = logoFileName;
+    }
+
+    public String getServerURL() {
+        return serverURL;
+    }
+
+    public void setServerURL(String serverURL) {
+        this.serverURL = serverURL;
     }
 }

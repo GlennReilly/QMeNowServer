@@ -22,20 +22,27 @@
     <div>
         <div>
             <div class="label2">
-                <label>business name:</label><c:out value="${command.businessName}"/>
+                <label>business name:</label><span style="margin-left:10px; font-weight:bold;"><c:out value="${command.businessName}" /></span>
             </div>
             <div class="label2">
-                <label>contact name:</label><c:out value="${command.contactName}"/>
+                <label>contact name:</label><span style="margin-left:10px; font-weight:bold;"><c:out value="${command.contactName}"/></span>
             </div>
             <div class="label2">
-                <label>phone number:</label><c:out value="${command.phoneNumber}"/>
+                <label>phone number:</label><span style="margin-left:10px; font-weight:bold;"><c:out value="${command.phoneNumber}"/></span>
             </div>
             <div class="label2">
-                <label>email address:</label><c:out value="${command.emailAddress}"/>
+                <label>email address:</label><span style="margin-left:10px; font-weight:bold;"><c:out value="${command.emailAddress}"/></span>
             </div>
             <div class="label2">
-                <label>street address:</label><c:out value="${command.physicalAddress}"/>
+                <label>street address:</label><span style="margin-left:10px; font-weight:bold;"><c:out value="${command.physicalAddress}"/></span>
             </div>
+            <div class="label2">
+                <label>BaseURL:</label><span style="margin-left:10px; font-weight:bold;"><c:out value="${command.serverBaseURL}"/></span>
+            </div>
+            <div class="label2">
+                <label>Application URL:</label><span style="margin-left:10px; font-weight:bold;"><c:out value="${command.applicationAPIURL}"/></span>
+            </div>
+
         </div>
         <div class="label2">
                 <a href="<spring:url value='/FlexibleUIConfig/business/barcode/'/>">show barcode</a>

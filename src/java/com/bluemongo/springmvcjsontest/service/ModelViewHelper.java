@@ -4,7 +4,9 @@ import com.bluemongo.springmvcjsontest.controller.GenericController;
 import com.bluemongo.springmvcjsontest.model.*;
 import com.bluemongo.springmvcjsontest.persistence.*;
 import org.springframework.web.servlet.ModelAndView;
+import utils.InputHelper;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,10 +34,19 @@ public class ModelViewHelper extends GenericController {
         return  modelAndView;
     }
 
-    public static ModelAndView ProcessLogin(UserCredentials userCredentials,HttpSession httpSession) {
+    public static ModelAndView ProcessLogin(UserCredentials userCredentials,HttpSession httpSession, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         User validUser = User.get(userCredentials);
         if (validUser != null) {
+            String serverURL = request.getRequestURL().toString() + "?" + request.getQueryString();
+            // eg http://localhost:8080/login/?null -- http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
+            String baseURL = InputHelper.getBaseURL(serverURL);
+            Business business = new BusinessStore().get(validUser.getBusinessId());
+            if (business != null){
+                business.setServerBaseURL(baseURL);
+                business.saveUpdate();
+            }
+
             httpSession.setAttribute("User", validUser);
             if (validUser.getUserType().equals(User.UserType.USER)) {
                 modelAndView = ModelViewHelper.GetModelViewForUserHome(validUser, null);
@@ -237,8 +248,10 @@ public class ModelViewHelper extends GenericController {
         return  modelAndView;
     }
 
-    public static ModelAndView GetModelViewForError(String message) {
+    public static ModelAndView GetModelViewForError(HttpSession httpSession, String message) {
         ModelAndView modelAndView = new ModelAndView();
+        User user = (User) httpSession.getAttribute("User");
+        populateHeaderValues(user.getBusinessId(), modelAndView);
         modelAndView.addObject("pageTitle", "Oops..");
         modelAndView.addObject("message", message);
         modelAndView.setViewName("error");

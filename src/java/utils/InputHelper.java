@@ -56,4 +56,14 @@ public class InputHelper {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
     }
+
+    public static String getBaseURL(String serverURL) {
+        // http://localhost:8080/login/?null -- http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
+
+        String baseURL = "";
+        String[] serverURLParts = serverURL.split("/");
+        baseURL = serverURLParts[0] + "//" + serverURLParts[2] + "/";
+
+        return baseURL;
+    }
 }

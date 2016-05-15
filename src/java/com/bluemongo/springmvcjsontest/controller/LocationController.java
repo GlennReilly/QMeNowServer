@@ -35,7 +35,7 @@ public class LocationController {
                 modelAndView = new ModelViewHelper().getModelViewForLocationsHome(user);
             }
             catch (Exception ex){
-                modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession,ex.getMessage());
             }
         }
         return modelAndView;
@@ -109,7 +109,7 @@ public class LocationController {
                 httpSession.setAttribute("CurrentlyEditingLocationId", locationId);
             }
             catch (Exception ex){
-                modelAndView = ModelViewHelper.GetModelViewForError(ex.getMessage());
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession,ex.getMessage());
             }
         }
         return modelAndView;

@@ -57,9 +57,14 @@
             <div class="label2">
                 <label>Background colour hex code:</label><form:input type="color" path="backgroundColourHexCode" />
             </div>
-<%--            <div class="label2">
-                <label>Footer colour hex code:</label><form:input type="color" path="footerColourHexCode" />
-            </div>--%>
+            <div class="label2">
+                <label>BaseURL:</label><form:input type="text" path="serverBaseURL" />
+            </div>
+            <div class="label2">
+                <label>Application URL:</label><form:input type="text" path="applicationAPIURL" />
+            </div>
+
+
             <div class="label2">
                 <label>default location:</label>
                 <form:select path="defaultLocationId">
@@ -84,7 +89,7 @@
     </div>
 </form:form>
 <form:form method="POST" action="../uploadLogo"
-           enctype="multipart/form-data">
+           enctype="multipart/form-data" cssClass="formBackground">
 
     <form:errors path="*" cssClass="errorblock" element="div" />
 

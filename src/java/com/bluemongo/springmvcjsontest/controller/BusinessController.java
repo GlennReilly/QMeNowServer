@@ -163,19 +163,19 @@ public class BusinessController extends GenericController implements ServletCont
                         modelAndView.addObject("pageMessage", "You successfully uploaded your logo.");
 
                     } else {
-                        modelAndView = ModelViewHelper.GetModelViewForError("Sorry, that's not an image.");
+                        modelAndView = ModelViewHelper.GetModelViewForError(httpSession, "Sorry, that's not an image.");
                     }
                 }
                 else{
-                    modelAndView = ModelViewHelper.GetModelViewForError("Sorry, that file is larger than the allowed " + maxFileSizeBytes/1000 + "KB");
+                    modelAndView = ModelViewHelper.GetModelViewForError(httpSession, "Sorry, that file is larger than the allowed " + maxFileSizeBytes/1000 + "KB");
                 }
             }
             else{
-                modelAndView = ModelViewHelper.GetModelViewForError("You failed to upload because the file was empty.");
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession, "Your upload failed because the file path was empty.");
             }
         }
         else{
-            modelAndView = ModelViewHelper.GetModelViewForError("Sorry, no businessId found");
+            modelAndView = ModelViewHelper.GetModelViewForError(httpSession, "Sorry, no businessId found");
         }
         return modelAndView;
     }
@@ -238,7 +238,8 @@ public class BusinessController extends GenericController implements ServletCont
             modelAndView.setViewName("/FlexibleUIConfig/Barcode/index");
         }
         else{
-            modelAndView = ModelViewHelper.GetModelViewForError("No businessId found, please try again.");
+            //modelAndView = ModelViewHelper.GetModelViewForError("No businessId found, please try again.");
+            modelAndView = ModelViewHelper.GetLoginForm("No business details found, please login again.");
         }
 
         return modelAndView;
@@ -257,6 +258,7 @@ public class BusinessController extends GenericController implements ServletCont
         businessQRCodePayload.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
         businessQRCodePayload.setLogoFileName(business.getLogoFileName());
         businessQRCodePayload.setContent(business.getPhysicalAddress());
+        businessQRCodePayload.getBusinessDTO().setServerURL(business.getServerBaseURL());
         Gson gson = new Gson();
         String jsonBarcodePayload = gson.toJson(businessQRCodePayload);
 

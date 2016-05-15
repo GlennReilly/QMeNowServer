@@ -13,6 +13,7 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -111,7 +112,7 @@ public class CustomerController extends GenericController implements ServletCont
                     httpSession.setAttribute("CurrentlyEditingCustomerId", customerList.get(0).getId());
                 }
             }else{
-                modelAndView = ModelViewHelper.GetModelViewForError("No matching customers found.");
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession,"No matching customers found.");
             }
 
         }
@@ -138,7 +139,7 @@ public class CustomerController extends GenericController implements ServletCont
                 modelAndView = getModelViewForCustomerEdit(httpSession, user, customer);
                 populateHeaderValues(user.getBusinessId(), modelAndView);
             }else {
-                modelAndView = ModelViewHelper.GetModelViewForError("Sorry, there was an error retrieving that customer.");
+                modelAndView = ModelViewHelper.GetModelViewForError(httpSession,"Sorry, there was an error retrieving that customer.");
             }
         }
 

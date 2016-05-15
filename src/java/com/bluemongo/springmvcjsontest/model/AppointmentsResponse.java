@@ -19,6 +19,7 @@ public class AppointmentsResponse {
         this.businessDTO.setHeaderColourHexCode(business.getHeaderColourHexCode());
         this.businessDTO.setBackgroundColourHexCode(business.getBackgroundColourHexCode());
         this.businessDTO.setLogoFileName(business.getLogoFileName());
+        this.businessDTO.setServerURL(business.getServerBaseURL() + business.getApplicationAPIURL());
     }
 
     public void setBusinessDTO(BusinessDTO businessDTO) {

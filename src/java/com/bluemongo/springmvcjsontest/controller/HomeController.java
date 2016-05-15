@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bluemongo.springmvcjsontest.service.ModelViewHelper;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -50,8 +51,9 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/login", method=RequestMethod.POST)
-    public ModelAndView ProcessLogin(@ModelAttribute UserCredentials userCredentials,HttpSession httpSession){
-        return ModelViewHelper.ProcessLogin(userCredentials, httpSession);
+    public ModelAndView ProcessLogin(@ModelAttribute UserCredentials userCredentials,HttpSession httpSession, HttpServletRequest request){
+        return ModelViewHelper.ProcessLogin(userCredentials, httpSession, request);
+
     }
 
     // Button style methods

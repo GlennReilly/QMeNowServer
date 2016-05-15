@@ -168,6 +168,7 @@ public class Customer implements Validator {
         this.barcodeImageString = getBarcodeImageString();
     }*/
 
+//HttpServletRequest request
     public void setBarcodeImageString(){
         Hashtable hintMap = new Hashtable();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
@@ -243,6 +244,7 @@ public class Customer implements Validator {
             customerQRCodePayload.getBusinessDTO().setHeaderColourHexCode(business.getHeaderColourHexCode());
             customerQRCodePayload.getBusinessDTO().setButtonColourHexCode(business.getButtonColourHexCode());
             customerQRCodePayload.getBusinessDTO().setLogoFileName(business.getLogoFileName());
+            customerQRCodePayload.getBusinessDTO().setServerURL(business.getServerBaseURL());
         }
 
         Gson gson = new Gson();

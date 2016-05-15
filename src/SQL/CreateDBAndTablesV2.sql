@@ -74,6 +74,8 @@ CREATE TABLE `business` (
   `headerColourHexCode` varchar(10) DEFAULT NULL,
   `backgroundColourHexCode` varchar(10) DEFAULT NULL,
   `footerColourHexCode` varchar(10) DEFAULT NULL,
+  'serverBaseURL' varchar(100) DEFAULT NULL,
+  'applicationAPIURL' varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
