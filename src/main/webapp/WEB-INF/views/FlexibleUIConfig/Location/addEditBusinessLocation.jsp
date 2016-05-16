@@ -26,7 +26,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form modelAttribute="location" action="/FlexibleUIConfig/location/addOrEdit/" method="post" cssClass="formBackground">
+<form:form modelAttribute="location" action="/QMeNow/location/addOrEdit/" method="post" cssClass="formBackground">
     <div>
         <div style="clear: both;">
             <div class="formLabel">

@@ -21,7 +21,7 @@ import java.util.List;
  * Created by glenn on 17/10/15.
  */
 @RestController
-@RequestMapping("/FlexibleUIConfig/customer")
+@RequestMapping("/customer")
 public class CustomerController extends GenericController implements ServletContextAware
 {
     private ServletContext servletContext;

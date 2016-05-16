@@ -19,7 +19,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointment/get" method="post">
+<form:form action="/QMeNow/appointment/get" method="post">
 
     <div class="pageSubHeading" style="display: table;">
             Search Results:
@@ -98,7 +98,7 @@
                         <c:out value="${appointmentResult.appointment.isComplete}" />
                     </td>
                     <td style="padding-left: 10px;">
-                        <a href="<spring:url value='/FlexibleUIConfig/appointment/get/${appointmentResult.appointment.id}' />" >view</a>
+                        <a href="<spring:url value='/appointment/get/${appointmentResult.appointment.id}' />" >view</a>
                     </td>
                 </tr>
             </c:forEach>

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * Created by glenn on 11/10/15.
  */
 @RestController
-@RequestMapping("/FlexibleUIConfig/user")
+@RequestMapping("/user")
 public class UserController extends GenericController{
     private static final Logger logger =  LogManager.getLogger(UserController.class);
     // User methods

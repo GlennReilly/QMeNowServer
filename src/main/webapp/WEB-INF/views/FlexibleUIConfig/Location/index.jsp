@@ -61,16 +61,16 @@
                 </span>
             </td>
             <td>
-                <a href="<spring:url value='/FlexibleUIConfig/location/update/${appointmentType.id}' />" >update</a>
+                <a href="<spring:url value='/QMeNow/location/update/${appointmentType.id}' />" >update</a>
             </td>
             <td>
-                <a href="<spring:url value='/FlexibleUIConfig/location/delete/${appointmentType.id}' />" >delete</a>
+                <a href="<spring:url value='/QMeNow/location/delete/${appointmentType.id}' />" >delete</a>
             </td>
         </tr>
     </c:forEach>
 </table>
 <ul>
-    <li><a href="<spring:url value='/FlexibleUIConfig/location/add'/>">Add a new location for your business</a></li>
+    <li><a href="<spring:url value='/location/add'/>">Add a new location for your business</a></li>
 </ul>
 <tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 <script type="text/javascript" src="<spring:url value='/resources/DataTables/datatables.min.js'/>"></script>

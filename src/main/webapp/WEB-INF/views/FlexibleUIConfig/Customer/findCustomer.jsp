@@ -16,7 +16,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/customer/find/" method="post" cssClass="formBackground">
+<form:form action="/QMeNow/customer/find/" method="post" cssClass="formBackground">
     <%--TODO add validation here --%>
     <div>
         <div>

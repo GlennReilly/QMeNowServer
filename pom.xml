@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bluemongo</groupId>
-  <artifactId>SpringMVCJsonTest</artifactId>
+  <artifactId>QMeNowServer</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>SpringMVCJsonTest Maven Webapp</name>
@@ -207,7 +207,7 @@
 
   </dependencies>
   <build>
-    <finalName>SpringMVCJsonTest</finalName>
+    <finalName>QMeNowServer</finalName>
       <plugins>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>

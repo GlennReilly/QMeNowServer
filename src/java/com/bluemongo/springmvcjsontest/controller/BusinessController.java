@@ -36,7 +36,7 @@ import java.util.List;
  * Created by glenn on 17/10/15.
  */
 @RestController
-@RequestMapping("/FlexibleUIConfig/business")
+@RequestMapping("/business")
 public class BusinessController extends GenericController implements ServletContextAware
 {
     private ServletContext servletContext;
@@ -238,7 +238,6 @@ public class BusinessController extends GenericController implements ServletCont
             modelAndView.setViewName("/FlexibleUIConfig/Barcode/index");
         }
         else{
-            //modelAndView = ModelViewHelper.GetModelViewForError("No businessId found, please try again.");
             modelAndView = ModelViewHelper.GetLoginForm("No business details found, please login again.");
         }
 

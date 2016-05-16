@@ -28,7 +28,7 @@ import static com.bluemongo.springmvcjsontest.controller.GenericController.popul
  * Created by glenn on 20/10/15.
  */
 @Controller
-@RequestMapping(value = "/FlexibleUIConfig/appointmentType")
+@RequestMapping(value = "/appointmentType")
 
 public class AppointmentTypeController {
     private static final Logger logger =  LogManager.getLogger(AppointmentTypeController.class);

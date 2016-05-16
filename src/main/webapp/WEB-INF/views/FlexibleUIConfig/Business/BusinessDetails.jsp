@@ -18,7 +18,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="./add/" method="post">
+<form:form action="/QMeNow/business/add/" method="post">
     <div>
         <div>
             <div class="label2">
@@ -45,9 +45,9 @@
 
         </div>
         <div class="label2">
-                <a href="<spring:url value='/FlexibleUIConfig/business/barcode/'/>">show barcode</a>
+                <a href="<spring:url value='/business/barcode/'/>">show barcode</a>
             <br/>
-                <a href="<spring:url value='/FlexibleUIConfig/business/edit/${command.id}'/>">edit business details</a>
+                <a href="<spring:url value='/business/edit/${command.id}'/>">edit business details</a>
 
         </div>
     </div>

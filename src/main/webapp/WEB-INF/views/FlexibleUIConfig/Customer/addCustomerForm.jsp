@@ -25,7 +25,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form modelAttribute="customer" action="/FlexibleUIConfig/customer/add" method="post" cssClass="formBackground">
+<form:form modelAttribute="customer" action="/QMeNow/customer/add" method="post" cssClass="formBackground">
     <div>
         <div>
             <div style="clear: both;">

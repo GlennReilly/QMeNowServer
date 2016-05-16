@@ -18,7 +18,7 @@
 <div class="pageMessage">${message}</div>
 <br/>
 <ul>
-    <li><a href="<spring:url value='/FlexibleUIConfig/business/add' />">Add a new business</a></li>
+    <li><a href="<spring:url value='/business/add' />">Add a new business</a></li>
     <li><a href="./login">Login</a></li>
     <li><a href="./customer/add">Add a new customer</a></li>
     <li><a href="./customer/find">Find a customer</a></li>

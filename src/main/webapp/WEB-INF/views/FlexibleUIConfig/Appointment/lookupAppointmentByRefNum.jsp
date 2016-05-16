@@ -20,7 +20,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointment/find" method="get" cssClass="formBackground">
+<form:form action="/QMeNow/appointment/find" method="get" cssClass="formBackground">
     <%--TODO add validation here --%>
         <div>
             <div class="label2">

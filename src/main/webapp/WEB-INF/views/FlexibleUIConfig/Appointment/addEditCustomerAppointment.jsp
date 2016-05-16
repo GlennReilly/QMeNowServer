@@ -27,7 +27,7 @@
 <div class="pageMessage">${message}</div>
 <br/>
 
-<form:form modelAttribute="addAppointmentFormHelper" action="/FlexibleUIConfig/appointment/addOrUpdate/" method="post" >
+<form:form modelAttribute="addAppointmentFormHelper" action="/QMeNow/appointment/addOrUpdate/" method="post" >
 
     <fieldset class="userHomeFieldSet">
         <legend>${pageTitle}</legend>

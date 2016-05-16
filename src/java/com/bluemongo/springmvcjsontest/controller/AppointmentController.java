@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * Created by glenn on 11/10/15.
  */
 @RestController
-@RequestMapping("/FlexibleUIConfig/appointment")
+@RequestMapping("/appointment")
 public class AppointmentController{
 
 
@@ -136,14 +136,7 @@ public class AppointmentController{
                     addAppointmentFormHelper.setAppointmentStatusList(appointmentStatusList);
                     List<AppointmentType> appointmentTypeList = new AppointmentTypeStore().getAll(businessId, true);
                     addAppointmentFormHelper.setAppointmentTypeList(appointmentTypeList);
-
-/*                    if (appointmentId > 0) {
-                        appointment = new AppointmentStore().getAppointment(appointmentId);
-                        modelAndView = ModelViewHelper.GetModelViewForEditAppointment(customerId, businessId, null, httpSession, appointment);
-                        addAppointmentFormHelper.setAppointment(appointment);
-                    }else{*/
-                        modelAndView = ModelViewHelper.GetModelViewForAddAppointment(customerId, businessId, null, httpSession);
-                    //}
+                    modelAndView = ModelViewHelper.GetModelViewForAddAppointment(customerId, businessId, null, httpSession);
 
                     addAppointmentFormHelper.setBusinessId(businessId);
                     addAppointmentFormHelper.setCustomerId(customerId);

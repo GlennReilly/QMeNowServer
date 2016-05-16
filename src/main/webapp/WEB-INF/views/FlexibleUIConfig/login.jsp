@@ -16,7 +16,7 @@
 <body style="background-color:#d3f7b6;">
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-    <form:form action="/login/" method="post" cssClass="formBackground">
+    <form:form action="/QMeNow/login/" method="post" cssClass="formBackground">
         <div>
             <div class="label2">
                 <label>username:</label><form:input path="username" id="username" />

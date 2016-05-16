@@ -21,7 +21,7 @@ import java.util.List;
  * Created by glenn on 21/10/15.
  */
 @Controller
-@RequestMapping(value = "/FlexibleUIConfig/appointmentStatus")
+@RequestMapping(value = "/appointmentStatus")
 public class AppointmentStatusController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

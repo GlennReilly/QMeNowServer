@@ -17,7 +17,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form modelAttribute="appointmentType" action="/FlexibleUIConfig/appointmentType/addOrUpdate" method="post" cssClass="formBackground">
+<form:form modelAttribute="appointmentType" action="/QMeNow/appointmentType/addOrUpdate" method="post" cssClass="formBackground">
     <%--<form:errors path="*" cssClass="errorblock" element="div" />--%>
   <div>
       <div>

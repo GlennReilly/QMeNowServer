@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body>
-    <form:form action="/phrase/newPhraseForm" method="POST">
+    <form:form action="/QMeNow/phrase/newPhraseForm" method="POST">
         <fieldset>
             <div class="form-row">
                 <label for="phraseText">phraseText</label>

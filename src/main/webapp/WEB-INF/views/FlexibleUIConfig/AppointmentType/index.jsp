@@ -67,16 +67,16 @@
                 </span>
             </td>
             <td>
-                <a href="<spring:url value='/FlexibleUIConfig/appointmentType/update/${appointmentType.id}' />" >update</a>
+                <a href="<spring:url value='/appointmentType/update/${appointmentType.id}' />" >update</a>
             </td>
             <td>
-                <a href="<spring:url value='/FlexibleUIConfig/appointmentType/delete/${appointmentType.id}' />" >delete</a>
+                <a href="<spring:url value='/appointmentType/delete/${appointmentType.id}' />" >delete</a>
             </td>
         </tr>
     </c:forEach>
 </table>
 <ul>
-    <li><a href="<spring:url value='/FlexibleUIConfig/appointmentType/add'/>">Add a new appointment type for your business</a></li>
+    <li><a href="<spring:url value='/appointmentType/add'/>">Add a new appointment type for your business</a></li>
 </ul>
 <tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 <script type="text/javascript" src="<spring:url value='/resources/DataTables/datatables.min.js'/>"></script>

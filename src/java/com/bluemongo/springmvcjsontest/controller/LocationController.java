@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/FlexibleUIConfig/location")
+@RequestMapping("/location")
 public class LocationController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

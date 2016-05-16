@@ -24,7 +24,7 @@
 </tags:header>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form modelAttribute="newUser" action="/FlexibleUIConfig/user/add" method="post" cssClass="formBackground">
+<form:form modelAttribute="newUser" action="/QMeNow/user/add" method="post" cssClass="formBackground">
   <div>
       <div class="label2">
               <%--<form:errors path="*" cssClass="errorblock" />--%>

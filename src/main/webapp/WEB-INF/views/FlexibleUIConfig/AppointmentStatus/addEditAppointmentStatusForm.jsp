@@ -17,7 +17,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form modelAttribute="appointmentStatus" action="/FlexibleUIConfig/appointmentStatus/addOrUpdate" method="post" cssClass="formBackground">
+<form:form modelAttribute="appointmentStatus" action="/QMeNow/appointmentStatus/addOrUpdate" method="post" cssClass="formBackground">
   <div>
     <div>
         <div style="clear: both;">

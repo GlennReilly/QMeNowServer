@@ -21,7 +21,7 @@
 
 <%--<div class="pageTitle">${pageTitle}</div>--%>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/appointment/get" method="get">
+<form:form action="/QMeNow/appointment/get" method="get">
 <fieldset class="userHomeFieldSet">
     <legend>${pageTitle}</legend>
 
@@ -133,7 +133,7 @@
                         <fmt:formatDate pattern="E d MMM h:mma" value="${appointmentResult.appointment.checkInDate}" />
                     </td>
                     <td style="text-align: center;">
-                        <a href="<spring:url value='/FlexibleUIConfig/appointment/get/${appointmentResult.appointment.id}' />" >view</a>
+                        <a href="<spring:url value='/appointment/get/${appointmentResult.appointment.id}' />" >view</a>
                     </td>
                 </tr>
             </c:forEach>

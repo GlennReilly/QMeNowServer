@@ -22,7 +22,7 @@
 
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/FlexibleUIConfig/customer/update" method="post">
+<form:form action="/QMeNow/customer/update" method="post">
     <div>
         <div>
             <div class="label2">
@@ -49,8 +49,8 @@
         </div>
     </div>
 </form:form>
-<span class="listLink"><a href='<spring:url value="/FlexibleUIConfig/appointment/add/${command.id}"/>'>add appointment</a></span>
-<span class="listLink"><a href='<spring:url value="/FlexibleUIConfig/appointment/getAllForDateRange/${command.id}"/>'>show all appointments</a></span>
+<span class="listLink"><a href='<spring:url value="/appointment/add/${command.id}"/>'>add appointment</a></span>
+<span class="listLink"><a href='<spring:url value="/appointment/getAllForDateRange/${command.id}"/>'>show all appointments</a></span>
 <tags:jsIncludes logoPath="${logoFileName}"></tags:jsIncludes>
 </body>
 </html>
