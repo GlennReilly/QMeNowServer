@@ -50,7 +50,7 @@ public class BusinessController extends GenericController implements ServletCont
     @RequestMapping(value = "/{businessId}/getLogo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getLogo(@PathVariable int businessId) throws IOException {
         Business business = new BusinessStore().get(businessId);
-        String resourceBase = "/resources/images/";
+        String resourceBase = "/QMeNow/resources/images/";
 
         InputStream in = null;
         byte[] logoByteArray = new byte[0];
@@ -72,7 +72,7 @@ public class BusinessController extends GenericController implements ServletCont
         if(httpSession.getAttribute("businessId") != null) {
             int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
             Business business = new BusinessStore().get(businessId);
-            String resourceBase = "/resources/images/";
+            String resourceBase = "/QMeNow/resources/images/";
             InputStream in = servletContext.getResourceAsStream(resourceBase + business.getLogoFileName());
             return IOUtils.toByteArray(in);
         }else{
@@ -121,17 +121,22 @@ public class BusinessController extends GenericController implements ServletCont
     }
 
     @RequestMapping(value = "/addOrUpdate", method = RequestMethod.POST)
-    public String AddBusiness(@ModelAttribute Business business, HttpSession httpSession) {
-        if(httpSession.getAttribute("businessId")==null || httpSession.getAttribute("businessId").equals(0)) {
-            int newBusinessId = business.saveNew();
-            return "Business saved successfully: " + newBusinessId;
-        }
-        else{
-            int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
+    public ModelAndView AddBusiness(@ModelAttribute Business business, HttpSession httpSession) {
+        if (httpSession.getAttribute("User") != null) {
+            User user = (User) httpSession.getAttribute("User");
 
-            business.setId(businessId);
-            business.saveUpdate();
-            return "Business updated successfully";
+            if (httpSession.getAttribute("businessId") == null || httpSession.getAttribute("businessId").equals(0)) {
+                int newBusinessId = business.saveNew();
+                return ModelViewHelper.GetModelViewForUserHome(user, "Business saved successfully: " + newBusinessId);
+            } else {
+                int businessId = Integer.parseInt(httpSession.getAttribute("businessId").toString());
+
+                business.setId(businessId);
+                business.saveUpdate();
+                return ModelViewHelper.GetModelViewForUserHome(user, "Business updated successfully: ");
+            }
+        }else{
+            return ModelViewHelper.GetLoginForm("Sorry, your session has expired, please log in again.");
         }
     }
 
@@ -238,7 +243,7 @@ public class BusinessController extends GenericController implements ServletCont
             modelAndView.setViewName("/FlexibleUIConfig/Barcode/index");
         }
         else{
-            modelAndView = ModelViewHelper.GetLoginForm("No business details found, please login again.");
+            modelAndView = ModelViewHelper.GetLoginForm("Your session has expired, please login again.");
         }
 
         return modelAndView;

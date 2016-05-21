@@ -9,6 +9,11 @@
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/jquery-ui.min.css'/>" />
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/DataTables/datatables.min.css'/>" />
+    <style>
+        #resultsTable_wrapper{
+            width: 75%;
+        }
+    </style>
 </head>
 <body style="background-color: ${backgroundColourHexCode}">
 <tags:menu></tags:menu>
@@ -27,20 +32,23 @@
         <table id="resultsTable" data-page-length='5'>
             <thead>
             <tr class="resultsTable">
-                <th>
+                <th style="width: 100px;">
                     Appointment Date
                 </th>
-                <th colspan="2">
-                    Appointment #
+                <th style="width: 100px;">
+                    Ref#
                 </th>
-                <th>
+                <th style="width: 100px;">
                     Status
                 </th>
-                <th>
+                <th style="width: 100px;">
                     Location
                 </th>
                 <th>
                     Type
+                </th>
+                <th>
+                    Customer Id
                 </th>
                 <th>
                     Customer name
@@ -49,7 +57,10 @@
                     Message to customer
                 </th>
                 <th>
-                    is Complete?
+                    Complete?
+                </th>
+                <th style="width: 100px;">
+                    Check-in Date
                 </th>
                 <th>
                     View
@@ -58,46 +69,47 @@
             </thead>
             <c:forEach items="${command}" var="appointmentResult"  >
                 <tr>
-                    <td>
-                        <c:out value="${appointmentResult.appointment.appointmentDate}" />
+                    <td style="text-align: right;">
+                        <fmt:formatDate pattern="E d MMM h:mma" value="${appointmentResult.appointment.appointmentDate}" />
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.appointmentTypePrefix}${appointmentResult.appointment.id}" />
-                    </td>
-                    <td>
                         <c:if test="${not empty appointmentResult.appointment.appTypeHexCode}">
-                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.appTypeHexCode}"></div>
+                            <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.appTypeHexCode}"></img>
                         </c:if>
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.statusName}" />
-                    </td>
-                    <td>
                         <c:if test="${not empty appointmentResult.appointment.statusHexCode}">
-                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.statusHexCode}"></div>
+                            <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.statusHexCode}"></img>
                         </c:if>
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.locationName}" />
-                    </td>
-                    <td>
                         <c:if test="${not empty appointmentResult.appointment.locationHexCode}">
-                            <div style="width:22px; height:22px; background-color: ${appointmentResult.appointment.locationHexCode}"></div>
+                            <img style="width:22px; height:22px; background-color: ${appointmentResult.appointment.locationHexCode}"></img>
                         </c:if>
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.appointmentTypeName}" />
                     </td>
-                    <td>
+                    <td style="text-align: center;">
+                        <c:out value="${appointmentResult.customer.id}" />
+                    </td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.customer.name}" />
                     </td>
-                    <td>
+                    <td style="text-align: right;">
                         <c:out value="${appointmentResult.appointment.messageToCustomer}" />
                     </td>
-                    <td>
-                        <c:out value="${appointmentResult.appointment.isComplete}" />
+                    <td style="text-align: center;">
+                        <c:if test="${appointmentResult.appointment.isComplete == true}"> Yes </c:if>
+                        <c:if test="${appointmentResult.appointment.isComplete == false}"> No </c:if>
                     </td>
-                    <td style="padding-left: 10px;">
+                    <td style="text-align: right;">
+                        <fmt:formatDate pattern="E d MMM h:mma" value="${appointmentResult.appointment.checkInDate}" />
+                    </td>
+                    <td style="text-align: center;">
                         <a href="<spring:url value='/appointment/get/${appointmentResult.appointment.id}' />" >view</a>
                     </td>
                 </tr>

@@ -14,9 +14,14 @@
   <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/css/style1.css'/>" />
 </head>
 <body style="background-color:#d3f7b6;">
-<div class="pageTitle">${pageTitle}</div>
+<div id="logoDiv" style="text-align: center;width:40%;  padding: 20px;">
+    <img id="logoImg" style="width: 125px;" src="/QMeNow/resources/images/noLogo.png">
+</div>
+<%--<div class="pageTitle">${pageTitle}</div>--%>
 <div class="pageMessage">${message}</div>
-    <form:form action="/QMeNow/login/" method="post" cssClass="formBackground">
+    <form:form action="/QMeNow/login/" method="post">
+<fieldset class="userHomeFieldSet">
+    <legend>${pageTitle}</legend>
         <div>
             <div class="label2">
                 <label>username:</label><form:input path="username" id="username" />
@@ -28,6 +33,7 @@
                 <input type="submit">
             </div>
         </div>
+    </fieldset>
     </form:form>
 <tags:jsIncludes></tags:jsIncludes>
 </body>

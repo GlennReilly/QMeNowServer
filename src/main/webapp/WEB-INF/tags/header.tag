@@ -8,7 +8,7 @@
 <div style="height:100px; padding-bottom: 4vh; width:40vw; background-color:${headerColour};">
     <c:if test="${not empty logoPath}">
         <div id="logoDiv" style="float:left;width:20%;  padding: 20px;">
-            <img id="logoImg" style="width: 100px;" src="/resources/images/<c:out value="${logoPath}"/>">
+            <img id="logoImg" style="width: 100px;" src="/QMeNow/resources/images/<c:out value="${logoPath}"/>">
         </div>
     </c:if>
     <div class="businessName" style="color:${backgroundColourHexCode}"><c:out value="${businessName}" /></div>

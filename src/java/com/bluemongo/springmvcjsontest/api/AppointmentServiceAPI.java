@@ -26,7 +26,7 @@ public interface AppointmentServiceAPI{
     // @PUT("/FlexibleUIConfig/api/v1/Appointment/{id}/CheckIn")
     AppointmentsResponse checkInAppointment(int appointmentId, AppointmentCheckInDTO appointmentCheckIn);
 
-    // eg: http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1?customerId=1&firstName=bob&lastName=Socks
+    // eg: http://10.1.1.7:8080/QMeNow/FlexibleUIConfig/api/v1/AppointmentsToday/1?customerId=1&firstName=bob&lastName=Socks
     AppointmentsResponse getAppointmentsToday(Integer businessId, Integer customerId, String firstName, String lastName);
 
 

@@ -58,12 +58,12 @@ public class InputHelper {
     }
 
     public static String getBaseURL(String serverURL) {
-        // http://localhost:8080/login/?null -- http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
+        // http://10.1.1.11:8080/QMeNow/FlexibleUIConfig/api/v1/AppointmentsToday/1?customerId=1&firstName=bob&lastName=Socks
 
         String baseURL = "";
         String[] serverURLParts = serverURL.split("/");
-        baseURL = serverURLParts[0] + "//" + serverURLParts[2] + "/";
-
+        baseURL = serverURLParts[0] + "//" + serverURLParts[2]; //  + "/" + serverURLParts[3];
+                // http:               //     10.1.1.11:8080      /     QMeNow              /
         return baseURL;
     }
 }

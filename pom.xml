@@ -207,7 +207,7 @@
 
   </dependencies>
   <build>
-    <finalName>QMeNowServer</finalName>
+    <finalName>QMeNow</finalName>
       <plugins>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>

@@ -39,7 +39,7 @@ public class ModelViewHelper extends GenericController {
         User validUser = User.get(userCredentials);
         if (validUser != null) {
             String serverURL = request.getRequestURL().toString() + "?" + request.getQueryString();
-            // eg http://localhost:8080/login/?null -- http://10.1.1.7:8080/FlexibleUIConfig/api/v1/AppointmentsToday/1/7
+            // eg http://10.1.1.11:8080/QMeNow/FlexibleUIConfig/api/v1/AppointmentsToday/1?customerId=1&firstName=bob&lastName=Socks
             String baseURL = InputHelper.getBaseURL(serverURL);
             Business business = new BusinessStore().get(validUser.getBusinessId());
             if (business != null){

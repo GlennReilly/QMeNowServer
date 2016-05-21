@@ -18,7 +18,8 @@
 <tags:menu></tags:menu>
 <div class="pageTitle">${pageTitle}</div>
 <div class="pageMessage">${message}</div>
-<form:form action="/logout" method="post">
+<form:form action="/QMeNow/ls
+logout" method="post">
     Are you sure you want to logout?
     <br/>
     <input type="submit" value="Yes, logout">

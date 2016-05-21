@@ -38,9 +38,14 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView GetLogoutPageConfirmationForm(){
+    public ModelAndView GetLogoutPageConfirmationForm(HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/FlexibleUIConfig/logoutConfirmation");
+        if (httpSession.getAttribute("User") != null) {
+            User user = (User) httpSession.getAttribute("User");
+            ModelViewHelper.populateHeaderValues(user.getBusinessId(), modelAndView);
+        }
+
         return modelAndView;
     }
 

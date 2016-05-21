@@ -35,7 +35,7 @@
 
 function checkLogoExists(logoFileName){
     if( $("#logoDiv").length && $("#logoImg").length){
-        var imageBase = "/resources/images/";
+        var imageBase = "/QMeNow/resources/images/";
         var logoURL = imageBase + logoFileName;
         //logoURL = "http://localhost:8080/resources/images/Frank's%20Futons_1_futon.jpg";
         //alert("logoURL:" + logoURL);
