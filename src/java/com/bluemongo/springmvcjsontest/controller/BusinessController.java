@@ -83,11 +83,16 @@ public class BusinessController extends GenericController implements ServletCont
     @RequestMapping(value = "/{businessId}", method = RequestMethod.GET)
     public ModelAndView ShowBusinessDetails(@PathVariable int businessId, HttpSession httpSession){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/FlexibleUIConfig/Business/BusinessDetails");
-        Business business = new BusinessStore().get(businessId);
-        httpSession.setAttribute("businessId", business.getId());
-        populateHeaderValues(businessId, modelAndView);
-        modelAndView.addObject("command", business);
+        if (httpSession.getAttribute("User") == null) {
+            modelAndView = ModelViewHelper.GetLoginForm("");
+        }
+        else {
+            modelAndView.setViewName("/FlexibleUIConfig/Business/BusinessDetails");
+            Business business = new BusinessStore().get(businessId);
+            httpSession.setAttribute("businessId", business.getId());
+            populateHeaderValues(businessId, modelAndView);
+            modelAndView.addObject("command", business);
+        }
         return modelAndView;
     }
 
